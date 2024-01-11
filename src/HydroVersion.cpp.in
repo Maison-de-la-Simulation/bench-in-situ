@@ -1,0 +1,13 @@
+#include "HydroVersion.hpp"
+
+#include <string>
+
+namespace version
+{
+
+const std::string git_build_string {"@GIT_BUILD_STRING@"};
+const std::string git_branch       {"@GIT_BRANCH@"};
+const std::string compile_date     {"@DATE_STRING@"};
+const std::string compile_time     {"@TIME_STRING@"};
+
+}
