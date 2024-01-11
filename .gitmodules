@@ -7,3 +7,6 @@
 [submodule "lib/pdi"]
 	path = lib/pdi
 	url = https://gitlab.maisondelasimulation.fr/pdidev/pdi.git
+[submodule "lib/dms"]
+	path = lib/dms
+	url = https://gitlab.erc-atmo.eu/remi.bourgeois/dms.git
