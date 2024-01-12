@@ -9,4 +9,4 @@
 	url = https://gitlab.maisondelasimulation.fr/pdidev/pdi.git
 [submodule "lib/dms"]
 	path = lib/dms
-	url = https://gitlab.erc-atmo.eu/remi.bourgeois/dms.git
+	url = https://github.com/Maison-de-la-Simulation/dms.git
