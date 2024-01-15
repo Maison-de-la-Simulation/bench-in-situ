@@ -177,10 +177,10 @@ pdi:
 
   plugins:
 
-    # user_code:
-    #   on_event:
-    #     write_xml:
-    #       writeXML: {}
+    user_code:
+      on_event:
+        write_xml:
+          writeXML: {}
 
     mpi:
 
