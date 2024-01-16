@@ -97,27 +97,17 @@ pdi:
     time: double
     iStep: int
 
-    ratioX: int
-    ratioY: int
-    ratioZ: int
-
-    restart_filename_size: int
-    restart_filename: { type: array, subtype: char, size: $restart_filename_size }
-
-    read_start: { type: array, subtype: int, size: 3 }
-    
 
     mrz: int
-    mry: int
 
     pdi_writer_time_step: int
     mpi_coord: {type: array, subtype: int, size: 3}
 
   data:
+
     filename_size: int
     filename: { type: array, subtype: char, size: $filename_size }
   
-    
     Rstar_h: double
     output_id: int
     restart_id: int
@@ -130,21 +120,8 @@ pdi:
       start: [0, '$ghost[2]', '$ghost[1]', '$ghost[0]']
     outputs_record_size: int
 
-    rank_array: int
     grid_size: { type: array, subtype: int, size: 3 }
 
-    emag: double
-    ekin: double
-
-    d: { type: array, subtype: double, size: ['$ncell_local[2]/$ratioZ', '$ncell_local[1]/$ratioY', '$ncell_local[0]/$ratioX'] } # here is local for read
-    E: { type: array, subtype: double, size: ['$ncell_local[2]/$ratioZ', '$ncell_local[1]/$ratioY', '$ncell_local[0]/$ratioX'] } # here is local for read
-    dX: { type: array, subtype: double, size: ['$ncell_local[2]/$ratioZ', '$ncell_local[1]/$ratioY', '$ncell_local[0]/$ratioX'] } # here is local for read
-    mx: { type: array, subtype: double, size: ['$ncell_local[2]/$ratioZ', '$ncell_local[1]/$ratioY', '$ncell_local[0]/$ratioX'] } # here is local for read
-    my: { type: array, subtype: double, size: ['$ncell_local[2]/$ratioZ', '$ncell_local[1]/$ratioY', '$ncell_local[0]/$ratioX'] } # here is local for read
-    mz: { type: array, subtype: double, size: ['$ncell_local[2]/$ratioZ', '$ncell_local[1]/$ratioY', '$ncell_local[0]/$ratioX'] } # here is local for read
-    Bx: { type: array, subtype: double, size: ['$ncell_local[2]/$ratioZ', '$ncell_local[1]/$ratioY', '$ncell_local[0]/$ratioX'] } # here is local for read
-    By: { type: array, subtype: double, size: ['$ncell_local[2]/$ratioZ', '$ncell_local[1]/$ratioY', '$ncell_local[0]/$ratioX'] } # here is local for read
-    Bz: { type: array, subtype: double, size: ['$ncell_local[2]/$ratioZ', '$ncell_local[1]/$ratioY', '$ncell_local[0]/$ratioX'] } # here is local for read
 
   plugins:
 
@@ -185,102 +162,4 @@ pdi:
           - *Bz_description
           - *dX_description
 
-    - file: ${restart_filename}
-      on_event: prep
-      communicator: '${MPI_COMM_WORLD}'
-      read:
-        grid_size:
-
-    - file: ${restart_filename}
-      on_event: event_read_fields
-      communicator: '${MPI_COMM_WORLD}'
-      read:
-        iStep:
-        time:
-        output_id:
-        restart_id:
-        d:
-          memory_selection:
-            size: ['$ncell_local[2]/$ratioZ', '$ncell_local[1]/$ratioY', '$ncell_local[0]/$ratioX']
-            start: [0,0,0]
-          dataset_selection:
-            size: ['$ncell_local[2]/$ratioZ', '$ncell_local[1]/$ratioY', '$ncell_local[0]/$ratioX']
-            start: ['$read_start[2]','$read_start[1]','$read_start[0]']
-        E:
-          memory_selection:
-            size: ['$ncell_local[2]/$ratioZ', '$ncell_local[1]/$ratioY', '$ncell_local[0]/$ratioX']
-            start: [0,0,0]
-          dataset_selection:
-            size: ['$ncell_local[2]/$ratioZ', '$ncell_local[1]/$ratioY', '$ncell_local[0]/$ratioX']
-            start: ['$read_start[2]','$read_start[1]','$read_start[0]']
-        dX:
-          memory_selection:
-            size: ['$ncell_local[2]/$ratioZ', '$ncell_local[1]/$ratioY', '$ncell_local[0]/$ratioX']
-            start: [0,0,0]
-          dataset_selection:
-            size: ['$ncell_local[2]/$ratioZ', '$ncell_local[1]/$ratioY', '$ncell_local[0]/$ratioX']
-            start: ['$read_start[2]','$read_start[1]','$read_start[0]']
-        mx:
-          memory_selection:
-            size: ['$ncell_local[2]/$ratioZ', '$ncell_local[1]/$ratioY', '$ncell_local[0]/$ratioX']
-            start: [0,0,0]
-          dataset_selection:
-            size: ['$ncell_local[2]/$ratioZ', '$ncell_local[1]/$ratioY', '$ncell_local[0]/$ratioX']
-            start: ['$read_start[2]','$read_start[1]','$read_start[0]']
-        my:
-          memory_selection:
-            size: ['$ncell_local[2]/$ratioZ', '$ncell_local[1]/$ratioY', '$ncell_local[0]/$ratioX']
-            start: [0,0,0]
-          dataset_selection:
-            size: ['$ncell_local[2]/$ratioZ', '$ncell_local[1]/$ratioY', '$ncell_local[0]/$ratioX']
-            start: ['$read_start[2]','$read_start[1]','$read_start[0]']
-        mz:
-          memory_selection:
-            size: ['$ncell_local[2]/$ratioZ', '$ncell_local[1]/$ratioY', '$ncell_local[0]/$ratioX']
-            start: [0,0,0]
-          dataset_selection:
-            size: ['$ncell_local[2]/$ratioZ', '$ncell_local[1]/$ratioY', '$ncell_local[0]/$ratioX']
-            start: ['$read_start[2]','$read_start[1]','$read_start[0]']
-        Bx:
-          memory_selection:
-            size: ['$ncell_local[2]/$ratioZ', '$ncell_local[1]/$ratioY', '$ncell_local[0]/$ratioX']
-            start: [0,0,0]
-          dataset_selection:
-            size: ['$ncell_local[2]/$ratioZ', '$ncell_local[1]/$ratioY', '$ncell_local[0]/$ratioX']
-            start: ['$read_start[2]','$read_start[1]','$read_start[0]']
-        By:
-          memory_selection:
-            size: ['$ncell_local[2]/$ratioZ', '$ncell_local[1]/$ratioY', '$ncell_local[0]/$ratioX']
-            start: [0,0,0]
-          dataset_selection:
-            size: ['$ncell_local[2]/$ratioZ', '$ncell_local[1]/$ratioY', '$ncell_local[0]/$ratioX']
-            start: ['$read_start[2]','$read_start[1]','$read_start[0]']
-        Bz:
-          memory_selection:
-            size: ['$ncell_local[2]/$ratioZ', '$ncell_local[1]/$ratioY', '$ncell_local[0]/$ratioX']
-            start: [0,0,0]
-          dataset_selection:
-            size: ['$ncell_local[2]/$ratioZ', '$ncell_local[1]/$ratioY', '$ncell_local[0]/$ratioX']
-            start: ['$read_start[2]','$read_start[1]','$read_start[0]']
-
-
-    - file: ${restart_filename}
-      datasets: *full_datasets # a list of datasets inside the file created on first access
-      on_event: read
-      communicator: '${MPI_COMM_WORLD}'
-      read:
-        grid_size:
-        iStep:
-        time:
-        output_id:
-        restart_id:
-        local_full_field:
-          - *d_description
-          - *E_description
-          - *mx_description
-          - *my_description
-          - *mz_description
-          - *Bx_description
-          - *By_description
-          - *Bz_description
-          - *dX_description
+    
