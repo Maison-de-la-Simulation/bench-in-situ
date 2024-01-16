@@ -189,13 +189,7 @@ void Params::print(std::ostream& os) const
     os << utils::stringify("format", output.format) << "\n";
     os << utils::stringify("prefix", output.prefix) << "\n";
     os << utils::stringify("nOutput", output.nOutput) << "\n";
-    os << utils::stringify("n_mean", output.n_mean) << "\n";
-    os << utils::stringify("n_profile", output.n_profile) << "\n";
-    os << utils::stringify("n_slice", output.n_slice) << "\n";
     os << utils::stringify("dt_io", output.dt_io) << "\n";
-    os << utils::stringify("dt_mean :", output.dt_mean) << "\n";
-    os << utils::stringify("dt_profile :", output.dt_profile) << "\n";
-    os << utils::stringify("dt_slice :", output.dt_slice) << "\n";
     os << std::string(len1 + len2, '#') << std::endl;
 }
 

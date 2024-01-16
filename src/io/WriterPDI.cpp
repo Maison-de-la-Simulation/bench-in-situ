@@ -32,28 +32,13 @@ std::string getFilename(std::string const &prefix, Int outputId) {
 
   // concatenate file prefix + file number + suffix
   std::string filename(prefix);
-  filename += "_time_" + outputNum.str();
+  filename += "_" + outputNum.str();
   filename += ".h5";
   return filename;
 }
 
 extern "C"
 {
-    void reduce_data() {
-        int test_rank = 0;
-        int test_size = 1;
-
-#if defined(MPI_SESSION)
-        MPI_Comm_rank(MPI_COMM_WORLD, &test_rank);
-        MPI_Comm_size(MPI_COMM_WORLD, &test_size);
-#endif
-
-        PDI_multi_expose("write_reduced_data",
-                         "rank", &test_rank, PDI_OUT,
-                         "rank_array", &test_rank, PDI_OUT,
-                         "size", &test_size, PDI_OUT,
-                         NULL);
-    }
 
     void writeXML() {
         if (!Session::isIOProc())
@@ -272,7 +257,6 @@ extern "C"
         PDI_release("outputs_record");
         PDI_release("outputs_record_size");
     }
-
 }
 
 WriterPDI::WriterPDI(const UniformGrid& grid, const Params&,
@@ -315,14 +299,12 @@ WriterPDI::WriterPDI(const UniformGrid& grid, const Params&,
     dl[IZ] = grid.m_dl[IZ];
 
     int pdi_writer_time_step = 0;
-    int pdi_writer_slice_time_step = 0;
     int mrz = grid.m_dom[IZ];
 
     PDI_multi_expose("init_pdi",
                      "pdi_writer_time_step", &pdi_writer_time_step, PDI_OUT,
-                     "pdi_writer_slice_time_step", &pdi_writer_slice_time_step, PDI_OUT,
                      "mpi_coord", m_mpi_coords.data(), PDI_OUT,
-                     "mrz",&mrz,PDI_OUT,
+                     "mrz", &mrz, PDI_OUT,
                      "nvar", &nvar, PDI_OUT,
                      "ncell", pdi_ncells.data(), PDI_OUT,
                      "grid_size", pdi_ncells.data(), PDI_OUT,
@@ -405,121 +387,6 @@ void WriterPDI::write(HostConstArrayDyn u, const UniformGrid & grid,
                      "outputs_record", WriterBase::m_previous_outputs.data(), PDI_OUT,
                      "restart_id", &m_restartId, PDI_OUT,
                      NULL);
-
-    PDI_event("test_reduce");
 }
-
-void WriterPDI::write_mean(global_mean means)
-{
-
-    static int pdi_writer_mean_time_step = 0 ;
-
-    double emag =  means.get_emag();
-    double ekin =  means.get_ekin();
-
-    int tmp_rank=0, tmp_size=1;
-#if defined(MPI_SESSION)
-    MPI_Comm_rank(MPI_COMM_WORLD, &tmp_rank);
-    MPI_Comm_size(MPI_COMM_WORLD, &tmp_size);
-#endif
-
-
-    std::string mean_filename = "mean_restart_"+ std::to_string(m_restartId)+"_"+m_prefix.c_str()+".h5";
-    int mean_filename_size = mean_filename.size();
-
-
-    PDI_multi_expose("write_emeans",
-                     "rank", &tmp_rank, PDI_OUT,
-                     "size", &tmp_size, PDI_OUT,
-                     "pdi_writer_mean_time_step", &pdi_writer_mean_time_step, PDI_OUT,
-                     "restart_id", &m_restartId, PDI_OUT,
-                     "emag", &emag, PDI_OUT,
-                     "ekin", &ekin, PDI_OUT,
-                     "mean_filename_size", &mean_filename_size, PDI_OUT,
-                     "mean_filename", mean_filename.data(), PDI_OUT,
-                     NULL);
-
-    pdi_writer_mean_time_step++;
 }
-
-void WriterPDI::write_profile(void* profile_data, const UniformGrid& grid)
-{
-
-    static int pdi_writer_profile_time_step = 0 ;
-
-    int tmp_rank=0, tmp_size=1;
-#if defined(MPI_SESSION)
-    MPI_Comm_rank(MPI_COMM_WORLD, &tmp_rank);
-    MPI_Comm_size(MPI_COMM_WORLD, &tmp_size);
-#endif
-
-    int true_rank = grid.comm.rank();
-
-    std::string profile_filename = "profile_restart_"+ std::to_string(m_restartId)+"_"+m_prefix.c_str()+".h5";
-    int profile_filename_size = profile_filename.size();
-
-    if(profile_data)
-    {
-        PDI_multi_expose("write_profiles",
-                         "rank", &true_rank, PDI_OUT,
-                         "size", &tmp_size, PDI_OUT,
-                         "pdi_writer_profile_time_step", &pdi_writer_profile_time_step, PDI_OUT,
-                         "vert_prof", profile_data, PDI_OUT,
-                         "profile_filename_size", &profile_filename_size, PDI_OUT,
-                         "profile_filename", profile_filename.data(), PDI_OUT,
-                         NULL);
-    }
-
-    pdi_writer_profile_time_step++;
 }
-
-void WriterPDI::write_slice(const UniformGrid & grid, void* h_slice_data, void* v_slice_data, bool contains_middle_z)
-{
-
-    static int pdi_writer_slice_time_step = 0 ;
-
-    int tmp_rank=0, tmp_size=1;
-#if defined(MPI_SESSION)
-    MPI_Comm_rank(MPI_COMM_WORLD, &tmp_rank);
-    MPI_Comm_size(MPI_COMM_WORLD, &tmp_size);
-#endif
-
-    int mrz = grid.m_dom[IZ];
-    std::string h_slice_filename = "h_slice_restart_"+ std::to_string(m_restartId)+"_"+m_prefix.c_str()+".h5";
-    int h_slice_filename_size = h_slice_filename.size();
-
-    int mry = grid.m_dom[IY];
-    std::string v_slice_filename = "v_slice_restart_"+ std::to_string(m_restartId)+"_"+m_prefix.c_str()+".h5";
-    int v_slice_filename_size = v_slice_filename.size();
-    if((h_slice_data) && (v_slice_data))
-    {
-        PDI_multi_expose("write_slice",
-                         "rank", &tmp_rank, PDI_OUT,
-                         "size", &tmp_size, PDI_OUT,
-                         "mpi_coord", m_mpi_coords.data(), PDI_OUT,
-                         "mrz", &mrz, PDI_OUT,
-                         "mry", &mry, PDI_OUT,
-                         "pdi_writer_slice_time_step", &pdi_writer_slice_time_step, PDI_OUT,
-                         "local_h_slice", h_slice_data, PDI_OUT,
-                         "h_slice_filename_size", &h_slice_filename_size, PDI_OUT,
-                         "h_slice_filename", h_slice_filename.data(), PDI_OUT,
-                         "local_v_slice", v_slice_data, PDI_OUT,
-                         "v_slice_filename_size", &v_slice_filename_size, PDI_OUT,
-                         "v_slice_filename", v_slice_filename.data(), PDI_OUT,
-                         NULL);
-       if(contains_middle_z)
-       {
-        PDI_multi_expose("write_slice_deisa",
-                        "rank", &tmp_rank, PDI_OUT,
-                        "size", &tmp_size, PDI_OUT,
-                        "mpi_coord", m_mpi_coords.data(), PDI_OUT,
-                        "mrz", &mrz, PDI_OUT,
-                        "pdi_writer_slice_time_step", &pdi_writer_slice_time_step, PDI_OUT,
-                        "local_h_slice_deisa", h_slice_data, PDI_OUT,
-                        NULL);
-        }
-    }
-    pdi_writer_slice_time_step++;
-}
-
-}}

@@ -25,21 +25,6 @@ public:
     virtual void write(HostConstArrayDyn u, const UniformGrid& grid,
                        Int iStep, Real time, Real gamma, Real mmw) = 0;
 
-    virtual void write_mean(global_mean)
-    {
-        throw std::runtime_error("Writing mean is not implemented");
-    }
-
-    virtual void write_profile(void*, const UniformGrid&)
-    {
-        throw std::runtime_error("Writing profile is not implemented");
-    }
-
-    virtual void write_slice(const UniformGrid&, void*, void*, bool)
-    {
-        throw std::runtime_error("Writing slice is not implemented");
-    }
-
     void setOutputId(Int id)
     {
         m_outputId = id;

@@ -39,8 +39,6 @@ public:
 #else
     ~GodunovSolver() override = default;
 #endif
-  //  GodunovSolver& operator=(const GodunovSolver& x) = default;
-  //  GodunovSolver& operator=(GodunovSolver&& x) = default;
 
     Real computeTimeStep() final;
     void nextIteration(Real dt) final;
@@ -64,9 +62,6 @@ private:
     const UniformGrid m_grid;
     std::shared_ptr<io::WriterBase> m_writer;
     bool m_should_save;
-    bool m_should_expose_mean;
-    bool m_should_expose_profile;
-    bool m_should_expose_slice;
     bool m_time_limit_reached;
 
     const Array m_u;
