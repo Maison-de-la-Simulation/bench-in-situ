@@ -79,7 +79,6 @@ private:
     Int m_nz;
     Int m_mz;
     Int m_my;
-    Kokkos::View<double**,Kokkos::HostSpace> m_profiles;
     Int m_iz_middle_gloc;
     Int m_iy_middle_gloc;
     bool m_contains_middle_z;
@@ -94,8 +93,6 @@ private:
     #endif
     Int iz_middle;
     Int iy_middle;
-    Kokkos::View<double**[9], Kokkos::LayoutRight, Kokkos::HostSpace> m_q_h_slice_host;
-    Kokkos::View<double**[9], Kokkos::LayoutRight, Kokkos::HostSpace> m_q_v_slice_host;
 };
 
 }

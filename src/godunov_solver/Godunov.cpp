@@ -57,9 +57,6 @@ GodunovSolver::GodunovSolver(std::shared_ptr<Problem> problem)
     , m_nz {m_params->mesh.nbCells[IZ]}
     , m_mz {m_params->mesh.dom[IZ]}
     , m_my {m_params->mesh.dom[IY]}
-    , m_profiles ("profiles", 7, m_params->mesh.nbCells[IZ])
-    , m_q_h_slice_host ("q_h_slice_host",m_params->mesh.nbCells[IX],m_params->mesh.nbCells[IY])//Allocate host array for slice
-    , m_q_v_slice_host ("q_v_slice_host",m_params->mesh.nbCells[IX],m_params->mesh.nbCells[IZ])//Allocate host array for slice
 
 {
     //slice stuff
