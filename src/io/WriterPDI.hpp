@@ -31,11 +31,8 @@ public:
     //WriterPDI& operator=(const WriterPDI& x) = default;
     //WriterPDI& operator=(WriterPDI&& x) = default;
 
-    void write(HostConstArrayDyn u, const UniformGrid& grid,
+    void write(HostConstArrayDyn u, const UniformGrid &grid,
                Int iStep, Real time, Real gamma, Real mmw) override;
-    void write_mean(global_mean means) override;
-    void write_profile(void* profile_data, const UniformGrid& grid) override;
-    void write_slice(const UniformGrid& grid, void* h_slice_data, void* v_slice_data, bool contains_middle_z) final;
 
     std::array<int, three_d> m_mpi_coords;
     std::string m_prefix;

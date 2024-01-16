@@ -43,9 +43,6 @@ GodunovSolver::GodunovSolver(std::shared_ptr<Problem> problem)
                         m_params->mesh.dom, ghostWidth}
     , m_writer         {}
     , m_should_save    {false}
-    , m_should_expose_mean    {false}
-    , m_should_expose_profile {false}
-    , m_should_expose_slice   {false}
     , m_time_limit_reached  {false}
     , m_u              ("U", m_grid.nbCells())
     , m_q              ("Q", m_grid.nbCells())
@@ -110,10 +107,6 @@ GodunovSolver::GodunovSolver(std::shared_ptr<Problem> problem)
     {
         m_problem->initialize(m_u, m_grid);
         m_should_save = (m_params->output.nOutput > 0 ) || (m_params->output.dt_io > 0);
-        m_should_expose_mean = (m_params->output.n_mean > 0 )|| (m_params->output.dt_mean > 0);
-        m_should_expose_profile = (m_params->output.n_profile > 0 )|| (m_params->output.dt_profile > 0);
-        m_should_expose_slice = (m_params->output.n_slice > 0 )|| (m_params->output.dt_slice > 0);
-
     }
     m_problem->make_boundaries(m_u, m_grid);
     ExecuteConservativeToPrimitive(*m_params, m_grid, m_u, m_q);
@@ -171,32 +164,17 @@ void GodunovSolver::nextIteration(Real dt)
 void GodunovSolver::prepareNextOutput(Real& dt)
 {
     m_should_save = false;
-    m_should_expose_mean = false;
-    m_should_expose_slice = false;
-    m_should_expose_profile = false;
-
+    
     auto dt_io = m_params->output.dt_io;
-    auto dt_mean = m_params->output.dt_mean;
-    auto dt_profile = m_params->output.dt_profile;
-    auto dt_slice = m_params->output.dt_slice;
-
+    
     auto delta_io=std::numeric_limits<Real>::infinity();
-    auto delta_mean=std::numeric_limits<Real>::infinity();
-    auto delta_profile=std::numeric_limits<Real>::infinity();
-    auto delta_slice=std::numeric_limits<Real>::infinity();
-
+    
     if (dt_io > constants::zero) {compute_adjust_timestep(dt_io, dt, delta_io);}
-    if (dt_mean > constants::zero) {compute_adjust_timestep(dt_mean, dt, delta_mean);}
-    if (dt_profile > constants::zero) {compute_adjust_timestep(dt_profile, dt, delta_profile);}
-    if (dt_slice > constants::zero) {compute_adjust_timestep(dt_slice, dt, delta_slice);}
-
-    dt=std::min({dt, delta_io, delta_mean, delta_profile, delta_slice});
+    
+    dt=std::min({dt, delta_io});
 
     if (dt == delta_io) {m_should_save=true;}
-    if (dt == delta_mean) {m_should_expose_mean=true;}
-    if (dt == delta_profile) {m_should_expose_profile=true;}
-    if (dt == delta_slice) {m_should_expose_slice=true;}
-
+    
     if (m_t + dt >= m_tEnd)
     {
         m_should_save = true;
@@ -206,21 +184,7 @@ void GodunovSolver::prepareNextOutput(Real& dt)
     {
         m_should_save = true;
     }
-
-    if ( (m_params->output.n_mean > 0) && ((Super::m_iteration + 1) % m_params->output.n_mean == 0) )
-    {
-        m_should_expose_mean = true;
-    }
-
-    if ((m_params->output.n_profile > 0) && ((Super::m_iteration + 1) % m_params->output.n_profile == 0))
-    {
-        m_should_expose_profile = true;
-    }
-
-    if ((m_params->output.n_slice > 0) && ((Super::m_iteration + 1) % m_params->output.n_slice == 0))
-    {
-        m_should_expose_slice = true;
-    }
+    
 }
 
 void GodunovSolver::pdiExposeData()
@@ -247,51 +211,6 @@ void GodunovSolver::pdiExposeData()
 
     }
 
-    if (m_should_expose_mean)
-    {
-        Kokkos::Profiling::pushRegion("I/O - GlobalMean");
-        Print() << "========= mean exposed at iteration = " << Super::m_iteration << " time t = "<<Super::m_t<<std::endl;
-        Executeglobal_mean(*m_params, m_grid, m_q, m_means);
-        m_writer->write_mean(m_means);
-        Kokkos::Profiling::popRegion();
-    }
-
-    if (m_should_expose_profile)
-    {
-        Kokkos::Profiling::pushRegion("I/O - Profile");
-        Print() << "============= profile exposed at iteration = " << Super::m_iteration << " time t = "<<Super::m_t<< std::endl;
-        Executevp2(*m_params, m_grid, m_q, m_profiles);
-        m_writer->write_profile(m_profiles.data(), m_grid);
-        Kokkos::Profiling::popRegion();
-    }
-
-    if (m_should_expose_slice)
-    {
-        Kokkos::Profiling::pushRegion("I/O - Slice");
-        Print() << "================= slice exposed at iteration = " << Super::m_iteration << " time t = "<<Super::m_t << std::endl;
-
-        //9 is the total amount of variables
-        //4=2*2 is the amount of ghost cells
-        Kokkos::View<double***[9],Kokkos::LayoutLeft> qMD(m_q.data(),4+m_nx,4+m_ny,4+m_nz); //Get a MD representation of m_q: qMD
-        //5 is the total amount of variable we need to compute the kinetic energy
-        //We actually need 4 but its d p u v w and we cant skip p so we take from 0 to 5-1
-        //EDIT: we want all variables now from 0 to 9-1 !
-        //2 is the amount of ghost cell, we also take them out
-        auto q_h_slice=Kokkos::subview(qMD, Kokkos::make_pair(2, m_nx+2), Kokkos::make_pair(2, m_ny+2), iz_middle+2, Kokkos::make_pair(0,9));//MD representation of the slice
-        Kokkos::View<double**[9],Kokkos::LayoutRight> q_h_slice_gpu("q_h_slice_gpu", m_nx, m_ny); // allocate contiguous memory for the slice
-        Kokkos::deep_copy(q_h_slice_gpu,q_h_slice); // Deep copy into contiguous memory in GPU
-        Kokkos::deep_copy(m_q_h_slice_host,q_h_slice_gpu); // Deep copy into host array to expose
-
-        auto q_v_slice=Kokkos::subview(qMD, Kokkos::make_pair(2, m_nx+2), iy_middle+2, Kokkos::make_pair(2, m_nz+2), Kokkos::make_pair(0,9));//MD representation of the slice
-        Kokkos::View<double**[9],Kokkos::LayoutRight> q_v_slice_gpu("q_v_slice_gpu", m_nx, m_nz);
-        Kokkos::deep_copy(q_v_slice_gpu,q_v_slice);
-        Kokkos::deep_copy(m_q_v_slice_host,q_v_slice_gpu);
-
-        m_writer->write_slice(m_grid, m_q_h_slice_host.data(), m_q_v_slice_host.data(), m_contains_middle_z);
-
-
-        Kokkos::Profiling::popRegion();
-    }
 }
 
 
@@ -320,7 +239,7 @@ bool GodunovSolver::shouldPrintInformation() const
         return true;
     }
 
-    if (m_should_save||m_should_expose_mean||m_should_expose_profile||m_should_expose_slice)
+    if (m_should_save)
     {
         return true;
     }
