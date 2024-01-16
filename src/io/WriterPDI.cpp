@@ -299,12 +299,10 @@ WriterPDI::WriterPDI(const UniformGrid& grid, const Params&,
     dl[IZ] = grid.m_dl[IZ];
 
     int pdi_writer_time_step = 0;
-    int mrz = grid.m_dom[IZ];
 
-    PDI_multi_expose("init_pdi",
+    PDI_multi_expose("init_pdi_w_deisa",
                      "pdi_writer_time_step", &pdi_writer_time_step, PDI_OUT,
                      "mpi_coord", m_mpi_coords.data(), PDI_OUT,
-                     "mrz", &mrz, PDI_OUT,
                      "nvar", &nvar, PDI_OUT,
                      "ncell", pdi_ncells.data(), PDI_OUT,
                      "grid_size", pdi_ncells.data(), PDI_OUT,
@@ -317,28 +315,7 @@ WriterPDI::WriterPDI(const UniformGrid& grid, const Params&,
                      "prefix_size", &prefix_size, PDI_OUT,
                      "prefix", prefix.c_str(), PDI_OUT,
                      NULL);
-    bool is_middle_proc=false;
-    int middle_z_position = mrz*grid.m_nbCells[IZ]/2-1;
-    is_middle_proc = m_mpi_coords[IZ]*grid.m_nbCells[IZ]<=middle_z_position && middle_z_position<=(m_mpi_coords[IZ]+1)*grid.m_nbCells[IZ]-1;
-    if((is_middle_proc)||(tmp_rank==0))
-    {
-	   PDI_multi_expose("init_deisa",
-                     "pdi_writer_time_step", &pdi_writer_time_step, PDI_OUT,
-                     "mpi_coord", m_mpi_coords.data(), PDI_OUT,
-                     "mrz",&mrz,PDI_OUT,
-                     "nvar", &nvar, PDI_OUT,
-                     "ncell", pdi_ncells.data(), PDI_OUT,
-                     "grid_size", pdi_ncells.data(), PDI_OUT,
-                     "ghost", grid.m_ghostWidths.data(), PDI_OUT,
-                     "ncell_local", pdi_ncells_local.data(), PDI_OUT,
-                     "start", pdi_start.data(), PDI_OUT,
-                     "origin", origin.data(), PDI_OUT,
-                     "dl", dl.data(), PDI_OUT,
-                     "restart_id", &m_restartId, PDI_OUT,
-                     "prefix_size", &prefix_size, PDI_OUT,
-                     "prefix", prefix.c_str(), PDI_OUT,
-                     NULL);
-    }
+    
 }
 
 void WriterPDI::write(HostConstArrayDyn u, const UniformGrid & grid,
@@ -388,5 +365,4 @@ void WriterPDI::write(HostConstArrayDyn u, const UniformGrid & grid,
                      "restart_id", &m_restartId, PDI_OUT,
                      NULL);
 }
-}
-}
+}}
