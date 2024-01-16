@@ -98,8 +98,6 @@ pdi:
     iStep: int
 
 
-    mrz: int
-
     pdi_writer_time_step: int
     mpi_coord: {type: array, subtype: int, size: 3}
 
