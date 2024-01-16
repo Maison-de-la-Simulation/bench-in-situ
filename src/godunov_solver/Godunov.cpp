@@ -59,15 +59,6 @@ GodunovSolver::GodunovSolver(std::shared_ptr<Problem> problem)
     , m_my {m_params->mesh.dom[IY]}
 
 {
-    //slice stuff
-    m_iz_middle_gloc =m_mz*m_nz/2-1;
-    m_contains_middle_z = ((m_mpi_z_rank*m_nz<=m_iz_middle_gloc)&&(m_iz_middle_gloc<=(m_mpi_z_rank+1)*m_nz-1));
-    iz_middle= m_iz_middle_gloc%m_nz;
-
-    m_iy_middle_gloc =m_my*m_ny/2-1;
-    m_contains_middle_y = ((m_mpi_y_rank*m_ny<=m_iy_middle_gloc)&&(m_iy_middle_gloc<=(m_mpi_y_rank+1)*m_ny-1));
-    iy_middle= m_iy_middle_gloc%m_ny;
-    //--
 
     std::vector<std::string> var_names = MHD::cons_names();
     std::vector<std::pair<int, std::string>> variables_to_save;

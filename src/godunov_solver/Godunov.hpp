@@ -79,10 +79,7 @@ private:
     Int m_nz;
     Int m_mz;
     Int m_my;
-    Int m_iz_middle_gloc;
-    Int m_iy_middle_gloc;
-    bool m_contains_middle_z;
-    bool m_contains_middle_y;
+    
 
     #if defined(MPI_SESSION)
       int m_mpi_z_rank = m_grid.comm.getCoords(m_grid.comm.rank())[IZ];
@@ -91,8 +88,7 @@ private:
       int m_mpi_z_rank = 0 ;
       int m_mpi_y_rank = 0 ;
     #endif
-    Int iz_middle;
-    Int iy_middle;
+    
 };
 
 }
