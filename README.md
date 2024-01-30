@@ -20,6 +20,14 @@ module load cuda/11.7.0/gcc-11.2.0
 module load cmake/3.21.4/gcc-11.2.0 
 ```
 
+### Modules needed (on Jean-Zay)
+```
+module load cmake/3.21.3
+module load intel-compilers/19.0.4
+module load intel-mpi/2019.4
+```
+
+
 ### To build PDI
 ```
 cmake -DCMAKE_INSTALL_PREFIX=$PWD/../../install_pdi -DUSE_HDF5=EMBEDDED -DBUILD_HDF5_PARALLEL=ON  -DUSE_yaml=EMBEDDED -DUSE_paraconf=EMBEDDED -DBUILD_SHARED_LIBS=ON -DBUILD_FORTRAN=OFF -DBUILD_BENCHMARKING=OFF -DBUILD_SET_VALUE_PLUGIN=OFF -DBUILD_TESTING=OFF -DBUILD_DECL_NETCDF_PLUGIN=OFF -DBUILD_USER_CODE_PLUGIN=ON ..
@@ -36,5 +44,5 @@ make -j 4
 ```
 ### To run bench
 ```
-./main ../setup.ini ../io.yaml
+./main ../setup.ini ../io_chkpt.yml
 ```
