@@ -44,5 +44,5 @@ make -j 4
 ```
 ### To run bench
 ```
-./main ../setup.ini ../io.yaml
+./main ../setup.ini ../io_chkpt.yml
 ```
