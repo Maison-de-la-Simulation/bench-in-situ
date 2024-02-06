@@ -10,3 +10,6 @@
 [submodule "lib/dms"]
 	path = lib/dms
 	url = https://github.com/Maison-de-la-Simulation/dms.git
+[submodule "lib/deisa"]
+	path = lib/deisa
+	url = https://github.com/pdidev/deisa.git
