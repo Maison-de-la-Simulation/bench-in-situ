@@ -74,3 +74,8 @@ flycheck_*.el
 
 # directory configuration
 .dir-locals.el
+
+.idea/
+out/
+*cmake-tools*
+working_dir
