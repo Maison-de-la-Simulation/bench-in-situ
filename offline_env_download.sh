@@ -20,5 +20,6 @@ pip install ../lib/deisa
 pip download ../lib/deisa/ -d deps/
 pip download wheel versioneer -d deps/
 
-
+deactivate
+rm -r ${PYTHON_ENV}
 cd --

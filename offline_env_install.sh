@@ -13,15 +13,9 @@ python -m venv ${PYTHON_ENV}
 source ${PYTHON_ENV}/bin/activate
 
 pip install deps/*.whl
-pip install deps/*.zip
+pip install --no-index --no-build-isolation deps/*.zip
 
 # install Deisa
 pip install --no-index --no-build-isolation --no-deps ../lib/deisa
-
-# TODO: offline setup
-
-pip download ../lib/deisa/ -d deps/
-pip download wheel versioneer -d deps/
-
 
 cd --
