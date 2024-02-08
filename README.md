@@ -46,3 +46,14 @@ make -j 4
 ```
 ./main ../setup.ini ../io_chkpt.yml
 ```
+## Offline Installation
+### On the online machine
+```
+./offline_env_download.sh
+```
+Copy the whole repo on the offline machine
+
+### On the offline machine
+```
+./offline_env_install.sh
+```
