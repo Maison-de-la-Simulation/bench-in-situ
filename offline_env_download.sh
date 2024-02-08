@@ -8,29 +8,88 @@ cd ${WORKING_DIR}
 
 # TODO: create conda python 3.9
 # 1) create conda env with python 3.9: conda create -y --name py39 python=3.9.10
+conda create -y --name py39 python=3.9
 # 2) activate environment
-# 3) pip download
-# 4) tar gz -> deisa_deps_py39.tar.gz
-# 5) cleanup: deactivate conda env, rm conda env, downloaded files
-
-# TODO: create conda python 3.10
-# TODO: create conda python 3.11
-
-# setup python environment
-python -m venv ${PYTHON_ENV}
-
-# activate python environment
-source ${PYTHON_ENV}/bin/activate
-
-# install Deisa
+conda init
+conda activate py39
+# 3) pip download and wheel
 pip install ../lib/deisa
-
-# TODO: offline setup
-
 pip download ../lib/deisa/ -d deps/
 pip download wheel versioneer -d deps/
 
-deactivate
-rm -r ${PYTHON_ENV}
-cd --
+cd deps
+pip wheel *.zip
+rm *.zip
+cd ..
 
+# 4) tar gz -> deisa_deps_py39.tar.gz
+tar -czvf deisa_deps_py39.tar.gz deps/*
+# 5) cleanup: deactivate conda env, rm conda env, downloaded files
+conda deactivate
+conda remove -y --name py39 --all
+rm -r deps/*
+
+# TODO: create conda python 3.10
+
+# 1) create conda env with python 3.10: conda create -y --name py39 python=3.9.10
+conda create -y --name py10 python=3.10
+# 2) activate environment
+conda init
+conda activate py310
+# 3) pip download and wheel
+pip install ../lib/deisa
+pip download ../lib/deisa/ -d deps/
+pip download wheel versioneer -d deps/
+
+cd deps
+pip wheel *.zip
+rm *.zip
+cd ..
+
+# 4) tar gz -> deisa_deps_py39.tar.gz
+tar -czvf deisa_deps_py310.tar.gz deps/*
+# 5) cleanup: deactivate conda env, rm conda env, downloaded files
+conda deactivate
+conda remove -y --name py310 --all
+rm -r deps/*
+
+# TODO: create conda python 3.11
+# 1) create conda env with python 3.11: conda create -y --name py39 python=3.9.10
+conda create -y --name py311 python=3.11
+# 2) activate environment
+conda init
+conda activate py311
+# 3) pip download and wheel
+pip install ../lib/deisa
+pip download ../lib/deisa/ -d deps/
+pip download wheel versioneer -d deps/
+
+cd deps
+pip wheel *.zip
+rm *.zip
+cd ..
+
+# 4) tar gz -> deisa_deps_py39.tar.gz
+tar -czvf deisa_deps_py311.tar.gz deps/*
+# 5) cleanup: deactivate conda env, rm conda env, downloaded files
+conda deactivate
+conda remove -y --name py311 --all
+rm -r deps/*
+
+# setup python environment
+#python -m venv ${PYTHON_ENV}
+
+# activate python environment
+#source ${PYTHON_ENV}/bin/activate
+
+# install Deisa
+#pip install ../lib/deisa
+
+# TODO: offline setup
+
+#pip download ../lib/deisa/ -d deps/
+#pip download wheel versioneer -d deps/
+
+#deactivate
+rm -r ${PYTHON_ENV}
+cd ..
