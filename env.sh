@@ -5,6 +5,9 @@ BUILD_DIR=${SCRIPT_DIR}/out/Debug
 PYTHON_ENV=deisa
 SIMULATION_BIN=${BUILD_DIR}/main
 
+mkdir -p ${WORKING_DIR}
+mkdir -p ${WORKING_DIR}/${PYTHON_ENV}
+
 print_env() {
 	echo "============="
 	echo "SCRIPT_DIR=${SCRIPT_DIR}"
