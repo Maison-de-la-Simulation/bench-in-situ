@@ -11,6 +11,7 @@
 
 from deisa import Deisa
 import os
+import sys
 import h5py
 import dask.array as da
 import yaml
@@ -18,9 +19,10 @@ import yaml
 os.environ["DASK_DISTRIBUTED__COMM__UCX__INFINIBAND"] = "True"
 
 # Initialize Deisa
-scheduler_info = "../scheduler.json"
+
+scheduler_info = sys.argv[1] if sys.argv[1] else "scheduler.json"
 config_file = "../deisa.yml"
-Deisa = Deisa(scheduler_info, config_file)
+deisa = Deisa(scheduler_info, config_file)
 
 # TODO: these variables should be in the config file
 with open(config_file) as file:
@@ -31,8 +33,8 @@ with open(config_file) as file:
     num_restart = data["num_restart"]
 
 # Get client
-client = Deisa.get_client()
-arrays = Deisa.get_deisa_arrays()
+client = deisa.get_client()
+arrays = deisa.get_deisa_arrays()
 
 # Select data
 iz_middle_gloc = mz * nz / 2 - 1
@@ -92,7 +94,6 @@ hf.create_dataset("knrm", data=knrm)
 hf.create_dataset("fourier_amplitudes", data=fourier_amplitudes)
 hf.create_dataset("kbins", data=kbins)
 hf.create_dataset("kvals", data=kvals)
-
 
 hf.close()
 

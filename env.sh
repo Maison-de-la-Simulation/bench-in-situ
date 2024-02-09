@@ -1,7 +1,7 @@
 SCRIPT_DIR=$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" &>/dev/null && pwd)
 WORKING_DIR=${SCRIPT_DIR}/working_dir # TODO: Add datetime ?
 SCHEFILE=${WORKING_DIR}/scheduler.json
-BUILD_DIR=${SCRIPT_DIR}/out/Debug
+BUILD_DIR=${SCRIPT_DIR}/build
 PYTHON_ENV=deisa
 SIMULATION_BIN=${BUILD_DIR}/main
 PYTHON_DEPS=${WORKING_DIR}/deps

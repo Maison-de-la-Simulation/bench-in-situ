@@ -6,3 +6,7 @@
 #  height: 2
 #  width: 2
 workers: 1
+mz: 1
+nz: 16
+prefix: CheckPoints
+num_restart: 0
