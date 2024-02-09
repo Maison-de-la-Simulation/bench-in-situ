@@ -4,6 +4,7 @@ SCHEFILE=${WORKING_DIR}/scheduler.json
 BUILD_DIR=${SCRIPT_DIR}/out/Debug
 PYTHON_ENV=deisa
 SIMULATION_BIN=${BUILD_DIR}/main
+PYTHON_DEPS=${WORKING_DIR}/deps
 
 mkdir -p ${WORKING_DIR}
 mkdir -p ${WORKING_DIR}/${PYTHON_ENV}
