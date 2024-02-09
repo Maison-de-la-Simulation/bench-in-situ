@@ -6,15 +6,15 @@ print_env
 mkdir -p ${WORKING_DIR}
 cd ${WORKING_DIR}
 
-# TODO: create conda python 3.9
+# Create conda python 3.9
 # 1) create conda env with python 3.9: conda create -y --name py39 python=3.9.10
 conda create -y --name py39 python=3.9
 # 2) activate environment
-conda init
-conda activate py39
+conda init          #TODO: can this be removed ?
+conda activate py39 #TODO: use `conda run` instead of `conda activate`
 # 3) pip download and wheel
-pip install ../lib/deisa
-pip download ../lib/deisa/ -d deps/
+pip install ../lib/deisa            #TODO: is this needed ?
+pip download ../lib/deisa/ -d deps/ #TODO: deps should be a a variable in env.sh
 pip download wheel versioneer -d deps/
 
 cd deps
@@ -29,7 +29,7 @@ conda deactivate
 conda remove -y --name py39 --all
 rm -r deps/*
 
-# TODO: create conda python 3.10
+# Create conda python 3.10
 
 # 1) create conda env with python 3.10: conda create -y --name py39 python=3.9.10
 conda create -y --name py10 python=3.10
@@ -53,7 +53,7 @@ conda deactivate
 conda remove -y --name py310 --all
 rm -r deps/*
 
-# TODO: create conda python 3.11
+# Create conda python 3.11
 # 1) create conda env with python 3.11: conda create -y --name py39 python=3.9.10
 conda create -y --name py311 python=3.11
 # 2) activate environment
@@ -84,8 +84,6 @@ rm -r deps/*
 
 # install Deisa
 #pip install ../lib/deisa
-
-# TODO: offline setup
 
 #pip download ../lib/deisa/ -d deps/
 #pip download wheel versioneer -d deps/
