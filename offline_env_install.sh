@@ -18,12 +18,12 @@ pip install deps/*.whl
 pip install --no-index --no-build-isolation --no-deps ../lib/deisa
 
 echo "TESTING DEPENDENCIES"
-echo "Deisa :"
-python -m import deisa
-echo "Numpy :"
-python -m import numpy
-echo "Dask :"
-python -m import Dask
-echo "Distributed :"
-python -m import distributed
+echo "Deisa.."
+python -c "import deisa"
+echo "Numpy.."
+python -c "import numpy"
+echo "Dask.."
+python -c "import dask"
+echo "Distributed.."
+python -c "import distributed"
 cd --
