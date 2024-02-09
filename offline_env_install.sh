@@ -17,4 +17,13 @@ pip install deps/*.whl
 # install Deisa
 pip install --no-index --no-build-isolation --no-deps ../lib/deisa
 
+echo "TESTING DEPENDENCIES"
+echo "Deisa.."
+python -c "import deisa"
+echo "Numpy.."
+python -c "import numpy"
+echo "Dask.."
+python -c "import dask"
+echo "Distributed.."
+python -c "import distributed"
 cd --
