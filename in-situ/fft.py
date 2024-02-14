@@ -14,23 +14,14 @@ import os
 import sys
 import h5py
 import dask.array as da
-import yaml
 
 os.environ["DASK_DISTRIBUTED__COMM__UCX__INFINIBAND"] = "True"
 
 # Initialize Deisa
 
 scheduler_info = sys.argv[1] if sys.argv[1] else "scheduler.json"
-config_file = "../deisa.yml"
-deisa = Deisa(scheduler_info, config_file)
-
-# TODO: these variables should be in the config file
-with open(config_file) as file:
-    data = yaml.load(file, Loader=yaml.FullLoader)
-    nz = data["nz"]
-    mz = data["mz"]
-    prefix = data["prefix"]
-    num_restart = data["num_restart"]
+nb_workers = 1
+deisa = Deisa(scheduler_info, nb_workers)
 
 # Get client
 client = deisa.get_client()
