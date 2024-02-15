@@ -14,33 +14,39 @@ import os
 import sys
 import h5py
 import dask.array as da
-import yaml
 
 os.environ["DASK_DISTRIBUTED__COMM__UCX__INFINIBAND"] = "True"
 
 # Initialize Deisa
 
 scheduler_info = sys.argv[1] if sys.argv[1] else "scheduler.json"
-config_file = "../deisa.yml"
-deisa = Deisa(scheduler_info, config_file)
-
-# TODO: these variables should be in the config file
-with open(config_file) as file:
-    data = yaml.load(file, Loader=yaml.FullLoader)
-    nz = data["nz"]
-    mz = data["mz"]
-    prefix = data["prefix"]
-    num_restart = data["num_restart"]
+nb_workers = 1
+deisa = Deisa(scheduler_info, nb_workers)
 
 # Get client
 client = deisa.get_client()
 arrays = deisa.get_deisa_arrays()
 
 # Select data
-iz_middle_gloc = mz * nz / 2 - 1
+#iz_middle_gloc = mz * nz / 2 - 1
 t = 3  # Temps auquel on veut le sdp
 
-slice = arrays["global_t"][t, 0, :, :, :]
+global_t = arrays["global_t"][...]
+slice = global_t[t, 0, :, :, :]
+print("global_t=" + str(global_t), flush=True)
+print("slice=" + str(slice), flush=True)
+
+#nz = 16
+nz = len(slice[:,0,0])
+assert(isinstance(nz, int))
+#mz = 1
+mz = len(global_t[0,:,0,0,0])
+assert(isinstance(mz, int))
+prefix = "deisa"
+num_restart = 0
+
+print("nz=" + str(nz))
+print("mz=" + str(mz))
 
 # Check contract
 arrays.check_contract()
@@ -98,4 +104,4 @@ hf.create_dataset("kvals", data=kvals)
 hf.close()
 
 print("Done", flush=True)
-client.shutdown()
+deisa.wait_for_last_bridge_and_shutdown()
