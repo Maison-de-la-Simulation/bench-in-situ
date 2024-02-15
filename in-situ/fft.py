@@ -104,4 +104,4 @@ hf.create_dataset("kvals", data=kvals)
 hf.close()
 
 print("Done", flush=True)
-client.shutdown()
+deisa.wait_for_last_bridge_and_shutdown()

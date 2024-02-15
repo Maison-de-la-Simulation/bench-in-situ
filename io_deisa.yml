@@ -160,7 +160,6 @@ pdi:
       write:
         grid_size:
         time:
-        time:
           - dataset: Time
         Rstar_h:
         gamma:
