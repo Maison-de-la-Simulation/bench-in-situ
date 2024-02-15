@@ -48,7 +48,7 @@ int main(int argc, char** argv)
         auto engine = hydro::EngineFactory::New(argv[1]);
 
         std::ostringstream oss;
-        hydro::print_configuration(oss);
+        // hydro::print_configuration(oss);
         engine->print_configuration(oss);
         Print() << oss.str();
 

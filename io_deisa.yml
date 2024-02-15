@@ -119,7 +119,7 @@ pdi:
     outputs_record_size: int
 
     grid_size: { type: array, subtype: int, size: 3 }
-    local_h_slice_deisa: { type: array, subtype: double, size: [1,'$ncell_local[0]','$ncell_local[1]',9] }
+    # local_h_slice_deisa: { type: array, subtype: double, size: [1,'$ncell_local[0]','$ncell_local[1]',9] }
 
   plugins:
 
@@ -137,15 +137,15 @@ pdi:
         global_t:                                                                  # That's the name that i will send to Dask for this array
           type: array
           subtype: double
-          size: [1000, 1, '$ncell[0]', '$ncell[1]', 9]
-          subsize: [1, 1, '$ncell_local[0]', '$ncell_local[1]', 9]
-          start: ['$pdi_writer_time_step', 0, '$ncell_local[0]*$mpi_coord[0]', '$ncell_local[1]*$mpi_coord[1]', 0]
-          #size: [100, '${nvar}', '$ncell[2]', '$ncell[1]', '$ncell[0]']
-          #subsize: [1, '${nvar}', '$ncell_local[2]', '$ncell_local[1]', '$ncell_local[0]']
-          #start: [$pdi_writer_time_step , 0, '$ncell_local[2]*$mpi_coord[2]', '$ncell_local[1]*$mpi_coord[1]', '$ncell_local[0]*$mpi_coord[0]']
+          # size: [1000, 1, '$ncell[0]', '$ncell[1]', 9]
+          # subsize: [1, 1, '$ncell_local[0]', '$ncell_local[1]', 9]
+          # start: ['$pdi_writer_time_step', 0, '$ncell_local[0]*$mpi_coord[0]', '$ncell_local[1]*$mpi_coord[1]', 0]
+          size: [100, '$ncell[0]', '$ncell[1]', '$ncell[2]', '${nvar}']
+          subsize: [1, '$ncell_local[0]', '$ncell_local[1]', '$ncell_local[2]', '${nvar}']
+          start: [$pdi_writer_time_step , '$ncell_local[0]*$mpi_coord[0]', '$ncell_local[1]*$mpi_coord[1]', '$ncell_local[2]*$mpi_coord[2]', 0]
           +timedim: 0                                                                       # A tag for the time dim, only this configuration is supported for the moment
       map_in:                                                                               # Which local data will be mapped to which deisa array
-        local_h_slice_deisa: global_t
+        local_full_field: global_t
 
     mpi:
 
@@ -157,9 +157,9 @@ pdi:
       on_event: checkpoint
       collision_policy: write_into
       communicator: '${MPI_COMM_WORLD}'
+      when: '$iStep%1000 = 0'
       write:
         grid_size:
-        time:
         time:
           - dataset: Time
         Rstar_h:
