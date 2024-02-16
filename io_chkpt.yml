@@ -128,7 +128,7 @@ pdi:
         write_xml:
           writeXML: {}
 
-    mpi:
+    # mpi:
 
     decl_hdf5:
 
@@ -137,7 +137,7 @@ pdi:
       datasets: *full_datasets # a list of datasets inside the file created on first access
       on_event: checkpoint
       collision_policy: write_into
-      communicator: '${MPI_COMM_WORLD}'
+      # communicator: '${MPI_COMM_WORLD}'
       when: '$iStep%100 = 0'
       write:
         grid_size:

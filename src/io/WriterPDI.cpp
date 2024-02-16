@@ -279,15 +279,19 @@ WriterPDI::WriterPDI(const UniformGrid& grid, const Params&,
     m_mpi_coords = grid.comm.getCoords(grid.comm.rank());
 #endif
 
-    m_prefix=prefix;
     std::array<int, 3> pdi_start;
     pdi_start[IX] = grid.m_nbCells[IX] * m_mpi_coords[IX];
     pdi_start[IY] = grid.m_nbCells[IY] * m_mpi_coords[IY];
     pdi_start[IZ] = grid.m_nbCells[IZ] * m_mpi_coords[IZ];
 
-    int prefix_size = prefix.size() + 1;
-    int nvar = 9;
+    std::ostringstream mpi_prefix;
+    mpi_prefix << std::setw(3) << std::setfill('0') << tmp_rank;    
+    std::string new_prefix(prefix);
+    new_prefix.append("_r"+mpi_prefix.str());
 
+    int prefix_size = new_prefix.size() + 1;
+    int nvar = 9;
+    
     std::array<Real, 3> origin;
     origin[IX] = grid.m_lowGlobal[IX];
     origin[IY] = grid.m_lowGlobal[IY];
@@ -298,10 +302,10 @@ WriterPDI::WriterPDI(const UniformGrid& grid, const Params&,
     dl[IY] = grid.m_dl[IY];
     dl[IZ] = grid.m_dl[IZ];
 
-    int pdi_writer_time_step = 0;
+    int iStep = 0;
 
     PDI_multi_expose("init_pdi_w_deisa",
-                     "pdi_writer_time_step", &pdi_writer_time_step, PDI_OUT,
+                     "iStep", &iStep, PDI_OUT,
                      "mpi_coord", m_mpi_coords.data(), PDI_OUT,
                      "nvar", &nvar, PDI_OUT,
                      "ncell", pdi_ncells.data(), PDI_OUT,
@@ -336,10 +340,8 @@ void WriterPDI::write(HostConstArrayDyn u, const UniformGrid & grid,
     std::string filename = getFilename(prefix, outputId);
     int filename_size = filename.size();
 
-    static int pdi_writer_time_step = 0;
     PDI_multi_expose("checkpoint",
                      "iStep", &iStep, PDI_OUT,
-                     "pdi_writer_time_step", &pdi_writer_time_step, PDI_OUT,
                      "time", &time, PDI_OUT,
                      "Rstar_h", &code_units::constants::Rstar_h, PDI_OUT,
                      "gamma", &gamma, PDI_OUT,
@@ -351,7 +353,6 @@ void WriterPDI::write(HostConstArrayDyn u, const UniformGrid & grid,
                      "filename", filename.data(), PDI_OUT,
                      "grid_size", pdi_ncells.data(), PDI_OUT,
                      NULL);
-    ++pdi_writer_time_step;
 
     WriterBase::m_previous_outputs.push_back(std::make_pair(outputId, time));
 
