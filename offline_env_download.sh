@@ -11,7 +11,7 @@ cd ${WORKING_DIR}
 conda create -y --name py39 python=3.9
 
 # 2) pip download and wheel
-conda run -n py39 pip download ../lib/deisa/ -d ${PYTHON_${PYTHON_DEPS}}/
+conda run -n py39 pip download ../lib/deisa/ -d ${PYTHON_DEPS}/
 conda run -n py39 pip download wheel versioneer -d ${PYTHON_DEPS}/
 
 cd ${PYTHON_DEPS}
@@ -30,7 +30,7 @@ rm -r ${PYTHON_DEPS}/*
 conda create -y --name py310 python=3.10
 
 # 2) pip download and wheel
-conda run -n py310 pip download ../lib/deisa/ -d ${PYTHON_${PYTHON_DEPS}}/
+conda run -n py310 pip download ../lib/deisa/ -d ${PYTHON_DEPS}/
 conda run -n py310 pip download wheel versioneer -d ${PYTHON_DEPS}/
 
 cd ${PYTHON_DEPS}
@@ -49,7 +49,7 @@ rm -r ${PYTHON_DEPS}/*
 conda create -y --name py311 python=3.11
 
 # 2) pip download and wheel
-conda run -n py311 pip download ../lib/deisa/ -d ${PYTHON_${PYTHON_DEPS}}/
+conda run -n py311 pip download ../lib/deisa/ -d ${PYTHON_DEPS}/
 conda run -n py311 pip download wheel versioneer -d ${PYTHON_DEPS}/
 
 cd ${PYTHON_DEPS}
