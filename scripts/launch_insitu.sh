@@ -11,6 +11,6 @@ sync
 
 dask worker --local-directory /tmp --scheduler-file=$SCHEFILE &
 
-python3 ../in-situ/fft.py $SCHEFILE
+python3 -O ../in-situ/fft.py $SCHEFILE
 
 cd --
