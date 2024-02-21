@@ -49,7 +49,9 @@ print("Z-dim =", mz, flush=True)
 z_pos = int(mz/3)
 print("getting slice at z =", z_pos)
 
-slice = arrays["global_t"][:, :, z_pos, :, :]  
+t_stride = 10
+
+slice = arrays["global_t"][0:mt:t_stride, :, z_pos, :, :]  
 # gt[time, var, z, y, x]
 # slice[time, var, y, x]
 
@@ -82,7 +84,7 @@ ekin_deisa_rechunked = ekin_deisa.rechunk({0: -1, 1: -1, 2: -1}) #no chunking al
 # npix = ekin_deisa_rechunked.shape[1]
 ekin_fft2 = da.fft.fft2(ekin_deisa_rechunked) # fft over the last two axes
 fourier_amplitudes = da.absolute(ekin_fft2) **2
-fourier_amplitudes = fourier_amplitudes.reshape(mt, mx*my)
+fourier_amplitudes = fourier_amplitudes.reshape(mt/t_stride, mx*my)
 # kfreq = da.fft.fftfreq(npix) * npix
 # kfreq2D = da.meshgrid(kfreq, kfreq)
 # knrm = da.sqrt(kfreq2D[0] ** 2 + kfreq2D[1] ** 2)
@@ -106,12 +108,12 @@ client.compute(s4).result()
 
 
 
-for t in range(mt):
+for t in range(0, mt, t_stride):
     hf = h5py.File("deisa_output_" + str(t) + ".h5", "w")
-    hf.create_dataset("U", data=s3[t,iu,:,:])
-    hf.create_dataset("V", data=s3[t,iv,:,:])
-    hf.create_dataset("W", data=s3[t,iw,:,:])
-    hf.create_dataset("fft2", data=s4[t,:])
+    hf.create_dataset("U", data=s3[t/t_stride,iu,:,:])
+    hf.create_dataset("V", data=s3[t/t_stride,iv,:,:])
+    hf.create_dataset("W", data=s3[t/t_stride,iw,:,:])
+    hf.create_dataset("fft2", data=s4[t/t_stride,:])
     hf.close()
 
 hf = h5py.File("deisa_sumXY.h5", "w")
