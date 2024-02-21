@@ -20,8 +20,8 @@ os.environ["DASK_DISTRIBUTED__COMM__UCX__INFINIBAND"] = "True"
 
 # Initialize Deisa
 
-# scheduler_info = sys.argv[1] if sys.argv[1] else "scheduler.json"
-scheduler_info = "scheduler.json"
+scheduler_info = sys.argv[1] if len(sys.argv)>1 else "scheduler.json"
+# scheduler_info = "scheduler.json"
 
 nb_workers = 1
 deisa = Deisa(scheduler_info, nb_workers)
@@ -34,12 +34,24 @@ arrays = deisa.get_deisa_arrays()
 
 # Select data
 gt = arrays["global_t"][...]
-mz = len(gt[0,0,0,:,0])
-assert(isinstance(mz, int))
-print("Z-dim = ", mz, flush=True)
+mx = len(gt[0,0,0,0,:])
+my = len(gt[0,0,0,:,0])
+mz = len(gt[0,0,:,0,0])
 
-print("getting slice")
-slice = arrays["global_t"][:, :, :, 5, :]
+mt = len(gt[:,0,0,0,0])
+
+assert(isinstance(mx, int))
+assert(isinstance(my, int))
+assert(isinstance(mz, int))
+print("X-dim =", mx, flush=True)
+print("Y-dim =", my, flush=True)
+print("Z-dim =", mz, flush=True)
+z_pos = int(mz/3)
+print("getting slice at z =", z_pos)
+
+slice = arrays["global_t"][:, :, z_pos, :, :]  
+# gt[time, var, z, y, x]
+# slice[time, var, y, x]
 
 # Check contract
 arrays.check_contract()
@@ -50,58 +62,61 @@ iu = 2
 iv = 3
 iw = 4
 
+
 ekin_deisa = (
     0.5
-    * slice[:, :, :, id]
-    * (  slice[:, :, :, iu] * slice[:, :, :, iu]
-    + slice[:, :, :, iv] * slice[:, :, :, iv]
-    + slice[:, :, :, iw] * slice[:, :, :, iw]
+    * slice[:, id, :, :]
+    * (  slice[:, iu, :, :] * slice[:, iu, :, :]
+    + slice[:, iv, :, :] * slice[:, iv, :, :]
+    + slice[:, iw, :, :] * slice[:, iw, :, :]
     )
     / (mz * mz)
 )
+# ekin_deisa[time, y, x]
 
 sum_over_xy = ekin_deisa.sum(axis=(1,2))
 
 
 
-# ekin_deisa_rechunked = ekin_deisa.rechunk(({0: -1, 1: -1, 2: -1})) #no chanking along dim 0 and dim 1
+ekin_deisa_rechunked = ekin_deisa.rechunk({0: -1, 1: -1, 2: -1}) #no chunking along dim 0, 1, and 2
 # npix = ekin_deisa_rechunked.shape[1]
-# fourier_image = da.fft.fftn(ekin_deisa_rechunked)
-# fourier_amplitudes = da.absolute(fourier_image) ** 2
+ekin_fft2 = da.fft.fft2(ekin_deisa_rechunked) # fft over the last two axes
+fourier_amplitudes = da.absolute(ekin_fft2) **2
+fourier_amplitudes = fourier_amplitudes.reshape(mt, mx*my)
 # kfreq = da.fft.fftfreq(npix) * npix
 # kfreq2D = da.meshgrid(kfreq, kfreq)
 # knrm = da.sqrt(kfreq2D[0] ** 2 + kfreq2D[1] ** 2)
 # knrm = knrm.flatten()
-# fourier_amplitudes2 = fourier_amplitudes.flatten()
 # kbins = da.arange(0.5, npix // 2 + 1, 1.0)
 # kvals = 0.5 * (kbins[1:] + kbins[:-1])
 
-s1 = client.persist(ekin_deisa)
+# s1 = client.persist(ekin_deisa)
 s2 = client.persist(sum_over_xy)
+s3 = client.persist(slice)
+s4 = client.persist(fourier_amplitudes)
 # Submit the task graph to the scheduler
-
-# s1, s2, s3, s4= client.persist([knrm, fourier_amplitudes, kbins, kvals])
-# s1, s3, s4 = client.persist([knrm, kbins, kvals])
-# s2 = client.persist(fourier_amplitudes)
 
 # Sign contract
 arrays.validate_contract()
 
-client.compute(s1).result()
+# client.compute(s1).result()
 client.compute(s2).result()
-# client.compute(s3).result()
-# client.compute(s4).result()
+client.compute(s3).result()
+client.compute(s4).result()
 
 
-# for t in range(100):
-#     hf = h5py.File("fft_from_deisa_" + str(t) + ".h5", "w")
-#     hf.create_dataset("knrm", data=s2[t])
-#     # hf.create_dataset("knrm", data=s1)
-#     # hf.create_dataset("fourier_amplitudes", data=fourier_amplitudes)
-#     # hf.create_dataset("kbins", data=s3)
-#     # hf.create_dataset("kvals", data=s4)
 
-#     hf.close()
+for t in range(mt):
+    hf = h5py.File("deisa_output_" + str(t) + ".h5", "w")
+    hf.create_dataset("U", data=s3[t,iu,:,:])
+    hf.create_dataset("V", data=s3[t,iv,:,:])
+    hf.create_dataset("W", data=s3[t,iw,:,:])
+    hf.create_dataset("fft2", data=s4[t,:])
+    hf.close()
+
+hf = h5py.File("deisa_sumXY.h5", "w")
+hf.create_dataset("ekin_sum_over_XY", data=s2)
+hf.close()
 
 print("Done ", flush=True)
 deisa.wait_for_last_bridge_and_shutdown()
