@@ -1,5 +1,5 @@
 SCRIPT_DIR=$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" &>/dev/null && pwd)
-WORKING_DIR=${SCRIPT_DIR}/working_dir # TODO: Add datetime ?
+WORKING_DIR=${SCRIPT_DIR}/../working_dir
 SCHEFILE=${WORKING_DIR}/scheduler.json
 BUILD_DIR=${WORKING_DIR}/build
 SIMULATION_BIN=${BUILD_DIR}/main
