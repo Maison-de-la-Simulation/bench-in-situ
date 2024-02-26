@@ -20,7 +20,7 @@ rm *.zip
 cd ..
 
 # 4) tar gz -> deisa_${PYTHON_DEPS}_py39.tar.gz
-tar -czvf deisa_deps_py39.tar.gz ${PYTHON_DEPS}/*
+tar -czvf deisa_deps_py39.tar.gz "$(basename "$PYTHON_DEPS")"/*
 # 5) cleanup: deactivate conda env, rm conda env, downloaded files
 conda remove -y --name py39 --all
 rm -r ${PYTHON_DEPS}/*
@@ -39,7 +39,7 @@ rm *.zip
 cd ..
 
 # 4) tar gz -> deisa_${PYTHON_DEPS}_py310.tar.gz
-tar -czvf deisa_deps_py310.tar.gz ${PYTHON_DEPS}/*
+tar -czvf deisa_deps_py310.tar.gz "$(basename "$PYTHON_DEPS")"/*
 # 5) cleanup: deactivate conda env, rm conda env, downloaded files
 conda remove -y --name py310 --all
 rm -r ${PYTHON_DEPS}/*
@@ -58,7 +58,7 @@ rm *.zip
 cd ..
 
 # 4) tar gz -> deisa_${PYTHON_DEPS}_py311.tar.gz
-tar -czvf deisa_deps_py311.tar.gz ${PYTHON_DEPS}/*
+tar -czvf deisa_deps_py311.tar.gz "$(basename "$PYTHON_DEPS")"/*
 # 5) cleanup: deactivate conda env, rm conda env, downloaded files
 conda remove -y --name py311 --all
 rm -r ${PYTHON_DEPS}/*
