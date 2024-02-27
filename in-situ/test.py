@@ -1,16 +1,13 @@
-import os
+import sys
 
-print(">>> LD_LIBRARY_PATH=" + str(os.environ.get("LD_LIBRARY_PATH", None)), flush=True)
-
-# from mpi4py import MPI
-from dask import delayed
-from dask.distributed import performance_report
+# from dask import delayed
+# from dask.distributed import performance_report
 from deisa import Deisa
 
 # os.environ["DASK_DISTRIBUTED__COMM__UCX__INFINIBAND"] = "True"
 
 # Scheduler file name and configuration file
-scheduler_info = "../build/scheduler.json"
+scheduler_info = sys.argv[1] if sys.argv[1] else "scheduler.json"
 config_file = "../deisa.yml"
 # pdi_config_file = '../io.yml'
 #

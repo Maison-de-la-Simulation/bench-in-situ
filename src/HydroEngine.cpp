@@ -67,7 +67,7 @@ void EngineNd::run() const
 
         if (solver->shouldPrintInformation())
         {
-            solver->printInformation(dt);
+            //solver->printInformation(dt);
         }
 
         Kokkos::Profiling::pushRegion("I/O");

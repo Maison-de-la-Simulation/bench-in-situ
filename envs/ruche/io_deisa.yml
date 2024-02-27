@@ -120,7 +120,6 @@ pdi:
 
     grid_size: { type: array, subtype: int, size: 3 }
 
-
   plugins:
 
     user_code:
@@ -128,16 +127,31 @@ pdi:
         write_xml:
           writeXML: {}
 
-    # mpi:
+    deisa:
+      scheduler_info: scheduler.json
+      init_on: init_pdi_w_deisa            # Event called after sharing all metdata
+      time_step: $iStep  
+
+      deisa_arrays:         # Those are Deisa virtual arrays equivalent to Dask arrays
+        global_t:           # That's the name that i will send to Dask for this array
+          type: array
+          subtype: double
+          size: [1000, '$ncell[0]', '$ncell[1]', '$ncell[2]', '${nvar}']
+          subsize: [1, '$ncell_local[0]', '$ncell_local[1]', '$ncell_local[2]', '${nvar}']
+          start: [$iStep , '$ncell_local[0]*$mpi_coord[0]', '$ncell_local[1]*$mpi_coord[1]', '$ncell_local[2]*$mpi_coord[2]', 0]
+          +timedim: 0                    # A tag for the time dim, only this configuration is supported for the moment
+      map_in:                            # Which local data will be mapped to which deisa array
+        local_full_field: global_t
+
+    mpi:
 
     decl_hdf5:
 
   
     - file: ${filename}
-      datasets: *full_datasets # a list of datasets inside the file created on first access
+      datasets: *full_datasets 
       on_event: checkpoint
       collision_policy: write_into
-      # communicator: '${MPI_COMM_WORLD}'
       when: '$iStep%100 = 0'
       write:
         grid_size:
