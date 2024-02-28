@@ -46,14 +46,11 @@ make -j 4
 ```
 ./main ../setup.ini ../io_chkpt.yml
 ```
-## Offline Installation
-### On the online machine
-```
-./offline_env_download.sh
-```
-Copy the whole repo on the offline machine
-
-### On the offline machine
-```
-./offline_env_install.sh
-```
+### Offline Installation
+ * Download the Python environment on the online machine : `./offline_env_download.sh`
+ * Source the env file : `source env.sh`
+ * unzip the `deisa_.tar.gz` file according to the Python version used on the offline machine : `tar -xzvf working_dir/deisa_deps_.tar.gz -C ${WORKING_DIR}`
+ * Copy the whole repo on the offline machine
+ * Install the Python environment on the offline machine : `./offline_env_install.sh`
+ * Install PDI : `./offline_pdi_install.sh `
+ * Install ARK-MHD : `./offline_ark_install.sh `
