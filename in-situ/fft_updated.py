@@ -47,11 +47,11 @@ print("X-dim =", mx, flush=True)
 print("Y-dim =", my, flush=True)
 print("Z-dim =", mz, flush=True)
 z_pos = int(mz/3)
-print("getting slice at z =", z_pos)
+print("getting slice at z =", z_pos, flush=True)
 
-t_stride = 10
+t_stride = 100
 
-slice = arrays["global_t"][0:mt:t_stride, :, z_pos, :, :]  
+slice = arrays["global_t"][0: mt: t_stride, :, z_pos, :, :]
 # gt[time, var, z, y, x]
 # slice[time, var, y, x]
 
@@ -79,18 +79,21 @@ ekin_deisa = (
 sum_over_xy = ekin_deisa.sum(axis=(1,2))
 
 
-
-ekin_deisa_rechunked = ekin_deisa.rechunk({0: -1, 1: -1, 2: -1}) #no chunking along dim 0, 1, and 2
+ekin_deisa_rechunked = ekin_deisa.rechunk({0: 1, 1: -1, 2: -1}) #no chunking along dim 0, 1, and 2
 # npix = ekin_deisa_rechunked.shape[1]
 ekin_fft2 = da.fft.fft2(ekin_deisa_rechunked) # fft over the last two axes
 fourier_amplitudes = da.absolute(ekin_fft2) **2
-fourier_amplitudes = fourier_amplitudes.reshape(mt/t_stride, mx*my)
+# fourier_amplitudes = fourier_amplitudes.reshape(mt/t_stride, mx*my)
 # kfreq = da.fft.fftfreq(npix) * npix
 # kfreq2D = da.meshgrid(kfreq, kfreq)
 # knrm = da.sqrt(kfreq2D[0] ** 2 + kfreq2D[1] ** 2)
 # knrm = knrm.flatten()
 # kbins = da.arange(0.5, npix // 2 + 1, 1.0)
 # kvals = 0.5 * (kbins[1:] + kbins[:-1])
+
+sum_over_xy = sum_over_xy.to_zarr("sum_over_xy.zarr", overwrite=True, compute=False)
+slice = slice.to_zarr("slice.zarr", overwrite=True, compute=False)
+fourier_amplitudes = fourier_amplitudes.to_zarr("fourier_amplitudes.zarr", overwrite=True, compute=False)
 
 # s1 = client.persist(ekin_deisa)
 s2 = client.persist(sum_over_xy)
@@ -116,9 +119,9 @@ client.compute(s4).result()
 #    hf.create_dataset("fft2", data=s4[t/t_stride,:])
 #    hf.close()
 
-hf = h5py.File("deisa_sumXY.h5", "w")
-hf.create_dataset("ekin_sum_over_XY", data=s2)
-hf.close()
+#hf = h5py.File("deisa_sumXY.h5", "w")
+#hf.create_dataset("ekin_sum_over_XY", data=s2)
+#hf.close()
 
 print("Done ", flush=True)
 deisa.wait_for_last_bridge_and_shutdown()
