@@ -108,13 +108,13 @@ client.compute(s4).result()
 
 
 
-for t in range(0, mt, t_stride):
-    hf = h5py.File("deisa_output_" + str(t) + ".h5", "w")
-    hf.create_dataset("U", data=s3[t/t_stride,iu,:,:])
-    hf.create_dataset("V", data=s3[t/t_stride,iv,:,:])
-    hf.create_dataset("W", data=s3[t/t_stride,iw,:,:])
-    hf.create_dataset("fft2", data=s4[t/t_stride,:])
-    hf.close()
+#for t in range(0, mt, t_stride):
+#    hf = h5py.File("deisa_output_" + str(t) + ".h5", "w")
+#    hf.create_dataset("U", data=s3[t/t_stride,iu,:,:])
+#    hf.create_dataset("V", data=s3[t/t_stride,iv,:,:])
+#    hf.create_dataset("W", data=s3[t/t_stride,iw,:,:])
+#    hf.create_dataset("fft2", data=s4[t/t_stride,:])
+#    hf.close()
 
 hf = h5py.File("deisa_sumXY.h5", "w")
 hf.create_dataset("ekin_sum_over_XY", data=s2)
