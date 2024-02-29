@@ -22,6 +22,8 @@ pip install --no-index --no-build-isolation --no-deps ../lib/deisa
 echo "TESTING DEPENDENCIES"
 echo "Deisa.."
 python -c "import deisa"
+echo "HDF5.."
+python -c "import h5py"
 echo "Numpy.."
 python -c "import numpy"
 echo "Dask.."
