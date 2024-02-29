@@ -1,5 +1,6 @@
 #!/bin/bash
 
+SCRIPT_DIR=$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" &>/dev/null && pwd) && cd ${SCRIPT_DIR}
 source env.sh
 print_env
 
@@ -11,6 +12,6 @@ sync
 
 dask worker --local-directory /tmp --scheduler-file=$SCHEFILE &
 
-python3 ../in-situ/fft.py $SCHEFILE
+python3 -O ../in-situ/fft.py $SCHEFILE
 
 cd --
