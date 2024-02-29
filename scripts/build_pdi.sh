@@ -18,7 +18,7 @@ cmake -DCMAKE_INSTALL_PREFIX=${PDI_INSTALL_DIR} \
   -DBUILD_SET_VALUE_PLUGIN=OFF -DBUILD_DECL_NETCDF_PLUGIN=OFF -DBUILD_USER_CODE_PLUGIN=ON -DBUILD_PYTHON=ON -DBUILD_DEISA_PLUGIN=ON \
   ../../../lib/pdi
 
-make -j8
+make -j $(nproc)
 make install
 
 source ${PDI_INSTALL_DIR}/share/pdi/env.sh

@@ -21,7 +21,7 @@ cmake \
     -DSESSION=MPI_SESSION \
     ../..
 
-make -j8
+make -j $(nproc) 
 
 cd --
 
