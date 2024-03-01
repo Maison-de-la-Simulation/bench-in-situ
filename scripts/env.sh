@@ -20,6 +20,6 @@ print_env() {
 	echo "SCHEFILE=${SCHEFILE}"
 	echo "BUILD_DIR=${BUILD_DIR}"
 	echo "PYTHON_ENV=${PYTHON_ENV}"
-	echo "PYTHON_ENV=${PYTHON_VERSION}"
+	echo "PYTHON_VERSION=${PYTHON_VERSION}"
 	echo "============="
 }
