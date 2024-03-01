@@ -17,7 +17,8 @@ cmake \
     -DEuler_ENABLE_PDI=ON \
     -DKokkos_ENABLE_SERIAL=ON \
     -DKokkos_ENABLE_CUDA=ON \
-    -DKokkos_ARCH_AMPERE80=ON \
+    -DKokkos_ARCH_AMPERE80=OFF \
+    -DKokkos_ARCH_PASCAL60=ON \
     -DSESSION=MPI_SESSION \
     ../..
 
