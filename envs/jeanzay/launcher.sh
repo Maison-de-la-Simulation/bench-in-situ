@@ -43,6 +43,7 @@ source deisa/bin/activate
 # PDI
 source pdi/share/pdi/env.sh
 
+export LD_LIBRARY_PATH="/gpfslocalsup/pub/anaconda-py3/2023.09/envs/python-3.11.5/lib:$LD_LIBRARY_PATH"
 # dask scheduler
 srun -N 1 -n 1 -c 1 -r 0 dask scheduler --protocol tcp --scheduler-file=${SCHEFILE} >> ${PREFIX}_dask-scheduler.o &
 
