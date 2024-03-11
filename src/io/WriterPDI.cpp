@@ -317,7 +317,7 @@ WriterPDI::WriterPDI(const UniformGrid& grid, const Params&,
                      "dl", dl.data(), PDI_OUT,
                      "restart_id", &m_restartId, PDI_OUT,
                      "prefix_size", &prefix_size, PDI_OUT,
-                     "prefix", prefix.c_str(), PDI_OUT,
+                     "prefix", new_prefix.c_str(), PDI_OUT,
                      NULL);
     
 }
