@@ -8,6 +8,7 @@
 #include "Utils.hpp"
 #include "TimeStep.hpp"
 #include "global_mean.hpp"
+#include "Timer.hpp"
 
 #include <memory>
 #include <vector>
@@ -51,6 +52,7 @@ public:
     double memoryUsage() const final;
     void set_should_save() final;
     void set_time_limit_reached() final;
+    void accumulate_compute_duration(const std::chrono::steady_clock::duration& duration) final;
 
 private:
     void computeFluxesAndUpdate(Real dt);
@@ -79,7 +81,9 @@ private:
     Int m_nz;
     Int m_mz;
     Int m_my;
-    
+
+    PerformanceTimer performanceTimer;
+
 
     #if defined(MPI_SESSION)
       int m_mpi_z_rank = m_grid.comm.getCoords(m_grid.comm.rank())[IZ];

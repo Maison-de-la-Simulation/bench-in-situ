@@ -11,7 +11,7 @@ cd ${WORKING_DIR}
 # PYTHON 3.9
 #############
 # 1) create conda env
-conda create -y --name py39 python=3.9
+conda create -y --name py39 python=3.9.19
 
 # 2) pip download and wheel
 conda run -n py39 pip download ../lib/deisa/ -d ${PYTHON_DEPS}
@@ -32,7 +32,7 @@ rm -r ${PYTHON_DEPS}/*
 # PYTHON 3.10
 #############
 # 1) create conda env
-conda create -y --name py310 python=3.10
+conda create -y --name py310 python=3.10.14
 
 # 2) pip download and wheel
 conda run -n py310 pip download ../lib/deisa/ -d ${PYTHON_DEPS}
@@ -53,7 +53,7 @@ rm -r ${PYTHON_DEPS}/*
 # PYTHON 3.11
 #############
 # 1) create conda env
-conda create -y --name py311 python=3.11
+conda create -y --name py311 python=3.11.6
 
 # 2) pip download and wheel
 conda run -n py311 pip download ../lib/deisa/ -d ${PYTHON_DEPS}

@@ -7,6 +7,8 @@ print_env
 cd ${WORKING_DIR}
 source ${PYTHON_ENV}/bin/activate
 
+export LD_LIBRARY_PATH=${PYTHON_ENV}/lib:${LD_LIBRARY_PATH}
+
 python --version
 
 cd ${PDI_BUILD_DIR}

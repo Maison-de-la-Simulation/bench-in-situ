@@ -55,6 +55,8 @@ void EngineNd::run() const
 
     while (!solver->finished())
     {
+        const std::chrono::steady_clock::time_point m_start_compute = std::chrono::steady_clock::now();
+
         Kokkos::Profiling::pushRegion("Time step");
         Real dt {solver->computeTimeStep()};
         Kokkos::Profiling::popRegion();
@@ -74,6 +76,8 @@ void EngineNd::run() const
 
         std::chrono::steady_clock::time_point date = std::chrono::steady_clock::now();
         std::chrono::steady_clock::duration duration = date-start;
+
+        solver->accumulate_compute_duration(std::chrono::steady_clock::now() - m_start_compute);
 
         if (solver->iteration()%freq_check_safe_save==0)
         {

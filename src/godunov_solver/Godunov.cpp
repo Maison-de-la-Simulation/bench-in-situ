@@ -57,6 +57,7 @@ GodunovSolver::GodunovSolver(std::shared_ptr<Problem> problem)
     , m_nz {m_params->mesh.nbCells[IZ]}
     , m_mz {m_params->mesh.dom[IZ]}
     , m_my {m_params->mesh.dom[IY]}
+    , performanceTimer()
 
 {
 
@@ -177,6 +178,8 @@ void GodunovSolver::prepareNextOutput(Real& dt)
 
 void GodunovSolver::pdiExposeData()
 {
+  std::chrono::steady_clock::time_point m_start_io = std::chrono::steady_clock::now();
+
 #if defined(Euler_ENABLE_PDI)
     PDI_multi_expose("data_on_GPU",
                      "iStep", (void*)&(Super::m_iteration), PDI_OUT,
@@ -199,6 +202,7 @@ void GodunovSolver::pdiExposeData()
 
     }
 
+  performanceTimer.time_spent_in_io += (std::chrono::steady_clock::now() - m_start_io);
 }
 
 
@@ -211,7 +215,9 @@ bool GodunovSolver::finished() const
 void GodunovSolver::printMonitoring(double t_tot) const
 {
     const double w_perf {Session::getNProc() * static_cast<double>(Super::m_iteration) * static_cast<double>(m_grid.nbCells()) / t_tot * 1.0E-6};
-    Print() << "Perf (Wall clock): " << w_perf << " Mcell-updates/s\n";
+    Print() << "Perf: " << w_perf << " Mcell-updates/s" << std::endl;
+    Print() << "Wall time: " << t_tot << " s" << std::endl;
+    Print() << performanceTimer << std::endl;
 }
 
 
@@ -294,6 +300,10 @@ void GodunovSolver::compute_adjust_timestep(Real dt_type, Real dt, Real& delta_t
          throw std::runtime_error("Time step is increasing whereas it should decrease.\n");
         }
     } 
+}
+
+void GodunovSolver::accumulate_compute_duration(const std::chrono::steady_clock::duration& duration) {
+  performanceTimer.time_spent_in_compute += duration;
 }
 
 }

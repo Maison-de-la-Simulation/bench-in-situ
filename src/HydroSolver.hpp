@@ -29,6 +29,7 @@ public:
     virtual Int iteration() const;
     virtual void set_should_save() = 0;
     virtual void set_time_limit_reached() = 0;
+    virtual void accumulate_compute_duration(const std::chrono::steady_clock::duration& duration) = 0;
 
     Real m_t = constants::zero;
     Int m_iteration = 0;

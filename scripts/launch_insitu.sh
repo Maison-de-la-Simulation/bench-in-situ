@@ -5,6 +5,7 @@ source env.sh
 print_env
 
 cd ${WORKING_DIR}
+source ${PYTHON_ENV}/bin/activate
 
 dask scheduler --scheduler-file=$SCHEFILE &
 sleep 3

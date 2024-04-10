@@ -7,7 +7,7 @@ source ${WORKING_DIR}/${PYTHON_ENV}/bin/activate
 source ${PDI_INSTALL_DIR}/share/pdi/env.sh
 
 
-export PYTHONPATH=${WORKING_DIR}/${PYTHON_ENV}/lib/python3.11/site-packages
+export PYTHONPATH=${WORKING_DIR}/${PYTHON_ENV}/lib/python3.11/site-packages:${PYTHONPATH}
 #export LD_LIBRARY_PATH=${PDI_INSTALL_DIR}/lib:${WORKING_DIR}/${PYTHON_ENV}/lib:${LD_LIBRARY_PATH}
 export LD_LIBRARY_PATH=${WORKING_DIR}/${PYTHON_ENV}/lib:${LD_LIBRARY_PATH}
 #export LD_PRELOAD=${PDI_INSTALL_DIR}/lib64/libyaml.so # note: only for mac
@@ -18,6 +18,7 @@ echo "LD_LIBRARY_PATH=${LD_LIBRARY_PATH}"
 
 cp ../io_chkpt.yml ../io_deisa.yml ${BUILD_DIR}
 cp ../setup.ini ${BUILD_DIR}
+cp ${SCHEFILE} ${BUILD_DIR}
 
 cd ${BUILD_DIR}
 

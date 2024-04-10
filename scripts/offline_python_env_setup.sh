@@ -7,7 +7,7 @@ print_env
 cd ${WORKING_DIR}
 
 # setup python environment
-python -m venv ${PYTHON_ENV}
+python3 -m venv ${PYTHON_ENV}
 
 # activate python environment
 source ${PYTHON_ENV}/bin/activate
