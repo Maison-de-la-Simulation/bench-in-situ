@@ -9,7 +9,7 @@
 
 
 # All paths are relative to WORKING_DIRECTORY
-
+SIMU_SIZE=s
 SCRIPT_DIR=$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" &>/dev/null && pwd)
 BASE_DIR=${HOME}/bench-in-situ
 WORKING_DIR=${BASE_DIR}/working_dir
@@ -58,7 +58,7 @@ srun -N 1 -n 1 -c 1 -r $(($DASK_WORKER_NODES+1)) python -O ${BASE_DIR}/in-situ/f
 client_pid=$!
 
 # simulation
-srun -N ${SIM_NODES} -n ${SIM_PROC} -r $(($DASK_WORKER_NODES+2)) build/main ${BASE_DIR}/envs/adastra/setup.ini ${BASE_DIR}/envs/adastra/io_deisa.yml --kokkos-map-device-id-by=mpi_rank &
+srun -N ${SIM_NODES} -n ${SIM_PROC} -r $(($DASK_WORKER_NODES+2)) build/main ${BASE_DIR}/envs/adastra/${SIMU_SIZE}/setup.ini ${BASE_DIR}/envs/adastra/${SIMU_SIZE}/io_deisa.yml --kokkos-map-device-id-by=mpi_rank &
 simu_pid=$!
 wait $simu_pid
 
