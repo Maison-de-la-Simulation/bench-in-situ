@@ -16,15 +16,13 @@ import h5py
 import dask.array as da
 import yaml
 
-os.environ["DASK_DISTRIBUTED__COMM__UCX__INFINIBAND"] = "True"
-
 # Initialize Deisa
 
 scheduler_info = sys.argv[1] if len(sys.argv)>1 else "scheduler.json"
 # scheduler_info = "scheduler.json"
 
 nb_workers = 1
-deisa = Deisa(scheduler_info, nb_workers)
+deisa = Deisa(scheduler_info, nb_workers, use_ucx=os.environ.get("DASK_DISTRIBUTED__COMM__UCX__INFINIBAND", False))
 
 print("getting client")
 client = deisa.get_client()
