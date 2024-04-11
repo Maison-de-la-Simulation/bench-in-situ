@@ -13,18 +13,19 @@ cd ${BUILD_DIR}
 
 
 #cmake -DCMAKE_BUILD_TYPE=Release -DSESSION=MPI_SESSION -DKokkos_ENABLE_OPENMP=ON -DEuler_ENABLE_PDI=ON ../..
+#    -DCMAKE_CXX_STANDARD=17 \
 
 cmake \
     -DCMAKE_BUILD_TYPE=Release \
-    -DCMAKE_CXX_STANDARD=17 \
     -DEuler_ENABLE_PDI=ON \
-    -DKokkos_ENABLE_SERIAL=ON \
+    -DKokkos_ENABLE_OPENMP=ON \
+    -DKokkos_ENABLE_SERIAL=OFF \
     -DKokkos_ENABLE_CUDA=OFF \
     -DKokkos_ARCH_AMPERE80=OFF \
     -DKokkos_ARCH_PASCAL60=OFF \
-    -DKokkos_ARCH_ZEN3=ON \
-    -DKokkos_ENABLE_HIP=ON \
-    -DKokkos_ARCH_VEGA90A=ON \
+    -DKokkos_ARCH_ZEN3=OFF \
+    -DKokkos_ENABLE_HIP=OFF \
+    -DKokkos_ARCH_VEGA90A=OFF \
     -DSESSION=MPI_SESSION \
     ../..
 #Ampere : ruche a100
