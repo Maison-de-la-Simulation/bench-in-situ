@@ -10,7 +10,7 @@
 #SBATCH --partition=cpu_short
 
 # All paths are relative to WORKING_DIRECTORY
-SIMU_SIZE=1
+SIMU_SIZE=4
 SCRIPT_DIR=$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" &>/dev/null && pwd)
 BASE_DIR=${HOME}/bench-in-situ
 WORKING_DIR=${BASE_DIR}/working_dir
