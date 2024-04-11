@@ -79,3 +79,5 @@ flycheck_*.el
 out/
 *cmake-tools*
 working_dir
+cmake-build-*
+*.tar.gz
