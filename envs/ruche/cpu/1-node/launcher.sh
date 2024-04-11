@@ -2,7 +2,7 @@
 
 #SBATCH --job-name=bench_insitu
 #SBATCH --output=%x_%j.out 
-#SBATCH --time=00:10:00 
+#SBATCH --time=00:20:00
 #SBATCH --ntasks-per-node=1
 #SBATCH --ntasks=4
 #SBATCH --cpus-per-task=20
@@ -29,7 +29,7 @@ echo "OMP_NUM_THREADS=$OMP_NUM_THREADS"
 echo "SIM_NODES=$SIM_NODES"
 
 # this file must be accessible from every slurm node (i.e.: shared network drive)
-source ${BASE_DIR}/envs/ruche/modules.env
+source ${BASE_DIR}/envs/ruche/cpu/1-node/modules.env
 
 # move to working directory 
 cd ${WORKING_DIR}
@@ -56,7 +56,7 @@ srun -N 1 -n 1 -c 1 -r $(($DASK_WORKER_NODES+1)) python -O in-situ/fft_updated.p
 client_pid=$!
 
 # simulation
-srun -N ${SIM_NODES} -n ${SIM_PROC} -r $(($DASK_WORKER_NODES+2)) build/main ${BASE_DIR}/envs/ruche/setup.ini ${BASE_DIR}/envs/ruche/io_deisa.yml --kokkos-map-device-id-by=mpi_rank &
+srun -N ${SIM_NODES} -n ${SIM_PROC} -r $(($DASK_WORKER_NODES+2)) build/main ${BASE_DIR}/envs/ruche/cpu/1-node/setup.ini ${BASE_DIR}/envs/ruche/cpu/1-node/io_deisa.yml --kokkos-map-device-id-by=mpi_rank &
 simu_pid=$!
 wait $simu_pid
 
