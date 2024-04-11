@@ -1,0 +1,176 @@
+full_datasets: &full_datasets
+  Time: { type: double }
+  d: { type: array, subtype: double, size: ['$ncell[2]', '$ncell[1]', '$ncell[0]'] }
+  E: { type: array, subtype: double, size: ['$ncell[2]', '$ncell[1]', '$ncell[0]'] }
+  dX: { type: array, subtype: double, size: ['$ncell[2]', '$ncell[1]', '$ncell[0]'] }
+  mx: { type: array, subtype: double, size: ['$ncell[2]', '$ncell[1]', '$ncell[0]'] }
+  my: { type: array, subtype: double, size: ['$ncell[2]', '$ncell[1]', '$ncell[0]'] }
+  mz: { type: array, subtype: double, size: ['$ncell[2]', '$ncell[1]', '$ncell[0]'] }
+  Bx: { type: array, subtype: double, size: ['$ncell[2]', '$ncell[1]', '$ncell[0]'] }
+  By: { type: array, subtype: double, size: ['$ncell[2]', '$ncell[1]', '$ncell[0]'] }
+  Bz: { type: array, subtype: double, size: ['$ncell[2]', '$ncell[1]', '$ncell[0]'] }
+
+
+local_dataset_selection: &local_dataset_selection
+  size: ['$ncell_local[2]', '$ncell_local[1]', '$ncell_local[0]']
+  start: ['$start[2]', '$start[1]', '$start[0]']
+
+d_description: &d_description
+  dataset: d
+  memory_selection:
+    size: [1, '$ncell_local[2]', '$ncell_local[1]', '$ncell_local[0]']
+    start: [0, 0, 0, 0]
+  dataset_selection: *local_dataset_selection
+
+E_description: &E_description
+  dataset: E
+  memory_selection:
+    size: [1, '$ncell_local[2]', '$ncell_local[1]', '$ncell_local[0]']
+    start: [1, 0, 0, 0]
+  dataset_selection: *local_dataset_selection
+
+mx_description: &mx_description
+  dataset: mx
+  memory_selection:
+    size: [1, '$ncell_local[2]', '$ncell_local[1]', '$ncell_local[0]']
+    start: [2, 0, 0, 0]
+  dataset_selection: *local_dataset_selection
+
+my_description: &my_description
+  dataset: my
+  memory_selection:
+    size: [1, '$ncell_local[2]', '$ncell_local[1]', '$ncell_local[0]']
+    start: [3, 0, 0, 0]
+  dataset_selection: *local_dataset_selection
+
+mz_description: &mz_description
+  dataset: mz
+  memory_selection:
+    size: [1, '$ncell_local[2]', '$ncell_local[1]', '$ncell_local[0]']
+    start: [4, 0, 0, 0]
+  dataset_selection: *local_dataset_selection
+
+Bx_description: &Bx_description
+  dataset: Bx
+  memory_selection:
+    size: [1, '$ncell_local[2]', '$ncell_local[1]', '$ncell_local[0]']
+    start: [5, 0, 0, 0]
+  dataset_selection: *local_dataset_selection
+
+By_description: &By_description
+  dataset: By
+  memory_selection:
+    size: [1, '$ncell_local[2]', '$ncell_local[1]', '$ncell_local[0]']
+    start: [6, 0, 0, 0]
+  dataset_selection: *local_dataset_selection
+
+Bz_description: &Bz_description
+  dataset: Bz
+  memory_selection:
+    size: [1, '$ncell_local[2]', '$ncell_local[1]', '$ncell_local[0]']
+    start: [7, 0, 0, 0]
+  dataset_selection: *local_dataset_selection
+
+dX_description: &dX_description
+  dataset: dX
+  memory_selection:
+    size: [1, '$ncell_local[2]', '$ncell_local[1]', '$ncell_local[0]']
+    start: [8, 0, 0, 0]
+  dataset_selection: *local_dataset_selection
+
+pdi:
+  
+  metadata:
+    nvar: int
+    ncell: { type: array, subtype: int, size: 3 }
+    ghost: { type: array, subtype: int, size: 3 }
+    ncell_local: { type: array, subtype: int, size: 3 }
+    start: { type: array, subtype: int, size: 3 }
+    origin: { type: array, subtype: double, size: 3 }
+    dl: { type: array, subtype: double, size: 3 }
+    gamma: double
+    mmw: double
+    prefix_size: int
+    prefix: { type: array, subtype: char, size: $prefix_size }
+    rank: int
+    size: int
+    time: double
+    iStep: int
+
+
+    mpi_coord: {type: array, subtype: int, size: 3}
+
+  data:
+
+    filename_size: int
+    filename: { type: array, subtype: char, size: $filename_size }
+  
+    Rstar_h: double
+    output_id: int
+    restart_id: int
+
+    local_full_field:
+      type: array
+      subtype: double
+      size: ['${nvar}', '$ncell_local[2]+2*$ghost[2]', '$ncell_local[1]+2*$ghost[1]', '$ncell_local[0]+2*$ghost[0]']
+      subsize: ['${nvar}', '$ncell_local[2]', '$ncell_local[1]', '$ncell_local[0]']
+      start: [0, '$ghost[2]', '$ghost[1]', '$ghost[0]']
+    outputs_record_size: int
+
+    grid_size: { type: array, subtype: int, size: 3 }
+
+  plugins:
+
+    user_code:
+      on_event:
+        write_xml:
+          writeXML: {}
+
+    deisa:
+      scheduler_info: scheduler.json
+      init_on: init_pdi_w_deisa            # Event called after sharing all metdata
+      time_step: $iStep  
+
+      deisa_arrays:         # Those are Deisa virtual arrays equivalent to Dask arrays
+        global_t:           # That's the name that i will send to Dask for this array
+          type: array
+          subtype: double
+          size: [4000, '${nvar}', '$ncell[2]', '$ncell[1]', '$ncell[0]']
+          subsize: [1, '${nvar}', '$ncell_local[2]', '$ncell_local[1]', '$ncell_local[0]']
+          start: [$iStep , 0, '$ncell_local[2]*$mpi_coord[2]', '$ncell_local[1]*$mpi_coord[1]', '$ncell_local[0]*$mpi_coord[0]']
+          +timedim: 0                    # A tag for the time dim, only this configuration is supported for the moment
+      map_in:                            # Which local data will be mapped to which deisa array
+        local_full_field: global_t
+
+    mpi:
+
+    decl_hdf5:
+
+  
+    - file: ${filename}
+      datasets: *full_datasets 
+      on_event: checkpoint
+      collision_policy: write_into
+      when: '$iStep = 1000 | $iStep = 3000'
+      write:
+        grid_size:
+        time:
+          - dataset: Time
+        Rstar_h:
+        gamma:
+        mmw:
+        iStep:
+        output_id:
+        restart_id:
+        local_full_field:
+          - *d_description
+          - *E_description
+          - *mx_description
+          - *my_description
+          - *mz_description
+          - *Bx_description
+          - *By_description
+          - *Bz_description
+          - *dX_description
+
+    

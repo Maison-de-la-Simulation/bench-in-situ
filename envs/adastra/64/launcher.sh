@@ -3,13 +3,13 @@
 #SBATCH --job-name=bench_insitu
 #SBATCH --output=%x_%j.out 
 #SBATCH --time=00:30:00 
-#SBATCH --nodes=7
+#SBATCH --nodes=67
 #SBATCH --account=cad14985 
 #SBATCH --constraint=MI250
 
 
 # All paths are relative to WORKING_DIRECTORY
-SIMU_SIZE=s
+SIMU_SIZE=64
 SCRIPT_DIR=$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" &>/dev/null && pwd)
 BASE_DIR=${HOME}/bench-in-situ
 WORKING_DIR=${BASE_DIR}/working_dir
@@ -28,7 +28,10 @@ echo "OMP_NUM_THREADS=$OMP_NUM_THREADS"
 echo "SIM_NODES=$SIM_NODES"
 
 # this file must be accessible from every slurm node (i.e.: shared network drive)
-source ${BASE_DIR}/envs/adastra/modules.env
+source ${BASE_DIR}/envs/adastra/${SIMU_SIZE}/modules.env
+
+# set result file path
+sed -i 's/^prefix=.*/prefix=${SNAPSHOT_FILE_PATH}/${SIMU_SIZE}/Checkpoint' ${BASE_DIR}/envs/adastra/${SIMU_SIZE}/setup.ini
 
 # move to working directory 
 cd ${WORKING_DIR}
@@ -62,3 +65,4 @@ srun -N ${SIM_NODES} -n ${SIM_PROC} -r $(($DASK_WORKER_NODES+2)) build/main ${BA
 simu_pid=$!
 wait $simu_pid
 
+rm ${SNAPSHOT_FILE_PATH}/${SIMU_SIZE}/*.h5 && rm ${SNAPSHOT_FILE_PATH}/${SIMU_SIZE}/*.xmf
