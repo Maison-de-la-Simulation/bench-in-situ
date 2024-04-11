@@ -32,7 +32,7 @@ echo "SIM_NODES=$SIM_NODES"
 source ${BASE_DIR}/envs/adastra/${SIMU_SIZE}/modules.env
 
 # set result file path
-sed -i "s|^prefix=.*|prefix=\${SNAPSHOT_FILE_PATH}/\${SIMU_SIZE}/Checkpoint|" ${BASE_DIR}/envs/adastra/${SIMU_SIZE}/setup.ini
+sed -i "s|^prefix=.*|prefix=$SNAPSHOT_FILE_PATH/$SIMU_SIZE/Checkpoint|" ${BASE_DIR}/envs/adastra/${SIMU_SIZE}/setup.ini
 
 # move to working directory 
 cd ${WORKING_DIR}
