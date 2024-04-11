@@ -1,7 +1,7 @@
 #!/bin/bash
 
 #SBATCH --job-name=bench_insitu
-#SBATCH --output=%x_%j.out 
+#SBATCH --output=res128N_%x_%j.out 
 #SBATCH --time=00:30:00 
 #SBATCH --nodes=131
 #SBATCH --account=cad14985 
