@@ -6,7 +6,9 @@
 #SBATCH --nodes=7
 #SBATCH --account=cad14985 
 #SBATCH --constraint=MI250
-
+#SBATCH --ntasks-per-node=1
+#SBATCH --ntasks=7
+#SBATCH --threads-per-core=1
 
 # All paths are relative to WORKING_DIRECTORY
 SIMU_SIZE=4
