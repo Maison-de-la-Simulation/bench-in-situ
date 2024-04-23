@@ -2,13 +2,11 @@
 
 #SBATCH --job-name=bench_insitu
 #SBATCH --output=res64N_%x_%j.out 
-#SBATCH --time=00:30:00 
-#SBATCH --nodes=67
+#SBATCH --time=00:60:00 
+#SBATCH --nodes=11
 #SBATCH --account=cad14985 
 #SBATCH --constraint=MI250
-#SBATCH --ntasks-per-node=1
-#SBATCH --ntasks=67
-#SBATCH --threads-per-core=1
+#SBATCH --ntasks-per-node=18
 
 # All paths are relative to WORKING_DIRECTORY
 SIMU_SIZE=64
@@ -20,7 +18,7 @@ SCHEFILE=scheduler.json
 PREFIX=bench_insitu
 DASK_WORKER_NODES=1
 SIM_NODES=$(($SLURM_NNODES-2-$DASK_WORKER_NODES))
-SIM_PROC=$SIM_NODES
+SIM_PROC=64
 
 export OMP_NUM_THREADS=${SLURM_CPUS_PER_TASK}
 export OMP_PLACES=cores
