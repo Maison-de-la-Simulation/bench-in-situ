@@ -26,7 +26,6 @@ cmake \
     -DKokkos_ARCH_ZEN3=OFF \
     -DKokkos_ENABLE_HIP=OFF \
     -DKokkos_ARCH_VEGA90A=OFF \
-    -Kokkos_enable_openmp=off \
     -DSESSION=MPI_SESSION \
     ../..
 #Ampere : ruche a100
