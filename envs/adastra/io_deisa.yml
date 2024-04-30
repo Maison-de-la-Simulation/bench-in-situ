@@ -142,7 +142,7 @@ pdi:
       map_in:                            # Which local data will be mapped to which deisa array
         local_full_field: global_t
 
-    #mpi:
+    mpi:
 
     decl_hdf5:
 
