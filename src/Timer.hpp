@@ -8,8 +8,8 @@ struct PerformanceTimer {
   }
 
   friend std::ostream& operator<<(std::ostream& os, const PerformanceTimer& obj) {
-    os << "I/O: " << obj.time_spent_in_compute.count() << " s" << std::endl;
-    os << "Compute: " << obj.time_spent_in_io.count() << " s" << std::endl;
+    os << "[RESULT] I/O: " << obj.time_spent_in_compute.count() << " s" << std::endl;
+    os << "[RESULT] Compute: " << obj.time_spent_in_io.count() << " s" << std::endl;
     return os;
   }
 

@@ -215,8 +215,8 @@ bool GodunovSolver::finished() const
 void GodunovSolver::printMonitoring(double t_tot) const
 {
     const double w_perf {Session::getNProc() * static_cast<double>(Super::m_iteration) * static_cast<double>(m_grid.nbCells()) / t_tot * 1.0E-6};
-    Print() << "Perf: " << w_perf << " Mcell-updates/s" << std::endl;
-    Print() << "Wall time: " << t_tot << " s" << std::endl;
+    Print() << "[RESULT] Perf: " << w_perf << " Mcell-updates/s" << std::endl;
+    Print() << "[RESULT] Wall time: " << t_tot << " s" << std::endl;
     Print() << performanceTimer << std::endl;
 }
 
