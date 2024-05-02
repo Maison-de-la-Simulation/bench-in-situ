@@ -2,7 +2,7 @@
 
 #SBATCH --job-name=bench_insitu
 #SBATCH --output=res128N_%x_%j.out 
-#SBATCH --time=00:60:00 
+#SBATCH --time=24:00:00 
 #SBATCH --nodes=16
 #SBATCH --account=cad14985 
 #SBATCH --constraint=MI250
