@@ -2,11 +2,12 @@
 
 #SBATCH --job-name=bench_insitu
 #SBATCH --output=res256N_%x_%j.out 
-#SBATCH --time=00:60:00 
+#SBATCH --time=24:00:00 
 #SBATCH --nodes=35
 #SBATCH --account=cad14985 
 #SBATCH --constraint=MI250
 #SBATCH --ntasks-per-node=8
+#SBATCH --exclusive
 
 # All paths are relative to WORKING_DIRECTORY
 
