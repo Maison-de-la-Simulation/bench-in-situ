@@ -1,9 +1,6 @@
 [submodule "lib/kokkos"]
 	path = lib/kokkos
 	url = https://github.com/kokkos/kokkos.git
-[submodule "lib/simd-math"]
-	path = lib/simd-math
-	url = https://github.com/kokkos/simd-math.git
 [submodule "lib/pdi"]
 	path = lib/pdi
 	url = https://gitlab.maisondelasimulation.fr/pdidev/pdi.git
