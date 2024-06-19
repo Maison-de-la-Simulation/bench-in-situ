@@ -135,7 +135,7 @@ pdi:
       datasets: *full_datasets 
       on_event: checkpoint
       collision_policy: write_into
-      when: '$iStep = 1000 | $iStep = 3000'
+      when: '$iStep = 250 | $iStep = 750'
       write:
         grid_size:
         time:
