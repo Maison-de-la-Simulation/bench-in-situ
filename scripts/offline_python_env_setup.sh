@@ -18,6 +18,7 @@ pip install ${PYTHON_DEPS}/*.whl
 
 # install Deisa
 pip install --no-index --no-build-isolation --no-deps ../lib/deisa
+pip install zarr bokeh
 
 echo "TESTING DEPENDENCIES"
 echo "Deisa.."
@@ -30,5 +31,8 @@ echo "Dask.."
 python -c "import dask"
 echo "Distributed.."
 python -c "import distributed"
-
+echo "Zarr.."
+python -c "import zarr"
+echo "bokeh.."
+python -c "import bokeh"
 cd --
