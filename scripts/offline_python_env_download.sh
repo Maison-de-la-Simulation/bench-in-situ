@@ -10,7 +10,7 @@ for py_version in "${py_versions[@]}"; do
     docker run -it --rm -w /root/workingdir -v ${SCRIPT_DIR}/..:/root/workingdir python:${py_version} bash -c "pip install --upgrade pip && \
     pip download lib/deisa -d ${PYTHON_WORKING_DIR} && \
     pip download wheel versioneer zarr cytools h5py -d ${PYTHON_WORKING_DIR} && \
-    cd ${PYTHON_WORKING_DIR} && pip wheel ${PYTHON_WORKING_DIR}/distributed-2011.11.2+1398.g9b7ce185.zip && cd - && \
+    cd ${PYTHON_WORKING_DIR} && pip wheel ${PYTHON_WORKING_DIR}/distributed-2021.11.2+1398.g9b7ce185.zip && cd - && \
     rm ${PYTHON_WORKING_DIR}/distributed-2011.11.2+1398.g9b7ce185.zip && \
     tar -cvzf output/deisa_deps_py${py_version//.}.tar.gz -C ${PYTHON_WORKING_DIR} . && \
     rm -rf ${PYTHON_WORKING_DIR}"
