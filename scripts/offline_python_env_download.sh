@@ -4,7 +4,7 @@ SCRIPT_DIR=$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" &>/dev/null && pwd) && cd
 source env.sh
 print_env
 
-py_versions=( "3.9" )
+py_versions=( "3.9" "3.10" "3.11" "3.12" "3.13" )
 for py_version in "${py_versions[@]}"; do
     echo "Working on python version: ${py_version}"
     docker run -it --rm -w /root/workingdir -v ${SCRIPT_DIR}/..:/root/workingdir python:${py_version} bash -c "pip install --upgrade pip && \
