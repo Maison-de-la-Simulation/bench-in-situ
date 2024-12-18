@@ -6,7 +6,7 @@ print_env
 
 py_versions=( "3.9" )
 for py_version in "${py_versions[@]}"; do
-    echo "Working on python versio: ${py_version}"
+    echo "Working on python version: ${py_version}"
     docker run -it --rm -w /root/workingdir -v ${SCRIPT_DIR}/..:/root/workingdir python:${py_version} bash -c "pip install --upgrade pip && \
     pip download lib/deisa -d ${PYTHON_WORKING_DIR} && \
     pip install whell versionner zarr cytools h5py -d ${PYTHON_WORKING_DIR} && \
