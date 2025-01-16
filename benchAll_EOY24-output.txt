@@ -1,0 +1,975 @@
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/64/res16.out:[RESULT] Perf: 20.4743 Mcell-updates/s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/64/res16.out:[RESULT] Wall time: 20.2557 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/64/res16.out:[RESULT] I/O: 2.70379 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/64/res16.out:[RESULT] Compute: 17.5561 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/64/res16.out:[RESULT] Compute / I/O: 0.154008 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/64/res16.out:[RESULT] Perf: 20.4743 Mcell-updates/s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/64/res16.out:[RESULT] Wall time: 20.2557 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/64/res16.out:[RESULT] I/O: 2.70379 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/64/res16.out:[RESULT] Compute: 17.5561 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/64/res16.out:[RESULT] Compute / I/O: 0.154008 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/64/res1.out:[RESULT] Perf: 13.213 Mcell-updates/s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/64/res1.out:[RESULT] Wall time: 23.7971 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/64/res1.out:[RESULT] I/O: 4.30418 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/64/res1.out:[RESULT] Compute: 19.4994 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/64/res1.out:[RESULT] Compute / I/O: 0.220733 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/64/res16.out:[RESULT] Perf: 20.4743 Mcell-updates/s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/64/res16.out:[RESULT] Wall time: 20.2557 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/64/res16.out:[RESULT] I/O: 2.70379 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/64/res16.out:[RESULT] Compute: 17.5561 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/64/res16.out:[RESULT] Compute / I/O: 0.154008 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/64/res2.out:[RESULT] Perf: 14.2623 Mcell-updates/s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/64/res2.out:[RESULT] Wall time: 23.3432 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/64/res2.out:[RESULT] I/O: 3.9319 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/64/res2.out:[RESULT] Compute: 19.4172 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/64/res2.out:[RESULT] Compute / I/O: 0.202495 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/64/res1.out:[RESULT] Perf: 13.213 Mcell-updates/s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/64/res1.out:[RESULT] Wall time: 23.7971 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/64/res1.out:[RESULT] I/O: 4.30418 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/64/res1.out:[RESULT] Compute: 19.4994 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/64/res1.out:[RESULT] Compute / I/O: 0.220733 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/64/res4.out:[RESULT] Perf: 16.2704 Mcell-updates/s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/64/res4.out:[RESULT] Wall time: 21.6658 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/64/res4.out:[RESULT] I/O: 3.25204 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/64/res4.out:[RESULT] Compute: 18.4203 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/64/res4.out:[RESULT] Compute / I/O: 0.176546 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/64/res16.out:[RESULT] Perf: 20.4743 Mcell-updates/s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/64/res16.out:[RESULT] Wall time: 20.2557 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/64/res16.out:[RESULT] I/O: 2.70379 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/64/res16.out:[RESULT] Compute: 17.5561 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/64/res16.out:[RESULT] Compute / I/O: 0.154008 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/64/res2.out:[RESULT] Perf: 14.2623 Mcell-updates/s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/64/res2.out:[RESULT] Wall time: 23.3432 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/64/res2.out:[RESULT] I/O: 3.9319 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/64/res2.out:[RESULT] Compute: 19.4172 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/64/res2.out:[RESULT] Compute / I/O: 0.202495 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/64/res1.out:[RESULT] Perf: 13.213 Mcell-updates/s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/64/res1.out:[RESULT] Wall time: 23.7971 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/64/res1.out:[RESULT] I/O: 4.30418 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/64/res1.out:[RESULT] Compute: 19.4994 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/64/res1.out:[RESULT] Compute / I/O: 0.220733 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/64/res4.out:[RESULT] Perf: 16.2704 Mcell-updates/s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/64/res4.out:[RESULT] Wall time: 21.6658 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/64/res4.out:[RESULT] I/O: 3.25204 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/64/res4.out:[RESULT] Compute: 18.4203 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/64/res4.out:[RESULT] Compute / I/O: 0.176546 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/64/res16.out:[RESULT] Perf: 20.4743 Mcell-updates/s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/64/res16.out:[RESULT] Wall time: 20.2557 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/64/res16.out:[RESULT] I/O: 2.70379 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/64/res16.out:[RESULT] Compute: 17.5561 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/64/res16.out:[RESULT] Compute / I/O: 0.154008 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/64/res64.out:[RESULT] Perf: 27.5147 Mcell-updates/s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/64/res64.out:[RESULT] Wall time: 18.6082 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/64/res64.out:[RESULT] I/O: 1.88639 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/64/res64.out:[RESULT] Compute: 16.729 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/64/res64.out:[RESULT] Compute / I/O: 0.112762 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/64/res2.out:[RESULT] Perf: 14.2623 Mcell-updates/s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/64/res2.out:[RESULT] Wall time: 23.3432 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/64/res2.out:[RESULT] I/O: 3.9319 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/64/res2.out:[RESULT] Compute: 19.4172 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/64/res2.out:[RESULT] Compute / I/O: 0.202495 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/64/res1.out:[RESULT] Perf: 13.213 Mcell-updates/s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/64/res1.out:[RESULT] Wall time: 23.7971 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/64/res1.out:[RESULT] I/O: 4.30418 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/64/res1.out:[RESULT] Compute: 19.4994 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/64/res1.out:[RESULT] Compute / I/O: 0.220733 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/64/res4.out:[RESULT] Perf: 16.2704 Mcell-updates/s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/64/res4.out:[RESULT] Wall time: 21.6658 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/64/res4.out:[RESULT] I/O: 3.25204 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/64/res4.out:[RESULT] Compute: 18.4203 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/64/res4.out:[RESULT] Compute / I/O: 0.176546 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/64/res8.out:[RESULT] Perf: 17.07 Mcell-updates/s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/64/res8.out:[RESULT] Wall time: 21.8658 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/64/res8.out:[RESULT] I/O: 3.33477 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/64/res8.out:[RESULT] Compute: 18.5366 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/64/res8.out:[RESULT] Compute / I/O: 0.179902 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/64/res16.out:[RESULT] Perf: 20.4743 Mcell-updates/s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/64/res16.out:[RESULT] Wall time: 20.2557 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/64/res16.out:[RESULT] I/O: 2.70379 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/64/res16.out:[RESULT] Compute: 17.5561 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/64/res16.out:[RESULT] Compute / I/O: 0.154008 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/64/res64.out:[RESULT] Perf: 27.5147 Mcell-updates/s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/64/res64.out:[RESULT] Wall time: 18.6082 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/64/res64.out:[RESULT] I/O: 1.88639 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/64/res64.out:[RESULT] Compute: 16.729 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/64/res64.out:[RESULT] Compute / I/O: 0.112762 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/64/res2.out:[RESULT] Perf: 14.2623 Mcell-updates/s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/64/res2.out:[RESULT] Wall time: 23.3432 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/64/res2.out:[RESULT] I/O: 3.9319 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/64/res2.out:[RESULT] Compute: 19.4172 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/64/res2.out:[RESULT] Compute / I/O: 0.202495 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/64/res1.out:[RESULT] Perf: 13.213 Mcell-updates/s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/64/res1.out:[RESULT] Wall time: 23.7971 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/64/res1.out:[RESULT] I/O: 4.30418 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/64/res1.out:[RESULT] Compute: 19.4994 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/64/res1.out:[RESULT] Compute / I/O: 0.220733 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/64/res128.out:[RESULT] Perf: 32.8266 Mcell-updates/s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/64/res128.out:[RESULT] Wall time: 18.7165 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/64/res128.out:[RESULT] I/O: 1.80522 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/64/res128.out:[RESULT] Compute: 16.9177 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/64/res128.out:[RESULT] Compute / I/O: 0.106706 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/64/res4.out:[RESULT] Perf: 16.2704 Mcell-updates/s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/64/res4.out:[RESULT] Wall time: 21.6658 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/64/res4.out:[RESULT] I/O: 3.25204 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/64/res4.out:[RESULT] Compute: 18.4203 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/64/res4.out:[RESULT] Compute / I/O: 0.176546 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/64/res8.out:[RESULT] Perf: 17.07 Mcell-updates/s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/64/res8.out:[RESULT] Wall time: 21.8658 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/64/res8.out:[RESULT] I/O: 3.33477 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/64/res8.out:[RESULT] Compute: 18.5366 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/64/res8.out:[RESULT] Compute / I/O: 0.179902 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/64/res16.out:[RESULT] Perf: 20.4743 Mcell-updates/s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/64/res16.out:[RESULT] Wall time: 20.2557 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/64/res16.out:[RESULT] I/O: 2.70379 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/64/res16.out:[RESULT] Compute: 17.5561 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/64/res16.out:[RESULT] Compute / I/O: 0.154008 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/64/res64.out:[RESULT] Perf: 27.5147 Mcell-updates/s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/64/res64.out:[RESULT] Wall time: 18.6082 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/64/res64.out:[RESULT] I/O: 1.88639 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/64/res64.out:[RESULT] Compute: 16.729 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/64/res64.out:[RESULT] Compute / I/O: 0.112762 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/64/res2.out:[RESULT] Perf: 14.2623 Mcell-updates/s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/64/res2.out:[RESULT] Wall time: 23.3432 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/64/res2.out:[RESULT] I/O: 3.9319 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/64/res2.out:[RESULT] Compute: 19.4172 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/64/res2.out:[RESULT] Compute / I/O: 0.202495 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/64/res1.out:[RESULT] Perf: 13.213 Mcell-updates/s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/64/res1.out:[RESULT] Wall time: 23.7971 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/64/res1.out:[RESULT] I/O: 4.30418 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/64/res1.out:[RESULT] Compute: 19.4994 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/64/res1.out:[RESULT] Compute / I/O: 0.220733 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/64/res128.out:[RESULT] Perf: 32.8266 Mcell-updates/s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/64/res128.out:[RESULT] Wall time: 18.7165 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/64/res128.out:[RESULT] I/O: 1.80522 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/64/res128.out:[RESULT] Compute: 16.9177 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/64/res128.out:[RESULT] Compute / I/O: 0.106706 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/64/res4.out:[RESULT] Perf: 16.2704 Mcell-updates/s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/64/res4.out:[RESULT] Wall time: 21.6658 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/64/res4.out:[RESULT] I/O: 3.25204 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/64/res4.out:[RESULT] Compute: 18.4203 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/64/res4.out:[RESULT] Compute / I/O: 0.176546 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/64/res8.out:[RESULT] Perf: 17.07 Mcell-updates/s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/64/res8.out:[RESULT] Wall time: 21.8658 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/64/res8.out:[RESULT] I/O: 3.33477 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/64/res8.out:[RESULT] Compute: 18.5366 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/64/res8.out:[RESULT] Compute / I/O: 0.179902 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/64/res16.out:[RESULT] Perf: 20.4743 Mcell-updates/s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/64/res16.out:[RESULT] Wall time: 20.2557 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/64/res16.out:[RESULT] I/O: 2.70379 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/64/res16.out:[RESULT] Compute: 17.5561 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/64/res16.out:[RESULT] Compute / I/O: 0.154008 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/64/res64.out:[RESULT] Perf: 27.5147 Mcell-updates/s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/64/res64.out:[RESULT] Wall time: 18.6082 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/64/res64.out:[RESULT] I/O: 1.88639 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/64/res64.out:[RESULT] Compute: 16.729 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/64/res64.out:[RESULT] Compute / I/O: 0.112762 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/64/res2.out:[RESULT] Perf: 14.2623 Mcell-updates/s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/64/res2.out:[RESULT] Wall time: 23.3432 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/64/res2.out:[RESULT] I/O: 3.9319 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/64/res2.out:[RESULT] Compute: 19.4172 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/64/res2.out:[RESULT] Compute / I/O: 0.202495 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/64/res32.out:[RESULT] Perf: 24.3728 Mcell-updates/s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/64/res32.out:[RESULT] Wall time: 18.9063 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/64/res32.out:[RESULT] I/O: 2.22056 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/64/res32.out:[RESULT] Compute: 16.6918 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/64/res32.out:[RESULT] Compute / I/O: 0.133033 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/64/res1.out:[RESULT] Perf: 13.213 Mcell-updates/s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/64/res1.out:[RESULT] Wall time: 23.7971 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/64/res1.out:[RESULT] I/O: 4.30418 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/64/res1.out:[RESULT] Compute: 19.4994 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/64/res1.out:[RESULT] Compute / I/O: 0.220733 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/128/res16.out:[RESULT] Perf: 92.313 Mcell-updates/s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/128/res16.out:[RESULT] Wall time: 28.8521 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/128/res16.out:[RESULT] I/O: 7.75728 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/128/res16.out:[RESULT] Compute: 21.1007 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/128/res16.out:[RESULT] Compute / I/O: 0.367632 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/128/res16.out:[RESULT] Perf: 92.313 Mcell-updates/s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/128/res16.out:[RESULT] Wall time: 28.8521 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/128/res16.out:[RESULT] I/O: 7.75728 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/128/res16.out:[RESULT] Compute: 21.1007 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/128/res16.out:[RESULT] Compute / I/O: 0.367632 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/128/res1.out:[RESULT] Perf: 40.3914 Mcell-updates/s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/128/res1.out:[RESULT] Wall time: 56.942 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/128/res1.out:[RESULT] I/O: 20.6501 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/128/res1.out:[RESULT] Compute: 36.3126 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/128/res1.out:[RESULT] Compute / I/O: 0.568674 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/128/res16.out:[RESULT] Perf: 92.313 Mcell-updates/s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/128/res16.out:[RESULT] Wall time: 28.8521 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/128/res16.out:[RESULT] I/O: 7.75728 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/128/res16.out:[RESULT] Compute: 21.1007 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/128/res16.out:[RESULT] Compute / I/O: 0.367632 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/128/res2.out:[RESULT] Perf: 55.1385 Mcell-updates/s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/128/res2.out:[RESULT] Wall time: 42.9766 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/128/res2.out:[RESULT] I/O: 14.5036 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/128/res2.out:[RESULT] Compute: 28.4857 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/128/res2.out:[RESULT] Compute / I/O: 0.509155 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/128/res1.out:[RESULT] Perf: 40.3914 Mcell-updates/s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/128/res1.out:[RESULT] Wall time: 56.942 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/128/res1.out:[RESULT] I/O: 20.6501 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/128/res1.out:[RESULT] Compute: 36.3126 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/128/res1.out:[RESULT] Compute / I/O: 0.568674 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/128/res4.out:[RESULT] Perf: 70.329 Mcell-updates/s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/128/res4.out:[RESULT] Wall time: 34.715 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/128/res4.out:[RESULT] I/O: 10.3056 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/128/res4.out:[RESULT] Compute: 24.4202 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/128/res4.out:[RESULT] Compute / I/O: 0.422011 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/128/res16.out:[RESULT] Perf: 92.313 Mcell-updates/s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/128/res16.out:[RESULT] Wall time: 28.8521 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/128/res16.out:[RESULT] I/O: 7.75728 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/128/res16.out:[RESULT] Compute: 21.1007 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/128/res16.out:[RESULT] Compute / I/O: 0.367632 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/128/res2.out:[RESULT] Perf: 55.1385 Mcell-updates/s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/128/res2.out:[RESULT] Wall time: 42.9766 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/128/res2.out:[RESULT] I/O: 14.5036 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/128/res2.out:[RESULT] Compute: 28.4857 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/128/res2.out:[RESULT] Compute / I/O: 0.509155 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/128/res1.out:[RESULT] Perf: 40.3914 Mcell-updates/s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/128/res1.out:[RESULT] Wall time: 56.942 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/128/res1.out:[RESULT] I/O: 20.6501 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/128/res1.out:[RESULT] Compute: 36.3126 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/128/res1.out:[RESULT] Compute / I/O: 0.568674 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/128/res4.out:[RESULT] Perf: 70.329 Mcell-updates/s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/128/res4.out:[RESULT] Wall time: 34.715 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/128/res4.out:[RESULT] I/O: 10.3056 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/128/res4.out:[RESULT] Compute: 24.4202 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/128/res4.out:[RESULT] Compute / I/O: 0.422011 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/128/res16.out:[RESULT] Perf: 92.313 Mcell-updates/s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/128/res16.out:[RESULT] Wall time: 28.8521 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/128/res16.out:[RESULT] I/O: 7.75728 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/128/res16.out:[RESULT] Compute: 21.1007 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/128/res16.out:[RESULT] Compute / I/O: 0.367632 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/128/res64.out:[RESULT] Perf: 133.994 Mcell-updates/s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/128/res64.out:[RESULT] Wall time: 22.2845 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/128/res64.out:[RESULT] I/O: 3.76108 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/128/res64.out:[RESULT] Compute: 18.5287 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/128/res64.out:[RESULT] Compute / I/O: 0.202987 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/128/res2.out:[RESULT] Perf: 55.1385 Mcell-updates/s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/128/res2.out:[RESULT] Wall time: 42.9766 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/128/res2.out:[RESULT] I/O: 14.5036 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/128/res2.out:[RESULT] Compute: 28.4857 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/128/res2.out:[RESULT] Compute / I/O: 0.509155 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/128/res1.out:[RESULT] Perf: 40.3914 Mcell-updates/s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/128/res1.out:[RESULT] Wall time: 56.942 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/128/res1.out:[RESULT] I/O: 20.6501 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/128/res1.out:[RESULT] Compute: 36.3126 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/128/res1.out:[RESULT] Compute / I/O: 0.568674 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/128/res4.out:[RESULT] Perf: 70.329 Mcell-updates/s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/128/res4.out:[RESULT] Wall time: 34.715 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/128/res4.out:[RESULT] I/O: 10.3056 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/128/res4.out:[RESULT] Compute: 24.4202 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/128/res4.out:[RESULT] Compute / I/O: 0.422011 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/128/res8.out:[RESULT] Perf: 72.3974 Mcell-updates/s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/128/res8.out:[RESULT] Wall time: 34.7451 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/128/res8.out:[RESULT] I/O: 11.1347 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/128/res8.out:[RESULT] Compute: 23.6211 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/128/res8.out:[RESULT] Compute / I/O: 0.471386 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/128/res16.out:[RESULT] Perf: 92.313 Mcell-updates/s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/128/res16.out:[RESULT] Wall time: 28.8521 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/128/res16.out:[RESULT] I/O: 7.75728 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/128/res16.out:[RESULT] Compute: 21.1007 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/128/res16.out:[RESULT] Compute / I/O: 0.367632 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/128/res64.out:[RESULT] Perf: 133.994 Mcell-updates/s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/128/res64.out:[RESULT] Wall time: 22.2845 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/128/res64.out:[RESULT] I/O: 3.76108 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/128/res64.out:[RESULT] Compute: 18.5287 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/128/res64.out:[RESULT] Compute / I/O: 0.202987 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/128/res2.out:[RESULT] Perf: 55.1385 Mcell-updates/s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/128/res2.out:[RESULT] Wall time: 42.9766 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/128/res2.out:[RESULT] I/O: 14.5036 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/128/res2.out:[RESULT] Compute: 28.4857 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/128/res2.out:[RESULT] Compute / I/O: 0.509155 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/128/res1.out:[RESULT] Perf: 40.3914 Mcell-updates/s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/128/res1.out:[RESULT] Wall time: 56.942 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/128/res1.out:[RESULT] I/O: 20.6501 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/128/res1.out:[RESULT] Compute: 36.3126 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/128/res1.out:[RESULT] Compute / I/O: 0.568674 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/128/res128.out:[RESULT] Perf: 162.093 Mcell-updates/s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/128/res128.out:[RESULT] Wall time: 20.4683 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/128/res128.out:[RESULT] I/O: 3.02804 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/128/res128.out:[RESULT] Compute: 17.4451 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/128/res128.out:[RESULT] Compute / I/O: 0.173575 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/128/res4.out:[RESULT] Perf: 70.329 Mcell-updates/s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/128/res4.out:[RESULT] Wall time: 34.715 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/128/res4.out:[RESULT] I/O: 10.3056 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/128/res4.out:[RESULT] Compute: 24.4202 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/128/res4.out:[RESULT] Compute / I/O: 0.422011 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/128/res8.out:[RESULT] Perf: 72.3974 Mcell-updates/s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/128/res8.out:[RESULT] Wall time: 34.7451 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/128/res8.out:[RESULT] I/O: 11.1347 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/128/res8.out:[RESULT] Compute: 23.6211 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/128/res8.out:[RESULT] Compute / I/O: 0.471386 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/128/res16.out:[RESULT] Perf: 92.313 Mcell-updates/s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/128/res16.out:[RESULT] Wall time: 28.8521 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/128/res16.out:[RESULT] I/O: 7.75728 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/128/res16.out:[RESULT] Compute: 21.1007 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/128/res16.out:[RESULT] Compute / I/O: 0.367632 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/128/res64.out:[RESULT] Perf: 133.994 Mcell-updates/s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/128/res64.out:[RESULT] Wall time: 22.2845 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/128/res64.out:[RESULT] I/O: 3.76108 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/128/res64.out:[RESULT] Compute: 18.5287 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/128/res64.out:[RESULT] Compute / I/O: 0.202987 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/128/res2.out:[RESULT] Perf: 55.1385 Mcell-updates/s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/128/res2.out:[RESULT] Wall time: 42.9766 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/128/res2.out:[RESULT] I/O: 14.5036 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/128/res2.out:[RESULT] Compute: 28.4857 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/128/res2.out:[RESULT] Compute / I/O: 0.509155 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/128/res1.out:[RESULT] Perf: 40.3914 Mcell-updates/s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/128/res1.out:[RESULT] Wall time: 56.942 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/128/res1.out:[RESULT] I/O: 20.6501 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/128/res1.out:[RESULT] Compute: 36.3126 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/128/res1.out:[RESULT] Compute / I/O: 0.568674 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/128/res128.out:[RESULT] Perf: 162.093 Mcell-updates/s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/128/res128.out:[RESULT] Wall time: 20.4683 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/128/res128.out:[RESULT] I/O: 3.02804 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/128/res128.out:[RESULT] Compute: 17.4451 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/128/res128.out:[RESULT] Compute / I/O: 0.173575 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/128/res4.out:[RESULT] Perf: 70.329 Mcell-updates/s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/128/res4.out:[RESULT] Wall time: 34.715 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/128/res4.out:[RESULT] I/O: 10.3056 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/128/res4.out:[RESULT] Compute: 24.4202 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/128/res4.out:[RESULT] Compute / I/O: 0.422011 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/128/res8.out:[RESULT] Perf: 72.3974 Mcell-updates/s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/128/res8.out:[RESULT] Wall time: 34.7451 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/128/res8.out:[RESULT] I/O: 11.1347 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/128/res8.out:[RESULT] Compute: 23.6211 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/128/res8.out:[RESULT] Compute / I/O: 0.471386 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/128/res16.out:[RESULT] Perf: 92.313 Mcell-updates/s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/128/res16.out:[RESULT] Wall time: 28.8521 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/128/res16.out:[RESULT] I/O: 7.75728 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/128/res16.out:[RESULT] Compute: 21.1007 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/128/res16.out:[RESULT] Compute / I/O: 0.367632 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/128/res64.out:[RESULT] Perf: 133.994 Mcell-updates/s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/128/res64.out:[RESULT] Wall time: 22.2845 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/128/res64.out:[RESULT] I/O: 3.76108 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/128/res64.out:[RESULT] Compute: 18.5287 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/128/res64.out:[RESULT] Compute / I/O: 0.202987 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/128/res2.out:[RESULT] Perf: 55.1385 Mcell-updates/s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/128/res2.out:[RESULT] Wall time: 42.9766 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/128/res2.out:[RESULT] I/O: 14.5036 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/128/res2.out:[RESULT] Compute: 28.4857 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/128/res2.out:[RESULT] Compute / I/O: 0.509155 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/128/res32.out:[RESULT] Perf: 112.625 Mcell-updates/s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/128/res32.out:[RESULT] Wall time: 25.0397 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/128/res32.out:[RESULT] I/O: 5.49379 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/128/res32.out:[RESULT] Compute: 19.5512 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/128/res32.out:[RESULT] Compute / I/O: 0.280995 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/128/res1.out:[RESULT] Perf: 40.3914 Mcell-updates/s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/128/res1.out:[RESULT] Wall time: 56.942 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/128/res1.out:[RESULT] I/O: 20.6501 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/128/res1.out:[RESULT] Compute: 36.3126 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/128/res1.out:[RESULT] Compute / I/O: 0.568674 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/192/res16.out:[RESULT] Perf: 195.295 Mcell-updates/s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/192/res16.out:[RESULT] Wall time: 42.6022 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/192/res16.out:[RESULT] I/O: 15.463 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/192/res16.out:[RESULT] Compute: 27.1519 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/192/res16.out:[RESULT] Compute / I/O: 0.569501 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/192/res16.out:[RESULT] Perf: 195.295 Mcell-updates/s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/192/res16.out:[RESULT] Wall time: 42.6022 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/192/res16.out:[RESULT] I/O: 15.463 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/192/res16.out:[RESULT] Compute: 27.1519 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/192/res16.out:[RESULT] Compute / I/O: 0.569501 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/192/res1.out:[RESULT] Perf: 55.7085 Mcell-updates/s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/192/res1.out:[RESULT] Wall time: 135.16 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/192/res1.out:[RESULT] I/O: 55.9036 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/192/res1.out:[RESULT] Compute: 79.3173 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/192/res1.out:[RESULT] Compute / I/O: 0.70481 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/192/res16.out:[RESULT] Perf: 195.295 Mcell-updates/s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/192/res16.out:[RESULT] Wall time: 42.6022 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/192/res16.out:[RESULT] I/O: 15.463 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/192/res16.out:[RESULT] Compute: 27.1519 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/192/res16.out:[RESULT] Compute / I/O: 0.569501 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/192/res2.out:[RESULT] Perf: 84.3316 Mcell-updates/s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/192/res2.out:[RESULT] Wall time: 91.107 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/192/res2.out:[RESULT] I/O: 38.8818 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/192/res2.out:[RESULT] Compute: 52.2584 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/192/res2.out:[RESULT] Compute / I/O: 0.74403 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/192/res1.out:[RESULT] Perf: 55.7085 Mcell-updates/s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/192/res1.out:[RESULT] Wall time: 135.16 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/192/res1.out:[RESULT] I/O: 55.9036 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/192/res1.out:[RESULT] Compute: 79.3173 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/192/res1.out:[RESULT] Compute / I/O: 0.70481 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/192/res4.out:[RESULT] Perf: 123.068 Mcell-updates/s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/192/res4.out:[RESULT] Wall time: 63.7044 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/192/res4.out:[RESULT] I/O: 26.2842 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/192/res4.out:[RESULT] Compute: 37.4413 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/192/res4.out:[RESULT] Compute / I/O: 0.70201 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/192/res16.out:[RESULT] Perf: 195.295 Mcell-updates/s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/192/res16.out:[RESULT] Wall time: 42.6022 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/192/res16.out:[RESULT] I/O: 15.463 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/192/res16.out:[RESULT] Compute: 27.1519 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/192/res16.out:[RESULT] Compute / I/O: 0.569501 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/192/res2.out:[RESULT] Perf: 84.3316 Mcell-updates/s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/192/res2.out:[RESULT] Wall time: 91.107 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/192/res2.out:[RESULT] I/O: 38.8818 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/192/res2.out:[RESULT] Compute: 52.2584 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/192/res2.out:[RESULT] Compute / I/O: 0.74403 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/192/res1.out:[RESULT] Perf: 55.7085 Mcell-updates/s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/192/res1.out:[RESULT] Wall time: 135.16 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/192/res1.out:[RESULT] I/O: 55.9036 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/192/res1.out:[RESULT] Compute: 79.3173 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/192/res1.out:[RESULT] Compute / I/O: 0.70481 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/192/res4.out:[RESULT] Perf: 123.068 Mcell-updates/s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/192/res4.out:[RESULT] Wall time: 63.7044 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/192/res4.out:[RESULT] I/O: 26.2842 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/192/res4.out:[RESULT] Compute: 37.4413 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/192/res4.out:[RESULT] Compute / I/O: 0.70201 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/192/res16.out:[RESULT] Perf: 195.295 Mcell-updates/s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/192/res16.out:[RESULT] Wall time: 42.6022 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/192/res16.out:[RESULT] I/O: 15.463 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/192/res16.out:[RESULT] Compute: 27.1519 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/192/res16.out:[RESULT] Compute / I/O: 0.569501 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/192/res64.out:[RESULT] Perf: 320.364 Mcell-updates/s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/192/res64.out:[RESULT] Wall time: 28.0897 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/192/res64.out:[RESULT] I/O: 7.68842 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/192/res64.out:[RESULT] Compute: 20.407 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/192/res64.out:[RESULT] Compute / I/O: 0.376754 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/192/res2.out:[RESULT] Perf: 84.3316 Mcell-updates/s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/192/res2.out:[RESULT] Wall time: 91.107 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/192/res2.out:[RESULT] I/O: 38.8818 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/192/res2.out:[RESULT] Compute: 52.2584 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/192/res2.out:[RESULT] Compute / I/O: 0.74403 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/192/res1.out:[RESULT] Perf: 55.7085 Mcell-updates/s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/192/res1.out:[RESULT] Wall time: 135.16 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/192/res1.out:[RESULT] I/O: 55.9036 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/192/res1.out:[RESULT] Compute: 79.3173 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/192/res1.out:[RESULT] Compute / I/O: 0.70481 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/192/res4.out:[RESULT] Perf: 123.068 Mcell-updates/s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/192/res4.out:[RESULT] Wall time: 63.7044 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/192/res4.out:[RESULT] I/O: 26.2842 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/192/res4.out:[RESULT] Compute: 37.4413 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/192/res4.out:[RESULT] Compute / I/O: 0.70201 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/192/res8.out:[RESULT] Perf: 145.195 Mcell-updates/s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/192/res8.out:[RESULT] Wall time: 55.0983 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/192/res8.out:[RESULT] I/O: 20.8767 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/192/res8.out:[RESULT] Compute: 34.2392 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/192/res8.out:[RESULT] Compute / I/O: 0.609731 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/192/res16.out:[RESULT] Perf: 195.295 Mcell-updates/s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/192/res16.out:[RESULT] Wall time: 42.6022 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/192/res16.out:[RESULT] I/O: 15.463 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/192/res16.out:[RESULT] Compute: 27.1519 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/192/res16.out:[RESULT] Compute / I/O: 0.569501 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/192/res64.out:[RESULT] Perf: 320.364 Mcell-updates/s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/192/res64.out:[RESULT] Wall time: 28.0897 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/192/res64.out:[RESULT] I/O: 7.68842 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/192/res64.out:[RESULT] Compute: 20.407 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/192/res64.out:[RESULT] Compute / I/O: 0.376754 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/192/res2.out:[RESULT] Perf: 84.3316 Mcell-updates/s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/192/res2.out:[RESULT] Wall time: 91.107 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/192/res2.out:[RESULT] I/O: 38.8818 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/192/res2.out:[RESULT] Compute: 52.2584 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/192/res2.out:[RESULT] Compute / I/O: 0.74403 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/192/res1.out:[RESULT] Perf: 55.7085 Mcell-updates/s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/192/res1.out:[RESULT] Wall time: 135.16 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/192/res1.out:[RESULT] I/O: 55.9036 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/192/res1.out:[RESULT] Compute: 79.3173 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/192/res1.out:[RESULT] Compute / I/O: 0.70481 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/192/res128.out:[RESULT] Perf: 386.208 Mcell-updates/s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/192/res128.out:[RESULT] Wall time: 25.093 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/192/res128.out:[RESULT] I/O: 5.99876 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/192/res128.out:[RESULT] Compute: 19.0989 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/192/res128.out:[RESULT] Compute / I/O: 0.314089 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/192/res4.out:[RESULT] Perf: 123.068 Mcell-updates/s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/192/res4.out:[RESULT] Wall time: 63.7044 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/192/res4.out:[RESULT] I/O: 26.2842 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/192/res4.out:[RESULT] Compute: 37.4413 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/192/res4.out:[RESULT] Compute / I/O: 0.70201 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/192/res8.out:[RESULT] Perf: 145.195 Mcell-updates/s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/192/res8.out:[RESULT] Wall time: 55.0983 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/192/res8.out:[RESULT] I/O: 20.8767 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/192/res8.out:[RESULT] Compute: 34.2392 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/192/res8.out:[RESULT] Compute / I/O: 0.609731 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/192/res16.out:[RESULT] Perf: 195.295 Mcell-updates/s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/192/res16.out:[RESULT] Wall time: 42.6022 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/192/res16.out:[RESULT] I/O: 15.463 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/192/res16.out:[RESULT] Compute: 27.1519 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/192/res16.out:[RESULT] Compute / I/O: 0.569501 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/192/res64.out:[RESULT] Perf: 320.364 Mcell-updates/s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/192/res64.out:[RESULT] Wall time: 28.0897 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/192/res64.out:[RESULT] I/O: 7.68842 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/192/res64.out:[RESULT] Compute: 20.407 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/192/res64.out:[RESULT] Compute / I/O: 0.376754 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/192/res2.out:[RESULT] Perf: 84.3316 Mcell-updates/s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/192/res2.out:[RESULT] Wall time: 91.107 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/192/res2.out:[RESULT] I/O: 38.8818 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/192/res2.out:[RESULT] Compute: 52.2584 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/192/res2.out:[RESULT] Compute / I/O: 0.74403 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/192/res1.out:[RESULT] Perf: 55.7085 Mcell-updates/s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/192/res1.out:[RESULT] Wall time: 135.16 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/192/res1.out:[RESULT] I/O: 55.9036 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/192/res1.out:[RESULT] Compute: 79.3173 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/192/res1.out:[RESULT] Compute / I/O: 0.70481 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/192/res128.out:[RESULT] Perf: 386.208 Mcell-updates/s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/192/res128.out:[RESULT] Wall time: 25.093 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/192/res128.out:[RESULT] I/O: 5.99876 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/192/res128.out:[RESULT] Compute: 19.0989 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/192/res128.out:[RESULT] Compute / I/O: 0.314089 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/192/res4.out:[RESULT] Perf: 123.068 Mcell-updates/s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/192/res4.out:[RESULT] Wall time: 63.7044 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/192/res4.out:[RESULT] I/O: 26.2842 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/192/res4.out:[RESULT] Compute: 37.4413 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/192/res4.out:[RESULT] Compute / I/O: 0.70201 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/192/res8.out:[RESULT] Perf: 145.195 Mcell-updates/s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/192/res8.out:[RESULT] Wall time: 55.0983 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/192/res8.out:[RESULT] I/O: 20.8767 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/192/res8.out:[RESULT] Compute: 34.2392 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/192/res8.out:[RESULT] Compute / I/O: 0.609731 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/192/res16.out:[RESULT] Perf: 195.295 Mcell-updates/s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/192/res16.out:[RESULT] Wall time: 42.6022 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/192/res16.out:[RESULT] I/O: 15.463 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/192/res16.out:[RESULT] Compute: 27.1519 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/192/res16.out:[RESULT] Compute / I/O: 0.569501 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/192/res64.out:[RESULT] Perf: 320.364 Mcell-updates/s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/192/res64.out:[RESULT] Wall time: 28.0897 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/192/res64.out:[RESULT] I/O: 7.68842 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/192/res64.out:[RESULT] Compute: 20.407 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/192/res64.out:[RESULT] Compute / I/O: 0.376754 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/192/res2.out:[RESULT] Perf: 84.3316 Mcell-updates/s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/192/res2.out:[RESULT] Wall time: 91.107 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/192/res2.out:[RESULT] I/O: 38.8818 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/192/res2.out:[RESULT] Compute: 52.2584 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/192/res2.out:[RESULT] Compute / I/O: 0.74403 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/192/res32.out:[RESULT] Perf: 260.355 Mcell-updates/s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/192/res32.out:[RESULT] Wall time: 33.2346 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/192/res32.out:[RESULT] I/O: 10.2982 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/192/res32.out:[RESULT] Compute: 22.944 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/192/res32.out:[RESULT] Compute / I/O: 0.448839 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/192/res1.out:[RESULT] Perf: 55.7085 Mcell-updates/s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/192/res1.out:[RESULT] Wall time: 135.16 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/192/res1.out:[RESULT] I/O: 55.9036 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/192/res1.out:[RESULT] Compute: 79.3173 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/192/res1.out:[RESULT] Compute / I/O: 0.70481 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/256/res16.out:[RESULT] Perf: 321.708 Mcell-updates/s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/256/res16.out:[RESULT] Wall time: 58.927 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/256/res16.out:[RESULT] I/O: 22.8979 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/256/res16.out:[RESULT] Compute: 36.048 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/256/res16.out:[RESULT] Compute / I/O: 0.635206 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/256/res16.out:[RESULT] Perf: 321.708 Mcell-updates/s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/256/res16.out:[RESULT] Wall time: 58.927 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/256/res16.out:[RESULT] I/O: 22.8979 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/256/res16.out:[RESULT] Compute: 36.048 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/256/res16.out:[RESULT] Compute / I/O: 0.635206 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/256/res1.out:[RESULT] Perf: 63.0152 Mcell-updates/s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/256/res1.out:[RESULT] Wall time: 278.917 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/256/res1.out:[RESULT] I/O: 117.312 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/256/res1.out:[RESULT] Compute: 161.745 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/256/res1.out:[RESULT] Compute / I/O: 0.725287 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/256/res16.out:[RESULT] Perf: 321.708 Mcell-updates/s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/256/res16.out:[RESULT] Wall time: 58.927 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/256/res16.out:[RESULT] I/O: 22.8979 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/256/res16.out:[RESULT] Compute: 36.048 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/256/res16.out:[RESULT] Compute / I/O: 0.635206 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/256/res2.out:[RESULT] Perf: 106.935 Mcell-updates/s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/256/res2.out:[RESULT] Wall time: 166.89 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/256/res2.out:[RESULT] I/O: 70.0856 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/256/res2.out:[RESULT] Compute: 96.8827 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/256/res2.out:[RESULT] Compute / I/O: 0.723407 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/256/res1.out:[RESULT] Perf: 63.0152 Mcell-updates/s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/256/res1.out:[RESULT] Wall time: 278.917 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/256/res1.out:[RESULT] I/O: 117.312 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/256/res1.out:[RESULT] Compute: 161.745 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/256/res1.out:[RESULT] Compute / I/O: 0.725287 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/256/res4.out:[RESULT] Perf: 167.495 Mcell-updates/s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/256/res4.out:[RESULT] Wall time: 108.188 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/256/res4.out:[RESULT] I/O: 46.2954 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/256/res4.out:[RESULT] Compute: 61.9345 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/256/res4.out:[RESULT] Compute / I/O: 0.74749 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/256/res16.out:[RESULT] Perf: 321.708 Mcell-updates/s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/256/res16.out:[RESULT] Wall time: 58.927 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/256/res16.out:[RESULT] I/O: 22.8979 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/256/res16.out:[RESULT] Compute: 36.048 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/256/res16.out:[RESULT] Compute / I/O: 0.635206 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/256/res2.out:[RESULT] Perf: 106.935 Mcell-updates/s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/256/res2.out:[RESULT] Wall time: 166.89 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/256/res2.out:[RESULT] I/O: 70.0856 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/256/res2.out:[RESULT] Compute: 96.8827 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/256/res2.out:[RESULT] Compute / I/O: 0.723407 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/256/res1.out:[RESULT] Perf: 63.0152 Mcell-updates/s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/256/res1.out:[RESULT] Wall time: 278.917 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/256/res1.out:[RESULT] I/O: 117.312 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/256/res1.out:[RESULT] Compute: 161.745 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/256/res1.out:[RESULT] Compute / I/O: 0.725287 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/256/res4.out:[RESULT] Perf: 167.495 Mcell-updates/s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/256/res4.out:[RESULT] Wall time: 108.188 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/256/res4.out:[RESULT] I/O: 46.2954 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/256/res4.out:[RESULT] Compute: 61.9345 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/256/res4.out:[RESULT] Compute / I/O: 0.74749 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/256/res16.out:[RESULT] Perf: 321.708 Mcell-updates/s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/256/res16.out:[RESULT] Wall time: 58.927 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/256/res16.out:[RESULT] I/O: 22.8979 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/256/res16.out:[RESULT] Compute: 36.048 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/256/res16.out:[RESULT] Compute / I/O: 0.635206 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/256/res64.out:[RESULT] Perf: 551.768 Mcell-updates/s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/256/res64.out:[RESULT] Wall time: 36.4712 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/256/res64.out:[RESULT] I/O: 12.855 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/256/res64.out:[RESULT] Compute: 23.6251 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/256/res64.out:[RESULT] Compute / I/O: 0.544124 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/256/res2.out:[RESULT] Perf: 106.935 Mcell-updates/s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/256/res2.out:[RESULT] Wall time: 166.89 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/256/res2.out:[RESULT] I/O: 70.0856 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/256/res2.out:[RESULT] Compute: 96.8827 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/256/res2.out:[RESULT] Compute / I/O: 0.723407 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/256/res1.out:[RESULT] Perf: 63.0152 Mcell-updates/s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/256/res1.out:[RESULT] Wall time: 278.917 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/256/res1.out:[RESULT] I/O: 117.312 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/256/res1.out:[RESULT] Compute: 161.745 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/256/res1.out:[RESULT] Compute / I/O: 0.725287 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/256/res4.out:[RESULT] Perf: 167.495 Mcell-updates/s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/256/res4.out:[RESULT] Wall time: 108.188 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/256/res4.out:[RESULT] I/O: 46.2954 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/256/res4.out:[RESULT] Compute: 61.9345 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/256/res4.out:[RESULT] Compute / I/O: 0.74749 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/256/res8.out:[RESULT] Perf: 203.527 Mcell-updates/s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/256/res8.out:[RESULT] Wall time: 90.4044 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/256/res8.out:[RESULT] I/O: 38.797 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/256/res8.out:[RESULT] Compute: 51.6407 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/256/res8.out:[RESULT] Compute / I/O: 0.751287 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/256/res16.out:[RESULT] Perf: 321.708 Mcell-updates/s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/256/res16.out:[RESULT] Wall time: 58.927 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/256/res16.out:[RESULT] I/O: 22.8979 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/256/res16.out:[RESULT] Compute: 36.048 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/256/res16.out:[RESULT] Compute / I/O: 0.635206 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/256/res64.out:[RESULT] Perf: 551.768 Mcell-updates/s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/256/res64.out:[RESULT] Wall time: 36.4712 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/256/res64.out:[RESULT] I/O: 12.855 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/256/res64.out:[RESULT] Compute: 23.6251 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/256/res64.out:[RESULT] Compute / I/O: 0.544124 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/256/res2.out:[RESULT] Perf: 106.935 Mcell-updates/s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/256/res2.out:[RESULT] Wall time: 166.89 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/256/res2.out:[RESULT] I/O: 70.0856 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/256/res2.out:[RESULT] Compute: 96.8827 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/256/res2.out:[RESULT] Compute / I/O: 0.723407 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/256/res1.out:[RESULT] Perf: 63.0152 Mcell-updates/s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/256/res1.out:[RESULT] Wall time: 278.917 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/256/res1.out:[RESULT] I/O: 117.312 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/256/res1.out:[RESULT] Compute: 161.745 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/256/res1.out:[RESULT] Compute / I/O: 0.725287 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/256/res128.out:[RESULT] Perf: 738.242 Mcell-updates/s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/256/res128.out:[RESULT] Wall time: 28.8623 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/256/res128.out:[RESULT] I/O: 8.13957 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/256/res128.out:[RESULT] Compute: 20.7293 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/256/res128.out:[RESULT] Compute / I/O: 0.392659 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/256/res4.out:[RESULT] Perf: 167.495 Mcell-updates/s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/256/res4.out:[RESULT] Wall time: 108.188 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/256/res4.out:[RESULT] I/O: 46.2954 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/256/res4.out:[RESULT] Compute: 61.9345 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/256/res4.out:[RESULT] Compute / I/O: 0.74749 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/256/res8.out:[RESULT] Perf: 203.527 Mcell-updates/s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/256/res8.out:[RESULT] Wall time: 90.4044 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/256/res8.out:[RESULT] I/O: 38.797 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/256/res8.out:[RESULT] Compute: 51.6407 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/256/res8.out:[RESULT] Compute / I/O: 0.751287 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/256/res16.out:[RESULT] Perf: 321.708 Mcell-updates/s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/256/res16.out:[RESULT] Wall time: 58.927 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/256/res16.out:[RESULT] I/O: 22.8979 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/256/res16.out:[RESULT] Compute: 36.048 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/256/res16.out:[RESULT] Compute / I/O: 0.635206 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/256/res64.out:[RESULT] Perf: 551.768 Mcell-updates/s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/256/res64.out:[RESULT] Wall time: 36.4712 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/256/res64.out:[RESULT] I/O: 12.855 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/256/res64.out:[RESULT] Compute: 23.6251 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/256/res64.out:[RESULT] Compute / I/O: 0.544124 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/256/res2.out:[RESULT] Perf: 106.935 Mcell-updates/s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/256/res2.out:[RESULT] Wall time: 166.89 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/256/res2.out:[RESULT] I/O: 70.0856 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/256/res2.out:[RESULT] Compute: 96.8827 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/256/res2.out:[RESULT] Compute / I/O: 0.723407 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/256/res1.out:[RESULT] Perf: 63.0152 Mcell-updates/s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/256/res1.out:[RESULT] Wall time: 278.917 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/256/res1.out:[RESULT] I/O: 117.312 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/256/res1.out:[RESULT] Compute: 161.745 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/256/res1.out:[RESULT] Compute / I/O: 0.725287 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/256/res128.out:[RESULT] Perf: 738.242 Mcell-updates/s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/256/res128.out:[RESULT] Wall time: 28.8623 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/256/res128.out:[RESULT] I/O: 8.13957 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/256/res128.out:[RESULT] Compute: 20.7293 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/256/res128.out:[RESULT] Compute / I/O: 0.392659 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/256/res4.out:[RESULT] Perf: 167.495 Mcell-updates/s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/256/res4.out:[RESULT] Wall time: 108.188 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/256/res4.out:[RESULT] I/O: 46.2954 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/256/res4.out:[RESULT] Compute: 61.9345 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/256/res4.out:[RESULT] Compute / I/O: 0.74749 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/256/res8.out:[RESULT] Perf: 203.527 Mcell-updates/s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/256/res8.out:[RESULT] Wall time: 90.4044 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/256/res8.out:[RESULT] I/O: 38.797 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/256/res8.out:[RESULT] Compute: 51.6407 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/256/res8.out:[RESULT] Compute / I/O: 0.751287 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/256/res16.out:[RESULT] Perf: 321.708 Mcell-updates/s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/256/res16.out:[RESULT] Wall time: 58.927 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/256/res16.out:[RESULT] I/O: 22.8979 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/256/res16.out:[RESULT] Compute: 36.048 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/256/res16.out:[RESULT] Compute / I/O: 0.635206 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/256/res64.out:[RESULT] Perf: 551.768 Mcell-updates/s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/256/res64.out:[RESULT] Wall time: 36.4712 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/256/res64.out:[RESULT] I/O: 12.855 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/256/res64.out:[RESULT] Compute: 23.6251 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/256/res64.out:[RESULT] Compute / I/O: 0.544124 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/256/res2.out:[RESULT] Perf: 106.935 Mcell-updates/s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/256/res2.out:[RESULT] Wall time: 166.89 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/256/res2.out:[RESULT] I/O: 70.0856 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/256/res2.out:[RESULT] Compute: 96.8827 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/256/res2.out:[RESULT] Compute / I/O: 0.723407 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/256/res32.out:[RESULT] Perf: 440.53 Mcell-updates/s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/256/res32.out:[RESULT] Wall time: 44.337 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/256/res32.out:[RESULT] I/O: 16.0677 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/256/res32.out:[RESULT] Compute: 28.2822 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/256/res32.out:[RESULT] Compute / I/O: 0.568119 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/256/res1.out:[RESULT] Perf: 63.0152 Mcell-updates/s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/256/res1.out:[RESULT] Wall time: 278.917 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/256/res1.out:[RESULT] I/O: 117.312 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/256/res1.out:[RESULT] Compute: 161.745 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/256/res1.out:[RESULT] Compute / I/O: 0.725287 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/320/res16.out:[RESULT] Perf: 386.403 Mcell-updates/s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/320/res16.out:[RESULT] Wall time: 93.5506 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/320/res16.out:[RESULT] I/O: 41.1253 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/320/res16.out:[RESULT] Compute: 52.4571 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/320/res16.out:[RESULT] Compute / I/O: 0.78398 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/320/res16.out:[RESULT] Perf: 386.403 Mcell-updates/s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/320/res16.out:[RESULT] Wall time: 93.5506 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/320/res16.out:[RESULT] I/O: 41.1253 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/320/res16.out:[RESULT] Compute: 52.4571 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/320/res16.out:[RESULT] Compute / I/O: 0.78398 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/320/res1.out:[RESULT] Perf: 65.5165 Mcell-updates/s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/320/res1.out:[RESULT] Wall time: 519.14 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/320/res1.out:[RESULT] I/O: 222.856 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/320/res1.out:[RESULT] Compute: 296.554 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/320/res1.out:[RESULT] Compute / I/O: 0.751486 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/320/res16.out:[RESULT] Perf: 386.403 Mcell-updates/s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/320/res16.out:[RESULT] Wall time: 93.5506 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/320/res16.out:[RESULT] I/O: 41.1253 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/320/res16.out:[RESULT] Compute: 52.4571 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/320/res16.out:[RESULT] Compute / I/O: 0.78398 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/320/res2.out:[RESULT] Perf: 113.131 Mcell-updates/s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/320/res2.out:[RESULT] Wall time: 304.356 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/320/res2.out:[RESULT] I/O: 135.524 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/320/res2.out:[RESULT] Compute: 168.981 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/320/res2.out:[RESULT] Compute / I/O: 0.802009 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/320/res1.out:[RESULT] Perf: 65.5165 Mcell-updates/s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/320/res1.out:[RESULT] Wall time: 519.14 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/320/res1.out:[RESULT] I/O: 222.856 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/320/res1.out:[RESULT] Compute: 296.554 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/320/res1.out:[RESULT] Compute / I/O: 0.751486 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/320/res4.out:[RESULT] Perf: 189.28 Mcell-updates/s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/320/res4.out:[RESULT] Wall time: 184.157 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/320/res4.out:[RESULT] I/O: 82.8785 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/320/res4.out:[RESULT] Compute: 101.36 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/320/res4.out:[RESULT] Compute / I/O: 0.817668 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/320/res16.out:[RESULT] Perf: 386.403 Mcell-updates/s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/320/res16.out:[RESULT] Wall time: 93.5506 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/320/res16.out:[RESULT] I/O: 41.1253 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/320/res16.out:[RESULT] Compute: 52.4571 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/320/res16.out:[RESULT] Compute / I/O: 0.78398 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/320/res2.out:[RESULT] Perf: 113.131 Mcell-updates/s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/320/res2.out:[RESULT] Wall time: 304.356 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/320/res2.out:[RESULT] I/O: 135.524 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/320/res2.out:[RESULT] Compute: 168.981 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/320/res2.out:[RESULT] Compute / I/O: 0.802009 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/320/res1.out:[RESULT] Perf: 65.5165 Mcell-updates/s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/320/res1.out:[RESULT] Wall time: 519.14 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/320/res1.out:[RESULT] I/O: 222.856 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/320/res1.out:[RESULT] Compute: 296.554 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/320/res1.out:[RESULT] Compute / I/O: 0.751486 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/320/res4.out:[RESULT] Perf: 189.28 Mcell-updates/s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/320/res4.out:[RESULT] Wall time: 184.157 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/320/res4.out:[RESULT] I/O: 82.8785 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/320/res4.out:[RESULT] Compute: 101.36 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/320/res4.out:[RESULT] Compute / I/O: 0.817668 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/320/res16.out:[RESULT] Perf: 386.403 Mcell-updates/s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/320/res16.out:[RESULT] Wall time: 93.5506 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/320/res16.out:[RESULT] I/O: 41.1253 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/320/res16.out:[RESULT] Compute: 52.4571 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/320/res16.out:[RESULT] Compute / I/O: 0.78398 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/320/res64.out:[RESULT] Perf: 793.746 Mcell-updates/s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/320/res64.out:[RESULT] Wall time: 47.7899 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/320/res64.out:[RESULT] I/O: 18.9423 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/320/res64.out:[RESULT] Compute: 28.8586 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/320/res64.out:[RESULT] Compute / I/O: 0.656382 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/320/res2.out:[RESULT] Perf: 113.131 Mcell-updates/s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/320/res2.out:[RESULT] Wall time: 304.356 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/320/res2.out:[RESULT] I/O: 135.524 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/320/res2.out:[RESULT] Compute: 168.981 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/320/res2.out:[RESULT] Compute / I/O: 0.802009 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/320/res1.out:[RESULT] Perf: 65.5165 Mcell-updates/s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/320/res1.out:[RESULT] Wall time: 519.14 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/320/res1.out:[RESULT] I/O: 222.856 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/320/res1.out:[RESULT] Compute: 296.554 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/320/res1.out:[RESULT] Compute / I/O: 0.751486 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/320/res4.out:[RESULT] Perf: 189.28 Mcell-updates/s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/320/res4.out:[RESULT] Wall time: 184.157 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/320/res4.out:[RESULT] I/O: 82.8785 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/320/res4.out:[RESULT] Compute: 101.36 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/320/res4.out:[RESULT] Compute / I/O: 0.817668 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/320/res8.out:[RESULT] Perf: 242.365 Mcell-updates/s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/320/res8.out:[RESULT] Wall time: 145.597 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/320/res8.out:[RESULT] I/O: 64.4272 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/320/res8.out:[RESULT] Compute: 81.2296 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/320/res8.out:[RESULT] Compute / I/O: 0.793149 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/320/res16.out:[RESULT] Perf: 386.403 Mcell-updates/s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/320/res16.out:[RESULT] Wall time: 93.5506 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/320/res16.out:[RESULT] I/O: 41.1253 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/320/res16.out:[RESULT] Compute: 52.4571 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/320/res16.out:[RESULT] Compute / I/O: 0.78398 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/320/res64.out:[RESULT] Perf: 793.746 Mcell-updates/s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/320/res64.out:[RESULT] Wall time: 47.7899 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/320/res64.out:[RESULT] I/O: 18.9423 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/320/res64.out:[RESULT] Compute: 28.8586 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/320/res64.out:[RESULT] Compute / I/O: 0.656382 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/320/res2.out:[RESULT] Perf: 113.131 Mcell-updates/s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/320/res2.out:[RESULT] Wall time: 304.356 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/320/res2.out:[RESULT] I/O: 135.524 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/320/res2.out:[RESULT] Compute: 168.981 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/320/res2.out:[RESULT] Compute / I/O: 0.802009 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/320/res1.out:[RESULT] Perf: 65.5165 Mcell-updates/s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/320/res1.out:[RESULT] Wall time: 519.14 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/320/res1.out:[RESULT] I/O: 222.856 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/320/res1.out:[RESULT] Compute: 296.554 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/320/res1.out:[RESULT] Compute / I/O: 0.751486 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/320/res128.out:[RESULT] Perf: 1050.87 Mcell-updates/s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/320/res128.out:[RESULT] Wall time: 37.8158 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/320/res128.out:[RESULT] I/O: 14.3043 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/320/res128.out:[RESULT] Compute: 23.52 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/320/res128.out:[RESULT] Compute / I/O: 0.608177 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/320/res4.out:[RESULT] Perf: 189.28 Mcell-updates/s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/320/res4.out:[RESULT] Wall time: 184.157 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/320/res4.out:[RESULT] I/O: 82.8785 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/320/res4.out:[RESULT] Compute: 101.36 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/320/res4.out:[RESULT] Compute / I/O: 0.817668 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/320/res8.out:[RESULT] Perf: 242.365 Mcell-updates/s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/320/res8.out:[RESULT] Wall time: 145.597 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/320/res8.out:[RESULT] I/O: 64.4272 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/320/res8.out:[RESULT] Compute: 81.2296 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/320/res8.out:[RESULT] Compute / I/O: 0.793149 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/320/res16.out:[RESULT] Perf: 386.403 Mcell-updates/s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/320/res16.out:[RESULT] Wall time: 93.5506 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/320/res16.out:[RESULT] I/O: 41.1253 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/320/res16.out:[RESULT] Compute: 52.4571 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/320/res16.out:[RESULT] Compute / I/O: 0.78398 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/320/res64.out:[RESULT] Perf: 793.746 Mcell-updates/s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/320/res64.out:[RESULT] Wall time: 47.7899 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/320/res64.out:[RESULT] I/O: 18.9423 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/320/res64.out:[RESULT] Compute: 28.8586 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/320/res64.out:[RESULT] Compute / I/O: 0.656382 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/320/res2.out:[RESULT] Perf: 113.131 Mcell-updates/s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/320/res2.out:[RESULT] Wall time: 304.356 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/320/res2.out:[RESULT] I/O: 135.524 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/320/res2.out:[RESULT] Compute: 168.981 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/320/res2.out:[RESULT] Compute / I/O: 0.802009 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/320/res1.out:[RESULT] Perf: 65.5165 Mcell-updates/s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/320/res1.out:[RESULT] Wall time: 519.14 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/320/res1.out:[RESULT] I/O: 222.856 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/320/res1.out:[RESULT] Compute: 296.554 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/320/res1.out:[RESULT] Compute / I/O: 0.751486 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/320/res128.out:[RESULT] Perf: 1050.87 Mcell-updates/s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/320/res128.out:[RESULT] Wall time: 37.8158 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/320/res128.out:[RESULT] I/O: 14.3043 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/320/res128.out:[RESULT] Compute: 23.52 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/320/res128.out:[RESULT] Compute / I/O: 0.608177 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/320/res4.out:[RESULT] Perf: 189.28 Mcell-updates/s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/320/res4.out:[RESULT] Wall time: 184.157 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/320/res4.out:[RESULT] I/O: 82.8785 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/320/res4.out:[RESULT] Compute: 101.36 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/320/res4.out:[RESULT] Compute / I/O: 0.817668 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/320/res8.out:[RESULT] Perf: 242.365 Mcell-updates/s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/320/res8.out:[RESULT] Wall time: 145.597 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/320/res8.out:[RESULT] I/O: 64.4272 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/320/res8.out:[RESULT] Compute: 81.2296 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/320/res8.out:[RESULT] Compute / I/O: 0.793149 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/320/res16.out:[RESULT] Perf: 386.403 Mcell-updates/s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/320/res16.out:[RESULT] Wall time: 93.5506 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/320/res16.out:[RESULT] I/O: 41.1253 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/320/res16.out:[RESULT] Compute: 52.4571 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/320/res16.out:[RESULT] Compute / I/O: 0.78398 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/320/res64.out:[RESULT] Perf: 793.746 Mcell-updates/s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/320/res64.out:[RESULT] Wall time: 47.7899 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/320/res64.out:[RESULT] I/O: 18.9423 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/320/res64.out:[RESULT] Compute: 28.8586 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/320/res64.out:[RESULT] Compute / I/O: 0.656382 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/320/res2.out:[RESULT] Perf: 113.131 Mcell-updates/s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/320/res2.out:[RESULT] Wall time: 304.356 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/320/res2.out:[RESULT] I/O: 135.524 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/320/res2.out:[RESULT] Compute: 168.981 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/320/res2.out:[RESULT] Compute / I/O: 0.802009 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/320/res32.out:[RESULT] Perf: 584.736 Mcell-updates/s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/320/res32.out:[RESULT] Wall time: 63.3275 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/320/res32.out:[RESULT] I/O: 27.4534 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/320/res32.out:[RESULT] Compute: 35.8921 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/320/res32.out:[RESULT] Compute / I/O: 0.764887 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/320/res1.out:[RESULT] Perf: 65.5165 Mcell-updates/s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/320/res1.out:[RESULT] Wall time: 519.14 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/320/res1.out:[RESULT] I/O: 222.856 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/320/res1.out:[RESULT] Compute: 296.554 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/320/res1.out:[RESULT] Compute / I/O: 0.751486 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/384/res16.out:[RESULT] Perf: 456.306 Mcell-updates/s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/384/res16.out:[RESULT] Wall time: 134.703 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/384/res16.out:[RESULT] I/O: 60.1286 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/384/res16.out:[RESULT] Compute: 74.633 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/384/res16.out:[RESULT] Compute / I/O: 0.805657 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/384/res16.out:[RESULT] Perf: 456.306 Mcell-updates/s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/384/res16.out:[RESULT] Wall time: 134.703 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/384/res16.out:[RESULT] I/O: 60.1286 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/384/res16.out:[RESULT] Compute: 74.633 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/384/res16.out:[RESULT] Compute / I/O: 0.805657 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/384/res1.out:[RESULT] Perf: 68.6182 Mcell-updates/s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/384/res1.out:[RESULT] Wall time: 851.248 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/384/res1.out:[RESULT] I/O: 354.003 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/384/res1.out:[RESULT] Compute: 497.7 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/384/res1.out:[RESULT] Compute / I/O: 0.711279 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/384/res16.out:[RESULT] Perf: 456.306 Mcell-updates/s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/384/res16.out:[RESULT] Wall time: 134.703 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/384/res16.out:[RESULT] I/O: 60.1286 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/384/res16.out:[RESULT] Compute: 74.633 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/384/res16.out:[RESULT] Compute / I/O: 0.805657 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/384/res1.out:[RESULT] Perf: 68.6182 Mcell-updates/s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/384/res1.out:[RESULT] Wall time: 851.248 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/384/res1.out:[RESULT] I/O: 354.003 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/384/res1.out:[RESULT] Compute: 497.7 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/384/res1.out:[RESULT] Compute / I/O: 0.711279 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/384/res16.out:[RESULT] Perf: 456.306 Mcell-updates/s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/384/res16.out:[RESULT] Wall time: 134.703 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/384/res16.out:[RESULT] I/O: 60.1286 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/384/res16.out:[RESULT] Compute: 74.633 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/384/res16.out:[RESULT] Compute / I/O: 0.805657 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/384/res1.out:[RESULT] Perf: 68.6182 Mcell-updates/s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/384/res1.out:[RESULT] Wall time: 851.248 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/384/res1.out:[RESULT] I/O: 354.003 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/384/res1.out:[RESULT] Compute: 497.7 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/384/res1.out:[RESULT] Compute / I/O: 0.711279 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/384/res16.out:[RESULT] Perf: 456.306 Mcell-updates/s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/384/res16.out:[RESULT] Wall time: 134.703 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/384/res16.out:[RESULT] I/O: 60.1286 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/384/res16.out:[RESULT] Compute: 74.633 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/384/res16.out:[RESULT] Compute / I/O: 0.805657 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/384/res1.out:[RESULT] Perf: 68.6182 Mcell-updates/s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/384/res1.out:[RESULT] Wall time: 851.248 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/384/res1.out:[RESULT] I/O: 354.003 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/384/res1.out:[RESULT] Compute: 497.7 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/384/res1.out:[RESULT] Compute / I/O: 0.711279 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/384/res16.out:[RESULT] Perf: 456.306 Mcell-updates/s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/384/res16.out:[RESULT] Wall time: 134.703 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/384/res16.out:[RESULT] I/O: 60.1286 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/384/res16.out:[RESULT] Compute: 74.633 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/384/res16.out:[RESULT] Compute / I/O: 0.805657 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/384/res1.out:[RESULT] Perf: 68.6182 Mcell-updates/s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/384/res1.out:[RESULT] Wall time: 851.248 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/384/res1.out:[RESULT] I/O: 354.003 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/384/res1.out:[RESULT] Compute: 497.7 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/384/res1.out:[RESULT] Compute / I/O: 0.711279 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/384/res16.out:[RESULT] Perf: 456.306 Mcell-updates/s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/384/res16.out:[RESULT] Wall time: 134.703 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/384/res16.out:[RESULT] I/O: 60.1286 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/384/res16.out:[RESULT] Compute: 74.633 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/384/res16.out:[RESULT] Compute / I/O: 0.805657 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/384/res1.out:[RESULT] Perf: 68.6182 Mcell-updates/s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/384/res1.out:[RESULT] Wall time: 851.248 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/384/res1.out:[RESULT] I/O: 354.003 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/384/res1.out:[RESULT] Compute: 497.7 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/384/res1.out:[RESULT] Compute / I/O: 0.711279 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/384/res16.out:[RESULT] Perf: 456.306 Mcell-updates/s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/384/res16.out:[RESULT] Wall time: 134.703 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/384/res16.out:[RESULT] I/O: 60.1286 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/384/res16.out:[RESULT] Compute: 74.633 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/384/res16.out:[RESULT] Compute / I/O: 0.805657 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/384/res1.out:[RESULT] Perf: 68.6182 Mcell-updates/s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/384/res1.out:[RESULT] Wall time: 851.248 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/384/res1.out:[RESULT] I/O: 354.003 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/384/res1.out:[RESULT] Compute: 497.7 s
+/lus/home/CT6/cad14985/jauriac/bench-in-situ/resultsAll_EOY24/NoDeisa/384/res1.out:[RESULT] Compute / I/O: 0.711279 s

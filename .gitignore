@@ -81,3 +81,40 @@ out/
 working_dir
 cmake-build-*
 *.tar.gz
+
+## Temporary test files
+##############################
+slurm-*.out
+one-*.txt
+one-*.sh
+ten-*.txt
+ten-*.sh
+resTest.out
+resTest_Bench2.out
+*.maxRSS*
+launcher_noDeisa_*.sh
+launcher_noDeisa.sh
+test*.sh
+*.out.old
+*.sh.old
+launcherBench2_*
+launcherStrongScaling_*
+launcher_noDeisa.sh
+
+CMakeCache.txt
+CMakeFiles/cmake.check_cache
+
+## Keep chosen test files
+##############################
+!launcherStrongScaling_64_compEOY.sh
+!one-launcherStrongScaling_64_compEOY.sh
+!launcherBench2_All_EOY24.sh
+!launcherBench2_All.sh
+!launcherStrongScaling_64_test_3.sh
+!launcherStrongScaling_64_test_2.sh
+!launcherStrongScaling_64.sh
+!launcher_noDeisa_3.sh
+
+## Installation directories
+##############################
+lib/install_pdi*/*

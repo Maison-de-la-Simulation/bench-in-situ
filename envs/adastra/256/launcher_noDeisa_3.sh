@@ -1,23 +1,23 @@
 #!/bin/bash
 
 #SBATCH --job-name=bench_insitu
-#SBATCH --output=res1N_%x_%j.out 
-#SBATCH --time=1:00:00 
-#SBATCH --nodes=1
+#SBATCH --output=res256N_%x_%j.out 
+#SBATCH --time=24:00:00 
+#SBATCH --nodes=32
 #SBATCH --account=cad14985 
 #SBATCH --constraint=MI250
-#SBATCH --ntasks-per-node=1
+#SBATCH --ntasks-per-node=8
 #SBATCH --exclusive
 
 # All paths are relative to WORKING_DIRECTORY
-SIMU_SIZE=1
+SIMU_SIZE=256
 SCRIPT_DIR=$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" &>/dev/null && pwd)
 BASE_DIR=${HOME}/bench-in-situ
 WORKING_DIR=${BASE_DIR}/working_dir
 
 PREFIX=bench_insitu
-SIM_NODES=1
-SIM_PROC=1
+SIM_NODES=32
+SIM_PROC=256
 
 export OMP_NUM_THREADS=${SLURM_CPUS_PER_TASK}
 export OMP_PLACES=cores
@@ -37,10 +37,10 @@ sed -i "s|^prefix=.*|prefix=$SNAPSHOT_FILE_PATH/$SIMU_SIZE/Checkpoint|" ${BASE_D
 cd ${WORKING_DIR}
 
 # PDI
-source pdi/share/pdi/env.sh 
+source /lus/home/CT6/cad14985/jauriac/bench-in-situ/lib/pdi/build/staging/share/pdi/env.sh
 
 # simulation
-srun -N ${SIM_NODES} -n ${SIM_PROC} build/main ${BASE_DIR}/envs/adastra/${SIMU_SIZE}/setup.ini ${BASE_DIR}/envs/adastra/io_chkpt.yml --kokkos-map-device-id-by=mpi_rank &
+srun -N ${SIM_NODES} -n ${SIM_PROC} /lus/home/CT6/cad14985/jauriac/bench-in-situ/build/main ${BASE_DIR}/envs/adastra/${SIMU_SIZE}/setup.ini$
 simu_pid=$!
 wait $simu_pid
 
