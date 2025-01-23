@@ -11,10 +11,11 @@ python3 -m venv ${PYTHON_ENV}
 
 # activate python environment
 source ${PYTHON_ENV}/bin/activate
+pip install --upgrade pip
 
 
 tar xvf deisa_deps_py${PYTHON_VERSION}.tar.gz
-pip install ${PYTHON_DEPS}/*.whl
+pip install *.whl
 
 # install Deisa
 pip install --no-index --no-build-isolation --no-deps ../lib/deisa

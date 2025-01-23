@@ -120,6 +120,7 @@ pdi:
     grid_size: { type: array, subtype: int, size: 3 }
 
   plugins:
+    mpi:
 
     user_code:
       on_event:
@@ -142,35 +143,5 @@ pdi:
       map_in:                            # Which local data will be mapped to which deisa array
         local_full_field: global_t
 
-    mpi:
-
-    decl_hdf5:
-
-  
-    - file: ${filename}
-      datasets: *full_datasets 
-      on_event: checkpoint
-      collision_policy: write_into
-      when: '$iStep%100 = 0'
-      write:
-        grid_size:
-        time:
-          - dataset: Time
-        Rstar_h:
-        gamma:
-        mmw:
-        iStep:
-        output_id:
-        restart_id:
-        local_full_field:
-          - *d_description
-          - *E_description
-          - *mx_description
-          - *my_description
-          - *mz_description
-          - *Bx_description
-          - *By_description
-          - *Bz_description
-          - *dX_description
 
     

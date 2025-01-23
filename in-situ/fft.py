@@ -10,9 +10,11 @@
 ###################################################################################################
 
 from deisa import Deisa
+from dask.distributed import performance_report
+
 import os
 import sys
-import h5py
+#import h5py
 import dask.array as da
 
 os.environ["DASK_DISTRIBUTED__COMM__UCX__INFINIBAND"] = "True"
@@ -89,19 +91,19 @@ s1, s2, s3, s4 = client.persist([knrm, fourier_amplitudes, kbins, kvals])
 # Sign contract
 arrays.validate_contract()
 
-client.compute(s2).result()
-client.compute(s1).result()
-client.compute(s3).result()
-client.compute(s4).result()
+with performance_report(filename="dask-report.html"):
+    client.compute(s2).result()
+    client.compute(s1).result()
+    client.compute(s3).result()
+    client.compute(s4).result()
 
 
-hf = h5py.File("fft_from_deisa_" + prefix + "_" + str(num_restart) + ".h5", "w")
-hf.create_dataset("knrm", data=knrm)
-hf.create_dataset("fourier_amplitudes", data=fourier_amplitudes)
-hf.create_dataset("kbins", data=kbins)
-hf.create_dataset("kvals", data=kvals)
-
-hf.close()
+#hf = h5py.File("fft_from_deisa_" + prefix + "_" + str(num_restart) + ".h5", "w")
+#hf.create_dataset("knrm", data=knrm)
+#hf.create_dataset("fourier_amplitudes", data=fourier_amplitudes)
+#hf.create_dataset("kbins", data=kbins)
+#hf.create_dataset("kvals", data=kvals)
+#hf.close()
 
 print("Done", flush=True)
 deisa.wait_for_last_bridge_and_shutdown()
