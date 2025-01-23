@@ -13,3 +13,6 @@
 [submodule "lib/deisa"]
 	path = lib/deisa
 	url = https://github.com/pdidev/deisa.git
+[submodule "lib/new_deisa"]
+	path = lib/new_deisa
+	url = git@github.com:theabm/deisaV2.git
