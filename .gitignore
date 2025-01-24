@@ -100,6 +100,7 @@ test*.sh
 launcherBench2_*
 launcherStrongScaling_*
 launcher_noDeisa.sh
+showResults*
 
 CMakeCache.txt
 CMakeFiles/cmake.check_cache
