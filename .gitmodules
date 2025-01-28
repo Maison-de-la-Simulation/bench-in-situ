@@ -6,7 +6,7 @@
 	url = https://github.com/kokkos/simd-math.git
 [submodule "lib/pdi"]
 	path = lib/pdi
-	url = https://gitlab.maisondelasimulation.fr/pdidev/pdi.git
+	url = https://github.com/pdidev/pdi.git
 [submodule "lib/dms"]
 	path = lib/dms
 	url = https://github.com/Maison-de-la-Simulation/dms.git
@@ -15,4 +15,4 @@
 	url = https://github.com/pdidev/deisa.git
 [submodule "lib/new_deisa"]
 	path = lib/new_deisa
-	url = git@github.com:theabm/deisaV2.git
+	url = https://github.com/pdidev/deisa.git
