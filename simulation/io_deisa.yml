@@ -79,7 +79,6 @@ dX_description: &dX_description
   dataset_selection: *local_dataset_selection
 
 pdi:
-  
   metadata:
     nvar: int
     ncell: { type: array, subtype: int, size: 3 }
@@ -96,19 +95,14 @@ pdi:
     size: int
     time: double
     iStep: int
-
-
     mpi_coord: {type: array, subtype: int, size: 3}
 
   data:
-
     filename_size: int
     filename: { type: array, subtype: char, size: $filename_size }
-  
     Rstar_h: double
     output_id: int
     restart_id: int
-
     local_full_field:
       type: array
       subtype: double
@@ -116,16 +110,10 @@ pdi:
       subsize: ['${nvar}', '$ncell_local[2]', '$ncell_local[1]', '$ncell_local[0]']
       start: [0, '$ghost[2]', '$ghost[1]', '$ghost[0]']
     outputs_record_size: int
-
     grid_size: { type: array, subtype: int, size: 3 }
 
   plugins:
     mpi:
-
-    user_code:
-      on_event:
-        write_xml:
-          writeXML: {}
 
     deisa:
       scheduler_info: scheduler.json
@@ -143,5 +131,3 @@ pdi:
       map_in:                            # Which local data will be mapped to which deisa array
         local_full_field: global_t
 
-
-    

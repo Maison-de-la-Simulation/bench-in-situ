@@ -27,7 +27,7 @@ cmake \
     -DKokkos_ENABLE_HIP=OFF \
     -DKokkos_ARCH_VEGA90A=OFF \
     -DSESSION=MPI_SESSION \
-    ../..
+    ../../simulation
 #Ampere : ruche a100
 #Pascal : ruche p100
 #Zen3, HIP and Vega : Adastra

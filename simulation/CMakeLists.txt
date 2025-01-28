@@ -77,11 +77,11 @@ if(${PROJECT_NAME}_ENABLE_TRILINOS)
   target_link_libraries(Trilinos INTERFACE ${Trilinos_LIBRARIES} ${Trilinos_TPL_LIBRARIES})
   target_include_directories(Trilinos SYSTEM INTERFACE ${Trilinos_INCLUDE_DIRS} ${Trilinos_TPL_INCLUDE_DIRS})
 else(${PROJECT_NAME}_ENABLE_TRILINOS)
-  add_subdirectory(${PROJECT_SOURCE_DIR}/lib/kokkos)
+  add_subdirectory(${PROJECT_SOURCE_DIR}/../lib/kokkos kokkos)
 endif(${PROJECT_NAME}_ENABLE_TRILINOS)
 
-add_subdirectory(${PROJECT_SOURCE_DIR}/lib/dms)
-add_subdirectory(${PROJECT_SOURCE_DIR}/lib/inih)
+add_subdirectory(${PROJECT_SOURCE_DIR}/../lib/dms dms)
+add_subdirectory(${PROJECT_SOURCE_DIR}/../lib/inih inih)
 add_subdirectory(${PROJECT_SOURCE_DIR}/src)
 
 # Main file
