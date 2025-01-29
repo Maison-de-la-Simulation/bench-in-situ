@@ -24,7 +24,7 @@ os.environ["DASK_DISTRIBUTED__COMM__UCX__INFINIBAND"] = "True"
 
 scheduler_info = sys.argv[1] if sys.argv[1] else "scheduler.json"
 nb_workers = 1
-deisa = Deisa(scheduler_info, nb_workers)
+deisa = Deisa(scheduler_file_name=scheduler_info, nb_workers=nb_workers)
 
 # Get client
 client = deisa.get_client()
@@ -93,10 +93,15 @@ s1, s2, s3, s4 = client.persist([knrm, fourier_amplitudes, kbins, kvals])
 #arrays.validate_contract()
 
 with performance_report(filename="dask-report.html"), dask.config.set(array_optimize=None):
-    client.compute(s2).result()
-    client.compute(s1).result()
-    client.compute(s3).result()
-    client.compute(s4).result()
+    res2 = client.compute(s2).result()
+    res1 = client.compute(s1).result()
+    res3 = client.compute(s3).result()
+    res4 = client.compute(s4).result()
+
+    print("res1=" + str(res1.sum()))
+    print("res2=" + str(res2.sum()))
+    print("res3=" + str(res3))
+    print("res4=" + str(res4))
 
 
 #hf = h5py.File("fft_from_deisa_" + prefix + "_" + str(num_restart) + ".h5", "w")
