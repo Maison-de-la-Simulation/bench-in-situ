@@ -33,5 +33,6 @@ cmake \
 #Zen3, HIP and Vega : Adastra
 make -j $(nproc) 
 
+deactivate
 cd --
 

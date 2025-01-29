@@ -57,3 +57,12 @@ make -j 4
  * Install ARK-MHD : `./scripts/build_simulation.sh `
 
 
+# Using Guix
+
+```bash
+guix shell --pure python coreutils grep glibc zlib tar gzip bash lesspipe sed guix
+export LD_PRELOAD=$GUIX_ENVIRONMENT/lib/libz.so
+```
+
+
+

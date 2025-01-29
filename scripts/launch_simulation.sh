@@ -14,10 +14,10 @@ export LD_LIBRARY_PATH=${WORKING_DIR}/${PYTHON_ENV}/lib:${LD_LIBRARY_PATH}
 
 echo "PYTHONPATH=${PYTHONPATH}"
 echo "LD_LIBRARY_PATH=${LD_LIBRARY_PATH}"
-#echo "LD_PRELOAD=${LD_PRELOAD}"
+echo "LD_PRELOAD=${LD_PRELOAD}"
 
-cp ../io_chkpt.yml ../io_deisa.yml ${BUILD_DIR}
-cp ../setup.ini ${BUILD_DIR}
+cp ../simulation/io_chkpt.yml ../simulation/io_deisa.yml ${BUILD_DIR}
+cp ../simulation/setup.ini ${BUILD_DIR}
 cp ${SCHEFILE} ${BUILD_DIR}
 
 cd ${BUILD_DIR}
