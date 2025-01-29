@@ -12,6 +12,7 @@ run_python_import_tests () {
 
   declare -a TO_IMPORT=("deisa" "h5py" "numpy" "dask" "distributed")
   
+  res=0
   for i in "${TO_IMPORT[@]}"
   do
     echo -n "import $i "
@@ -19,11 +20,16 @@ run_python_import_tests () {
     retVal=$?
     if [ $retVal -ne 0 ]; then
       echo -e "${RED}Error${ENDCOLOR}"
-      exit 1
+      res=1
     else
       echo -e "${GREEN}OK${ENDCOLOR}"
     fi
   done
+    
+  if [ $res -ne 0 ]; then
+    echo -e "Python envionment test failed !"
+    exit 1
+  fi
 }
 
 
