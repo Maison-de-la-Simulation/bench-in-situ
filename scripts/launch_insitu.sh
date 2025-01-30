@@ -31,7 +31,7 @@ elif [ "$1" = "new" ]; then
   
   source ${PYTHON_ENV}_new/bin/activate
   run_dask
-  python3 -O ../in-situ/fft_new.py $SCHEFILE
+  python3 -O ../in-situ/bench_deisa.py $SCHEFILE
 else
   echo "Unknown option. accepted values are: old, new"
   exit 1
