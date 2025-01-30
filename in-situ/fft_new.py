@@ -88,6 +88,11 @@ kvals = 0.5 * (kbins[1:] + kbins[:-1])
 
 # Submit the task graph to the scheduler
 
+knrm.visualize(filename="dask-knrm.svg")
+fourier_amplitudes.visualize(filename="dask-fourier-amplitudes.svg")
+kbins.visualize(filename="dask-kbins.svg")
+kvals.visualize(filename="dask-kvals.svg")
+
 s1, s2, s3, s4 = client.persist([knrm, fourier_amplitudes, kbins, kvals])
 # Sign contract
 #arrays.validate_contract()
