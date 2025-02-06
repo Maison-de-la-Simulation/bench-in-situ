@@ -81,3 +81,4 @@ out/
 working_dir
 cmake-build-*
 *.tar.gz
+simulation/build/**
