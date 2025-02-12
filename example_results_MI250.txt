@@ -1,0 +1,7 @@
+#SBATCH --constraint=MI250
+1.8.1
+64/res64.out:[RESULT] Performance 23.1567 Mcell-updates/s
+64/res64.out:[RESULT] Wall_time 22.1103 s
+64/res64.out:[RESULT] I/O_time 16.699 s
+64/res64.out:[RESULT] Compute_time 5.4161 s
+64/res64.out:[RESULT] Compute_/_I/O_time 0.324337 Ratio

@@ -84,12 +84,6 @@ add_subdirectory(${PROJECT_SOURCE_DIR}/lib/dms)
 add_subdirectory(${PROJECT_SOURCE_DIR}/lib/inih)
 add_subdirectory(${PROJECT_SOURCE_DIR}/src)
 
-# Test of deactivate
-option(DEACTIVATE_PDI	   "Disable PDI without deleting code, as a toggle" OFF)
-if (DEACTIVATE_PDI)
-  add_definitions(-DDEACTIVATE_PDI)
-endif()
-
 # Main file
 add_executable(main src/main.cpp)
 target_link_libraries(main ${PROJECT_NAME})

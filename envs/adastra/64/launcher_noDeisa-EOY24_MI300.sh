@@ -5,12 +5,12 @@
 #SBATCH --time=12:00:00 
 #SBATCH --nodes=8
 #SBATCH --account=cad14985 
-#SBATCH --constraint=MI250
+#SBATCH --constraint=MI300
 ##SBATCH --constraint=GENOA
 #SBATCH --exclusive
-##SBATCH --ntasks-per-node=8
-##SBATCH --gpus-per-node=8
-##SBATCH --cpus-per-task=8
+##SBATCH --ntasks-per-node=4
+##SBATCH --gpus-per-node=4
+##SBATCH --cpus-per-task=24
 ##SBATCH --threads-per-core=1
 
 ## export MPICH_GPU_SUPPORT_ENABLED=1

@@ -3,19 +3,16 @@
 #sbatch --output=1NSizeBench.out
 #SBATCH --job-name=b-i-s_nd
 #SBATCH --constraint=GENOA
-##SBATCH --constraint=MI250
 #SBATCH --nodes=1
-##SBATCH --exclusive
 #SBATCH --time=20:00:00
-##SBATCH --nodelist=c1155
-##SBATCH --gpus-per-node=1
 
 SCRIPT_DIR=$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" &>/dev/null && pwd)
 BASE_DIR=${PWD}
-#BASE_DIR=${HOME}/bench-in-situ_3/bench-in-situ
 WORKING_DIR=${BASE_DIR}/working_dir
 SIMU_SIZE=1
 CUBE_SIZE=64
+WHICH_LAUNCHER="launcher_noDeisa-EOY24_MI300.sh"
+RESULT_DIR=results_v5
 
 cd ${WORKING_DIR}
 rm *.h5
@@ -80,8 +77,10 @@ for SIMU_SIZE in "${!tab_repart[@]}"; do
     cat ${BASE_DIR}/envs/adastra/${SIMU_SIZE}/setup.ini | grep mx
     cat ${BASE_DIR}/envs/adastra/${SIMU_SIZE}/setup.ini | grep my
     cat ${BASE_DIR}/envs/adastra/${SIMU_SIZE}/setup.ini | grep mz
-    sbatch --wait -o results_withGenoa/NoDeisa/${CUBE_SIZE}/res${SIMU_SIZE}.out ${BASE_DIR}/envs/adastra/${SIMU_SIZE}/launcher_noDeisa-EOY24.sh
+    sbatch --wait -o ${RESULT_DIR}/NoDeisa/${CUBE_SIZE}/res${SIMU_SIZE}.out ${BASE_DIR}/envs/adastra/${SIMU_SIZE}/${WHICH_LAUNCHER}
     echo "----------------------------------------"
 done
 
-mkdir -p ${BASE_DIR}/results_withGenoa/NoDeisa && cd ${BASE_DIR}/results_withGenoa/NoDeisa && grep -rw ${CUBE_SIZE} -e "RESULT" >> ${BASE_DIR}/one-${CUBE_SIZE}-output_withGenoa.txt
+grep -v "##*" -rw ${BASE_DIR}/envs/adastra/${SIMU_SIZE}/${WHICH_LAUNCHER} | grep -e "#SBATCH --constraint=" >> ${BASE_DIR}/one-${CUBE_SIZE}-output_v5.txt 
+cat ${PWD}/lib/pdi/pdi/VERSION >> ${BASE_DIR}/one-${CUBE_SIZE}-output_v5.txt
+mkdir -p ${BASE_DIR}/${RESULT_DIR}/NoDeisa && cd ${BASE_DIR}/${RESULT_DIR}/NoDeisa && grep -rw ${CUBE_SIZE} -e "RESULT" >> ${BASE_DIR}/one-${CUBE_SIZE}-output_v5.txt
