@@ -45,7 +45,8 @@ void EngineNd::run() const
     Kokkos::Profiling::pushRegion("I/O");
     solver->pdiExposeData();
     Kokkos::Profiling::popRegion();
-
+     
+    Kokkos::fence();
     const std::chrono::steady_clock::time_point start = std::chrono::steady_clock::now();
     Kokkos::Profiling::pushRegion("Time loop");
 
@@ -55,6 +56,7 @@ void EngineNd::run() const
 
     while (!solver->finished())
     {
+        Kokkos::fence();
         const std::chrono::steady_clock::time_point m_start_compute = std::chrono::steady_clock::now();
 
         Kokkos::Profiling::pushRegion("Time step");
@@ -74,9 +76,12 @@ void EngineNd::run() const
 
         Kokkos::Profiling::pushRegion("I/O");
 
+        Kokkos::fence();
         std::chrono::steady_clock::time_point date = std::chrono::steady_clock::now();
+        Kokkos::fence();
         std::chrono::steady_clock::duration duration = date-start;
 
+        Kokkos::fence();
         solver->accumulate_compute_duration(std::chrono::steady_clock::now() - m_start_compute);
 
         if (solver->iteration()%freq_check_safe_save==0)
@@ -99,6 +104,7 @@ void EngineNd::run() const
     }
 
     Kokkos::Profiling::popRegion();
+    Kokkos::fence();
     const std::chrono::steady_clock::time_point end = std::chrono::steady_clock::now();
 
     solver->printMonitoring(std::chrono::duration<double>(end-start).count());

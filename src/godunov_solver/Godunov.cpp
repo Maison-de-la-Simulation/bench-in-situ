@@ -178,7 +178,8 @@ void GodunovSolver::prepareNextOutput(Real& dt)
 
 void GodunovSolver::pdiExposeData()
 {
-  std::chrono::steady_clock::time_point m_start_io = std::chrono::steady_clock::now();
+    Kokkos::fence();
+    std::chrono::steady_clock::time_point m_start_io = std::chrono::steady_clock::now();
 
 #if defined(Euler_ENABLE_PDI)
     PDI_multi_expose("data_on_GPU",
@@ -202,7 +203,8 @@ void GodunovSolver::pdiExposeData()
 
     }
 
-  performanceTimer.time_spent_in_io += (std::chrono::steady_clock::now() - m_start_io);
+    Kokkos::fence();
+    performanceTimer.time_spent_in_io += (std::chrono::steady_clock::now() - m_start_io);
 }
 
 
