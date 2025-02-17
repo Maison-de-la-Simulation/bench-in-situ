@@ -82,7 +82,7 @@ fi
 ## Add test for the directory existence
 echo NODES_ARCH_SUPER_FRIEND = ${NODES_ARCH_SUPER_FRIEND}
 echo PDI_MHD_NODES_ARCH = ${PDI_MHD_NODES_ARCH}
-exit 1
+
 SCRIPT_DIR=$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" &>/dev/null && pwd)
 BASE_DIR=${WORK}/numpex/bench-in-situ_pdi_1_8
 WORKING_DIR=${BASE_DIR}/working_dir${NODES_ARCH_SUPER_FRIEND}
