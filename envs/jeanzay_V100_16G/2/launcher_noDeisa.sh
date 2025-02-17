@@ -21,18 +21,18 @@
 ##SBATCH --cpus-per-task=24          # nombre de CPU par tache pour gpu_p6 (1/4 du noeud 4-GPU H100)
 ##################################################
 #SBATCH --hint=nomultithread
-#SBATCH -A wuc@v100
+#SBATCH -A jyd@v100
 
 # All paths are relative to WORKING_DIRECTORY
 
-NODES_ARCH_COMPILATION="_V100"
+NODES_ARCH_COMPILATION="_V100"   ## variant of the working dir
 PDI_MHD_NODES_ARCH="_V100_16G"
 
 # All paths are relative to WORKING_DIRECTORY
 SIMU_SIZE=2 #${SLURM_NTASKS}
 SCRIPT_DIR=$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" &>/dev/null && pwd)
-BASE_DIR=${WORK}/numpex/bench-in-situ
-WORKING_DIR=${BASE_DIR}/working_dir${NODES_ARCH_COMPILATION}
+BASE_DIR=${WORK}/numpex/bench-in-situ                                       ## directory where is the repo of the bench
+WORKING_DIR=${BASE_DIR}/working_dir${NODES_ARCH_COMPILATION}                ## working directory
 
 PREFIX=bench_insitu
 SIM_NODES=${SLURM_NNODES}
