@@ -1,15 +1,20 @@
 #!/bin/bash
 
-############################################################################
+########################################################################################
 ## EXAMPLE OF USE: BENCHMARK FOR STRONG SCALING FOR A GIVEN SIZE
 ##
-## bash launcherFullBench.sh -gpu=V100 -gpuMEM=16G -cubesize=256
+##  1) To run the scripts of bench in the default directory "jeanzay_V100_16G"
 ##
-## Remark: the bench script are not launched in the same time.
-##         Each beanch script wait that the previous one is finish.
+##          bash launcherFullBench.sh -gpu=V100 -gpuMEM=16G
 ##
-##         The directory jeanzay_V100_16G_CUBESIZE_256 need to exist before.
-#############################################################################
+##  2) To run the scripts of the bench in the directory "jeanzay_V100_16G_CUBESIZE_256"
+##
+##          bash launcherFullBench.sh -gpu=V100 -gpuMEM=16G -cubesize=256
+##
+## Remark: - The bench script are not launched in the same time.
+##         Each bench script wait that the previous one is finish
+##         - The value of gpuMEM=16G for the moment. (need to add the 32G case for JZ)
+#########################################################################################
 for i in "$@"
 do
 case $i in
@@ -51,11 +56,33 @@ echo CUBE_SIZE = ${CUBE_SIZE}
 #echo SIMU_SIZE = ${SIMU_SIZE}
 
 NODES_ARCH_SUPER_FRIEND="_"${GPU_ARCH}
-PDI_MHD_NODES_ARCH=${NODES_ARCH_SUPER_FRIEND}"_"${GPU_MEM}"_CUBESIZE_"${CUBE_SIZE}
 
+if [ "${GPU_ARCH}" == "" ]; then
+    echo "Error -gpu is not given."
+    exit 1
+fi
+if [ "${GPU_ARCH}" == "V100" ]; then
+    if [ "${GPU_MEM}" == "" ]; then
+        echo "Error: The value -gpuMEM msut be 16G or 32G on JZ"
+        exit 1
+    fi
+    if [ "${GPU_MEM}" != "16G" ]; then
+        echo "Error: The value -gpuMEM msut be 16G for the moment"
+        exit 1
+    fi
+fi
+
+if [ "${CUBE_SIZE}" == "" ]; then
+    PDI_MHD_NODES_ARCH=${NODES_ARCH_SUPER_FRIEND}"_"${GPU_MEM}
+else
+    PDI_MHD_NODES_ARCH=${NODES_ARCH_SUPER_FRIEND}"_"${GPU_MEM}"_CUBESIZE_"${CUBE_SIZE}
+fi
+
+
+## Add test for the directory existence
 echo NODES_ARCH_SUPER_FRIEND = ${NODES_ARCH_SUPER_FRIEND}
 echo PDI_MHD_NODES_ARCH = ${PDI_MHD_NODES_ARCH}
-
+exit 1
 SCRIPT_DIR=$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" &>/dev/null && pwd)
 BASE_DIR=${WORK}/numpex/bench-in-situ_pdi_1_8
 WORKING_DIR=${BASE_DIR}/working_dir${NODES_ARCH_SUPER_FRIEND}
