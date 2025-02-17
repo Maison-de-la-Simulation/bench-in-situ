@@ -66,8 +66,8 @@ if [ "${GPU_ARCH}" == "V100" ]; then
         echo "Error: The value -gpuMEM msut be 16G or 32G on JZ"
         exit 1
     fi
-    if [ "${GPU_MEM}" != "16G" ]; then
-        echo "Error: The value -gpuMEM msut be 16G for the moment"
+    if [ "${GPU_MEM}" != "16G" ] && [ "${GPU_MEM}" != "32G" ]; then
+        echo "Error: The value -gpuMEM must be 16G or 32G on JZ for the moment"
         exit 1
     fi
 fi
