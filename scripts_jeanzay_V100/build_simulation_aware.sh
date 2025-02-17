@@ -15,10 +15,9 @@ cd ${BUILD_DIR}
 #cmake -DCMAKE_BUILD_TYPE=Release -DSESSION=MPI_SESSION -DKokkos_ENABLE_OPENMP=ON -DEuler_ENABLE_PDI=ON ../..
 #    -DCMAKE_CXX_STANDARD=17 \
 
-# export CXX=${BUILD_DIR}/../../lib/kokkos/bin/nvcc_wrapper
-
 cmake \
     -DCMAKE_BUILD_TYPE=Release \
+    -DEuler_ENABLE_MPI_CUDA_AWARE=ON \
     -DEuler_ENABLE_PDI=ON \
     -DKokkos_ENABLE_OPENMP=ON \
     -DKokkos_ENABLE_SERIAL=OFF \
