@@ -78,7 +78,6 @@ void EngineNd::run() const
 
         Kokkos::fence();
         std::chrono::steady_clock::time_point date = std::chrono::steady_clock::now();
-        Kokkos::fence();
         std::chrono::steady_clock::duration duration = date-start;
 
         Kokkos::fence();
