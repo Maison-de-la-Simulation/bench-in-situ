@@ -1,10 +1,9 @@
 ####################
 # variable to change
 APP_NODES_ARCH="A100"
-CXX_TYPE="_gcc_noaware"
 ####################
 SCRIPT_DIR=$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" &>/dev/null && pwd)
-WORKING_DIR=${SCRIPT_DIR}/../working_dir_${APP_NODES_ARCH}${CXX_TYPE}
+WORKING_DIR=${SCRIPT_DIR}/../working_dir_${APP_NODES_ARCH}
 SCHEFILE=${WORKING_DIR}/scheduler.json
 BUILD_DIR=${WORKING_DIR}/build
 SIMULATION_BIN=${BUILD_DIR}/main
