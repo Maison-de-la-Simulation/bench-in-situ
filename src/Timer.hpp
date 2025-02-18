@@ -19,5 +19,4 @@ struct PerformanceTimer {
 };
 
 
-
 #endif //EULER_SRC_TIMER_HPP_
