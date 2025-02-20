@@ -178,6 +178,7 @@ void GodunovSolver::prepareNextOutput(Real& dt)
 
 void GodunovSolver::pdiExposeData()
 {
+//  Kokkos::fence();
   std::chrono::steady_clock::time_point m_start_io = std::chrono::steady_clock::now();
 
 #if defined(Euler_ENABLE_PDI)
@@ -202,6 +203,7 @@ void GodunovSolver::pdiExposeData()
 
     }
 
+//  Kokkos::fence();
   performanceTimer.time_spent_in_io += (std::chrono::steady_clock::now() - m_start_io);
 }
 

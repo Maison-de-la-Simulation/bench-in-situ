@@ -5,36 +5,39 @@
 #SBATCH --time=12:00:00 
 #SBATCH --nodes=1
 #SBATCH --account=cad14985 
-#SBATCH --constraint=MI250
+#SBATCH --constraint=MI300
 ##SBATCH --constraint=GENOA
 #SBATCH --exclusive
-#SBATCH --ntasks-per-node=8
-#SBATCH --gpus-per-node=8
-#SBATCH --cpus-per-task=8
-#SBATCH --threads-per-core=1
+##SBATCH --ntasks-per-node=8
+##SBATCH --gpus-per-node=8
+#SBATCH --cpus-per-task=24
+##SBATCH --threads-per-core=1
 
-## export MPICH_GPU_SUPPORT_ENABLED=1
+export MPICH_GPU_SUPPORT_ENABLED=1
 
 # All paths are relative to WORKING_DIRECTORY
 SIMU_SIZE=2
 SCRIPT_DIR=$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" &>/dev/null && pwd)
-BASE_DIR=${HOME}/bench-in-situ
+BASE_DIR=${PWD}
 WORKING_DIR=${BASE_DIR}/working_dir
 
 PREFIX=bench_insitu
 SIM_NODES=1
 SIM_PROC=2
 
-## export OMP_NUM_THREADS=${SLURM_CPUS_PER_TASK}
-export OMP_NUM_THREADS=1
-export OMP_PLACES=cores
+export OMP_NUM_THREADS=${SLURM_CPUS_PER_TASK}
+## export OMP_NUM_THREADS=1
+## export OMP_PLACES=cores
+export OMP_PROC_BIND=spread
+export OMP_PLACES=threads
 
 echo "SLURM_NNODES=$SLURM_NNODES"
 echo "OMP_NUM_THREADS=$OMP_NUM_THREADS"
 echo "SIM_NODES=$SIM_NODES"
 
 # this file must be accessible from every slurm node (i.e.: shared network drive)
-source ${BASE_DIR}/envs/adastra/modules.env
+##source ${BASE_DIR}/envs/adastra/modules.env
+source /lus/home/CT6/cad14985/SHARED/modulesMI300.env
 
 # set result file path
 mkdir -p $SNAPSHOT_FILE_PATH/$SIMU_SIZE

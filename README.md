@@ -27,8 +27,27 @@ module load intel-compilers/19.0.4
 module load intel-mpi/2019.4
 ```
 
+### Modules needed (on Adastra for MI250X)
+```
+module load PrgEnv-cray
+module load amd-mixed/6.1.2
+module load rocm/6.1.2
+module load craype-accel-amd-gfx90a
+module load craype-x86-trento
+module load cray-python
+```
 
-### To build PDI
+### Modules needed (on Adastra for MI300A)
+```
+module load PrgEnv-cray
+module load amd-mixed/6.1.2
+module load rocm/6.1.2
+module load craype-accel-amd-gfx942
+module load craype-x86-genoa
+module load cray-python
+```
+
+## To build PDI
 ```
 cmake -DCMAKE_INSTALL_PREFIX=$PWD/../../install_pdi -DUSE_HDF5=EMBEDDED -DBUILD_HDF5_PARALLEL=ON  -DUSE_yaml=EMBEDDED -DUSE_paraconf=EMBEDDED -DBUILD_SHARED_LIBS=ON -DBUILD_FORTRAN=OFF -DBUILD_BENCHMARKING=OFF -DBUILD_SET_VALUE_PLUGIN=OFF -DBUILD_TESTING=OFF -DBUILD_DECL_NETCDF_PLUGIN=OFF -DBUILD_USER_CODE_PLUGIN=ON ..
 make -j 8
@@ -36,17 +55,32 @@ make install
 source $PWD/../../install_pdi/share/pdi/env.sh
 ```
 
-### To build bench
+## To build bench
 ```
 mkdir build && cd build
 cmake -DSESSION=MPI_SESSION -DKokkos_ENABLE_OPENMP=ON -DEuler_ENABLE_PDI=ON ..
 make -j 4
 ```
+
+### To build bench on Adastra
+For MI250, source modulesMI250.env, then use the following:
+```
+mkdir build && cd build
+cmake -DSESSION=MPI_SESSION -DKokkos_ARCH_AMD_GFX90A=ON -DKokkos_ENABLE_HIP=ON -DKokkos_ENABLE_OPENMP=ON -DEuler_ENABLE_PDI=ON -DCMAKE_CXX_FLAGS="-fopenmp" ..
+make -j 16
+```
+For MI300, source modulesMI300.env, then use the following:
+```
+mkdir build && cd build
+cmake -DSESSION=MPI_SESSION -DKokkos_ARCH_AMD_GFX942=ON -DKokkos_ENABLE_HIP=ON -DKokkos_ENABLE_OPENMP=ON -DEuler_ENABLE_PDI=ON -DCMAKE_CXX_FLAGS="-fopenmp" ..
+make -j 16
+```
+
 ### To run bench
 ```
 ./main ../setup.ini ../io_chkpt.yml
 ```
-### Offline Installation
+
 ### Offline Installation
  * Download the Python environment on the online machine : `./scripts/offline_python_env_download.sh`
  * Copy the whole repo on the offline machine

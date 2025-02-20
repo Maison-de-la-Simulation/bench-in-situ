@@ -1,0 +1,27 @@
+#SBATCH --constraint=MI250
+1.8.1
+./1024/res4.out:[RESULT] Performance 277.84 Mcell-updates/s
+./1024/res4.out:[RESULT] Wall_time 253.037 s
+./1024/res4.out:[RESULT] I/O_time 113.499 s
+./1024/res4.out:[RESULT] Compute_time 137.5 s
+./1024/res4.out:[RESULT] Compute_/_I/O_time 1.21146 Ratio
+./4096/res16.out:[RESULT] Performance 686.109 Mcell-updates/s
+./4096/res16.out:[RESULT] Wall_time 409.871 s
+./4096/res16.out:[RESULT] I/O_time 219.114 s
+./4096/res16.out:[RESULT] Compute_time 188.805 s
+./4096/res16.out:[RESULT] Compute_/_I/O_time 0.861672 Ratio
+./256/res1.out:[RESULT] Performance 98.3343 Mcell-updates/s
+./256/res1.out:[RESULT] Wall_time 178.737 s
+./256/res1.out:[RESULT] I/O_time 70.0453 s
+./256/res1.out:[RESULT] Compute_time 106.622 s
+./256/res1.out:[RESULT] Compute_/_I/O_time 1.52218 Ratio
+./2048/res8.out:[RESULT] Performance 346.393 Mcell-updates/s
+./2048/res8.out:[RESULT] Wall_time 405.921 s
+./2048/res8.out:[RESULT] I/O_time 209.996 s
+./2048/res8.out:[RESULT] Compute_time 193.986 s
+./2048/res8.out:[RESULT] Compute_/_I/O_time 0.923758 Ratio
+./512/res2.out:[RESULT] Performance 178.375 Mcell-updates/s
+./512/res2.out:[RESULT] Wall_time 197.068 s
+./512/res2.out:[RESULT] I/O_time 81.9668 s
+./512/res2.out:[RESULT] Compute_time 113.035 s
+./512/res2.out:[RESULT] Compute_/_I/O_time 1.37904 Ratio
