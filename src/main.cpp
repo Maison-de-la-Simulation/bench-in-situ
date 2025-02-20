@@ -36,9 +36,9 @@ int main(int argc, char** argv)
         return EXIT_FAILURE;
     }
 #endif // defined(Euler_ENABLE_PDI)
-    
-    Kokkos::fence();
-    std::chrono::steady_clock::time_point start_code = std::chrono::steady_clock::now(); // 
+
+    // We can't use barrier here: Kokkos and MPI are not initialize
+    std::chrono::steady_clock::time_point start_code = std::chrono::steady_clock::now();
 
     hydro::initialize(argc, argv);
 
@@ -49,7 +49,7 @@ int main(int argc, char** argv)
 
 
     Kokkos::fence();
-    const std::chrono::steady_clock::time_point end_initialization = std::chrono::steady_clock::now(); 
+    const std::chrono::steady_clock::time_point end_initialization = std::chrono::steady_clock::now();
 
     try
     {
@@ -68,7 +68,7 @@ int main(int argc, char** argv)
     }
 
     Kokkos::fence();
-    const std::chrono::steady_clock::time_point start_finalization = std::chrono::steady_clock::now(); 
+    const std::chrono::steady_clock::time_point start_finalization = std::chrono::steady_clock::now();
 
 #if defined(Euler_ENABLE_PDI)
     PDI_finalize();
@@ -77,8 +77,8 @@ int main(int argc, char** argv)
 
     hydro::finalize();
 
-    Kokkos::fence();
-    const std::chrono::steady_clock::time_point end_code = std::chrono::steady_clock::now(); 
+    // We can't use barrier here: Kokkos and MPI are not initialize
+    const std::chrono::steady_clock::time_point end_code = std::chrono::steady_clock::now();
 
     std::cout << "[MAIN RESULT] Init: " << std::chrono::duration<double>(end_initialization-start_code).count() << " s" << std::endl;
     std::cout << "[MAIN RESULT] Solver: " << std::chrono::duration<double>(start_finalization-end_initialization).count() << " s" << std::endl;
