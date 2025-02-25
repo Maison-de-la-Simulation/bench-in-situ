@@ -77,7 +77,7 @@ int main(int argc, char** argv)
 
     hydro::finalize();
 
-    // We can't use barrier here: Kokkos and MPI are not initialize
+    // We can't use barrier here: the object of Kokkos and MPI are deleted
     const std::chrono::steady_clock::time_point end_code = std::chrono::steady_clock::now();
 
     std::cout << "[MAIN RESULT] Init: " << std::chrono::duration<double>(end_initialization-start_code).count() << " s" << std::endl;
