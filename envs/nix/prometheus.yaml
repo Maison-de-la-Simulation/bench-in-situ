@@ -1,0 +1,13 @@
+global:
+  scrape_interval:     1s
+
+
+scrape_configs:
+  # The job name is added as a label `job=<job_name>` to any timeseries scraped from this config.
+  - job_name: 'dask-scheduler'
+    static_configs:
+      - targets: ['localhost:8787']
+
+  - job_name: 'dask-worker'
+    static_configs:
+      - targets: ['localhost:8789']
