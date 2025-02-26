@@ -152,4 +152,16 @@ void finalize()
     Session::finalize();
 }
 
+void finalize_kokkos()
+{
+    Print() << "Finalizing kokkos" << code_name << std::endl;
+    Kokkos::finalize();
+}
+
+void finalize_session()
+{
+    Print() << "Finalizing session" << code_name << std::endl;
+    Session::finalize();
+}
+
 }

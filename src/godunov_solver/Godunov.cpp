@@ -190,10 +190,19 @@ void GodunovSolver::pdiExposeData()
 
     if (m_should_save)
     {
+
         Kokkos::Profiling::pushRegion("I/O - Checkpoint");
         if(Super::m_iteration%100 == 0) Print() << "===================== output at iteration = " << Super::m_iteration << " time t = "<<Super::m_t<< std::endl;
         Kokkos::Profiling::pushRegion("I/O - Checkpoint - deep_copy");
+
+        Kokkos::fence();
+        std::chrono::steady_clock::time_point m_deep_io = std::chrono::steady_clock::now();
+
         Kokkos::deep_copy(m_u_host, m_u);
+
+        Kokkos::fence();
+        performanceTimer.time_deep_io += (std::chrono::steady_clock::now() - m_deep_io);
+
         Kokkos::Profiling::popRegion();
         Kokkos::Profiling::pushRegion("I/O - Checkpoint - write");
         m_writer->write(m_u_host, m_grid, Super::m_iteration, Super::m_t,
