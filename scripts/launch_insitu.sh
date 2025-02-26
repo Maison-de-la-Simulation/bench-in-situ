@@ -9,7 +9,11 @@ run_dask () {
   dask scheduler --scheduler-file=$SCHEFILE &
   sleep 3
   sync
-  dask worker --local-directory /tmp --scheduler-file=$SCHEFILE &
+  
+  echo "Starting ${DASK_NB_WORKERS} Dask workers with ${DASK_NB_THREAD_PER_WORKER} threads per worker."
+  # --nworkers sets the number of worker processes
+  # --nthreads sets the number of threads per worker process
+  dask worker --nworkers ${DASK_NB_WORKERS} --nthreads ${DASK_NB_THREAD_PER_WORKER} --local-directory /tmp --scheduler-file=$SCHEFILE &
 }
 
 

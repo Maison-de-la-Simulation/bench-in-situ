@@ -48,7 +48,8 @@ cp ${SCHEFILE} ${BUILD_DIR}
 
 cd ${BUILD_DIR}
 
-./main setup.ini io_deisa.yml
+#perf record mpirun -np 2 ./main setup.ini io_deisa.yml
+mpirun -np 4 ./main setup.ini io_deisa.yml
 
 #pdirun mpirun -np 1 ${BUILD_DIR}/main ../setup.ini ../io_deisa.yml
 cd --

@@ -20,9 +20,8 @@ from dask.distributed import performance_report
 scheduler_info = sys.argv[1] if len(sys.argv)>1 else "scheduler.json"
 # scheduler_info = "scheduler.json"
 
-nb_workers = 1
 deisa = Deisa(scheduler_file_name=scheduler_info, 
-              nb_workers=nb_workers, 
+              nb_workers=os.environ.get("DASK_NB_WORKERS", 1),
               use_ucx=os.environ.get("DASK_DISTRIBUTED__COMM__UCX__INFINIBAND", False))
 
 print("getting client")
@@ -107,9 +106,9 @@ with performance_report(filename="dask-report.html"), dask.config.set(array_opti
     res4 = client.compute(s4).result()
 
  #   print("res1=" + str(res1.sum()))
-    print("res2=" + str(res2))
-    print("res3=" + str(res3))
-    print("res4=" + str(res4))
+    print("res2=" + str(res2.sum()))
+    print("res3=" + str(res3.sum()))
+    print("res4=" + str(res4.sum()))
 
 print("Done ", flush=True)
 deisa.wait_for_last_bridge_and_shutdown()
