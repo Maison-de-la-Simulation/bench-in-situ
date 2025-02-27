@@ -49,7 +49,7 @@ declare -A tab_nxyz=(
 grep -v "##*" -rw ${BASE_DIR}/envs/adastra/${SIMU_SIZE}/${WHICH_LAUNCHER} | grep -e "#SBATCH --constraint=" >> ${BASE_DIR}/${RESULT_FILE}
 cat ${PWD}/lib/pdi/pdi/VERSION >> ${BASE_DIR}/${RESULT_FILE}
 
-for  ((CUBE_SIZE=64; CUBE_SIZE<=254; CUBE_SIZE*=2)); do
+for  ((CUBE_SIZE=64; CUBE_SIZE<=512; CUBE_SIZE*=2)); do
     # Boucle sur chaque clé du tableau associatif
     for SIMU_SIZE in "${!tab_repart[@]}"; do
         value=${tab_repart[$SIMU_SIZE]}
