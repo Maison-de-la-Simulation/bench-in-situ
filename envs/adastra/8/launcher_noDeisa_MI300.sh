@@ -17,7 +17,6 @@ export MPICH_GPU_SUPPORT_ENABLED=1
 
 # All paths are relative to WORKING_DIRECTORY
 SIMU_SIZE=8
-SCRIPT_DIR=$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" &>/dev/null && pwd)
 BASE_DIR=${PWD}/../..
 WORKING_DIR=${BASE_DIR}/working_dir
 
