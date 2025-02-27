@@ -5,8 +5,7 @@ source env.sh
 print_env
 
 # Old Deisa
-#py_versions=( "3.9" "3.10" "3.11" "3.12" "3.13" )
-py_versions=( "3.10" )
+py_versions=( "3.9" "3.10" "3.11" "3.12" "3.13" )
 for py_version in "${py_versions[@]}"; do
     echo "Working on python version: ${py_version}"
     docker run -it --rm -w /root/workingdir -v ${SCRIPT_DIR}/..:/root/workingdir python:${py_version} bash -c "pip install --upgrade pip && \
@@ -19,8 +18,7 @@ for py_version in "${py_versions[@]}"; do
 done
 
 # New Deisa
-#py_versions=( "3.9" "3.10" "3.11" "3.12" "3.13" )
-py_versions=( "3.10" )
+py_versions=( "3.9" "3.10" "3.11" "3.12" "3.13" )
 for py_version in "${py_versions[@]}"; do
     echo "Working on python version: ${py_version}"
     docker run -it --rm -w /root/workingdir -v ${SCRIPT_DIR}/..:/root/workingdir python:${py_version} bash -c "pip install --upgrade pip && \
