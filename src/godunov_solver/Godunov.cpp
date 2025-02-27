@@ -178,7 +178,7 @@ void GodunovSolver::prepareNextOutput(Real& dt)
 
 void GodunovSolver::pdiExposeData()
 {
-//  Kokkos::fence();
+  Kokkos::fence();
   std::chrono::steady_clock::time_point m_start_io = std::chrono::steady_clock::now();
 
 #if defined(Euler_ENABLE_PDI)
@@ -193,17 +193,25 @@ void GodunovSolver::pdiExposeData()
         Kokkos::Profiling::pushRegion("I/O - Checkpoint");
         if(Super::m_iteration%100 == 0) Print() << "===================== output at iteration = " << Super::m_iteration << " time t = "<<Super::m_t<< std::endl;
         Kokkos::Profiling::pushRegion("I/O - Checkpoint - deep_copy");
+	Kokkos::fence();
+	std::chrono::steady_clock::time_point m_start_deep_copy = std::chrono::steady_clock::now();
         Kokkos::deep_copy(m_u_host, m_u);
+	Kokkos::fence();
+	performanceTimer.time_spent_in_deep_copy += (std::chrono::steady_clock::now() - m_start_deep_copy);
         Kokkos::Profiling::popRegion();
         Kokkos::Profiling::pushRegion("I/O - Checkpoint - write");
-        m_writer->write(m_u_host, m_grid, Super::m_iteration, Super::m_t,
+        Kokkos::fence();
+	std::chrono::steady_clock::time_point m_start_write = std::chrono::steady_clock::now();
+	m_writer->write(m_u_host, m_grid, Super::m_iteration, Super::m_t,
                         m_params->thermo.gamma, m_params->thermo.mmw);
+	Kokkos::fence();
+        performanceTimer.time_spent_in_write += (std::chrono::steady_clock::now() - m_start_write);
         Kokkos::Profiling::popRegion();
         Kokkos::Profiling::popRegion();
 
     }
 
-//  Kokkos::fence();
+  Kokkos::fence();
   performanceTimer.time_spent_in_io += (std::chrono::steady_clock::now() - m_start_io);
 }
 

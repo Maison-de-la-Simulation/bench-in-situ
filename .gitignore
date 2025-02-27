@@ -85,23 +85,11 @@ cmake-build-*
 ## Temporary test files
 ##############################
 slurm-*.out
-one-*.txt
-one-*.sh
-ten-*.txt
-ten-*.sh
-resTest.out
-resTest_Bench2.out
 *.maxRSS*
-launcher_noDeisa_*.sh
-launcher_noDeisa.sh
 test*.sh
 *.out.old
 *.sh.old
-launcherBench2_*
-launcherStrongScaling_*
-launcher_noDeisa.sh
 showResults*
-PREVIOUS*
 
 CMakeCache.txt
 CMakeFiles/cmake.check_cache
