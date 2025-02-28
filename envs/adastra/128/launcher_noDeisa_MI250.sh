@@ -19,6 +19,7 @@ export MPICH_GPU_SUPPORT_ENABLED=1
 SIMU_SIZE=128
 BASE_DIR=${PWD}/../..
 WORKING_DIR=${BASE_DIR}/working_dir
+FORMATED_SIMU_SIZE=$(printf "%03d" "$SIMU_SIZE")
 
 PREFIX=bench_insitu
 SIM_NODES=16
@@ -36,8 +37,8 @@ echo "SIM_NODES=$SIM_NODES"
 source /lus/home/CT6/cad14985/SHARED/modulesMI250.env
 
 # set result file path
-mkdir -p $SNAPSHOT_FILE_PATH/$SIMU_SIZE
-sed -i "s|^prefix=.*|prefix=$SNAPSHOT_FILE_PATH/$SIMU_SIZE/Checkpoint|" ${BASE_DIR}/envs/adastra/${SIMU_SIZE}/setup.ini
+mkdir -p $SNAPSHOT_FILE_PATH/$FORMATED_SIMU_SIZE
+sed -i "s|^prefix=.*|prefix=$SNAPSHOT_FILE_PATH/$FORMATED_SIMU_SIZE/Checkpoint|" ${BASE_DIR}/envs/adastra/${FORMATED_SIMU_SIZE}/setup.ini
 
 # move to working directory 
 cd ${WORKING_DIR}
@@ -46,8 +47,8 @@ cd ${WORKING_DIR}
 source ${BASE_DIR}/lib/pdi/build/staging/share/pdi/env.sh
 
 # simulation
-srun -N ${SIM_NODES} -n ${SIM_PROC} ${BASE_DIR}/build/main ${BASE_DIR}/envs/adastra/${SIMU_SIZE}/setup.ini ${BASE_DIR}/envs/adastra/io_chkpt.yml --kokkos-map-device-id-by=mpi_rank &
+srun -N ${SIM_NODES} -n ${SIM_PROC} ${BASE_DIR}/build/main ${BASE_DIR}/envs/adastra/${FORMATED_SIMU_SIZE}/setup.ini ${BASE_DIR}/envs/adastra/io_chkpt.yml --kokkos-map-device-id-by=mpi_rank &
 simu_pid=$!
 wait $simu_pid
 
-rm ${SNAPSHOT_FILE_PATH}/${SIMU_SIZE}/*.h5 && rm ${SNAPSHOT_FILE_PATH}/${SIMU_SIZE}/*.xmf
+rm ${SNAPSHOT_FILE_PATH}/${FORMATED_SIMU_SIZE}/*.h5 && rm ${SNAPSHOT_FILE_PATH}/${FORMATED_SIMU_SIZE}/*.xmf

@@ -14,14 +14,14 @@ source /lus/home/CT6/cad14985/SHARED/modulesMI300.env
 
 export MPICH_GPU_SUPPORT_ENABLED=1
 
-SCRIPT_DIR=$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" &>/dev/null && pwd)
-BASE_DIR=${PWD}/../..
+BASE_DIR=${PWD}
 WORKING_DIR=${BASE_DIR}/working_dir
-SIMU_SIZE=1
+SIMU_SIZE=16
 CUBE_SIZE=64
 WHICH_LAUNCHER="launcher_noDeisa_MI300.sh"
 RESULT_DIR=results_weakScaling_MI300
 RESULT_FILE=weakScaling_output_MI300.txt
+FORMATED_SIMU_SIZE=$(printf "%03d" "$SIMU_SIZE")
 
 cd ${WORKING_DIR}
 rm *.h5
@@ -51,10 +51,11 @@ declare -A tab_nxyz=(
     ['z']=0
 )
 
-grep -v "##*" -rw ${BASE_DIR}/envs/adastra/${SIMU_SIZE}/${WHICH_LAUNCHER} | grep -e "#SBATCH --constraint=" >> ${BASE_DIR}/${RESULT_FILE}
-cat ${PWD}/lib/pdi/pdi/VERSION >> ${BASE_DIR}/${RESULT_FILE}
+grep -v "##*" -rw ${BASE_DIR}/${FORMATED_SIMU_SIZE}/${WHICH_LAUNCHER} | grep -e "#SBATCH --constraint=" >> ${BASE_DIR}/${RESULT_FILE}
+cat ${PWD}/../../lib/pdi/pdi/VERSION >> ${BASE_DIR}/${RESULT_FILE}
 
 for SIMU_SIZE in "${!specific_pairs[@]}"; do
+    FORMATED_SIMU_SIZE=$(printf "%03d" "$SIMU_SIZE")
     CUBE_SIZE=${specific_pairs[$SIMU_SIZE]}
     value=${tab_repart[$SIMU_SIZE]}
     echo "Key: $SIMU_SIZE, CUBE_SIZE: $CUBE_SIZE"
@@ -74,27 +75,24 @@ for SIMU_SIZE in "${!specific_pairs[@]}"; do
 
     # Afficher les valeurs du tableau tab_nxyz
     echo "tab_nxyz: x=${tab_nxyz['x']} y=${tab_nxyz['y']} z=${tab_nxyz['z']}"
-    let sizex=$CUBE_SIZE/${tab_nxyz['x']}
-    let sizey=$CUBE_SIZE/${tab_nxyz['y']}
-    let sizez=$CUBE_SIZE/${tab_nxyz['z']}
-    echo "$sizex $sizey $sizez"
-    sed -i "s/^nx=[0-9]*$/nx=256/" ${BASE_DIR}/envs/adastra/${SIMU_SIZE}/setup.ini
-    sed -i "s/^ny=[0-9]*$/ny=256/" ${BASE_DIR}/envs/adastra/${SIMU_SIZE}/setup.ini
-    sed -i "s/^nz=[0-9]*$/nz=256/" ${BASE_DIR}/envs/adastra/${SIMU_SIZE}/setup.ini
+    echo "256 256 256"
+    sed -i "s/^nx=[0-9]*$/nx=256/" ${BASE_DIR}/${FORMATED_SIMU_SIZE}/setup.ini
+    sed -i "s/^ny=[0-9]*$/ny=256/" ${BASE_DIR}/${FORMATED_SIMU_SIZE}/setup.ini
+    sed -i "s/^nz=[0-9]*$/nz=256/" ${BASE_DIR}/${FORMATED_SIMU_SIZE}/setup.ini
 
-    sed -i "s/^mx=[0-9]*$/mx=${tab_nxyz['x']}/" ${BASE_DIR}/envs/adastra/${SIMU_SIZE}/setup.ini
-    sed -i "s/^my=[0-9]*$/my=${tab_nxyz['y']}/" ${BASE_DIR}/envs/adastra/${SIMU_SIZE}/setup.ini
-    sed -i "s/^mz=[0-9]*$/mz=${tab_nxyz['z']}/" ${BASE_DIR}/envs/adastra/${SIMU_SIZE}/setup.ini
+    sed -i "s/^mx=[0-9]*$/mx=${tab_nxyz['x']}/" ${BASE_DIR}/${FORMATED_SIMU_SIZE}/setup.ini
+    sed -i "s/^my=[0-9]*$/my=${tab_nxyz['y']}/" ${BASE_DIR}/${FORMATED_SIMU_SIZE}/setup.ini
+    sed -i "s/^mz=[0-9]*$/mz=${tab_nxyz['z']}/" ${BASE_DIR}/${FORMATED_SIMU_SIZE}/setup.ini
 
-    cat ${BASE_DIR}/envs/adastra/${SIMU_SIZE}/setup.ini | grep nx
-    cat ${BASE_DIR}/envs/adastra/${SIMU_SIZE}/setup.ini | grep ny
-    cat ${BASE_DIR}/envs/adastra/${SIMU_SIZE}/setup.ini | grep nz
+    cat ${BASE_DIR}/${FORMATED_SIMU_SIZE}/setup.ini | grep nx
+    cat ${BASE_DIR}/${FORMATED_SIMU_SIZE}/setup.ini | grep ny
+    cat ${BASE_DIR}/${FORMATED_SIMU_SIZE}/setup.ini | grep nz
 
     echo "-----"
-    cat ${BASE_DIR}/envs/adastra/${SIMU_SIZE}/setup.ini | grep mx
-    cat ${BASE_DIR}/envs/adastra/${SIMU_SIZE}/setup.ini | grep my
-    cat ${BASE_DIR}/envs/adastra/${SIMU_SIZE}/setup.ini | grep mz
-    sbatch --wait -o ${RESULT_DIR}/NoDeisa/${CUBE_SIZE}/res${SIMU_SIZE}.out ${BASE_DIR}/envs/adastra/${SIMU_SIZE}/${WHICH_LAUNCHER}
+    cat ${BASE_DIR}/${FORMATED_SIMU_SIZE}/setup.ini | grep mx
+    cat ${BASE_DIR}/${FORMATED_SIMU_SIZE}/setup.ini | grep my
+    cat ${BASE_DIR}/${FORMATED_SIMU_SIZE}/setup.ini | grep mz
+    sbatch --wait -o ${RESULT_DIR}/NoDeisa/${CUBE_SIZE}/res${FORMATED_SIMU_SIZE}.out ${BASE_DIR}/${FORMATED_SIMU_SIZE}/${WHICH_LAUNCHER}
     echo "----------------------------------------"
 done
 
