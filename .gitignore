@@ -90,20 +90,26 @@ test*.sh
 *.out.old
 *.sh.old
 showResults*
+launcher*
+one-*
+ten-*
+*one*
+*ten*
+v2*
+v3*
+v4*
+v5*
+PREVIOUS*
+*output_v4*
+*output_v5*
 
 CMakeCache.txt
 CMakeFiles/cmake.check_cache
 
 ## Keep chosen test files
 ##############################
-!launcherStrongScaling_64_compEOY.sh
-!one-launcherStrongScaling_64_compEOY.sh
-!launcherBench2_All_EOY24.sh
-!launcherBench2_All.sh
-!launcherStrongScaling_64_test_3.sh
-!launcherStrongScaling_64_test_2.sh
-!launcherStrongScaling_64.sh
-!launcher_noDeisa_3.sh
+!launcher_noDeisa_MI250.sh
+!launcher_noDeisa_MI300.sh
 
 ## Installation directories
 ##############################
