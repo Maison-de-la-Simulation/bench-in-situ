@@ -1,17 +1,16 @@
 #!/bin/bash
 
 #SBATCH --job-name=bench_insitu
-#SBATCH --output=res256N_%x_%j.out 
+#SBATCH --output=res64N_%x_%j.out 
 #SBATCH --time=24:00:00 
-#SBATCH --nodes=35
+#SBATCH --nodes=11
 #SBATCH --account=cad14985 
 #SBATCH --constraint=MI250
 #SBATCH --ntasks-per-node=8
 #SBATCH --exclusive
 
 # All paths are relative to WORKING_DIRECTORY
-
-SIMU_SIZE=256
+SIMU_SIZE=64
 SCRIPT_DIR=$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" &>/dev/null && pwd)
 BASE_DIR=${HOME}/bench-in-situ
 WORKING_DIR=${BASE_DIR}/working_dir
@@ -20,7 +19,7 @@ SCHEFILE=scheduler.json
 PREFIX=bench_insitu
 DASK_WORKER_NODES=1
 SIM_NODES=$(($SLURM_NNODES-2-$DASK_WORKER_NODES))
-SIM_PROC=8
+SIM_PROC=64
 
 export OMP_NUM_THREADS=${SLURM_CPUS_PER_TASK}
 export OMP_PLACES=cores
