@@ -10,7 +10,8 @@
 ##SBATCH --nodelist=c1155
 #SBATCH --gpus-per-node=1
 
-source /lus/home/CT6/cad14985/SHARED/modulesMI300.env
+source modules.env
+source modulesMI300.env
 
 export MPICH_GPU_SUPPORT_ENABLED=1
 
@@ -29,14 +30,14 @@ rm *.xmf
 cd ..
 
 declare -A tab_repart=(
-    ['1']=" 1 1 1 "
-    ['2']=" 2 1 1 "
-    ['4']=" 2 2 1 "
-    ['8']=" 2 2 2 "
+#    ['1']=" 1 1 1 "
+#    ['2']=" 2 1 1 "
+#    ['4']=" 2 2 1 "
+#    ['8']=" 2 2 2 "
     ['16']=" 4 2 2 "
     ['32']=" 4 4 2 "
-    ['64']=" 4 4 4 "
-    ['128']=" 4 4 8 "
+#    ['64']=" 4 4 4 "
+#    ['128']=" 4 4 8 "
 )
 
 # Tableau associatif pour les valeurs x, y, z

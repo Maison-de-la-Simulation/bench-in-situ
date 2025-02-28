@@ -10,7 +10,8 @@
 ##SBATCH --nodelist=c1155
 #SBATCH --gpus-per-node=1
 
-source /lus/home/CT6/cad14985/SHARED/modulesMI250.env
+source modules.env
+source modulesMI250.env
 
 export MPICH_GPU_SUPPORT_ENABLED=1
 
