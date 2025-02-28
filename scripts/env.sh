@@ -4,7 +4,7 @@ SCHEFILE=${WORKING_DIR}/scheduler.json
 BUILD_DIR=${WORKING_DIR}/build
 SIMULATION_BIN=${BUILD_DIR}/main
 PYTHON_ENV=deisa
-PYTHON_DEPS="deps"
+PYTHON_WORKING_DIR="output/tmp"
 PYTHON_VERSION=${PYTHON_VERSION:-"311"}
 PDI_BUILD_DIR=${WORKING_DIR}/build/pdi
 PDI_INSTALL_DIR=${WORKING_DIR}/pdi
@@ -25,3 +25,8 @@ print_env() {
 	echo "DASK_DISTRIBUTED__COMM__UCX__INFINIBAND=${DASK_DISTRIBUTED__COMM__UCX__INFINIBAND}"
 	echo "============="
 }
+
+#expand aliases defined in the shell ~/.profile and ~/.bashrc
+shopt -s expand_aliases
+[ -f ~/.profile ] && source ~/.profile
+[ -f ~/.bashrc ] && source ~/.bashrc
