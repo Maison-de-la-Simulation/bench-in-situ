@@ -23,6 +23,7 @@ WHICH_LAUNCHER="launcher_noDeisa_MI300.sh"
 RESULT_DIR=results_weakScaling_MI300
 RESULT_FILE=weakScaling_output_MI300.txt
 FORMATED_SIMU_SIZE=$(printf "%03d" "$SIMU_SIZE")
+FORMATED_CUBE_SIZE=$(printf "%03d" "$CUBE_SIZE")
 
 cd ${WORKING_DIR}
 rm *.h5
@@ -93,7 +94,7 @@ for SIMU_SIZE in "${!specific_pairs[@]}"; do
     cat ${BASE_DIR}/${FORMATED_SIMU_SIZE}/setup.ini | grep mx
     cat ${BASE_DIR}/${FORMATED_SIMU_SIZE}/setup.ini | grep my
     cat ${BASE_DIR}/${FORMATED_SIMU_SIZE}/setup.ini | grep mz
-    sbatch --wait -o ${RESULT_DIR}/NoDeisa/${CUBE_SIZE}/res${FORMATED_SIMU_SIZE}.out ${BASE_DIR}/${FORMATED_SIMU_SIZE}/${WHICH_LAUNCHER}
+    sbatch --wait -o ${RESULT_DIR}/NoDeisa/${FORMATED_CUBE_SIZE}/res${FORMATED_SIMU_SIZE}.out ${BASE_DIR}/${FORMATED_SIMU_SIZE}/${WHICH_LAUNCHER}
     echo "----------------------------------------"
 done
 

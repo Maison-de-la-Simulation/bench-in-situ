@@ -23,6 +23,7 @@ WHICH_LAUNCHER="launcher_noDeisa_MI300.sh"
 RESULT_DIR=results_bench_MI300
 RESULT_FILE=bench_output_MI300.txt
 FORMATED_SIMU_SIZE=$(printf "%03d" "$SIMU_SIZE")
+FORMATED_CUBE_SIZE=$(printf "%03d" "$CUBE_SIZE")
 
 cd ${WORKING_DIR}
 rm *.h5
@@ -30,14 +31,14 @@ rm *.xmf
 cd ..
 
 declare -A tab_repart=(
-#    ['1']=" 1 1 1 "
+    ['1']=" 1 1 1 "
 #    ['2']=" 2 1 1 "
 #    ['4']=" 2 2 1 "
 #    ['8']=" 2 2 2 "
     ['16']=" 4 2 2 "
     ['32']=" 4 4 2 "
 #    ['64']=" 4 4 4 "
-#    ['128']=" 4 4 8 "
+    ['128']=" 4 4 8 "
 )
 
 # Tableau associatif pour les valeurs x, y, z
@@ -50,7 +51,7 @@ declare -A tab_nxyz=(
 grep -v "##*" -rw ${BASE_DIR}/${FORMATED_SIMU_SIZE}/${WHICH_LAUNCHER} | grep -e "#SBATCH --constraint=" >> ${BASE_DIR}/${RESULT_FILE}
 cat ${PWD}/../../lib/pdi/pdi/VERSION >> ${BASE_DIR}/${RESULT_FILE}
 
-for  ((CUBE_SIZE=64; CUBE_SIZE<=64; CUBE_SIZE*=2)); do
+for  ((CUBE_SIZE=64; CUBE_SIZE<=128; CUBE_SIZE*=2)); do
     # Boucle sur chaque clé du tableau associatif
     for SIMU_SIZE in "${!tab_repart[@]}"; do
 	FORMATED_SIMU_SIZE=$(printf "%03d" "$SIMU_SIZE")
@@ -92,7 +93,7 @@ for  ((CUBE_SIZE=64; CUBE_SIZE<=64; CUBE_SIZE*=2)); do
         cat ${BASE_DIR}/${FORMATED_SIMU_SIZE}/setup.ini | grep mx
         cat ${BASE_DIR}/${FORMATED_SIMU_SIZE}/setup.ini | grep my
         cat ${BASE_DIR}/${FORMATED_SIMU_SIZE}/setup.ini | grep mz
-        sbatch --wait -o ${RESULT_DIR}/NoDeisa/${CUBE_SIZE}/res${FORMATED_SIMU_SIZE}.out ${BASE_DIR}/${FORMATED_SIMU_SIZE}/${WHICH_LAUNCHER}
+        sbatch --wait -o ${RESULT_DIR}/NoDeisa/${FORMATED_CUBE_SIZE}/res${FORMATED_SIMU_SIZE}.out ${BASE_DIR}/${FORMATED_SIMU_SIZE}/${WHICH_LAUNCHER}
         echo "----------------------------------------"
     done
 done
