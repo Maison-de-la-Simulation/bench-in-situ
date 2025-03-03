@@ -34,8 +34,8 @@ echo "OMP_NUM_THREADS=$OMP_NUM_THREADS"
 echo "SIM_NODES=$SIM_NODES"
 
 # this file must be accessible from every slurm node (i.e.: shared network drive)
-source ../modules.env
-source ../modulesMI250.env
+source ${PWD}/modules.env
+source ${PWD}/modulesMI250.env
 
 # set result file path
 mkdir -p $SNAPSHOT_FILE_PATH/$FORMATED_SIMU_SIZE
