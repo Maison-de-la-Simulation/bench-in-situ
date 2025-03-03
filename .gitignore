@@ -82,3 +82,6 @@ working_dir
 cmake-build-*
 *.tar.gz
 simulation/build/**
+
+lib/pdi/
+lib/install_pdi/

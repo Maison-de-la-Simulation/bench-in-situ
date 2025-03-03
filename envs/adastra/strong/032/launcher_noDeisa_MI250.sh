@@ -17,7 +17,8 @@ export MPICH_GPU_SUPPORT_ENABLED=1
 
 # All paths are relative to WORKING_DIRECTORY
 SIMU_SIZE=32
-BASE_DIR=${PWD}/../..
+BASE_DIR=${PWD}
+ROOT_DIR=${PWD}/../../..
 WORKING_DIR=${BASE_DIR}/working_dir
 FORMATED_SIMU_SIZE=$(printf "%03d" "$SIMU_SIZE")
 
@@ -34,21 +35,21 @@ echo "OMP_NUM_THREADS=$OMP_NUM_THREADS"
 echo "SIM_NODES=$SIM_NODES"
 
 # this file must be accessible from every slurm node (i.e.: shared network drive)
-source ${PWD}/modules.env
-source ${PWD}/modulesMI250.env
+source ${PWD}/../modules.env
+source ${PWD}/../modulesMI250.env
 
 # set result file path
 mkdir -p $SNAPSHOT_FILE_PATH/$FORMATED_SIMU_SIZE
-sed -i "s|^prefix=.*|prefix=$SNAPSHOT_FILE_PATH/$FORMATED_SIMU_SIZE/Checkpoint|" ${BASE_DIR}/envs/adastra/${FORMATED_SIMU_SIZE}/setup.ini
+sed -i "s|^prefix=.*|prefix=$SNAPSHOT_FILE_PATH/$FORMATED_SIMU_SIZE/Checkpoint|" ${BASE_DIR}/${FORMATED_SIMU_SIZE}/setup.ini
 
 # move to working directory 
 cd ${WORKING_DIR}
 
 # PDI
-source ${BASE_DIR}/lib/pdi/build/staging/share/pdi/env.sh
+source ${ROOT_DIR}/lib/pdi/build/staging/share/pdi/env.sh
 
 # simulation
-srun -N ${SIM_NODES} -n ${SIM_PROC} ${BASE_DIR}/build/main ${BASE_DIR}/envs/adastra/${FORMATED_SIMU_SIZE}/setup.ini ${BASE_DIR}/envs/adastra/io_chkpt.yml --kokkos-map-device-id-by=mpi_rank &
+srun -N ${SIM_NODES} -n ${SIM_PROC} ${ROOT_DIR}/simulation/build/main ${BASE_DIR}/${FORMATED_SIMU_SIZE}/setup.ini ${BASE_DIR}/../io_chkpt.yml --kokkos-map-device-id-by=mpi_rank &
 simu_pid=$!
 wait $simu_pid
 

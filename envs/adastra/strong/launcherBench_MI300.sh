@@ -10,8 +10,8 @@
 ##SBATCH --nodelist=c1155
 #SBATCH --gpus-per-node=1
 
-source modules.env
-source modulesMI300.env
+source ../modules.env
+source ../modulesMI300.env
 
 export MPICH_GPU_SUPPORT_ENABLED=1
 
@@ -31,14 +31,14 @@ rm *.xmf
 cd ..
 
 declare -A tab_repart=(
-    ['1']=" 1 1 1 "
+#    ['1']=" 1 1 1 "
     ['2']=" 2 1 1 "
-    ['4']=" 2 2 1 "
-    ['8']=" 2 2 2 "
-    ['16']=" 4 2 2 "
-    ['32']=" 4 4 2 "
-    ['64']=" 4 4 4 "
-    ['128']=" 4 4 8 "
+#    ['4']=" 2 2 1 "
+#    ['8']=" 2 2 2 "
+#    ['16']=" 4 2 2 "
+#    ['32']=" 4 4 2 "
+#    ['64']=" 4 4 4 "
+#    ['128']=" 4 4 8 "
 )
 
 # Tableau associatif pour les valeurs x, y, z
@@ -49,14 +49,15 @@ declare -A tab_nxyz=(
 )
 
 grep -v "##*" -rw ${BASE_DIR}/${FORMATED_SIMU_SIZE}/${WHICH_LAUNCHER} | grep -e "#SBATCH --constraint=" >> ${BASE_DIR}/${RESULT_FILE}
-cat ${PWD}/../../lib/pdi/pdi/VERSION >> ${BASE_DIR}/${RESULT_FILE}
+cat ${PWD}/../../../lib/pdi/pdi/VERSION >> ${BASE_DIR}/${RESULT_FILE}
 
-for  ((CUBE_SIZE=64; CUBE_SIZE<=512; CUBE_SIZE*=2)); do
+for  ((CUBE_SIZE=64; CUBE_SIZE<=256; CUBE_SIZE*=2)); do
+    FORMATED_CUBE_SIZE=$(printf "%03d" "$CUBE_SIZE")
     # Boucle sur chaque clé du tableau associatif
     for SIMU_SIZE in "${!tab_repart[@]}"; do
 	FORMATED_SIMU_SIZE=$(printf "%03d" "$SIMU_SIZE")
         value=${tab_repart[$SIMU_SIZE]}
-        echo "Key: $SIMU_SIZE"
+        echo "Key: $SIMU_SIZE ; Formated simu size: $FORMATED_SIMU_SIZE"
         
         # Compteur pour assigner les valeurs aux clés x, y, z
         i=0
