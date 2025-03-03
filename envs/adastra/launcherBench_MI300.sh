@@ -25,20 +25,20 @@ RESULT_FILE=bench_output_MI300.txt
 FORMATED_SIMU_SIZE=$(printf "%03d" "$SIMU_SIZE")
 FORMATED_CUBE_SIZE=$(printf "%03d" "$CUBE_SIZE")
 
-cd ${WORKING_DIR}
+mkdir -p ${WORKING_DIR} && cd ${WORKING_DIR}
 rm *.h5
 rm *.xmf
 cd ..
 
 declare -A tab_repart=(
-    ['1']=" 1 1 1 "
+#    ['1']=" 1 1 1 "
 #    ['2']=" 2 1 1 "
 #    ['4']=" 2 2 1 "
 #    ['8']=" 2 2 2 "
     ['16']=" 4 2 2 "
     ['32']=" 4 4 2 "
 #    ['64']=" 4 4 4 "
-    ['128']=" 4 4 8 "
+#    ['128']=" 4 4 8 "
 )
 
 # Tableau associatif pour les valeurs x, y, z

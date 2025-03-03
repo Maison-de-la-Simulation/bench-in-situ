@@ -25,7 +25,7 @@ RESULT_FILE=weakScaling_output_MI300.txt
 FORMATED_SIMU_SIZE=$(printf "%03d" "$SIMU_SIZE")
 FORMATED_CUBE_SIZE=$(printf "%03d" "$CUBE_SIZE")
 
-cd ${WORKING_DIR}
+mkdir -p ${WORKING_DIR} && cd ${WORKING_DIR}
 rm *.h5
 rm *.xmf
 cd ..
