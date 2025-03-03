@@ -31,14 +31,14 @@ rm *.xmf
 cd ..
 
 declare -A tab_repart=(
-#    ['1']=" 1 1 1 "
-#    ['2']=" 2 1 1 "
-#    ['4']=" 2 2 1 "
-#    ['8']=" 2 2 2 "
+    ['1']=" 1 1 1 "
+    ['2']=" 2 1 1 "
+    ['4']=" 2 2 1 "
+    ['8']=" 2 2 2 "
     ['16']=" 4 2 2 "
     ['32']=" 4 4 2 "
-#    ['64']=" 4 4 4 "
-#    ['128']=" 4 4 8 "
+    ['64']=" 4 4 4 "
+    ['128']=" 4 4 8 "
 )
 
 # Tableau associatif pour les valeurs x, y, z
@@ -51,7 +51,7 @@ declare -A tab_nxyz=(
 grep -v "##*" -rw ${BASE_DIR}/${FORMATED_SIMU_SIZE}/${WHICH_LAUNCHER} | grep -e "#SBATCH --constraint=" >> ${BASE_DIR}/${RESULT_FILE}
 cat ${PWD}/../../lib/pdi/pdi/VERSION >> ${BASE_DIR}/${RESULT_FILE}
 
-for  ((CUBE_SIZE=64; CUBE_SIZE<=128; CUBE_SIZE*=2)); do
+for  ((CUBE_SIZE=64; CUBE_SIZE<=512; CUBE_SIZE*=2)); do
     # Boucle sur chaque clé du tableau associatif
     for SIMU_SIZE in "${!tab_repart[@]}"; do
 	FORMATED_SIMU_SIZE=$(printf "%03d" "$SIMU_SIZE")
