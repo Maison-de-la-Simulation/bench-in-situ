@@ -31,14 +31,14 @@ rm *.xmf
 cd ..
 
 declare -A tab_repart=(
-#    ['1']=" 1 1 1 "
+    ['1']=" 1 1 1 "
     ['2']=" 2 1 1 "
-#    ['4']=" 2 2 1 "
-#    ['8']=" 2 2 2 "
-#    ['16']=" 4 2 2 "
-#    ['32']=" 4 4 2 "
-#    ['64']=" 4 4 4 "
-#    ['128']=" 4 4 8 "
+    ['4']=" 2 2 1 "
+    ['8']=" 2 2 2 "
+    ['16']=" 4 2 2 "
+    ['32']=" 4 4 2 "
+    ['64']=" 4 4 4 "
+    ['128']=" 4 4 8 "
 )
 
 # Tableau associatif pour les valeurs x, y, z
@@ -58,7 +58,7 @@ for  ((CUBE_SIZE=64; CUBE_SIZE<=256; CUBE_SIZE*=2)); do
 	FORMATED_SIMU_SIZE=$(printf "%03d" "$SIMU_SIZE")
         value=${tab_repart[$SIMU_SIZE]}
         echo "Key: $SIMU_SIZE ; Formated simu size: $FORMATED_SIMU_SIZE"
-        
+
         # Compteur pour assigner les valeurs aux clés x, y, z
         i=0
         

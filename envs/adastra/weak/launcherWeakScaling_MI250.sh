@@ -39,11 +39,11 @@ declare -A tab_repart=(
 )
 
 declare -A specific_pairs=(
-    ['1']=256
-    ['2']=512
-    ['4']=1024
-    ['8']=2048
-    ['16']=4096
+    ['1']=448
+    ['2']=448
+    ['4']=448
+    ['8']=448
+    ['16']=448
 )
 
 # Tableau associatif pour les valeurs x, y, z
@@ -53,7 +53,7 @@ declare -A tab_nxyz=(
     ['z']=0
 )
 
-grep -v "##*" -rw ${BASE_DIR}/${SIMU_SIZE}/${WHICH_LAUNCHER} | grep -e "#SBATCH --constraint=" >> ${BASE_DIR}/${RESULT_FILE}
+grep -v "##*" -rw ${BASE_DIR}/${FORMATED_SIMU_SIZE}/${WHICH_LAUNCHER} | grep -e "#SBATCH --constraint=" >> ${BASE_DIR}/${RESULT_FILE}
 cat ${PWD}/../../lib/pdi/pdi/VERSION >> ${BASE_DIR}/${RESULT_FILE}
 
 for SIMU_SIZE in "${!specific_pairs[@]}"; do
@@ -77,10 +77,10 @@ for SIMU_SIZE in "${!specific_pairs[@]}"; do
 
     # Afficher les valeurs du tableau tab_nxyz
     echo "tab_nxyz: x=${tab_nxyz['x']} y=${tab_nxyz['y']} z=${tab_nxyz['z']}"
-    echo "256 256 256"
-    sed -i "s/^nx=[0-9]*$/nx=256/" ${BASE_DIR}/${FORMATED_SIMU_SIZE}/setup.ini
-    sed -i "s/^ny=[0-9]*$/ny=256/" ${BASE_DIR}/${FORMATED_SIMU_SIZE}/setup.ini
-    sed -i "s/^nz=[0-9]*$/nz=256/" ${BASE_DIR}/${FORMATED_SIMU_SIZE}/setup.ini
+    echo "448 448 448"
+    sed -i "s/^nx=[0-9]*$/nx=448/" ${BASE_DIR}/${FORMATED_SIMU_SIZE}/setup.ini
+    sed -i "s/^ny=[0-9]*$/ny=448/" ${BASE_DIR}/${FORMATED_SIMU_SIZE}/setup.ini
+    sed -i "s/^nz=[0-9]*$/nz=448/" ${BASE_DIR}/${FORMATED_SIMU_SIZE}/setup.ini
 
     sed -i "s/^mx=[0-9]*$/mx=${tab_nxyz['x']}/" ${BASE_DIR}/${FORMATED_SIMU_SIZE}/setup.ini
     sed -i "s/^my=[0-9]*$/my=${tab_nxyz['y']}/" ${BASE_DIR}/${FORMATED_SIMU_SIZE}/setup.ini

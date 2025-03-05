@@ -57,8 +57,8 @@ for  ((CUBE_SIZE=64; CUBE_SIZE<=512; CUBE_SIZE*=2)); do
     for SIMU_SIZE in "${!tab_repart[@]}"; do
 	FORMATED_SIMU_SIZE=$(printf "%03d" "$SIMU_SIZE")
         value=${tab_repart[$SIMU_SIZE]}
-        echo "Key: $SIMU_SIZE"
-        
+        echo "Key: $SIMU_SIZE ; Formated simu size: $FORMATED_SIMU_SIZE"
+
         # Compteur pour assigner les valeurs aux clés x, y, z
         i=0
         
