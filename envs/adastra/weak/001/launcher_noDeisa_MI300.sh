@@ -48,9 +48,13 @@ cd ${WORKING_DIR}
 # PDI
 source ${ROOT_DIR}/lib/pdi/build/staging/share/pdi/env.sh
 
+# rocm-smi
+##rocm-smi > rocm-monitor${FORMATED_SIMU_SIZE}.csv
+
 # simulation
 srun -N ${SIM_NODES} -n ${SIM_PROC} ${ROOT_DIR}/simulation/build/main ${BASE_DIR}/${FORMATED_SIMU_SIZE}/setup.ini ${BASE_DIR}/../io_chkpt.yml --kokkos-map-device-id-by=mpi_rank &
-simu_pid=$!
+simu_pid=$! &
+rocm-smi > rocm-monitor${FORMATED_SIMU_SIZE}.csv
 wait $simu_pid
 
 rm ${SNAPSHOT_FILE_PATH}/${FORMATED_SIMU_SIZE}/*.h5 && rm ${SNAPSHOT_FILE_PATH}/${FORMATED_SIMU_SIZE}/*.xmf

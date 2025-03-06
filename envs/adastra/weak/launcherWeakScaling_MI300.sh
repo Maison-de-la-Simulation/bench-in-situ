@@ -2,13 +2,13 @@
 #SBATCH --account=cad14985
 #sbatch --output=MI300WeakScaling.out
 #SBATCH --job-name=b-i-s_nd
-##SBATCH --constraint=GENOA
-#SBATCH --constraint=MI250
+#SBATCH --constraint=GENOA
+##SBATCH --constraint=MI300
 #SBATCH --nodes=1
 ##SBATCH --exclusive
 #SBATCH --time=06:00:00
 ##SBATCH --nodelist=c1155
-#SBATCH --gpus-per-node=1
+##SBATCH --gpus-per-node=1
 
 source ../modules.env
 source ../modulesMI300.env
@@ -39,11 +39,11 @@ declare -A tab_repart=(
 )
 
 declare -A specific_pairs=(
-    ['1']=448
-    ['2']=448
-    ['4']=448
-    ['8']=448
-    ['16']=448
+    ['1']=512
+    ['2']=512
+    ['4']=512
+    ['8']=512
+    ['16']=512
 )
 
 # Tableau associatif pour les valeurs x, y, z
@@ -54,7 +54,7 @@ declare -A tab_nxyz=(
 )
 
 grep -v "##*" -rw ${BASE_DIR}/${FORMATED_SIMU_SIZE}/${WHICH_LAUNCHER} | grep -e "#SBATCH --constraint=" >> ${BASE_DIR}/${RESULT_FILE}
-cat ${PWD}/../../lib/pdi/pdi/VERSION >> ${BASE_DIR}/${RESULT_FILE}
+cat ${PWD}/../../../lib/pdi/pdi/VERSION >> ${BASE_DIR}/${RESULT_FILE}
 
 for SIMU_SIZE in "${!specific_pairs[@]}"; do
     FORMATED_SIMU_SIZE=$(printf "%03d" "$SIMU_SIZE")
@@ -77,10 +77,10 @@ for SIMU_SIZE in "${!specific_pairs[@]}"; do
 
     # Afficher les valeurs du tableau tab_nxyz
     echo "tab_nxyz: x=${tab_nxyz['x']} y=${tab_nxyz['y']} z=${tab_nxyz['z']}"
-    echo "448 448 448"
-    sed -i "s/^nx=[0-9]*$/nx=448/" ${BASE_DIR}/${FORMATED_SIMU_SIZE}/setup.ini
-    sed -i "s/^ny=[0-9]*$/ny=448/" ${BASE_DIR}/${FORMATED_SIMU_SIZE}/setup.ini
-    sed -i "s/^nz=[0-9]*$/nz=448/" ${BASE_DIR}/${FORMATED_SIMU_SIZE}/setup.ini
+    echo "512 512 512"
+    sed -i "s/^nx=[0-9]*$/nx=512/" ${BASE_DIR}/${FORMATED_SIMU_SIZE}/setup.ini
+    sed -i "s/^ny=[0-9]*$/ny=512/" ${BASE_DIR}/${FORMATED_SIMU_SIZE}/setup.ini
+    sed -i "s/^nz=[0-9]*$/nz=512/" ${BASE_DIR}/${FORMATED_SIMU_SIZE}/setup.ini
 
     sed -i "s/^mx=[0-9]*$/mx=${tab_nxyz['x']}/" ${BASE_DIR}/${FORMATED_SIMU_SIZE}/setup.ini
     sed -i "s/^my=[0-9]*$/my=${tab_nxyz['y']}/" ${BASE_DIR}/${FORMATED_SIMU_SIZE}/setup.ini

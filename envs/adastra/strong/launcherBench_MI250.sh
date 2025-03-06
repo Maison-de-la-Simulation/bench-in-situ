@@ -2,13 +2,13 @@
 #SBATCH --account=cad14985
 #sbatch --output=MI250Bench.out
 #SBATCH --job-name=b-i-s_nd
-##SBATCH --constraint=GENOA
-#SBATCH --constraint=MI250
+#SBATCH --constraint=GENOA
+##SBATCH --constraint=MI250
 #SBATCH --nodes=1
 ##SBATCH --exclusive
 #SBATCH --time=06:00:00
 ##SBATCH --nodelist=c1155
-#SBATCH --gpus-per-node=1
+##SBATCH --gpus-per-node=1
 
 source ../modules.env
 source ../modulesMI250.env
