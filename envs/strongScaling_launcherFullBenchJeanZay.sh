@@ -5,11 +5,11 @@
 ##
 ##  1) To run the scripts of bench in the default directory "jeanzay_V100_16G"
 ##
-##          bash launcherFullBenchJZ.sh -case=strongScaling -gpu=V100 -gpuMEM=16G -cubesize=16 -fsimusize=file_nbgpu.txt
+##          bash launcherFullBenchJZ.sh -case=strong -gpu=V100 -gpuMEM=16G -cubesize=16 -fsimusize=file_nbgpu.txt
 ##
 ##  2) To run the scripts of the bench in the directory "jeanzay_A100
 ##
-##          bash launcherFullBenchJZ.sh -case=strongScaling -gpu=A100 -cubesize=16 -fsimusize=file_nbgpu.txt
+##          bash launcherFullBenchJZ.sh -case=strong -gpu=A100 -cubesize=16 -fsimusize=file_nbgpu.txt
 ##
 ##  In the file_nbgpu.txt, each line correspond to the number of gpu that we want to test (see example file_nbgpu.txt)
 ##
@@ -83,11 +83,14 @@ CLUSTER_NAME=jeanzay ## TO BE USE WHEN WE WANT TO USE FOR OTHERS CLUSTERS
 ##%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 ## CHECK ENTRY
 
-if [ "${CASE_BATCH}" == "strongScaling" ]; then
+if [ "${CASE_BATCH}" == "strong" ]; then
     echo "strong scaling experiment"
     echo CUBE_SIZE = ${CUBE_SIZE}
+elif [ "${CASE_BATCH}" == "weak" ]; then
+    echo "weak scaling experiment"
+    echo CUBE_SIZE = ${CUBE_SIZE}
 else
-    echo "-case must be equal to strongScaling"
+    echo "-case must be equal to strong or weak"
     exit 1
 fi
 
@@ -123,7 +126,7 @@ echo "SCRIPT_DIR=$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" &>/dev/null && pwd)
 ## need to be lunch in jeanzay the directory envs
 BASE_DIR=${SCRIPT_DIR}/..
 WORKING_DIR=${BASE_DIR}/working_dir${NODES_ARCH_SUPER_FRIEND}
-DATE_SEND=$(date +"%Y%m%d_%H%M%S_%4N")
+DATE_SEND=$(date +"%Y%m%d_%H%M%S")
 
 
 ##%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -142,7 +145,7 @@ else
     PDI_MHD_NODES_ARCH=${NODES_ARCH_SUPER_FRIEND}${ADD_INFO_ARCH}"_CUBESIZE_"${CUBE_SIZE}
 
     INPUT_DIR="jeanzay"${NODES_ARCH_SUPER_FRIEND}${ADD_INFO_ARCH}
-    OUTPUT_DIR="jeanzay"${PDI_MHD_NODES_ARCH}
+    OUTPUT_DIR="jeanzay_"${DATE_SEND}"_"${CASE_BATCH}${PDI_MHD_NODES_ARCH}
     ## creation of the directory
     mkdir ${SCRIPT_DIR}/${OUTPUT_DIR}
     echo "create file ${SCRIPT_DIR}/${OUTPUT_DIR}"
@@ -155,14 +158,25 @@ else
     declare -p SIMU_SIZEs
     for SIMU_SIZE in "${SIMU_SIZEs[@]}"; do
         echo " je lance le batch for ${SIMU_SIZE}"
-        bash generateInputFile.sh -inputdir=${INPUT_DIR} -outputdir=${OUTPUT_DIR} \
-            -cubesize=${CUBE_SIZE} -simusize=${SIMU_SIZE} -date=${DATA_SEND} \
-            -launchdir=${PDI_MHD_NODES_ARCH} -subdir=${SIMU_SIZE}
+	if [ "${CASE_BATCH}" == "strong" ]; then
+
+            bash generateInputFile.sh -inputdir=${INPUT_DIR} -outputdir=${OUTPUT_DIR} \
+		 -cubesize=${CUBE_SIZE} -simusize=${SIMU_SIZE} -date=${DATA_SEND} \
+		 -launchdir=${PDI_MHD_NODES_ARCH} -subdir=${SIMU_SIZE}
+	elif [ "${CASE_BATCH}" == "weak" ]; then
+	    bash generateInputFile.sh -localDomain=1 -inputdir=${INPUT_DIR} -outputdir=${OUTPUT_DIR} \
+		 -cubesize=${CUBE_SIZE} -simusize=${SIMU_SIZE} -date=${DATA_SEND} \
+		 -launchdir=${PDI_MHD_NODES_ARCH} -subdir=${SIMU_SIZE}
+	else
+	    echo "error -case must be strong or weak"
+	    exit 1
+	fi
     done
 fi
 
 ## END CREATION OF THE DIRECTORY FOR THE BENCH
 ##%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
 
 ##%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 ## BEGIN LAUNCH SCRIPT
@@ -171,7 +185,14 @@ fi
 echo "NODES_ARCH_SUPER_FRIEND=${NODES_ARCH_SUPER_FRIEND}"
 
 ## lunch the script
-RESULT_DIR=resultsBench${DATE_SEND}${PDI_MHD_NODES_ARCH}/NoDeisa/${CUBE_SIZE}
+if [ "${CASE_BATCH}" == "strong" ]; then
+    RESULT_DIR=strongScaling${DATE_SEND}${PDI_MHD_NODES_ARCH}/NoDeisa/${CUBE_SIZE}
+elif [ "${CASE_BATCH}" == "weak" ]; then
+    RESULT_DIR=weakScaling${DATE_SEND}${PDI_MHD_NODES_ARCH}/NoDeisa/${CUBE_SIZE}
+else
+    echo "error -case must be strong or weak"
+    exit 1
+fi
 
 echo "RESULT_DIR=${RESULT_DIR}"
 sleep 1 ## TO HAVE DATE BE CORRECT IN SECOND
@@ -194,3 +215,4 @@ done
 
 ## END LAUNCH SCRIPT
 ##%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
