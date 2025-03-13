@@ -7,12 +7,11 @@
 # - build the simulation
 ############################
 
+set -xeu
 SCRIPT_DIR=$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" &>/dev/null && pwd)
 
-cd ${WORKING_DIR}
-
 source ${SCRIPT_DIR}/env.sh
-
+cd ${WORKING_DIR}
 print_env
 
 python3 --version
