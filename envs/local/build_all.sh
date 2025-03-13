@@ -33,13 +33,18 @@ sync
 
 echo "Activating python venv"
 source ${PYTHON_ENV}/bin/activate
-if [ ${VIRTUAL_ENV} != "" ]; then
+if [ -z "${VIRTUAL_ENV}" ]; then
   echo "Could not activate python environment !"
   exit 1
 fi
 
 
 pip install --upgrade pip
+rc=$?
+if [ ${rc} -ne 0 ]; then
+  echo "Python pip upgrade failed !"
+  exit 1
+fi
 
 DEPS_FILE="${PYTHON_ENV_TARGZ}/deisa_deps_py${PYTHON_VERSION}.tar.gz"
 if [ ! -f "$DEPS_FILE" ]; then
@@ -51,10 +56,20 @@ fi
 mkdir tmp_untar
 tar xvf ${DEPS_FILE} -C tmp_untar
 pip install tmp_untar/*.whl
+rc=$?
+if [ ${rc} -ne 0 ]; then
+  echo "Python dependency install failed !"
+  exit 1
+fi
 rm -rf tmp_untar
 
 # install Deisa
 pip install --no-index --no-build-isolation --no-deps ${SCRIPT_DIR}/../../lib/deisa
+rc=$?
+if [ ${rc} -ne 0 ]; then
+  echo "Python deisa install failed !"
+  exit 1
+fi
 
 deactivate
 echo "venv build successfully"
@@ -75,7 +90,17 @@ fi
 
 # activate python environment
 source ${PYTHON_ENV}/bin/activate
+if [ -z "${VIRTUAL_ENV}" ]; then
+  echo "Could not activate python environment !"
+  exit 1
+fi
+
 pip install --upgrade pip
+rc=$?
+if [ ${rc} -ne 0 ]; then
+  echo "Python pip upgrade failed !"
+  exit 1
+fi
 
 DEPS_FILE="${PYTHON_ENV_TARGZ}/new_deisa_deps_py${PYTHON_VERSION}.tar.gz"
 if [ ! -f "$DEPS_FILE" ]; then
@@ -87,10 +112,20 @@ fi
 mkdir tmp_untar
 tar xvf ${DEPS_FILE} -C tmp_untar
 pip install tmp_untar/*.whl
+rc=$?
+if [ ${rc} -ne 0 ]; then
+  echo "Python dependency install failed !"
+  exit 1
+fi
 rm -rf tmp_untar
 
 # install Deisa
 pip install --no-index --no-build-isolation --no-deps ${SCRIPT_DIR}/../../lib/new_deisa
+rc=$?
+if [ ${rc} -ne 0 ]; then
+  echo "Python deisa install failed !"
+  exit 1
+fi
 
 deactivate
 echo "venv build successfully"
@@ -104,6 +139,7 @@ echo "LD_LIBRARY_PATH=${LD_LIBRARY_PATH}"
 echo "LD_PRELOAD=${LD_PRELOAD}"
 echo "PYTHON_ENV=${PYTHON_ENV}"
 
+# TODO: what python env should be used ? new or old ?
 source ${PYTHON_ENV}/bin/activate
 
 export LD_LIBRARY_PATH=${PYTHON_ENV}/lib:${LD_LIBRARY_PATH}
