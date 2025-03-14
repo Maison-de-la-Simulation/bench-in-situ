@@ -94,6 +94,10 @@ void initialize(int& argc, char**& argv)
     Session::initialize(argc, argv);
     Kokkos::initialize(argc, argv);
     oss << "Initializing " << code_name << '\n';
+    //====================================
+    print_configuration(oss);
+    //====================================
+
     Print() << oss.str();
 }
 
@@ -149,18 +153,6 @@ void finalize()
 {
     Print() << "Finalizing " << code_name << std::endl;
     Kokkos::finalize();
-    Session::finalize();
-}
-
-void finalize_kokkos()
-{
-    Print() << "Finalizing kokkos" << code_name << std::endl;
-    Kokkos::finalize();
-}
-
-void finalize_session()
-{
-    Print() << "Finalizing session" << code_name << std::endl;
     Session::finalize();
 }
 

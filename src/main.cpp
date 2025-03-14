@@ -37,7 +37,7 @@ int main(int argc, char** argv)
     }
 #endif // defined(Euler_ENABLE_PDI)
 
-    // We can't use barrier here: Kokkos and MPI are not initialize
+    // here we can use any kokkos::fence or MPI_BARRIER because MPI and kokkos are not initialize
     std::chrono::steady_clock::time_point start_code = std::chrono::steady_clock::now();
 
     hydro::initialize(argc, argv);
@@ -75,18 +75,15 @@ int main(int argc, char** argv)
     PC_tree_destroy(&conf);
 #endif // defined(Euler_ENABLE_PDI)
 
-    // hydro::finalize();
-    hydro::finalize_kokkos();
+    hydro::finalize();
+
 
     const std::chrono::steady_clock::time_point end_code = std::chrono::steady_clock::now();
 
-    // // We can't use barrier kokkos::fence():: the object of Kokkos is deleted here
-    Print() << "[MAIN RESULT] Init: " << std::chrono::duration<double>(end_initialization-start_code).count() << " s" << std::endl;
-    Print() << "[MAIN RESULT] Solver: " << std::chrono::duration<double>(start_finalization-end_initialization).count() << " s" << std::endl;
-    Print() << "[MAIN RESULT] Finalization: " << std::chrono::duration<double>(end_code-start_finalization).count() << " s" << std::endl;
-    Print() << "[MAIN RESULT] All time: " << std::chrono::duration<double>(end_code-start_code).count() << " s" << std::endl;
-
-    hydro::finalize_session();
+    std::cout << "[MAIN RESULT] Init: " << std::chrono::duration<double>(end_initialization-start_code).count() << " s" << std::endl;
+    std::cout << "[MAIN RESULT] Solver: " << std::chrono::duration<double>(start_finalization-end_initialization).count() << " s" << std::endl;
+    std::cout << "[MAIN RESULT] Finalization: " << std::chrono::duration<double>(end_code-start_finalization).count() << " s" << std::endl;
+    std::cout << "[MAIN RESULT] All time: " << std::chrono::duration<double>(end_code-start_code).count() << " s" << std::endl;
 
     return EXIT_SUCCESS;
 }

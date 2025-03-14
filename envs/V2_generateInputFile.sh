@@ -8,6 +8,11 @@ case $i in
     ## If the cubesize corresponding to the size of the global domain, localDomain=0
     LOCAL_DOMAIN="${i#*=}"
     ;;
+    -setupini=*)
+    ## 1: if setup.ini is defined in DIR_INPUT
+    ## 0 or nothing: if setup.ini is defined for each SIMUSIZE
+    Is_Only_One_SetUpIni="${i#*=}"
+    ;;
     -inputdir=*)
     DIR_INPUT="${i#*=}"
     ;;
@@ -25,6 +30,9 @@ case $i in
     ;;
     -launchdir=*)
     PDI_MHD_NODES_ARCH="${i#*=}"
+    ;;
+    -launchname=*)
+    LAUNCH_NAME="${i#*=}"
     ;;
     -subdir=*)
     SUB_DIR="${i#*=}"
@@ -48,6 +56,7 @@ declare -A tab_repart=(
     ['32']=" 4 4 2 "
     ['64']=" 4 4 4 "
     ['128']=" 8 4 4 "
+    ['256']=" 8 8 4 "
 )
 
 # Tableau associatif pour les valeurs x, y, z
@@ -114,19 +123,27 @@ else
 fi
 echo "$sizex $sizey $sizez"
 
-if [ ! -d "${DIR_INPUT}/${SIMU_SIZE}" ]; then
-    echo "The directory ${DIR_INPUT}/${SIMU_SIZE} doesn't exist."
+if [ ! -d "${DIR_INPUT}/${SUB_DIR}" ]; then
+    echo "The directory ${DIR_INPUT}/${SUB_DIR} doesn't exist."
     exit 1
 fi
 
-FILE_SETUPINI=${DIR_INPUT}/${SIMU_SIZE}/setup.ini
+# definition of FILE_SETUPINI
+if [ ${Is_Only_One_SetUpIni} == "1" ]; then
+    FILE_SETUPINI=${DIR_INPUT}/setup.ini
+else
+    FILE_SETUPINI=${DIR_INPUT}/${SUB_DIR}/setup.ini
+fi
+
 if [ ! -f "${FILE_SETUPINI}" ]; then
     echo "File ${FILE_SETUPINI} doesn't exist"
     exit 1
 fi
 
-FILE_LAUNCHER_NODEISA=${DIR_INPUT}/${SIMU_SIZE}/launcher_noDeisa.sh
+#
+FILE_LAUNCHER_NODEISA=${DIR_INPUT}/${SUB_DIR}/${LAUNCH_NAME}
 if [ ! -f "${FILE_LAUNCHER_NODEISA}" ]; then
+    echo "launchname= ${LAUNCH_NAME}"
     echo "File ${FILE_LAUNCHER_NODEISA} doesn't exist"
     exit 1
 fi
@@ -140,7 +157,7 @@ cp ../../${FILE_LAUNCHER_NODEISA} .
 
 sed_param=s/^PDI_MHD_NODES_ARCH=.*/PDI_MHD_NODES_ARCH=\"$PDI_MHD_NODES_ARCH\"/g
 echo ${sed_param}
-sed -i "$sed_param" launcher_noDeisa.sh
+sed -i "$sed_param" ${LAUNCH_NAME}
 
 sed -i "s/^nx=[0-9]*$/nx=$sizex/" setup.ini
 sed -i "s/^ny=[0-9]*$/ny=$sizey/" setup.ini

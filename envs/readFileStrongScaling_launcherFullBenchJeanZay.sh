@@ -23,63 +23,78 @@
 for i in "$@"
 do
 case $i in
-    -case=*)
-    CASE_BATCH="${i#*=}"
-    ;;
-    -gpu=*)
-    GPU_ARCH="${i#*=}"
-    ;;
-    -gpuMEM=*)
-    GPU_MEM="${i#*=}"
-    ;;
-    -cubesize=*)
-    CUBE_SIZE="${i#*=}"
-    ;;
-    -simusize=*)
-    SIMU_SIZE="${i#*=}"
-    ;;
-    ## read from file the parameter
-    -fsimusize=*)
-    FILE_SIMU_SIZE="${i#*=}"
-    echo "FILE_SIMU_SIZE=${FILE_SIMU_SIZE}"
-    mapfile -d '' array1 < "${FILE_SIMU_SIZE}"
-    declare -p array1
-    FILE_WITH_SIMU_SIZE="TRUE"
-    SIMU_SIZEs=()
-    for TMP_VAR in "${!array1[@]}"; do
-        value=${array1[$TMP_VAR]}
-        echo "value=$value"
-        for number in $value; do
-            echo "number=$number"
-            SIMU_SIZEs+=( $number )
-        done
-    done
-    ;;
-    -launchname=*)
-    LAUNCH_NAME="${i#*=}"
-    ;;
-    ## read from file the parameter
-    -fcubesize=*)
-    mapfile -d '' array2 < "${i#*=}"
-    FILE_WITH_CUBE_SIZE_FOR_ONE_GPU="TRUE"
-    CUBE_SIZEs=()
-    for TMP_VAR in "${!array2[@]}"; do
-        value=${array2[$TMP_VAR]}
-        echo "value=$value"
-        for number in $value; do
-            echo "number=$number"
-            CUBE_SIZEs+=( $number )
-        done
-    done
-    ;;
-    --default)
-    DEFAULT=YES
+    -input_arg=*)
+    FILE_INPUT_ARG="${i#*=}"
     ;;
     *)
     # unknown option
+    echo "no input argument"
+    exit 1
     ;;
 esac
 done
+
+if [ ! -f "${FILE_INPUT_ARG}" ]; then
+    echo "File ${FILE_INPUT_ARG} doesn't exist"
+    exit 1
+fi
+
+mapfile -t input_lines < ${FILE_INPUT_ARG}
+# declare -p lines ##
+
+for TMP_VAR in "${input_lines[@]}"; do
+	echo "TMP_VAR=${TMP_VAR}"
+	iii=0
+	get_index_value=""
+	for number in $TMP_VAR; do 
+		# read first element
+		case $iii in
+        	0) 
+			case $number in 
+				CASE_BATCH) get_index_value=$number;;
+				GPU_ARCH) get_index_value=$number;;
+				GPU_MEM) get_index_value=$number;;
+                CUBE_SIZE) get_index_value=$number;;
+                LAUNCH_NAME) get_index_value=$number;;
+                FILE_SIMU_SIZE) get_index_value=$number;;
+				*)
+				echo "The argument ${number} doesn't exist."
+				exit 1
+				;;
+			esac
+			;;
+        	1)
+			case $get_index_value in
+                CASE_BATCH) CASE_BATCH=$number;;
+				GPU_ARCH) GPU_ARCH=$number;;
+				GPU_MEM) GPU_MEM=$number;;
+                CUBE_SIZE) CUBE_SIZE=$number;;
+                LAUNCH_NAME) LAUNCH_NAME=$number;;
+                FILE_SIMU_SIZE) 
+                FILE_SIMU_SIZE=$number
+                echo "FILE_SIMU_SIZE=${FILE_SIMU_SIZE}"
+                mapfile -d '' array1 < "${FILE_SIMU_SIZE}"
+                declare -p array1
+                
+                SIMU_SIZEs=()
+                for TMP_VAR in "${!array1[@]}"; do
+                    value=${array1[$TMP_VAR]}
+                    echo "value=$value"
+                    for number in $value; do
+                        echo "number=$number"
+                        SIMU_SIZEs+=( $number )
+                    done
+                done
+                ;;
+				*)
+				echo "error 2"
+				exit 1
+			esac 
+    	esac
+    	((iii++))
+	done
+done
+
 
 CLUSTER_NAME=jeanzay ## TO BE USE WHEN WE WANT TO USE FOR OTHERS CLUSTERS
 
@@ -181,6 +196,8 @@ fi
 
 ## END CREATION OF THE DIRECTORY FOR THE BENCH
 ##%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+exit 1
 
 ##%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 ## BEGIN LAUNCH SCRIPT

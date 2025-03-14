@@ -129,7 +129,7 @@ void GodunovSolver::nextIteration(Real dt)
     }
 
     if (m_params->hydro.magnetic_resistivity_enabled)
-    {   
+    {
         //To update from value at time n, comment these brackets. Else, it's taken after the FV update
         {
         m_problem->make_boundaries(m_u, m_grid);
@@ -153,17 +153,17 @@ void GodunovSolver::nextIteration(Real dt)
 void GodunovSolver::prepareNextOutput(Real& dt)
 {
     m_should_save = false;
-    
+
     auto dt_io = m_params->output.dt_io;
-    
+
     auto delta_io=std::numeric_limits<Real>::infinity();
-    
+
     if (dt_io > constants::zero) {compute_adjust_timestep(dt_io, dt, delta_io);}
-    
+
     dt=std::min({dt, delta_io});
 
     if (dt == delta_io) {m_should_save=true;}
-    
+
     if (m_t + dt >= m_tEnd)
     {
         m_should_save = true;
@@ -173,7 +173,7 @@ void GodunovSolver::prepareNextOutput(Real& dt)
     {
         m_should_save = true;
     }
-    
+
 }
 
 void GodunovSolver::pdiExposeData()
@@ -190,23 +190,30 @@ void GodunovSolver::pdiExposeData()
 
     if (m_should_save)
     {
-
         Kokkos::Profiling::pushRegion("I/O - Checkpoint");
         if(Super::m_iteration%100 == 0) Print() << "===================== output at iteration = " << Super::m_iteration << " time t = "<<Super::m_t<< std::endl;
         Kokkos::Profiling::pushRegion("I/O - Checkpoint - deep_copy");
 
-        Kokkos::fence();
-        std::chrono::steady_clock::time_point m_deep_io = std::chrono::steady_clock::now();
+	Kokkos::fence();
+    	std::chrono::steady_clock::time_point m_start_deep_copy = std::chrono::steady_clock::now();
 
-        Kokkos::deep_copy(m_u_host, m_u);
+	Kokkos::deep_copy(m_u_host, m_u);
 
-        Kokkos::fence();
-        performanceTimer.time_deep_io += (std::chrono::steady_clock::now() - m_deep_io);
+	Kokkos::fence();
+    	performanceTimer.deepcopy_in_io += (std::chrono::steady_clock::now() - m_start_deep_copy);
 
         Kokkos::Profiling::popRegion();
         Kokkos::Profiling::pushRegion("I/O - Checkpoint - write");
+
+	Kokkos::fence();
+        std::chrono::steady_clock::time_point m_start_write = std::chrono::steady_clock::now();
+
         m_writer->write(m_u_host, m_grid, Super::m_iteration, Super::m_t,
                         m_params->thermo.gamma, m_params->thermo.mmw);
+
+	Kokkos::fence();
+        performanceTimer.write_in_io += (std::chrono::steady_clock::now() - m_start_write);
+
         Kokkos::Profiling::popRegion();
         Kokkos::Profiling::popRegion();
 
@@ -293,7 +300,7 @@ void GodunovSolver::set_time_limit_reached()
 
 void GodunovSolver::compute_adjust_timestep(Real dt_type, Real dt, Real& delta_type)
 {
- 
+
     // Next physical time to do output
     auto t_type = (std::floor(Super::m_t / dt_type) + constants::one)*dt_type;
     if (Super::m_t + dt >= t_type)
@@ -310,7 +317,7 @@ void GodunovSolver::compute_adjust_timestep(Real dt_type, Real dt, Real& delta_t
         {
          throw std::runtime_error("Time step is increasing whereas it should decrease.\n");
         }
-    } 
+    }
 }
 
 void GodunovSolver::accumulate_compute_duration(const std::chrono::steady_clock::duration& duration) {
