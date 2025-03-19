@@ -96,7 +96,7 @@ pdi:
     size: int
     time: double
     iStep: int
-
+    should_deepcopy: logical
 
     mpi_coord: {type: array, subtype: int, size: 3}
 
@@ -127,7 +127,19 @@ pdi:
           writeXML: {}
 
     #mpi:
-
+    set_value:
+      on_init:
+        #*** initialize should_output to false at initialization
+        - share:
+          - should_deepcopy: 0
+      on_event:
+        data_on_GPU:
+          #*** enable the writing of main_field when switch > 50, and disable the writing of main_field when switch < 25
+          - set:
+            - should_deepcopy: '$iStep = 250 | $iStep = 750'
+      on_finalize:
+        #*** release the variable should_output
+        - release: [should_deepcopy]
     decl_hdf5:
 
   

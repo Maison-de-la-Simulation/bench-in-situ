@@ -186,32 +186,40 @@ void GodunovSolver::pdiExposeData()
                      "iStep", (void*)&(Super::m_iteration), PDI_OUT,
                      "time", (void*)&(m_t), PDI_OUT,
                      NULL);
+    // m_should_save is defined here by the yaml file (not by the setup.ini!!!)
+    bool *should_deepcopy;
+    PDI_access("should_deepcopy",  (void **)&should_deepcopy,  PDI_IN);
+    PDI_release("should_deepcopy");
+
+    m_should_save=*should_deepcopy;
+    should_deepcopy=nullptr;
 #endif
 
     if (m_should_save)
     {
         Kokkos::Profiling::pushRegion("I/O - Checkpoint");
+        Print() << "=save solution================== output at iteration = " << Super::m_iteration << " time t = "<<Super::m_t<< std::endl;
         if(Super::m_iteration%100 == 0) Print() << "===================== output at iteration = " << Super::m_iteration << " time t = "<<Super::m_t<< std::endl;
         Kokkos::Profiling::pushRegion("I/O - Checkpoint - deep_copy");
 
-	Kokkos::fence();
+	    Kokkos::fence();
     	std::chrono::steady_clock::time_point m_start_deep_copy = std::chrono::steady_clock::now();
 
-	Kokkos::deep_copy(m_u_host, m_u);
+	    Kokkos::deep_copy(m_u_host, m_u);
 
-	Kokkos::fence();
+	    Kokkos::fence();
     	performanceTimer.deepcopy_in_io += (std::chrono::steady_clock::now() - m_start_deep_copy);
 
         Kokkos::Profiling::popRegion();
         Kokkos::Profiling::pushRegion("I/O - Checkpoint - write");
 
-	Kokkos::fence();
+	    Kokkos::fence();
         std::chrono::steady_clock::time_point m_start_write = std::chrono::steady_clock::now();
 
         m_writer->write(m_u_host, m_grid, Super::m_iteration, Super::m_t,
                         m_params->thermo.gamma, m_params->thermo.mmw);
 
-	Kokkos::fence();
+	    Kokkos::fence();
         performanceTimer.write_in_io += (std::chrono::steady_clock::now() - m_start_write);
 
         Kokkos::Profiling::popRegion();
