@@ -102,6 +102,8 @@ if [ "${GPU_ARCH}" == "" ]; then
     exit 1
 elif [ "${GPU_ARCH}" == "A100" ]; then
     echo "launch in A100"
+elif [ "${GPU_ARCH}" == "H100" ]; then
+    echo "launch in H100"
 elif [ "${GPU_ARCH}" == "V100" ]; then
     if [ "${GPU_MEM}" == "" ]; then
         echo "Error: The value -gpuMEM must be 16G or 32G on JZ"
