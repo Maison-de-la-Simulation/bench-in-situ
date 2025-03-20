@@ -4,7 +4,7 @@
 #SBATCH --output=res1N_%x_%j.out
 #SBATCH --time=01:00:00
 #SBATCH --nodes=1
-#SBATCH --account=${ACTIVE_PROJECT}
+#SBATCH --account=cad14985
 #SBATCH --constraint=MI250
 ##SBATCH --constraint=GENOA
 #SBATCH --exclusive
