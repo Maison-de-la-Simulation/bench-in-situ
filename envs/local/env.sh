@@ -1,5 +1,5 @@
 SCRIPT_DIR=$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" &>/dev/null && pwd)
-WORKING_DIR=${SCRIPT_DIR}/working_dir_$(date +%s)
+WORKING_DIR=${SCRIPT_DIR}/working_dir
 SCHEFILE=${WORKING_DIR}/scheduler.json
 BUILD_DIR=${WORKING_DIR}/sim/build
 SIMULATION_BIN=${BUILD_DIR}/main
@@ -14,6 +14,9 @@ DASK_NB_WORKERS=2
 DASK_NB_THREAD_PER_WORKER=1 # if set to 0, will auto select depending on host (ncores)
 DASK_WORKER_LOCAL_DIRECTORY="/tmp"
 DASK_WORKER_PORT=8789
+MPI_NB_PROCS=4
+export OMP_PROC_BIND=true
+export OMP_NUM_THREADS=2
 
 RED="\e[31m"
 GREEN="\e[32m"
@@ -36,6 +39,8 @@ print_env() {
   echo "DASK_DISTRIBUTED__COMM__UCX__INFINIBAND=${DASK_DISTRIBUTED__COMM__UCX__INFINIBAND}"
   echo "DASK_NB_WORKERS=${DASK_NB_WORKERS}"
   echo "DASK_NB_THREAD_PER_WORKER=${DASK_NB_THREAD_PER_WORKER}"
+  echo "MPI_NB_PROCS=${MPI_NB_PROCS}"
+  echo "OMP_NUM_THREADS=${OMP_NUM_THREADS}"
   echo "============="
 }
 
