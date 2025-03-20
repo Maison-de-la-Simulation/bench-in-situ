@@ -7,7 +7,6 @@
 # - build the simulation
 ############################
 
-set -xeu
 SCRIPT_DIR=$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" &>/dev/null && pwd)
 
 source ${SCRIPT_DIR}/env.sh
@@ -134,17 +133,11 @@ echo "################"
 echo "# Building PDI #"
 echo "################"
 
-echo "PYTHONPATH=${PYTHONPATH}"
-echo "LD_LIBRARY_PATH=${LD_LIBRARY_PATH}"
-echo "LD_PRELOAD=${LD_PRELOAD}"
-echo "PYTHON_ENV=${PYTHON_ENV}"
-
 # TODO: what python env should be used ? new or old ?
 source ${PYTHON_ENV}/bin/activate
 
-export LD_LIBRARY_PATH=${PYTHON_ENV}/lib:${LD_LIBRARY_PATH}
+#export LD_LIBRARY_PATH=${PYTHON_ENV}/lib:${LD_LIBRARY_PATH}
 
-python --version
 
 cd ${PDI_BUILD_DIR}
 

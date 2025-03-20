@@ -28,7 +28,7 @@ else:
     scheduler_file_name=str(sys.argv[2])
     print(f"parameters: dask workers - {nb_workers}, schedueler_file - {scheduler_file_name}", flush=True)
 
-deisa = Deisa(scheduler_file_name=scheduler_info, 
+deisa = Deisa(scheduler_file_name=scheduler_file_name, 
               nb_workers=os.environ.get("DASK_NB_WORKERS", 1),
               use_ucx=os.environ.get("DASK_DISTRIBUTED__COMM__UCX__INFINIBAND", False))
 
