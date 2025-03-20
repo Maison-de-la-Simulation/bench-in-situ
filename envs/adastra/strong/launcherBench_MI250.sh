@@ -1,9 +1,9 @@
 #!/bin/bash
-#SBATCH --account=cad14985
-#sbatch --output=MI250Bench.out
+#SBATCH --account=${ACTIVE_PROJECT}
+#SBATCH --output=$1_Bench_$(date +%Y-%m-%d-%H-%M).out
 #SBATCH --job-name=b-i-s_nd
 #SBATCH --constraint=GENOA
-##SBATCH --constraint=MI250
+##SBATCH --constraint=$1
 #SBATCH --nodes=1
 ##SBATCH --exclusive
 #SBATCH --time=06:00:00
@@ -11,7 +11,7 @@
 ##SBATCH --gpus-per-node=1
 
 source ../modules.env
-source ../modulesMI250.env
+source ../modules$1.env
 
 export MPICH_GPU_SUPPORT_ENABLED=1
 
@@ -19,9 +19,9 @@ BASE_DIR=${PWD}
 WORKING_DIR=${BASE_DIR}/working_dir
 SIMU_SIZE=16
 CUBE_SIZE=64
-WHICH_LAUNCHER="launcher_noDeisa_MI250.sh"
-RESULT_DIR=results_bench_MI250
-RESULT_FILE=bench_output_MI250.txt
+WHICH_LAUNCHER="launcher_noDeisa_$1.sh"
+RESULT_DIR="results_bench_$1_$(date +%Y-%m-%d-%H-%M)"
+RESULT_FILE=bench_output_$1_$(date +%Y-%m-%d-%H-%M).txt
 FORMATED_SIMU_SIZE=$(printf "%03d" "$SIMU_SIZE")
 FORMATED_CUBE_SIZE=$(printf "%03d" "$CUBE_SIZE")
 
@@ -30,7 +30,7 @@ rm *.h5
 rm *.xmf
 cd ..
 
-declare -A tab_repart=(
+declare -A problem_subdivisions=(
     ['1']=" 1 1 1 "
     ['2']=" 2 1 1 "
     ['4']=" 2 2 1 "
@@ -41,59 +41,80 @@ declare -A tab_repart=(
     ['128']=" 4 4 8 "
 )
 
-# Tableau associatif pour les valeurs x, y, z
-declare -A tab_nxyz=(
+declare -A nodes_per_gpu=(
+    ['1']=1
+    ['2']=1
+    ['4']=1
+    ['8']=1
+    ['16']=2
+    ['32']=4
+    ['64']=8
+    ['128']=16
+)
+
+declare -A subdivisions_of_iteration=(
     ['x']=0
     ['y']=0
     ['z']=0
 )
 
-grep -v "##*" -rw ${BASE_DIR}/${FORMATED_SIMU_SIZE}/${WHICH_LAUNCHER} | grep -e "#SBATCH --constraint=" >> ${BASE_DIR}/${RESULT_FILE}
+grep -v "##*" -rw ${BASE_DIR}/${WHICH_LAUNCHER} | grep -e "#SBATCH --constraint=" >> ${BASE_DIR}/${RESULT_FILE}
 cat ${PWD}/../../../lib/pdi/pdi/VERSION >> ${BASE_DIR}/${RESULT_FILE}
 
 for  ((CUBE_SIZE=64; CUBE_SIZE<=512; CUBE_SIZE*=2)); do
     FORMATED_CUBE_SIZE=$(printf "%03d" "$CUBE_SIZE")
-    # Boucle sur chaque clé du tableau associatif
-    for SIMU_SIZE in "${!tab_repart[@]}"; do
+
+    for SIMU_SIZE in "${!problem_subdivisions[@]}"; do
 	FORMATED_SIMU_SIZE=$(printf "%03d" "$SIMU_SIZE")
-        value=${tab_repart[$SIMU_SIZE]}
+        value=${problem_subdivisions[$SIMU_SIZE]}
         echo "Key: $SIMU_SIZE ; Formated simu size: $FORMATED_SIMU_SIZE"
 
-        # Compteur pour assigner les valeurs aux clés x, y, z
         i=0
         
-        # Lire les chiffres un par un
         for number in $value; do
             case $i in
-                0) tab_nxyz['x']=$number ;;
-                1) tab_nxyz['y']=$number ;;
-                2) tab_nxyz['z']=$number ;;
+                0) subdivisions_of_iteration['x']=$number ;;
+                1) subdivisions_of_iteration['y']=$number ;;
+                2) subdivisions_of_iteration['z']=$number ;;
             esac
         ((i++))
         done
         
-        # Afficher les valeurs du tableau tab_nxyz
-        echo "tab_nxyz: x=${tab_nxyz['x']} y=${tab_nxyz['y']} z=${tab_nxyz['z']}"
-        let sizex=$CUBE_SIZE/${tab_nxyz['x']}
-        let sizey=$CUBE_SIZE/${tab_nxyz['y']}
-        let sizez=$CUBE_SIZE/${tab_nxyz['z']}
+        echo "subdivisions_of_iteration: x=${subdivisions_of_iteration['x']} y=${subdivisions_of_iteration['y']} z=${subdivisions_of_iteration['z']}"
+        let sizex=$CUBE_SIZE/${subdivisions_of_iteration['x']}
+        let sizey=$CUBE_SIZE/${subdivisions_of_iteration['y']}
+        let sizez=$CUBE_SIZE/${subdivisions_of_iteration['z']}
         echo "$sizex $sizey $sizez"
-        sed -i "s/^nx=[0-9]*$/nx=$sizex/" ${BASE_DIR}/${FORMATED_SIMU_SIZE}/setup.ini
-        sed -i "s/^ny=[0-9]*$/ny=$sizey/" ${BASE_DIR}/${FORMATED_SIMU_SIZE}/setup.ini
-        sed -i "s/^nz=[0-9]*$/nz=$sizez/" ${BASE_DIR}/${FORMATED_SIMU_SIZE}/setup.ini
+        sed -i "s/^nx=[0-9]*$/nx=$sizex/" ${BASE_DIR}/../setup.ini
+        sed -i "s/^ny=[0-9]*$/ny=$sizey/" ${BASE_DIR}/../setup.ini
+        sed -i "s/^nz=[0-9]*$/nz=$sizez/" ${BASE_DIR}/../setup.ini
 
-        sed -i "s/^mx=[0-9]*$/mx=${tab_nxyz['x']}/" ${BASE_DIR}/${FORMATED_SIMU_SIZE}/setup.ini
-        sed -i "s/^my=[0-9]*$/my=${tab_nxyz['y']}/" ${BASE_DIR}/${FORMATED_SIMU_SIZE}/setup.ini
-        sed -i "s/^mz=[0-9]*$/mz=${tab_nxyz['z']}/" ${BASE_DIR}/${FORMATED_SIMU_SIZE}/setup.ini
+        sed -i "s/^mx=[0-9]*$/mx=${subdivisions_of_iteration['x']}/" ${BASE_DIR}/../setup.ini
+        sed -i "s/^my=[0-9]*$/my=${subdivisions_of_iteration['y']}/" ${BASE_DIR}/../setup.ini
+        sed -i "s/^mz=[0-9]*$/mz=${subdivisions_of_iteration['z']}/" ${BASE_DIR}/../setup.ini
 
-        cat ${BASE_DIR}/${FORMATED_SIMU_SIZE}/setup.ini | grep nx
-        cat ${BASE_DIR}/${FORMATED_SIMU_SIZE}/setup.ini | grep ny
-        cat ${BASE_DIR}/${FORMATED_SIMU_SIZE}/setup.ini | grep nz
+        sed -i "s/^--output=res[0-9]*$/--output=res${SIMU_SIZE}/" ${BASE_DIR}/launcher_noDeisa.sh
+        sed -i "s/^--nodes=[0-9]*$/--nodes=${nodes_per_gpu[$SIMU_SIZE]}/" ${BASE_DIR}/launcher_noDeisa.sh
+        sed -i "s/^SIMU_SIZE=[0-9]*$/SIMU_SIZE=${SIMU_SIZE}/" ${BASE_DIR}/launcher_noDeisa.sh
+        sed -i "s/^SIM_NODES=[0-9]*$/SIM_NODES=${nodes_per_gpu[$SIMU_SIZE]}/" ${BASE_DIR}/launcher_noDeisa.sh
+        sed -i "s/^SIM_PROC=[0-9]*$/SIM_PROC=${SIMU_SIZE}/" ${BASE_DIR}/launcher_noDeisa.sh
+
+        cat ${BASE_DIR}/../setup.ini | grep nx
+        cat ${BASE_DIR}/../setup.ini | grep ny
+        cat ${BASE_DIR}/../setup.ini | grep nz
 
         echo "-----"
-        cat ${BASE_DIR}/${FORMATED_SIMU_SIZE}/setup.ini | grep mx
-        cat ${BASE_DIR}/${FORMATED_SIMU_SIZE}/setup.ini | grep my
-        cat ${BASE_DIR}/${FORMATED_SIMU_SIZE}/setup.ini | grep mz
+        cat ${BASE_DIR}/../setup.ini | grep mx
+        cat ${BASE_DIR}/../setup.ini | grep my
+        cat ${BASE_DIR}/../setup.ini | grep mz
+
+        echo "-----"
+        cat ${BASE_DIR}/launcher_noDeisa.sh | grep output=res
+        cat ${BASE_DIR}/launcher_noDeisa.sh | grep nodes=
+        cat ${BASE_DIR}/launcher_noDeisa.sh | grep SIMU_SIZE=
+        cat ${BASE_DIR}/launcher_noDeisa.sh | grep SIM_NODES=
+        cat ${BASE_DIR}/launcher_noDeisa.sh | grep SIM_PROC=
+
         sbatch --wait -o ${RESULT_DIR}/NoDeisa/${FORMATED_CUBE_SIZE}/res${FORMATED_SIMU_SIZE}.out ${BASE_DIR}/${FORMATED_SIMU_SIZE}/${WHICH_LAUNCHER}
         echo "----------------------------------------"
     done
