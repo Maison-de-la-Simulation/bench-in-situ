@@ -32,25 +32,11 @@ rm *.xmf
 cd ..
 
 declare -A problem_subdivisions=(
-    ['1']=" 1 1 1 "
-    ['2']=" 2 1 1 "
-    ['4']=" 2 2 1 "
-    ['8']=" 2 2 2 "
     ['16']=" 4 2 2 "
-    ['32']=" 4 4 2 "
-    ['64']=" 4 4 4 "
-    ['128']=" 4 4 8 "
 )
 
 declare -A nodes_per_gpu=(
-    ['1']=1
-    ['2']=1
-    ['4']=1
-    ['8']=1
     ['16']=2
-    ['32']=4
-    ['64']=8
-    ['128']=16
 )
 
 declare -A subdivisions_of_iteration=(
@@ -62,7 +48,7 @@ declare -A subdivisions_of_iteration=(
 grep -v "##*" -rw ${BASE_DIR}/${WHICH_LAUNCHER} | grep -e "#SBATCH --constraint=" >> ${BASE_DIR}/${RESULT_FILE}
 cat ${PWD}/../../../lib/pdi/pdi/VERSION >> ${BASE_DIR}/${RESULT_FILE}
 
-for  ((CUBE_SIZE=64; CUBE_SIZE<=512; CUBE_SIZE*=2)); do
+for  ((CUBE_SIZE=128; CUBE_SIZE<=128; CUBE_SIZE*=2)); do
     FORMATED_CUBE_SIZE=$(printf "%03d" "$CUBE_SIZE")
 
     for SIMU_SIZE in "${!problem_subdivisions[@]}"; do

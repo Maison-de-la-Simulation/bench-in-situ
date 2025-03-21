@@ -94,6 +94,7 @@ make -j8
 ### To build bench on Adastra
 For MI250, use the following from `bench-in-situ/simulation`:
 ``` bash
+export ${ACTIVE_PROJECT}
 source $PWD/../lib/install_pdi/share/pdi/env.sh
 source $PWD/../envs/adastra/modules.env
 source $PWD/../envs/adastra/modulesMI250.env
@@ -110,6 +111,7 @@ make -j16
 ```
 For MI300, use the following from `bench-in-situ/simulation`:
 ``` bash
+export ${ACTIVE_PROJECT}
 source $PWD/../lib/install_pdi/share/pdi/env.sh
 source $PWD/../envs/adastra/modules.env
 source $PWD/../envs/adastra/modulesMI300.env
