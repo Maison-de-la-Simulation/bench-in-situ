@@ -119,3 +119,4 @@ for  ((CUBE_SIZE=128; CUBE_SIZE<=128; CUBE_SIZE*=2)); do
 done
 
 mkdir -p ${BASE_DIR}/${RESULT_DIR}/NoDeisa && cd ${BASE_DIR}/${RESULT_DIR}/NoDeisa && grep -rw . -e "RESULT" >> ${BASE_DIR}/${RESULT_FILE}
+rm -rf ${WORKING_DIR}

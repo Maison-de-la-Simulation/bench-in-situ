@@ -158,7 +158,7 @@ Run manually from the folder `simulation` using:
 Or use a script from a subdirectory of `envs` with sbatch (or bash), 
 for example:
 ``` bash
-sbatch ./envs/adastra/strong/launcherBench_MI250.sh
+bash ./envs/adastra/strong/launcherBench.sh MI250
 ```
 
 ## Offline Installation
