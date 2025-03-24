@@ -32,7 +32,8 @@ rm *.xmf
 cd ..
 
 declare -A problem_subdivisions=(
-    ['16']=" 4 2 2 "
+    ['2']=" 2 1 1 "
+#    ['16']=" 4 2 2 "
 )
 
 declare -A subdivisions_of_iteration=(
@@ -84,12 +85,22 @@ for  ((CUBE_SIZE=128; CUBE_SIZE<=128; CUBE_SIZE*=2)); do
         sed -i "s/modulesMI.*$/modules$1.env/" ${BASE_DIR}/${WHICH_LAUNCHER}
         if [ "$1" = "MI250" ]; then
             sed -i "s/^#SBATCH --cpus-per-task=.*$/#SBATCH --cpus-per-task=16/" ${BASE_DIR}/${WHICH_LAUNCHER}
-            sed -i "s/^#SBATCH --nodes=.*$/#SBATCH --nodes=$((SIMU_SIZE / 8))/" ${BASE_DIR}/${WHICH_LAUNCHER}
-            sed -i "s/^SIM_NODES=.*$/SIM_NODES=$((SIMU_SIZE / 8))/" ${BASE_DIR}/${WHICH_LAUNCHER}
+            if [ "$SIMU_SIZE" -gt 8 ]; then
+                sed -i "s/^#SBATCH --nodes=.*$/#SBATCH --nodes=$((SIMU_SIZE / 8))/" ${BASE_DIR}/${WHICH_LAUNCHER}
+                sed -i "s/^SIM_NODES=.*$/SIM_NODES=$((SIMU_SIZE / 8))/" ${BASE_DIR}/${WHICH_LAUNCHER}
+            else
+                sed -i "s/^#SBATCH --nodes=.*$/#SBATCH --nodes=1/" ${BASE_DIR}/${WHICH_LAUNCHER}
+                sed -i "s/^SIM_NODES=.*$/SIM_NODES=1/" ${BASE_DIR}/${WHICH_LAUNCHER}
+            fi
         elif [ "$1" = "MI300" ]; then
             sed -i "s/^#SBATCH --cpus-per-task=.*$/#SBATCH --cpus-per-task=24/" ${BASE_DIR}/${WHICH_LAUNCHER}
-            sed -i "s/^#SBATCH --nodes=.*$/#SBATCH --nodes=$((SIMU_SIZE / 4))/" ${BASE_DIR}/${WHICH_LAUNCHER}
-            sed -i "s/^SIM_NODES=.*$/SIM_NODES=$((SIMU_SIZE / 4))/" ${BASE_DIR}/${WHICH_LAUNCHER}
+            if [ "$SIMU_SIZE" -gt 4 ]; then
+                sed -i "s/^#SBATCH --nodes=.*$/#SBATCH --nodes=$((SIMU_SIZE / 4))/" ${BASE_DIR}/${WHICH_LAUNCHER}
+                sed -i "s/^SIM_NODES=.*$/SIM_NODES=$((SIMU_SIZE / 4))/" ${BASE_DIR}/${WHICH_LAUNCHER}
+            else
+                sed -i "s/^#SBATCH --nodes=.*$/#SBATCH --nodes=1/" ${BASE_DIR}/${WHICH_LAUNCHER}
+                sed -i "s/^SIM_NODES=.*$/SIM_NODES=1/" ${BASE_DIR}/${WHICH_LAUNCHER}
+            fi
         fi
 
         cat ${BASE_DIR}/../setup.ini | grep nx

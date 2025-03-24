@@ -1,30 +1,30 @@
 #!/bin/bash
 
 #SBATCH --job-name=bench_insitu
-#SBATCH --output=res16N_%x_%j.out
-#SBATCH --time=01:00:00
-#SBATCH --nodes=2
+#SBATCH --output=res32N_%x_%j.out
+#SBATCH --time=02:00:00
+#SBATCH --nodes=8
 #SBATCH --account=cad14985
-#SBATCH --constraint=MI250
+#SBATCH --constraint=MI300
 ##SBATCH --constraint=GENOA
 #SBATCH --exclusive
 ##SBATCH --ntasks-per-node=8
 ##SBATCH --gpus-per-node=8
-#SBATCH --cpus-per-task=16
+#SBATCH --cpus-per-task=24
 ##SBATCH --threads-per-core=1
 
 export MPICH_GPU_SUPPORT_ENABLED=1
 
 # All paths relative to WORKING_DIRECTORY
-SIMU_SIZE=16
+SIMU_SIZE=32
 BASE_DIR=${PWD}
 ROOT_DIR=${PWD}/../../..
 WORKING_DIR=${BASE_DIR}/working_dir
 FORMATED_SIMU_SIZE=$(printf "%03d" "$SIMU_SIZE")
 
 PREFIX=bench_insitu
-SIM_NODES=2
-SIM_PROC=16
+SIM_NODES=8
+SIM_PROC=32
 
 export OMP_NUM_THREADS=${SLURM_CPUS_PER_TASK}
 export OMP_PROC_BIND=spread
@@ -36,7 +36,7 @@ echo "SIM_NODES=$SIM_NODES"
 
 # Modules files must be accessible from every slurm node (i.e.: shared network drive)
 source ${PWD}/../modules.env
-source ${PWD}/../modulesMI250.env
+source ${PWD}/../modulesMI300.env
 
 # Set result file path
 mkdir -p $SNAPSHOT_FILE_PATH/$FORMATED_SIMU_SIZE

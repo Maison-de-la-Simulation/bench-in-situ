@@ -18,7 +18,7 @@ export MPICH_GPU_SUPPORT_ENABLED=1
 
 BASE_DIR=${PWD}
 WORKING_DIR=${BASE_DIR}/working_dir
-SIMU_SIZE=16
+SIMU_SIZE=1
 CUBE_SIZE=64
 WHICH_LAUNCHER="launcher_noDeisa.sh"
 RESULT_DIR="results_bench_$1_$(date +%Y-%m-%d-%H-%M)"
@@ -91,12 +91,22 @@ for  ((CUBE_SIZE=64; CUBE_SIZE<=512; CUBE_SIZE*=2)); do
         sed -i "s/modulesMI.*$/modules$1.env/" ${BASE_DIR}/${WHICH_LAUNCHER}
         if [ "$1" = "MI250" ]; then
             sed -i "s/^#SBATCH --cpus-per-task=.*$/#SBATCH --cpus-per-task=16/" ${BASE_DIR}/${WHICH_LAUNCHER}
-            sed -i "s/^#SBATCH --nodes=.*$/#SBATCH --nodes=$((SIMU_SIZE / 8))/" ${BASE_DIR}/${WHICH_LAUNCHER}
-            sed -i "s/^SIM_NODES=.*$/SIM_NODES=$((SIMU_SIZE / 8))/" ${BASE_DIR}/${WHICH_LAUNCHER}
+            if [ "$SIMU_SIZE" -gt 8 ]; then
+                sed -i "s/^#SBATCH --nodes=.*$/#SBATCH --nodes=$((SIMU_SIZE / 8))/" ${BASE_DIR}/${WHICH_LAUNCHER}
+                sed -i "s/^SIM_NODES=.*$/SIM_NODES=$((SIMU_SIZE / 8))/" ${BASE_DIR}/${WHICH_LAUNCHER}
+            else
+                sed -i "s/^#SBATCH --nodes=.*$/#SBATCH --nodes=1/" ${BASE_DIR}/${WHICH_LAUNCHER}
+                sed -i "s/^SIM_NODES=.*$/SIM_NODES=1/" ${BASE_DIR}/${WHICH_LAUNCHER}
+            fi
         elif [ "$1" = "MI300" ]; then
             sed -i "s/^#SBATCH --cpus-per-task=.*$/#SBATCH --cpus-per-task=24/" ${BASE_DIR}/${WHICH_LAUNCHER}
-            sed -i "s/^#SBATCH --nodes=.*$/#SBATCH --nodes=$((SIMU_SIZE / 4))/" ${BASE_DIR}/${WHICH_LAUNCHER}
-            sed -i "s/^SIM_NODES=.*$/SIM_NODES=$((SIMU_SIZE / 4))/" ${BASE_DIR}/${WHICH_LAUNCHER}
+            if [ "$SIMU_SIZE" -gt 4 ]; then
+                sed -i "s/^#SBATCH --nodes=.*$/#SBATCH --nodes=$((SIMU_SIZE / 4))/" ${BASE_DIR}/${WHICH_LAUNCHER}
+                sed -i "s/^SIM_NODES=.*$/SIM_NODES=$((SIMU_SIZE / 4))/" ${BASE_DIR}/${WHICH_LAUNCHER}
+            else
+                sed -i "s/^#SBATCH --nodes=.*$/#SBATCH --nodes=1/" ${BASE_DIR}/${WHICH_LAUNCHER}
+                sed -i "s/^SIM_NODES=.*$/SIM_NODES=1/" ${BASE_DIR}/${WHICH_LAUNCHER}
+            fi
         fi
 
         cat ${BASE_DIR}/../setup.ini | grep nx
