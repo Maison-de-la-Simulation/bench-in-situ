@@ -32,18 +32,10 @@ cd ..
 
 declare -A problem_subdivisions=(
     ['1']=" 1 1 1 "
-#    ['2']=" 2 1 1 "
-#    ['4']=" 2 2 1 "
-#    ['8']=" 2 2 2 "
-#    ['16']=" 4 2 2 "
-)
-
-declare -A nodes_per_gpu=(
-    ['1']=1
-#    ['2']=1
-#    ['4']=1
-#    ['8']=1
-#    ['16']=2
+    ['2']=" 2 1 1 "
+    ['4']=" 2 2 1 "
+    ['8']=" 2 2 2 "
+    ['16']=" 4 2 2 "
 )
 
 declare -A subdivisions_of_iteration=(
@@ -83,17 +75,19 @@ for SIMU_SIZE in "${!problem_subdivisions[@]}"; do
     sed -i "s/^mz=[0-9]*$/mz=${subdivisions_of_iteration['z']}/" ${BASE_DIR}/../setup.ini
 
     sed -i "s/^#SBATCH --output=res.*$/#SBATCH --output=res${SIMU_SIZE}N_%x_%j.out/" ${BASE_DIR}/${WHICH_LAUNCHER}
-    sed -i "s/^#SBATCH --nodes=[0-9]*$/#SBATCH --nodes=${nodes_per_gpu[$SIMU_SIZE]}/" ${BASE_DIR}/${WHICH_LAUNCHER}
-    sed -i "s/^SIMU_SIZE=[0-9]*$/SIMU_SIZE=${SIMU_SIZE}/" ${BASE_DIR}/${WHICH_LAUNCHER}
-    sed -i "s/^SIM_NODES=[0-9]*$/SIM_NODES=${nodes_per_gpu[$SIMU_SIZE]}/" ${BASE_DIR}/${WHICH_LAUNCHER}
-    sed -i "s/^SIM_PROC=[0-9]*$/SIM_PROC=${SIMU_SIZE}/" ${BASE_DIR}/${WHICH_LAUNCHER}
+    sed -i "s/^SIMU_SIZE=.*$/SIMU_SIZE=${SIMU_SIZE}/" ${BASE_DIR}/${WHICH_LAUNCHER}
+    sed -i "s/^SIM_PROC=.*$/SIM_PROC=${SIMU_SIZE}/" ${BASE_DIR}/${WHICH_LAUNCHER}
     sed -i "s/^#SBATCH --account=.*$/#SBATCH --account=${ACTIVE_PROJECT}/" ${BASE_DIR}/${WHICH_LAUNCHER}
     sed -i "s/^#SBATCH --constraint=.*$/#SBATCH --constraint=$1/" ${BASE_DIR}/${WHICH_LAUNCHER}
     sed -i "s/modulesMI.*$/modules$1.env/" ${BASE_DIR}/${WHICH_LAUNCHER}
     if [ "$1" = "MI250" ]; then
         sed -i "s/^#SBATCH --cpus-per-task=.*$/#SBATCH --cpus-per-task=16/" ${BASE_DIR}/${WHICH_LAUNCHER}
+        sed -i "s/^#SBATCH --nodes=.*$/#SBATCH --nodes=$((SIMU_SIZE / 8))/" ${BASE_DIR}/${WHICH_LAUNCHER}
+        sed -i "s/^SIM_NODES=.*$/SIM_NODES=$((SIMU_SIZE / 8))/" ${BASE_DIR}/${WHICH_LAUNCHER}
     elif [ "$1" = "MI300" ]; then
         sed -i "s/^#SBATCH --cpus-per-task=.*$/#SBATCH --cpus-per-task=24/" ${BASE_DIR}/${WHICH_LAUNCHER}
+        sed -i "s/^#SBATCH --nodes=.*$/#SBATCH --nodes=$((SIMU_SIZE / 4))/" ${BASE_DIR}/${WHICH_LAUNCHER}
+        sed -i "s/^SIM_NODES=.*$/SIM_NODES=$((SIMU_SIZE / 4))/" ${BASE_DIR}/${WHICH_LAUNCHER}
     fi
 
     cat ${BASE_DIR}/../setup.ini | grep nx

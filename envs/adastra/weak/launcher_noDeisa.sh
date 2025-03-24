@@ -1,9 +1,9 @@
 #!/bin/bash
 
 #SBATCH --job-name=bench_insitu
-#SBATCH --output=res1N_%x_%j.out
+#SBATCH --output=res16N_%x_%j.out
 #SBATCH --time=01:00:00 
-#SBATCH --nodes=1
+#SBATCH --nodes=4
 #SBATCH --account=cad14985
 #SBATCH --constraint=MI300
 ##SBATCH --constraint=GENOA
@@ -16,15 +16,15 @@
 export MPICH_GPU_SUPPORT_ENABLED=1
 
 # All paths are relative to WORKING_DIRECTORY
-SIMU_SIZE=1
+SIMU_SIZE=16
 BASE_DIR=${PWD}
 ROOT_DIR=${PWD}/../../..
 WORKING_DIR=${BASE_DIR}/working_dir
 FORMATED_SIMU_SIZE=$(printf "%03d" "$SIMU_SIZE")
 
 PREFIX=bench_insitu
-SIM_NODES=1
-SIM_PROC=1
+SIM_NODES=4
+SIM_PROC=16
 
 export OMP_NUM_THREADS=${SLURM_CPUS_PER_TASK}
 export OMP_PROC_BIND=spread
