@@ -15,7 +15,7 @@
 
 export MPICH_GPU_SUPPORT_ENABLED=1
 
-# All paths relative to WORKING_DIRECTORY
+# All paths are relative to WORKING_DIRECTORY
 SIMU_SIZE=32
 BASE_DIR=${PWD}
 ROOT_DIR=${PWD}/../../..
