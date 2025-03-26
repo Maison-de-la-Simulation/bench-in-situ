@@ -23,7 +23,6 @@ CUBE_SIZE=64
 LAUNCHER_FILE="launcher_noDeisa.sh"
 RESULT_DIR="results_bench_$1_$(date +%Y-%m-%d-%H-%M)"
 RESULT_FILE=bench_output_$1_$(date +%Y-%m-%d-%H-%M).txt
-
 FORMATED_SIMU_SIZE=$(printf "%03d" "$SIMU_SIZE")
 FORMATED_CUBE_SIZE=$(printf "%03d" "$CUBE_SIZE")
 
@@ -133,8 +132,6 @@ for  ((CUBE_SIZE=${SMALL_CUBE_SIZE}; CUBE_SIZE<=${SMALL_CUBE_SIZE}; CUBE_SIZE*=2
         cat ${WHICH_LAUNCHER} | grep cpus-per-task
         cat ${WHICH_LAUNCHER} | grep constraint
         cat ${WHICH_LAUNCHER} | grep ^LOCAL_DIR=
-
-        SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
         sbatch --wait -o ${RESULT_DIR}/NoDeisa/${FORMATED_CUBE_SIZE}/res${FORMATED_SIMU_SIZE}.out ${WHICH_LAUNCHER}
         echo "----------------------------------------"
