@@ -48,17 +48,17 @@ for  ((CUBE_SIZE=${SMALL_CUBE_SIZE}; CUBE_SIZE<=${SMALL_CUBE_SIZE}; CUBE_SIZE*=2
         value=${problem_subdivisions_small[$SIMU_SIZE]}
         echo "Key: $SIMU_SIZE ; Formated simu size: $FORMATED_SIMU_SIZE"
 
-        ITERATION_FOLDER=${BASE_DIR}/${RESULT_DIR}/${FORMATED_CUBE_SIZE}/${FORMATED_SIMU_SIZE}
-        mkdir -p ${ITERATION_FOLDER}
-        WHICH_SETUP=${ITERATION_FOLDER}/setup.ini
+        JOB_GENERATED_DIR=${BASE_DIR}/${RESULT_DIR}/${FORMATED_CUBE_SIZE}/${FORMATED_SIMU_SIZE}
+        mkdir -p ${JOB_GENERATED_DIR}
+        WHICH_SETUP=${JOB_GENERATED_DIR}/setup.ini
         cp ${BASE_DIR}/../setup.ini ${WHICH_SETUP}
-        echo $1 >> ${ITERATION_FOLDER}/metadata.dat
-        cat ${PWD}/../../../lib/pdi/pdi/VERSION >> ${ITERATION_FOLDER}/metadata.dat
-        WHICH_LAUNCHER=${ITERATION_FOLDER}/launcher.sh
+        echo $1 >> ${JOB_GENERATED_DIR}/metadata.dat
+        cat ${PWD}/../../../lib/pdi/pdi/VERSION >> ${JOB_GENERATED_DIR}/metadata.dat
+        WHICH_LAUNCHER=${JOB_GENERATED_DIR}/launcher.sh
         cp ${LAUNCHER_FILE} ${WHICH_LAUNCHER}
-        cp ${BASE_DIR}/io_chkpt.yml ${ITERATION_FOLDER}/io_chkpt.yml
-        cp ${BASE_DIR}/../modules.env ${ITERATION_FOLDER}/modules.env
-        cp ${BASE_DIR}/../modules$1.env ${ITERATION_FOLDER}/modules$1.env
+        cp ${BASE_DIR}/io_chkpt.yml ${JOB_GENERATED_DIR}/io_chkpt.yml
+        cp ${BASE_DIR}/../modules.env ${JOB_GENERATED_DIR}/modules.env
+        cp ${BASE_DIR}/../modules$1.env ${JOB_GENERATED_DIR}/modules$1.env
 
         i=0
 
@@ -90,7 +90,7 @@ for  ((CUBE_SIZE=${SMALL_CUBE_SIZE}; CUBE_SIZE<=${SMALL_CUBE_SIZE}; CUBE_SIZE*=2
         sed -i "s/^#SBATCH --account=.*$/#SBATCH --account=${ACTIVE_PROJECT}/" ${WHICH_LAUNCHER}
         sed -i "s/^#SBATCH --constraint=.*$/#SBATCH --constraint=$1/" ${WHICH_LAUNCHER}
         sed -i "s/modulesGPU.*$/modules$1.env/" ${WHICH_LAUNCHER}
-        sed -i "s|^\(LOCAL_DIR=\).*|\1${ITERATION_FOLDER}/|" ${WHICH_LAUNCHER}
+        sed -i "s|^\(JOB_GENERATED_DIR=\).*|\1${JOB_GENERATED_DIR}/|" ${WHICH_LAUNCHER}
         if [ "$1" = "MI250" ]; then
             sed -i "s/^#SBATCH --cpus-per-task=.*$/#SBATCH --cpus-per-task=16/" ${WHICH_LAUNCHER}
             if [ "$SIMU_SIZE" -gt 8 ]; then
@@ -131,10 +131,10 @@ for  ((CUBE_SIZE=${SMALL_CUBE_SIZE}; CUBE_SIZE<=${SMALL_CUBE_SIZE}; CUBE_SIZE*=2
         cat ${WHICH_LAUNCHER} | grep constraint
         cat ${WHICH_LAUNCHER} | grep ^LOCAL_DIR=
 
-        sbatch --wait -o ${ITERATION_FOLDER}/res${FORMATED_SIMU_SIZE}.out ${WHICH_LAUNCHER}
+        sbatch --wait -o ${JOB_GENERATED_DIR}/res${FORMATED_SIMU_SIZE}.out ${WHICH_LAUNCHER}
         echo "----------------------------------------"
     done
 done
 
-mkdir -p ${BASE_DIR}/${RESULT_DIR} && cd ${BASE_DIR}/${RESULT_DIR} && grep -rw . -e "RESULT" >> ${BASE_DIR}/${RESULT_FILE}
+mkdir -p ${BASE_DIR}/${RESULT_DIR} && cd ${BASE_DIR}/${RESULT_DIR} && grep -rw . -e "RESULT" >> ${BASE_DIR}/${RESULT_DIR}/${RESULT_FILE}
 rm -rf ${WORKING_DIR}

@@ -17,10 +17,9 @@ export MPICH_GPU_SUPPORT_ENABLED=1
 
 # All paths are relative to WORKING_DIRECTORY
 SIMU_SIZE=%%SIMU_SIZE
-BASE_DIR=${PWD}
 ROOT_DIR=${PWD}/../../..
-LOCAL_DIR=%%LOCAL_DIR
-WORKING_DIR=${BASE_DIR}/working_dir
+JOB_GENERATED_DIR=%%JOB_GENERATED_DIR
+WORKING_DIR=${PWD}/working_dir
 FORMATED_SIMU_SIZE=$(printf "%03d" "$SIMU_SIZE")
 
 PREFIX=bench_insitu
@@ -36,12 +35,12 @@ echo "OMP_NUM_THREADS=$OMP_NUM_THREADS"
 echo "SIM_NODES=$SIM_NODES"
 
 # Modules files must be accessible from every slurm node (i.e.: shared network drive)
-source ${LOCAL_DIR}/modules.env
-source ${LOCAL_DIR}/modulesGPU%%constraint.env
+source ${JOB_GENERATED_DIR}/modules.env
+source ${JOB_GENERATED_DIR}/modulesGPU%%constraint.env
 
 # Set result file path
 mkdir -p $SNAPSHOT_FILE_PATH/$FORMATED_SIMU_SIZE
-sed -i "s|^prefix=.*|prefix=$SNAPSHOT_FILE_PATH/$FORMATED_SIMU_SIZE/Checkpoint|" ${LOCAL_DIR}/setup.ini
+sed -i "s|^prefix=.*|prefix=$SNAPSHOT_FILE_PATH/$FORMATED_SIMU_SIZE/Checkpoint|" ${JOB_GENERATED_DIR}/setup.ini
 
 # Move to working directory
 cd ${WORKING_DIR}
@@ -53,7 +52,7 @@ source ${ROOT_DIR}/lib/pdi/build/staging/share/pdi/env.sh
 ##rocm-smi > rocm-monitor${FORMATED_SIMU_SIZE}.csv
 
 # Simulation
-srun -N ${SIM_NODES} -n ${SIM_PROC} ${ROOT_DIR}/simulation/build/main ${LOCAL_DIR}/setup.ini ${LOCAL_DIR}/io_chkpt.yml --kokkos-map-device-id-by=mpi_rank &
+srun -N ${SIM_NODES} -n ${SIM_PROC} ${ROOT_DIR}/simulation/build/main ${JOB_GENERATED_DIR}/setup.ini ${JOB_GENERATED_DIR}/io_chkpt.yml --kokkos-map-device-id-by=mpi_rank &
 simu_pid=$! &
 rocm-smi > rocm-monitor${FORMATED_SIMU_SIZE}.csv
 wait $simu_pid
