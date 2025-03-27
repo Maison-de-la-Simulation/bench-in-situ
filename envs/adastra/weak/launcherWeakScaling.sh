@@ -1,6 +1,6 @@
 #!/bin/bash
 #SBATCH --account=$ACTIVE_PROJECT
-#sbatch --output=$1WeakScaling.out
+#SBATCH --output=$1WeakScaling.out
 #SBATCH --job-name=b-i-s_nd
 #SBATCH --constraint=GENOA
 ##SBATCH --constraint=$1
@@ -18,8 +18,8 @@ export MPICH_GPU_SUPPORT_ENABLED=1
 BASE_DIR=${PWD}
 WORKING_DIR=${BASE_DIR}/working_dir
 SIMU_SIZE=1
-CUBE_SIZE=512
-LAUNCHER_FILE="launcher_noDeisa.sh"
+CUBE_SIZE=${MAXIMUM_CUBE_SIZE}
+LAUNCHER_FILE="launcher_iteration.sh"
 RESULT_DIR="results_weakScaling_$1_$(date +%Y-%m-%d-%H-%M)"
 RESULT_FILE=bench_weakScaling_$1_$(date +%Y-%m-%d-%H-%M).txt
 FORMATED_SIMU_SIZE=$(printf "%03d" "$SIMU_SIZE")
@@ -44,10 +44,11 @@ for SIMU_SIZE in "${!problem_subdivisions[@]}"; do
     value=${problem_subdivisions[$SIMU_SIZE]}
     echo "Key: $SIMU_SIZE, CUBE_SIZE: $CUBE_SIZE"
 
-    ITERATION_FOLDER=${BASE_DIR}/${RESULT_DIR}/NoDeisa/${FORMATED_CUBE_SIZE}/${FORMATED_SIMU_SIZE}
+    ITERATION_FOLDER=${BASE_DIR}/${RESULT_DIR}/${FORMATED_CUBE_SIZE}/${FORMATED_SIMU_SIZE}
     mkdir -p ${ITERATION_FOLDER}
     WHICH_SETUP=${ITERATION_FOLDER}/setup.ini
     cp ${BASE_DIR}/../setup.ini ${WHICH_SETUP}
+    echo $1 >> ${ITERATION_FOLDER}/metadata.dat
     cat ${PWD}/../../../lib/pdi/pdi/VERSION >> ${ITERATION_FOLDER}/metadata.dat
     WHICH_LAUNCHER=${ITERATION_FOLDER}/launcher.sh
     cp ${LAUNCHER_FILE} ${WHICH_LAUNCHER}
@@ -67,16 +68,16 @@ for SIMU_SIZE in "${!problem_subdivisions[@]}"; do
     done
 
     echo "subdivisions_of_iteration: x=${subdivisions_of_iteration['x']} y=${subdivisions_of_iteration['y']} z=${subdivisions_of_iteration['z']}"
-    echo "512 512 512"
-    sed -i "s/^nx=[0-9]*$/nx=512/" ${WHICH_SETUP}
-    sed -i "s/^ny=[0-9]*$/ny=512/" ${WHICH_SETUP}
-    sed -i "s/^nz=[0-9]*$/nz=512/" ${WHICH_SETUP}
+    echo "${MAXIMUM_CUBE_SIZE} ${MAXIMUM_CUBE_SIZE} ${MAXIMUM_CUBE_SIZE}"
+    sed -i "s/^nx=[0-9]*$/nx=${MAXIMUM_CUBE_SIZE}/" ${WHICH_SETUP}
+    sed -i "s/^ny=[0-9]*$/ny=${MAXIMUM_CUBE_SIZE}/" ${WHICH_SETUP}
+    sed -i "s/^nz=[0-9]*$/nz=${MAXIMUM_CUBE_SIZE}/" ${WHICH_SETUP}
 
     sed -i "s/^mx=[0-9]*$/mx=${subdivisions_of_iteration['x']}/" ${WHICH_SETUP}
     sed -i "s/^my=[0-9]*$/my=${subdivisions_of_iteration['y']}/" ${WHICH_SETUP}
     sed -i "s/^mz=[0-9]*$/mz=${subdivisions_of_iteration['z']}/" ${WHICH_SETUP}
 
-    sed -i "s/^#SBATCH --output=res.*$/#SBATCH --output=res${SIMU_SIZE}N_%x_%j.out/" ${WHICH_LAUNCHER}
+    sed -i "s/^#SBATCH --output=.*$/#SBATCH --output=res${FORMATED_SIMU_SIZE}N_%x_%j.out/" ${WHICH_LAUNCHER}
     sed -i "s/^SIMU_SIZE=.*$/SIMU_SIZE=${SIMU_SIZE}/" ${WHICH_LAUNCHER}
     sed -i "s/^SIM_PROC=.*$/SIM_PROC=${SIMU_SIZE}/" ${WHICH_LAUNCHER}
     sed -i "s/^#SBATCH --account=.*$/#SBATCH --account=${ACTIVE_PROJECT}/" ${WHICH_LAUNCHER}
@@ -123,9 +124,9 @@ for SIMU_SIZE in "${!problem_subdivisions[@]}"; do
     cat ${WHICH_LAUNCHER} | grep constraint
     cat ${WHICH_LAUNCHER} | grep ^LOCAL_DIR=
 
-    sbatch --wait -o ${RESULT_DIR}/NoDeisa/${FORMATED_CUBE_SIZE}/res${FORMATED_SIMU_SIZE}.out ${WHICH_LAUNCHER}
+    sbatch --wait -o ${ITERATION_FOLDER}/res${FORMATED_SIMU_SIZE}.out ${WHICH_LAUNCHER}
     echo "----------------------------------------"
 done
 
-mkdir -p ${BASE_DIR}/${RESULT_DIR}/NoDeisa && cd ${BASE_DIR}/${RESULT_DIR}/NoDeisa && grep -rw . -e "RESULT" >> ${BASE_DIR}/${RESULT_FILE}
+mkdir -p ${BASE_DIR}/${RESULT_DIR} && cd ${BASE_DIR}/${RESULT_DIR} && grep -rw . -e "RESULT" >> ${BASE_DIR}/${RESULT_FILE}
 rm -rf ${WORKING_DIR}
