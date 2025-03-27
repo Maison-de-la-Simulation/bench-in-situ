@@ -96,7 +96,7 @@ pdi:
     size: int
     time: double
     iStep: int
-    should_deepcopy: logical
+    should_deepcopy: int
 
     mpi_coord: {type: array, subtype: int, size: 3}
 
