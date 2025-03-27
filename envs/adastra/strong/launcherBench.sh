@@ -31,8 +31,6 @@ rm *.h5
 rm *.xmf
 cd ..
 
-source ${BASE_DIR}/../topology.dat
-
 declare -A subdivisions_of_iteration=(
     ['x']=0
     ['y']=0
@@ -57,8 +55,7 @@ for  ((CUBE_SIZE=${MINIMUM_CUBE_SIZE}; CUBE_SIZE<=${MAXIMUM_CUBE_SIZE}; CUBE_SIZ
         cat ${PWD}/../../../lib/pdi/pdi/VERSION >> ${ITERATION_FOLDER}/metadata.dat
         WHICH_LAUNCHER=${ITERATION_FOLDER}/launcher.sh
         cp ${LAUNCHER_FILE} ${WHICH_LAUNCHER}
-        cp ${BASE_DIR}/../topology.dat ${ITERATION_FOLDER}/topology.dat
-        cp ${BASE_DIR}/../io_chkpt.yml ${ITERATION_FOLDER}/io_chkpt.yml
+        cp ${BASE_DIR}/io_chkpt.yml ${ITERATION_FOLDER}/io_chkpt.yml
         cp ${BASE_DIR}/../modules.env ${ITERATION_FOLDER}/modules.env
         cp ${BASE_DIR}/../modules$1.env ${ITERATION_FOLDER}/modules$1.env
 
@@ -91,7 +88,7 @@ for  ((CUBE_SIZE=${MINIMUM_CUBE_SIZE}; CUBE_SIZE<=${MAXIMUM_CUBE_SIZE}; CUBE_SIZ
         sed -i "s/^SIM_PROC=.*$/SIM_PROC=${SIMU_SIZE}/" ${WHICH_LAUNCHER}
         sed -i "s/^#SBATCH --account=.*$/#SBATCH --account=${ACTIVE_PROJECT}/" ${WHICH_LAUNCHER}
         sed -i "s/^#SBATCH --constraint=.*$/#SBATCH --constraint=$1/" ${WHICH_LAUNCHER}
-        sed -i "s/modulesMI.*$/modules$1_${FORMATED_SIMU_SIZE}.env/" ${WHICH_LAUNCHER}
+        sed -i "s/modulesGPU.*$/modules$1.env/" ${WHICH_LAUNCHER}
         sed -i "s|^\(LOCAL_DIR=\).*|\1${ITERATION_FOLDER}/|" ${WHICH_LAUNCHER}
         if [ "$1" = "MI250" ]; then
             sed -i "s/^#SBATCH --cpus-per-task=.*$/#SBATCH --cpus-per-task=16/" ${WHICH_LAUNCHER}

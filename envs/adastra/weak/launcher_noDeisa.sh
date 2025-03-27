@@ -1,31 +1,31 @@
 #!/bin/bash
 
 #SBATCH --job-name=bench_insitu
-#SBATCH --output=res8N_%x_%j.out
-#SBATCH --time=02:00:00 
-#SBATCH --nodes=2
-#SBATCH --account=cad14985
-#SBATCH --constraint=MI300
+#SBATCH --output=res%%SIMU_SIZEN_%x_%j.out
+#SBATCH --time=02:00:00
+#SBATCH --nodes=%%SIMU_SIZE/gpus-per-node
+#SBATCH --account=%%account
+#SBATCH --constraint=%%constraint
 ##SBATCH --constraint=GENOA
 #SBATCH --exclusive
-##SBATCH --ntasks-per-node=8
-##SBATCH --gpus-per-node=8
-#SBATCH --cpus-per-task=24
+##SBATCH --ntasks-per-node=8, one for each GCD
+##SBATCH --gpus-per-node=8 GCD for MI250, 4 for MI300
+#SBATCH --cpus-per-task=%%cpus-per-task
 ##SBATCH --threads-per-core=1
 
 export MPICH_GPU_SUPPORT_ENABLED=1
 
 # All paths are relative to WORKING_DIRECTORY
-SIMU_SIZE=8
+SIMU_SIZE=%%SIMU_SIZE
 BASE_DIR=${PWD}
 ROOT_DIR=${PWD}/../../..
-LOCAL_DIR=...
+LOCAL_DIR=%%LOCAL_DIR
 WORKING_DIR=${BASE_DIR}/working_dir
 FORMATED_SIMU_SIZE=$(printf "%03d" "$SIMU_SIZE")
 
 PREFIX=bench_insitu
-SIM_NODES=2
-SIM_PROC=8
+SIM_NODES=%%SIM_NODES
+SIM_PROC=%%SIMU_SIZE
 
 export OMP_NUM_THREADS=${SLURM_CPUS_PER_TASK}
 export OMP_PROC_BIND=spread
@@ -37,13 +37,13 @@ echo "SIM_NODES=$SIM_NODES"
 
 # Modules files must be accessible from every slurm node (i.e.: shared network drive)
 source ${LOCAL_DIR}/modules.env
-source ${LOCAL_DIR}/modulesMI300.env
+source ${LOCAL_DIR}/modulesGPU%%constraint.env
 
 # Set result file path
 mkdir -p $SNAPSHOT_FILE_PATH/$FORMATED_SIMU_SIZE
 sed -i "s|^prefix=.*|prefix=$SNAPSHOT_FILE_PATH/$FORMATED_SIMU_SIZE/Checkpoint|" ${LOCAL_DIR}/setup.ini
 
-# Move to working directory 
+# Move to working directory
 cd ${WORKING_DIR}
 
 # PDI
@@ -52,7 +52,7 @@ source ${ROOT_DIR}/lib/pdi/build/staging/share/pdi/env.sh
 # rocm-smi
 ##rocm-smi > rocm-monitor${FORMATED_SIMU_SIZE}.csv
 
-# simulation
+# Simulation
 srun -N ${SIM_NODES} -n ${SIM_PROC} ${ROOT_DIR}/simulation/build/main ${LOCAL_DIR}/setup.ini ${LOCAL_DIR}/io_chkpt.yml --kokkos-map-device-id-by=mpi_rank &
 simu_pid=$! &
 rocm-smi > rocm-monitor${FORMATED_SIMU_SIZE}.csv
