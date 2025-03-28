@@ -20,7 +20,7 @@ BASE_DIR=${PWD}
 WORKING_DIR=${BASE_DIR}/working_dir
 SIMU_SIZE=16
 CUBE_SIZE=64
-LAUNCHER_FILE="launcher_iteration.sh"
+LAUNCHER_FILE="template_launcher.sh"
 RESULT_DIR="results_bench_$1_$(date +%Y-%m-%d-%H-%M)"
 RESULT_FILE=bench_output_$1_$(date +%Y-%m-%d-%H-%M).txt
 FORMATED_SIMU_SIZE=$(printf "%03d" "$SIMU_SIZE")
@@ -136,5 +136,5 @@ for  ((CUBE_SIZE=${SMALL_CUBE_SIZE}; CUBE_SIZE<=${SMALL_CUBE_SIZE}; CUBE_SIZE*=2
     done
 done
 
-mkdir -p ${BASE_DIR}/${RESULT_DIR} && cd ${BASE_DIR}/${RESULT_DIR} && grep -rw . -e "RESULT" >> ${BASE_DIR}/${RESULT_DIR}/${RESULT_FILE}
+mkdir -p ${BASE_DIR}/${RESULT_DIR} && cd ${BASE_DIR}/${RESULT_DIR} && grep -rw . -e "RESULT" >> ${BASE_DIR}/${RESULT_FILE}
 rm -rf ${WORKING_DIR}

@@ -136,5 +136,5 @@ for  ((CUBE_SIZE=${MINIMUM_CUBE_SIZE}; CUBE_SIZE<=${MAXIMUM_CUBE_SIZE}; CUBE_SIZ
     done
 done
 
-mkdir -p ${BASE_DIR}/${RESULT_DIR} && cd ${BASE_DIR}/${RESULT_DIR} && grep -rw . -e "RESULT" >> ${BASE_DIR}/${RESULT_DIR}/${RESULT_FILE}
+mkdir -p ${BASE_DIR}/${RESULT_DIR} && cd ${BASE_DIR}/${RESULT_DIR} && grep -rw . -e "RESULT" >> ${BASE_DIR}/${RESULT_FILE}
 rm -rf ${WORKING_DIR}
