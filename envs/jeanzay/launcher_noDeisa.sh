@@ -16,25 +16,23 @@
 #SBATCH --hint=nomultithread
 #SBATCH -A ${IDRPROJ}@${IDR_ARCH}
 
-# All paths are relative to WORKING_DIRECTORYIDRPROJ
 GPU_ARCH="V100"
-NODES_ARCH_COMPILATION="_V100"
 
-# All paths are relative to WORKING_DIRECTORY
+# All paths are relative to the DIRECTORY of this script
 SIMU_SIZE=1 #${SLURM_NTASKS}
 FORMATED_SIMU_SIZE=$(printf "%03d" "$SIMU_SIZE")
 
 ##================================================
 ## definition of direction
-LAUNCH_DIR=${PWD} ## = ${BENCH_ROOT_DIR}/result_dir/${FORMATED_SIMU_SIZE}
+LAUNCH_DIR=${PWD} ## = ${ENVS_JEANZAY_DIR}/strong_OR_weak_OR_deisa/result_dir/${FORMATED_CUBE_SIZE}/${FORMATED_SIMU_SIZE}
 
-BENCH_ROOT_DIR=${LAUNCH_DIR}/../.. ## = ${BENCH_ROOT_DIR}
+ENVS_JEANZAY_DIR=${LAUNCH_DIR}/../../../.. ## = ${BENCH_ROOT_DIR}
 ## RESULT DIRECTORY = DIRECTORY WHERE INPUT FILE OF EXECUTABLE
 
 ## WORKING DIRECTORY = DIRECTORY WHERE ARE THE DIFFERENT BUILD
 # LIBRARY AND EXECUTABLE VARIABLE
-PDI_INSTALL_DIR=${BENCH_ROOT_DIR}/working_dir${NODES_ARCH_COMPILATION}
-MAIN_EXE_DIR=${BENCH_ROOT_DIR}/working_dir${NODES_ARCH_COMPILATION}/build
+PDI_INSTALL_DIR=${ENVS_JEANZAY_DIR}/working_dir_${GPU_ARCH}/pdi/install
+MAIN_EXE_DIR=${ENVS_JEANZAY_DIR}/working_dir_${GPU_ARCH}/sim/build
 
 # INPUT FILE VARIABLE
 YAML_FILE="" ##
@@ -72,7 +70,7 @@ sed -i "s|^prefix=.*|prefix=$SNAPSHOT_FILE_PATH/$SIMU_SIZE/Checkpoint|" ${LAUNCH
 cd ${LAUNCH_DIR}
 
 # PDI
-source ${PDI_INSTALL_DIR}/pdi/share/pdi/env.sh
+source ${PDI_INSTALL_DIR}/share/pdi/env.sh
 
 # simulation
 srun -N ${SIM_NODES} -n ${SIM_PROC} ${MAIN_EXE_DIR}/main ${LAUNCH_DIR}/setup.ini ${LAUNCH_DIR}/${YAML_FILE} --kokkos-map-device-id-by=mpi_rank &
