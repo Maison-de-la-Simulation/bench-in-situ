@@ -186,6 +186,17 @@ void GodunovSolver::pdiExposeData()
                      "iStep", (void*)&(Super::m_iteration), PDI_OUT,
                      "time", (void*)&(m_t), PDI_OUT,
                      NULL);
+
+    /*
+    // m_should_save is defined here by the yaml file (not by the setup.ini!!!)
+    bool *should_deepcopy;
+    PDI_access("should_deepcopy",  (void **)&should_deepcopy,  PDI_IN);
+    PDI_release("should_deepcopy");
+
+    m_should_save=*should_deepcopy;
+    should_deepcopy=nullptr;
+    */
+
 #endif
 
     if (m_should_save)

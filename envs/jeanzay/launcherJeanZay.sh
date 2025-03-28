@@ -1,20 +1,8 @@
 #!/bin/bash
 
-# case batch strong or weak
-CASE_BATCH=strong
+# get the parameter of the launcher
+source param_launcher.ini
 
-# GPU TYPE
-GPU_ARCH=V100
-GPU_MEM=16G
-
-# init launcher name
-LAUNCH_NAME=launcher_noDeisa.sh
-
-# size of physical domain in 1D (local for weak scaling and  global for strong scaling)
-CUBE_SIZE=16
-
-# vector of nb of gpu
-SIMU_SIZEs=( 1 2 4 8 )
 
 ##%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 ##
@@ -30,8 +18,6 @@ PDI_INSTALL_DIR=${WORKING_DIR}/pdi/install
 MAIN_EXE_DIR=${WORKING_DIR}/sim/build
 DATE_SEND=$(date +"%Y%m%d_%H%M%S")
 YAML_FILE=io_chkpt.yml
-
-source topo.dat
 
 ##%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 ## CHECK ENTRY
@@ -137,7 +123,7 @@ for SIMU_SIZE in "${SIMU_SIZEs[@]}"; do
         let sizex=$CUBE_SIZE
         let sizey=$CUBE_SIZE
         let sizez=$CUBE_SIZE
-    else
+    elif [ "${CASE_BATCH}" == "strong" ]; then
         let sizex=$CUBE_SIZE/${tab_nxyz['x']}
         let sizey=$CUBE_SIZE/${tab_nxyz['y']}
         let sizez=$CUBE_SIZE/${tab_nxyz['z']}
@@ -166,6 +152,7 @@ for SIMU_SIZE in "${SIMU_SIZEs[@]}"; do
     ## Tranform local launcher
 
     ## set global variable
+    sed -i "s:^GPU_ARCH=.*$:GPU_ARCH=${GPU_ARCH}:" ${LOCAL_LAUNCHER}
     sed -i "s:^YAML_FILE=.*$:YAML_FILE=$YAML_FILE:" ${LOCAL_LAUNCHER}
 
     ## change the output

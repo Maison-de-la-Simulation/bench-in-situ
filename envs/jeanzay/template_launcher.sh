@@ -1,30 +1,30 @@
 #!/bin/bash
 
 #SBATCH --job-name=bench_insitu
-#SBATCH --output=res1_%x_%j.out
+#SBATCH --output=res%%NB_GPU_%x_%j.out
 #SBATCH --time=01:00:00
 ##################################################
 #SBATCH -C partition
 ##################################################
-##SBATCH --ntasks=1
-##SBATCH --nodes=1
-#SBATCH --ntasks-per-node=1
-#SBATCH --gres=gpu:1
+##SBATCH --ntasks=%%NTASKS
+##SBATCH --nodes=%%NODES
+#SBATCH --ntasks-per-node=%%NTASKS_PER_NODES
+#SBATCH --gres=gpu:%%GPU_PER_NODE
 ##################################################
 #SBATCH --cpus-per-task=658
 ##################################################
 #SBATCH --hint=nomultithread
-#SBATCH -A ${IDRPROJ}@${IDR_ARCH}
+#SBATCH -A %%${IDRPROJ}@${ARCH}
 
-GPU_ARCH="V100"
+GPU_ARCH=%%GPU_ARCH
 
 # All paths are relative to the DIRECTORY of this script
-SIMU_SIZE=1 #${SLURM_NTASKS}
+SIMU_SIZE=%%NB_GPU
 FORMATED_SIMU_SIZE=$(printf "%03d" "$SIMU_SIZE")
 
 ##================================================
 ## definition of direction
-LAUNCH_DIR=${PWD} ## = ${ENVS_JEANZAY_DIR}/strong_OR_weak_OR_deisa/result_dir/${FORMATED_CUBE_SIZE}/${FORMATED_SIMU_SIZE}
+LAUNCH_DIR=${PWD} ## = ${ENVS_JEANZAY_DIR}/strong_OR_weak_OR_deisa/result_dir/${FORMATED_CUBE_SIZE}/nb_gpu_${FORMATED_SIMU_SIZE}
 
 ENVS_JEANZAY_DIR=${LAUNCH_DIR}/../../../.. ## = ${BENCH_ROOT_DIR}
 ## RESULT DIRECTORY = DIRECTORY WHERE INPUT FILE OF EXECUTABLE
@@ -35,7 +35,7 @@ PDI_INSTALL_DIR=${ENVS_JEANZAY_DIR}/working_dir_${GPU_ARCH}/pdi/install
 MAIN_EXE_DIR=${ENVS_JEANZAY_DIR}/working_dir_${GPU_ARCH}/sim/build
 
 # INPUT FILE VARIABLE
-YAML_FILE="" ##
+YAML_FILE=%%""
 
 echo "== INFO DIRECTORY"
 echo "BASE_DIR=$BASE_DIR"
