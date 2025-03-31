@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# get the parameter of the launcher
+# Get the parameters of the launcher
 source param_launcher.ini
 
 
@@ -9,7 +9,7 @@ source param_launcher.ini
 SCRIPT_DIR=$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" &>/dev/null && pwd)
 echo "SCRIPT_DIR=$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" &>/dev/null && pwd)"
 
-## need to be launch in envs/jeanzay
+## Needs to be launched from envs/jeanzay
 BENCH_ROOT_DIR=${SCRIPT_DIR}/../..
 INIT_DIR=${SCRIPT_DIR}
 RESULT_ROOT_DIR=${INIT_DIR}
@@ -69,7 +69,7 @@ if [ "${CUBE_SIZE}" == "" ]; then
 fi
 
 PDI_MHD_NODES_ARCH=${GPU_ARCH}${ADD_INFO_ARCH}
-## lunch the script
+## Launch the script
 if [ "${CASE_BATCH}" == "strong" ]; then
     RESULT_DIR_NAME="strong/jeanzay_"${DATE_SEND}"_"${PDI_MHD_NODES_ARCH}
 elif [ "${CASE_BATCH}" == "weak" ]; then
@@ -83,7 +83,7 @@ echo "RESULT_DIR_NAME=$RESULT_DIR_NAME"
 FORMATED_CUBE_SIZE=$(printf "%03d" "$CUBE_SIZE")
 RESULT_DIR=${RESULT_ROOT_DIR}/${RESULT_DIR_NAME}/${FORMATED_CUBE_SIZE}
 
-## creation of the directory
+## Creation of the directory
 mkdir -p ${RESULT_DIR}
 echo "create file RESULT_DIR=${RESULT_DIR}"
 
@@ -134,7 +134,7 @@ for SIMU_SIZE in "${SIMU_SIZEs[@]}"; do
     cp ${INIT_DIR}/${YAML_FILE} ${TEST_CASE_DIR}/${YAML_FILE}
     cp ${INIT_DIR}/${LAUNCH_NAME} ${TEST_CASE_DIR}/job.sh
 
-    ## change the discretisation between gpu
+    ## Change the discretisation between gpu
     sed -i "s/^nx=[0-9]*$/nx=$sizex/" ${TEST_CASE_DIR}/setup.ini
     sed -i "s/^ny=[0-9]*$/ny=$sizey/" ${TEST_CASE_DIR}/setup.ini
     sed -i "s/^nz=[0-9]*$/nz=$sizez/" ${TEST_CASE_DIR}/setup.ini
@@ -143,24 +143,24 @@ for SIMU_SIZE in "${SIMU_SIZEs[@]}"; do
     sed -i "s/^my=[0-9]*$/my=${tab_nxyz['y']}/" ${TEST_CASE_DIR}/setup.ini
     sed -i "s/^mz=[0-9]*$/mz=${tab_nxyz['z']}/" ${TEST_CASE_DIR}/setup.ini
 
-    ## change the directory of the snapshot
+    ## Change the directory of the snapshot
     sed_snapshot=s:bench-in-situ:bench-in-situ_$DATE_SEND:g
     sed -i "$sed_snapshot" ${TEST_CASE_DIR}/modules_${GPU_ARCH}.env
 
+    ## Set local launcher path
     LOCAL_LAUNCHER=${TEST_CASE_DIR}"/job.sh"
     echo "LOCAL_LAUNCHER=$LOCAL_LAUNCHER"
-    ## Tranform local launcher
 
-    ## set global variable
+    ## Set global variables
     sed -i "s:^GPU_ARCH=.*$:GPU_ARCH=${GPU_ARCH}:" ${LOCAL_LAUNCHER}
     sed -i "s:^YAML_FILE=.*$:YAML_FILE=$YAML_FILE:" ${LOCAL_LAUNCHER}
 
-    ## change the output
+    ## Change the output file name
     sed -i "s/^#SBATCH --output=res.*$/#SBATCH --output=res${SIMU_SIZE}_%x_%j.out/" ${LOCAL_LAUNCHER}
 
-    ## REMARK: WE DON'T HAVE CODED THE VERSION WITH PARTITION gpu_p2 (V100 octo GPU)
+    ## REMARK: THE VERSION WITH PARTITION gpu_p2 (V100 octo GPU) IS CURRENTLY MISSING
 
-    ## set account and constraint
+    ## Set account and partition constraint
     if [ "${GPU_ARCH}" == "V100" ]; then
         sed -i "s/^#SBATCH -A.*$/#SBATCH -A ${IDRPROJ}@v100/g" ${LOCAL_LAUNCHER}
         if [ "${GPU_MEM}" == "16G" ]; then
@@ -184,7 +184,7 @@ for SIMU_SIZE in "${SIMU_SIZEs[@]}"; do
 
     fi
 
-    ## set nodes configurations
+    ## Set nodes configurations
     ## CASE 1: PARTITION WITH 4 GPU PER NODES
     if [ "${GPU_ARCH}" == "V100" ] || [ "${GPU_ARCH}" == "H100" ]; then
         NB_GPU_PER_NODES=4
@@ -220,8 +220,6 @@ for SIMU_SIZE in "${SIMU_SIZEs[@]}"; do
 
         sed -i "s/^SIMU_SIZE=.*$/SIMU_SIZE=$SIMU_SIZE/g" ${LOCAL_LAUNCHER}
     fi
-
-    ## set global variable
 done
 
 ## END CREATION OF THE DIRECTORY FOR THE BENCH
@@ -232,7 +230,7 @@ done
 
 ## Add test for testing if the directory exists
 echo "RESULT_DIR=${RESULT_DIR}"
-sleep 1 ## TO HAVE THE CORRECT DATE IN SECOND
+sleep 1 ## TO PREVENT DIFFERENT JOBS FROM WRITING IN THE SAME FOLDER
 
 for ii in "${!SIMU_SIZEs[@]}"; do
 
@@ -240,7 +238,7 @@ for ii in "${!SIMU_SIZEs[@]}"; do
     FORMATED_SIMU_SIZE=$(printf "%03d" "$SIMU_SIZE")
     LAUNCH_TEST_CASE_DIR=${RESULT_DIR}/nb_gpu_${FORMATED_SIMU_SIZE}
 
-    echo "create batch=${ii} for SIMU_SIZE=${SIMU_SIZE}"
+    echo "Create batch=${ii} for SIMU_SIZE=${SIMU_SIZE}"
 
     cd ${LAUNCH_TEST_CASE_DIR}
 

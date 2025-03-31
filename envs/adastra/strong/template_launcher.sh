@@ -3,36 +3,50 @@
 #SBATCH --job-name=bench_insitu
 #SBATCH --output=res%%SIMU_SIZEN_%x_%j.out
 #SBATCH --time=02:00:00
-#SBATCH --nodes=%%SIMU_SIZE/gpus-per-node
-#SBATCH --account=%%account
+##################################################
 #SBATCH --constraint=%%constraint
 ##SBATCH --constraint=GENOA
+##################################################
+#SBATCH --nodes=%%SIMU_SIZE/gpus-per-node
 #SBATCH --exclusive
 ##SBATCH --ntasks-per-node=8, one for each GCD
 ##SBATCH --gpus-per-node=8 GCD for MI250, 4 for MI300
 #SBATCH --cpus-per-task=%%cpus-per-task
 ##SBATCH --threads-per-core=1
+##################################################
+#SBATCH --account=%%ACTIVE_PROJECT
+
 
 export MPICH_GPU_SUPPORT_ENABLED=1
 
-# All paths are relative to WORKING_DIRECTORY
-SIMU_SIZE=%%SIMU_SIZE
+# All paths are relative to the WORKING_DIRECTORY of this script
+SIMU_SIZE=%%NB_GCD
 ROOT_DIR=${PWD}/../../..
 JOB_GENERATED_DIR=%%JOB_GENERATED_DIR
 WORKING_DIR=${PWD}/working_dir
 FORMATED_SIMU_SIZE=$(printf "%03d" "$SIMU_SIZE")
 
-PREFIX=bench_insitu
 SIM_NODES=%%SIM_NODES
 SIM_PROC=%%SIMU_SIZE
+PDI_SOURCE=${ROOT_DIR}/lib/install_pdi/share/pdi/env.sh
+MAIN_SIMULATION=${ROOT_DIR}/simulation/build/main
+
+echo "== INFO DIRECTORY"
+echo "JOB_GENERATED_DIR=$JOB_GENERATED_DIR"
+echo "PDI_SOURCE=$PDI_SOURCE"
+echo "MAIN_SIMULATION=$MAIN_SIMULATION"
+echo " "
 
 export OMP_NUM_THREADS=${SLURM_CPUS_PER_TASK}
 export OMP_PROC_BIND=spread
 export OMP_PLACES=threads
 
+echo "== INFO SLURM"
 echo "SLURM_NNODES=$SLURM_NNODES"
+echo "SLURM_NTASKS=$SLURM_NTASKS"
 echo "OMP_NUM_THREADS=$OMP_NUM_THREADS"
-echo "SIM_NODES=$SIM_NODES"
+echo "SIMU_SIZE=$SIMU_SIZE"
+echo " "
 
 # Modules files must be accessible from every slurm node (i.e.: shared network drive)
 source ${JOB_GENERATED_DIR}/modules.env
@@ -46,10 +60,10 @@ sed -i "s|^prefix=.*|prefix=$SNAPSHOT_FILE_PATH/$FORMATED_SIMU_SIZE/Checkpoint|"
 cd ${WORKING_DIR}
 
 # PDI
-source ${ROOT_DIR}/lib/pdi/build/staging/share/pdi/env.sh
+source ${PDI_SOURCE}
 
 # Simulation
-srun -N ${SIM_NODES} -n ${SIM_PROC} ${ROOT_DIR}/simulation/build/main ${JOB_GENERATED_DIR}/setup.ini ${JOB_GENERATED_DIR}/io_chkpt.yml --kokkos-map-device-id-by=mpi_rank &
+srun -N ${SIM_NODES} -n ${SIM_PROC} ${MAIN_SIMULATION} ${JOB_GENERATED_DIR}/setup.ini ${JOB_GENERATED_DIR}/io_chkpt.yml --kokkos-map-device-id-by=mpi_rank &
 simu_pid=$!
 wait $simu_pid
 
