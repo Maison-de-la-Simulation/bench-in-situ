@@ -1,0 +1,8 @@
+CASE_BATCH strong
+GPU_ARCH V100
+GPU_MEM 16G
+CUBE_SIZE 32
+FILE_SIMU_SIZE nb_gpu.txt
+LAUNCH_NAME launcher_noDeisa_V100_16G.sh
+
+

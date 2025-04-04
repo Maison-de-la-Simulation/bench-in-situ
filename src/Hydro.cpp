@@ -94,6 +94,10 @@ void initialize(int& argc, char**& argv)
     Session::initialize(argc, argv);
     Kokkos::initialize(argc, argv);
     oss << "Initializing " << code_name << '\n';
+    //====================================
+    print_configuration(oss);
+    //====================================
+
     Print() << oss.str();
 }
 

@@ -116,6 +116,7 @@ struct Tags
 };
 
 using Layout = Kokkos::LayoutLeft;
+//using Layout = Kokkos::LayoutRight;
 
 template <Int size>
 using IntVectorNd = Kokkos::Array<Int, size>;
