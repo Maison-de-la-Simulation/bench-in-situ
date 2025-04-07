@@ -19,9 +19,9 @@
 GPU_ARCH=%%GPU_ARCH
 
 ##================================================
-## Directory and filename (ordre ?)
+## Directory and filename
 ##================================================
-# Directory of this script
+# All paths are relative to the working directory "JOB_GENERATED_DIR" of this script
 JOB_GENERATED_DIR=${PWD} ## = ${ENVS_JEANZAY_DIR}/strong_OR_weak_OR_deisa/result_dirname/${FORMATED_CUBE_SIZE}/nb_gpu_${FORMATED_SIMU_SIZE}
 
 # LIBRARY AND EXECUTABLE VARIABLE
@@ -38,7 +38,7 @@ echo "MAIN_SIMULATION=$MAIN_SIMULATION"
 echo " "
 
 ##=================================================
-## Job parameters (ordre ?)
+## Job parameters
 ##=================================================
 SIMU_SIZE=%%NB_GPU
 FORMATED_SIMU_SIZE=$(printf "%03d" "$SIMU_SIZE")
@@ -56,7 +56,6 @@ echo "SLURM_NTASKS=$SLURM_NTASKS"
 echo "OMP_NUM_THREADS=$OMP_NUM_THREADS"
 echo "SIMU_SIZE=$SIMU_SIZE"
 echo " "
-
 
 # Modules files must be accessible from every slurm node (i.e.: shared network drive)
 source ${JOB_GENERATED_DIR}/modules_${GPU_ARCH}.env

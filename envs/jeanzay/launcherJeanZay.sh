@@ -104,7 +104,7 @@ for SIMU_SIZE in "${SIMU_SIZE_ARRAY[@]}"; do
     mkdir -p ${JOB_GENERATED_DIR}
     echo "create file JOB_GENERATED_DIR=${JOB_GENERATED_DIR}"
 
-    # Get domain decomposition(dd) for SIMU_SIZE
+    # Get domain decomposition (dd) for SIMU_SIZE
     dd_value=${domain_decomposition_for_each_simulation_size[$SIMU_SIZE]}
     # Index to get the domain decomposition of an axis
     axis_index=0

@@ -31,7 +31,7 @@ rm *.h5
 rm *.xmf
 cd ..
 
-declare -A subdivisions_of_iteration=(
+declare -A local_domain_decomposition=(
     ['x']=0
     ['y']=0
     ['z']=0
@@ -50,88 +50,91 @@ for  ((CUBE_SIZE=${SMALL_CUBE_SIZE}; CUBE_SIZE<=${SMALL_CUBE_SIZE}; CUBE_SIZE*=2
 
         JOB_GENERATED_DIR=${BASE_DIR}/${RESULT_DIR}/${FORMATED_CUBE_SIZE}/${FORMATED_SIMU_SIZE}
         mkdir -p ${JOB_GENERATED_DIR}
-        WHICH_SETUP=${JOB_GENERATED_DIR}/setup.ini
-        cp ${BASE_DIR}/../setup.ini ${WHICH_SETUP}
+        GENERATED_SETUP_INI=${JOB_GENERATED_DIR}/setup.ini
+        cp ${BASE_DIR}/../setup.ini ${GENERATED_SETUP_INI}
         echo $1 >> ${JOB_GENERATED_DIR}/metadata.dat
         cat ${PWD}/../../../lib/pdi/pdi/VERSION >> ${JOB_GENERATED_DIR}/metadata.dat
-        WHICH_LAUNCHER=${JOB_GENERATED_DIR}/launcher.sh
-        cp ${LAUNCHER_FILE} ${WHICH_LAUNCHER}
+        GENERATED_LAUNCHER=${JOB_GENERATED_DIR}/launcher.sh
+        cp ${LAUNCHER_FILE} ${GENERATED_LAUNCHER}
         cp ${BASE_DIR}/io_chkpt.yml ${JOB_GENERATED_DIR}/io_chkpt.yml
         cp ${BASE_DIR}/../modules.env ${JOB_GENERATED_DIR}/modules.env
         cp ${BASE_DIR}/../modules$1.env ${JOB_GENERATED_DIR}/modules$1.env
 
-        i=0
+        # Index to get the domain decomposition of an axis
+        axis_index=0
 
-        for number in $value; do
-            case $i in
-                0) subdivisions_of_iteration['x']=$number ;;
-                1) subdivisions_of_iteration['y']=$number ;;
-                2) subdivisions_of_iteration['z']=$number ;;
+        # Get domain decomposition for each axis (x,y,z)
+        for dd_axis in $dd_value; do
+            case $axis_index in
+                0) local_domain_decomposition['x']=$dd_axis ;;
+                1) local_domain_decomposition['y']=$dd_axis ;;
+                2) local_domain_decomposition['z']=$dd_axis ;;
             esac
-        ((i++))
+        ((axis_index++))
         done
 
-        echo "subdivisions_of_iteration: x=${subdivisions_of_iteration['x']} y=${subdivisions_of_iteration['y']} z=${subdivisions_of_iteration['z']}"
-        let sizex=$CUBE_SIZE/${subdivisions_of_iteration['x']}
-        let sizey=$CUBE_SIZE/${subdivisions_of_iteration['y']}
-        let sizez=$CUBE_SIZE/${subdivisions_of_iteration['z']}
+        echo "local_domain_decomposition: x=${local_domain_decomposition['x']} y=${local_domain_decomposition['y']} z=${local_domain_decomposition['z']}"
+        let sizex=$CUBE_SIZE/${local_domain_decomposition['x']}
+        let sizey=$CUBE_SIZE/${local_domain_decomposition['y']}
+        let sizez=$CUBE_SIZE/${local_domain_decomposition['z']}
         echo "$sizex $sizey $sizez"
-        sed -i "s/^nx=[0-9]*$/nx=$sizex/" ${WHICH_SETUP}
-        sed -i "s/^ny=[0-9]*$/ny=$sizey/" ${WHICH_SETUP}
-        sed -i "s/^nz=[0-9]*$/nz=$sizez/" ${WHICH_SETUP}
+        ## Change the discretisation between gpu
+        sed -i "s/^nx=[0-9]*$/nx=$sizex/" ${GENERATED_SETUP_INI}
+        sed -i "s/^ny=[0-9]*$/ny=$sizey/" ${GENERATED_SETUP_INI}
+        sed -i "s/^nz=[0-9]*$/nz=$sizez/" ${GENERATED_SETUP_INI}
 
-        sed -i "s/^mx=[0-9]*$/mx=${subdivisions_of_iteration['x']}/" ${WHICH_SETUP}
-        sed -i "s/^my=[0-9]*$/my=${subdivisions_of_iteration['y']}/" ${WHICH_SETUP}
-        sed -i "s/^mz=[0-9]*$/mz=${subdivisions_of_iteration['z']}/" ${WHICH_SETUP}
+        sed -i "s/^mx=[0-9]*$/mx=${local_domain_decomposition['x']}/" ${GENERATED_SETUP_INI}
+        sed -i "s/^my=[0-9]*$/my=${local_domain_decomposition['y']}/" ${GENERATED_SETUP_INI}
+        sed -i "s/^mz=[0-9]*$/mz=${local_domain_decomposition['z']}/" ${GENERATED_SETUP_INI}
 
-        sed -i "s/^#SBATCH --output=.*$/#SBATCH --output=res${FORMATED_SIMU_SIZE}N_%x_%j.out/" ${WHICH_LAUNCHER}
-        sed -i "s/^SIMU_SIZE=.*$/SIMU_SIZE=${SIMU_SIZE}/" ${WHICH_LAUNCHER}
-        sed -i "s/^SIM_PROC=.*$/SIM_PROC=${SIMU_SIZE}/" ${WHICH_LAUNCHER}
-        sed -i "s/^#SBATCH --account=.*$/#SBATCH --account=${ACTIVE_PROJECT}/" ${WHICH_LAUNCHER}
-        sed -i "s/^#SBATCH --constraint=.*$/#SBATCH --constraint=$1/" ${WHICH_LAUNCHER}
-        sed -i "s/modulesGPU.*$/modules$1.env/" ${WHICH_LAUNCHER}
-        sed -i "s|^\(JOB_GENERATED_DIR=\).*|\1${JOB_GENERATED_DIR}/|" ${WHICH_LAUNCHER}
+        sed -i "s/^#SBATCH --output=.*$/#SBATCH --output=res${FORMATED_SIMU_SIZE}N_%x_%j.out/" ${GENERATED_LAUNCHER}
+        sed -i "s/^SIMU_SIZE=.*$/SIMU_SIZE=${SIMU_SIZE}/" ${GENERATED_LAUNCHER}
+        sed -i "s/^SIM_PROC=.*$/SIM_PROC=${SIMU_SIZE}/" ${GENERATED_LAUNCHER}
+        sed -i "s/^#SBATCH --account=.*$/#SBATCH --account=${ACTIVE_PROJECT}/" ${GENERATED_LAUNCHER}
+        sed -i "s/^#SBATCH --constraint=.*$/#SBATCH --constraint=$1/" ${GENERATED_LAUNCHER}
+        sed -i "s/modulesGPU.*$/modules$1.env/" ${GENERATED_LAUNCHER}
+        sed -i "s|^\(JOB_GENERATED_DIR=\).*|\1${JOB_GENERATED_DIR}/|" ${GENERATED_LAUNCHER}
         if [ "$1" = "MI250" ]; then
-            sed -i "s/^#SBATCH --cpus-per-task=.*$/#SBATCH --cpus-per-task=16/" ${WHICH_LAUNCHER}
+            sed -i "s/^#SBATCH --cpus-per-task=.*$/#SBATCH --cpus-per-task=16/" ${GENERATED_LAUNCHER}
             if [ "$SIMU_SIZE" -gt 8 ]; then
-                sed -i "s/^#SBATCH --nodes=.*$/#SBATCH --nodes=$((SIMU_SIZE / 8))/" ${WHICH_LAUNCHER}
-                sed -i "s/^SIM_NODES=.*$/SIM_NODES=$((SIMU_SIZE / 8))/" ${WHICH_LAUNCHER}
+                sed -i "s/^#SBATCH --nodes=.*$/#SBATCH --nodes=$((SIMU_SIZE / 8))/" ${GENERATED_LAUNCHER}
+                sed -i "s/^SIM_NODES=.*$/SIM_NODES=$((SIMU_SIZE / 8))/" ${GENERATED_LAUNCHER}
             else
-                sed -i "s/^#SBATCH --nodes=.*$/#SBATCH --nodes=1/" ${WHICH_LAUNCHER}
-                sed -i "s/^SIM_NODES=.*$/SIM_NODES=1/" ${WHICH_LAUNCHER}
+                sed -i "s/^#SBATCH --nodes=.*$/#SBATCH --nodes=1/" ${GENERATED_LAUNCHER}
+                sed -i "s/^SIM_NODES=.*$/SIM_NODES=1/" ${GENERATED_LAUNCHER}
             fi
         elif [ "$1" = "MI300" ]; then
-            sed -i "s/^#SBATCH --cpus-per-task=.*$/#SBATCH --cpus-per-task=24/" ${WHICH_LAUNCHER}
+            sed -i "s/^#SBATCH --cpus-per-task=.*$/#SBATCH --cpus-per-task=24/" ${GENERATED_LAUNCHER}
             if [ "$SIMU_SIZE" -gt 4 ]; then
-                sed -i "s/^#SBATCH --nodes=.*$/#SBATCH --nodes=$((SIMU_SIZE / 4))/" ${WHICH_LAUNCHER}
-                sed -i "s/^SIM_NODES=.*$/SIM_NODES=$((SIMU_SIZE / 4))/" ${WHICH_LAUNCHER}
+                sed -i "s/^#SBATCH --nodes=.*$/#SBATCH --nodes=$((SIMU_SIZE / 4))/" ${GENERATED_LAUNCHER}
+                sed -i "s/^SIM_NODES=.*$/SIM_NODES=$((SIMU_SIZE / 4))/" ${GENERATED_LAUNCHER}
             else
-                sed -i "s/^#SBATCH --nodes=.*$/#SBATCH --nodes=1/" ${WHICH_LAUNCHER}
-                sed -i "s/^SIM_NODES=.*$/SIM_NODES=1/" ${WHICH_LAUNCHER}
+                sed -i "s/^#SBATCH --nodes=.*$/#SBATCH --nodes=1/" ${GENERATED_LAUNCHER}
+                sed -i "s/^SIM_NODES=.*$/SIM_NODES=1/" ${GENERATED_LAUNCHER}
             fi
         fi
 
-        cat ${WHICH_SETUP} | grep nx
-        cat ${WHICH_SETUP} | grep ny
-        cat ${WHICH_SETUP} | grep nz
+        cat ${GENERATED_SETUP_INI} | grep nx
+        cat ${GENERATED_SETUP_INI} | grep ny
+        cat ${GENERATED_SETUP_INI} | grep nz
 
         echo "-----"
-        cat ${WHICH_SETUP} | grep mx
-        cat ${WHICH_SETUP} | grep my
-        cat ${WHICH_SETUP} | grep mz
+        cat ${GENERATED_SETUP_INI} | grep mx
+        cat ${GENERATED_SETUP_INI} | grep my
+        cat ${GENERATED_SETUP_INI} | grep mz
 
         echo "-----"
-        cat ${WHICH_LAUNCHER} | grep output=res
-        cat ${WHICH_LAUNCHER} | grep nodes=
-        cat ${WHICH_LAUNCHER} | grep ^SIMU_SIZE=
-        cat ${WHICH_LAUNCHER} | grep ^SIM_NODES=
-        cat ${WHICH_LAUNCHER} | grep SIM_PROC=
-        cat ${WHICH_LAUNCHER} | grep modulesMI
-        cat ${WHICH_LAUNCHER} | grep cpus-per-task
-        cat ${WHICH_LAUNCHER} | grep constraint
-        cat ${WHICH_LAUNCHER} | grep ^LOCAL_DIR=
+        cat ${GENERATED_LAUNCHER} | grep output=res
+        cat ${GENERATED_LAUNCHER} | grep nodes=
+        cat ${GENERATED_LAUNCHER} | grep ^SIMU_SIZE=
+        cat ${GENERATED_LAUNCHER} | grep ^SIM_NODES=
+        cat ${GENERATED_LAUNCHER} | grep SIM_PROC=
+        cat ${GENERATED_LAUNCHER} | grep modulesMI
+        cat ${GENERATED_LAUNCHER} | grep cpus-per-task
+        cat ${GENERATED_LAUNCHER} | grep constraint
+        cat ${GENERATED_LAUNCHER} | grep ^LOCAL_DIR=
 
-        sbatch --wait -o ${JOB_GENERATED_DIR}/res${FORMATED_SIMU_SIZE}.out ${WHICH_LAUNCHER}
+        sbatch --wait -o ${JOB_GENERATED_DIR}/res${FORMATED_SIMU_SIZE}.out ${GENERATED_LAUNCHER}
         echo "----------------------------------------"
     done
 done
