@@ -24,7 +24,6 @@ export MPICH_GPU_SUPPORT_ENABLED=1
 # All paths are relative to the working directory "JOB_GENERATED_DIR" of this script
 ROOT_DIR=${PWD}/../../..
 JOB_GENERATED_DIR=%%JOB_GENERATED_DIR
-# WORKING_DIR=${PWD}/working_dir
 
 # LIBRARY AND EXECUTABLE VARIABLE
 PDI_ENV_SCRIPT=${ROOT_DIR}/lib/install_pdi/share/pdi/env.sh
@@ -64,8 +63,7 @@ source ${JOB_GENERATED_DIR}/modulesGPU%%constraint.env
 mkdir -p $SNAPSHOT_FILE_PATH/$FORMATED_SIMU_SIZE
 sed -i "s|^prefix=.*|prefix=$SNAPSHOT_FILE_PATH/$FORMATED_SIMU_SIZE/Checkpoint|" ${JOB_GENERATED_DIR}/setup.ini
 
-# Move to working directory
-# cd ${WORKING_DIR}
+# Move to the working directory
 cd ${JOB_GENERATED_DIR}
 
 # PDI

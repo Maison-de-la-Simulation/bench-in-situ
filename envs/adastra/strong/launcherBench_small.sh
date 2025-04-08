@@ -45,7 +45,7 @@ for  ((CUBE_SIZE=${SMALL_CUBE_SIZE}; CUBE_SIZE<=${SMALL_CUBE_SIZE}; CUBE_SIZE*=2
 
     for SIMU_SIZE in "${!problem_subdivisions_small[@]}"; do
 	FORMATED_SIMU_SIZE=$(printf "%03d" "$SIMU_SIZE")
-        value=${problem_subdivisions_small[$SIMU_SIZE]}
+        dd_value=${problem_subdivisions_small[$SIMU_SIZE]}
         echo "Key: $SIMU_SIZE ; Formated simu size: $FORMATED_SIMU_SIZE"
 
         JOB_GENERATED_DIR=${BASE_DIR}/${RESULT_DIR}/${FORMATED_CUBE_SIZE}/${FORMATED_SIMU_SIZE}
