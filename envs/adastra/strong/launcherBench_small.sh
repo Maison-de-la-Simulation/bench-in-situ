@@ -78,7 +78,8 @@ for  ((CUBE_SIZE=${SMALL_CUBE_SIZE}; CUBE_SIZE<=${SMALL_CUBE_SIZE}; CUBE_SIZE*=2
         let sizey=$CUBE_SIZE/${local_domain_decomposition['y']}
         let sizez=$CUBE_SIZE/${local_domain_decomposition['z']}
         echo "$sizex $sizey $sizez"
-        ## Change the discretisation between gpu
+        
+        # Change the discretisation between gpu
         sed -i "s/^nx=[0-9]*$/nx=$sizex/" ${GENERATED_SETUP_INI}
         sed -i "s/^ny=[0-9]*$/ny=$sizey/" ${GENERATED_SETUP_INI}
         sed -i "s/^nz=[0-9]*$/nz=$sizez/" ${GENERATED_SETUP_INI}
