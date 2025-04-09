@@ -19,7 +19,7 @@ DATE_SEND=$(date +"%Y%m%d_%H%M%S")
 YAML_FILE=io_chkpt.yml
 
 ##%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-## CHECK ENTRY
+## BEGIN: CHECK INPUT PARAMETERS
 
 if [ "${CASE_BATCH}" == "strong" ]; then
     echo "strong scaling experiment"
@@ -53,8 +53,11 @@ else
     exit 1
 fi
 
+## END: CHECK INPUT PARAMETERS
 ##%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-## BEGIN CREATION OF THE DIRECTORY FOR THE BENCH
+
+##%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+## BEGIN: CREATING FOLDERS/FILES FOR LAUNCHERS GENERATED
 
 ADD_INFO_ARCH=""
 if [ "${GPU_ARCH}" == "V100" ]; then
@@ -86,7 +89,7 @@ RESULT_DIR=${INIT_DIR}/${RESULT_DIR_NAME}/${FORMATED_CUBE_SIZE}
 mkdir -p ${RESULT_DIR}
 echo "RESULT_DIR=${RESULT_DIR}"
 
-# Tableau associatif pour les valeurs x, y, z
+## Local domain decomposition
 declare -A local_domain_decomposition=(
     ['x']=0
     ['y']=0
@@ -104,7 +107,7 @@ for SIMU_SIZE in "${SIMU_SIZE_ARRAY[@]}"; do
     mkdir -p ${JOB_GENERATED_DIR}
     echo "create file JOB_GENERATED_DIR=${JOB_GENERATED_DIR}"
 
-    # Get domain decomposition (dd) for SIMU_SIZE
+    # Get domain decomposition(dd) for SIMU_SIZE
     dd_value=${domain_decomposition_for_each_simulation_size[$SIMU_SIZE]}
     # Index to get the domain decomposition of an axis
     axis_index=0
@@ -130,7 +133,7 @@ for SIMU_SIZE in "${SIMU_SIZE_ARRAY[@]}"; do
         let sizez=$CUBE_SIZE/${local_domain_decomposition['z']}
     fi
 
-    ## Copy file
+    ## Copy all files needed by the jobs
     cp ${INIT_DIR}/setup.ini               ${JOB_GENERATED_DIR}/setup.ini
     cp ${INIT_DIR}/modules_${GPU_ARCH}.env ${JOB_GENERATED_DIR}/modules_${GPU_ARCH}.env
     cp ${INIT_DIR}/${YAML_FILE}            ${JOB_GENERATED_DIR}/${YAML_FILE}
@@ -236,11 +239,11 @@ for SIMU_SIZE in "${SIMU_SIZE_ARRAY[@]}"; do
     fi
 done
 
-## END CREATION OF THE DIRECTORY FOR THE BENCH
-##%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+## END: CREATING FOLDERS/FILES FOR LAUNCHERS GENERATED
+##%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 ##%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-## BEGIN LAUNCH SCRIPT
+## BEGIN: SUBMISSION OF JOBS GENERATED
 
 ## Add test for testing if the directory exists
 echo "RESULT_DIR_NAME=${RESULT_DIR_NAME}"
@@ -271,5 +274,5 @@ for SIMU_SIZE in "${SIMU_SIZE_ARRAY[@]}"; do
     ((index_job++))
 done
 
-## END LAUNCH SCRIPT
+## END: SUBMISSION OF JOBS GENERATED
 ##%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
