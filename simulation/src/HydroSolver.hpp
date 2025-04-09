@@ -20,6 +20,7 @@ public:
     virtual void nextIteration(Real dt) = 0;
     virtual void prepareNextOutput(Real& dt) = 0;
     virtual void pdiExposeData() = 0;
+    virtual void copy_func() = 0;
     virtual bool finished() const = 0;
     virtual void printMonitoring(double t_tot) const = 0;
     virtual bool shouldPrintInformation() const = 0;

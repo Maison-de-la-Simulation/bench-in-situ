@@ -45,6 +45,7 @@ public:
     void nextIteration(Real dt) final;
     void prepareNextOutput(Real& dt) final;
     void pdiExposeData() final;
+    void copy_func() final;
     bool finished() const final;
     void printMonitoring(double t_tot) const final;
     bool shouldPrintInformation() const final;
