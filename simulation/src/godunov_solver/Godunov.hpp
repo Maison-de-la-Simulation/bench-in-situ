@@ -45,7 +45,6 @@ public:
     void nextIteration(Real dt) final;
     void prepareNextOutput(Real& dt) final;
     void pdiExposeData() final;
-    void copy_func() final;
     bool finished() const final;
     void printMonitoring(double t_tot) const final;
     bool shouldPrintInformation() const final;
@@ -58,6 +57,7 @@ public:
 private:
     void computeFluxesAndUpdate(Real dt);
     void compute_adjust_timestep(Real dt_type, Real dt, Real& delta_type);
+    void copy_func();
 
 private:
     std::shared_ptr<Problem> m_problem;
