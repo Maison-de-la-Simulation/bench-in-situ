@@ -95,24 +95,17 @@ for  ((CUBE_SIZE=${SMALL_CUBE_SIZE}; CUBE_SIZE<=${SMALL_CUBE_SIZE}; CUBE_SIZE*=2
         sed -i "s/^#SBATCH --constraint=.*$/#SBATCH --constraint=$1/" ${GENERATED_LAUNCHER}
         sed -i "s/modulesGPU.*$/modules$1.env/" ${GENERATED_LAUNCHER}
         sed -i "s|^\(JOB_GENERATED_DIR=\).*|\1${JOB_GENERATED_DIR}/|" ${GENERATED_LAUNCHER}
+        if [ "$SIMU_SIZE" -gt 4 ]; then
+            sed -i "s/^#SBATCH --nodes=.*$/#SBATCH --nodes=$((SIMU_SIZE / 4))/" ${GENERATED_LAUNCHER}
+            sed -i "s/^SIM_NODES=.*$/SIM_NODES=$((SIMU_SIZE / 4))/" ${GENERATED_LAUNCHER}
+        else
+            sed -i "s/^#SBATCH --nodes=.*$/#SBATCH --nodes=1/" ${GENERATED_LAUNCHER}
+            sed -i "s/^SIM_NODES=.*$/SIM_NODES=1/" ${GENERATED_LAUNCHER}
+        fi
         if [ "$1" = "MI250" ]; then
             sed -i "s/^#SBATCH --cpus-per-task=.*$/#SBATCH --cpus-per-task=16/" ${GENERATED_LAUNCHER}
-            if [ "$SIMU_SIZE" -gt 8 ]; then
-                sed -i "s/^#SBATCH --nodes=.*$/#SBATCH --nodes=$((SIMU_SIZE / 8))/" ${GENERATED_LAUNCHER}
-                sed -i "s/^SIM_NODES=.*$/SIM_NODES=$((SIMU_SIZE / 8))/" ${GENERATED_LAUNCHER}
-            else
-                sed -i "s/^#SBATCH --nodes=.*$/#SBATCH --nodes=1/" ${GENERATED_LAUNCHER}
-                sed -i "s/^SIM_NODES=.*$/SIM_NODES=1/" ${GENERATED_LAUNCHER}
-            fi
         elif [ "$1" = "MI300" ]; then
             sed -i "s/^#SBATCH --cpus-per-task=.*$/#SBATCH --cpus-per-task=24/" ${GENERATED_LAUNCHER}
-            if [ "$SIMU_SIZE" -gt 4 ]; then
-                sed -i "s/^#SBATCH --nodes=.*$/#SBATCH --nodes=$((SIMU_SIZE / 4))/" ${GENERATED_LAUNCHER}
-                sed -i "s/^SIM_NODES=.*$/SIM_NODES=$((SIMU_SIZE / 4))/" ${GENERATED_LAUNCHER}
-            else
-                sed -i "s/^#SBATCH --nodes=.*$/#SBATCH --nodes=1/" ${GENERATED_LAUNCHER}
-                sed -i "s/^SIM_NODES=.*$/SIM_NODES=1/" ${GENERATED_LAUNCHER}
-            fi
         fi
 
         cat ${GENERATED_SETUP_INI} | grep nx
