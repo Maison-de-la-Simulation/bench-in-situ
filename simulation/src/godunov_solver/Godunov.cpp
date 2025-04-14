@@ -232,37 +232,6 @@ void GodunovSolver::pdiExposeData()
   performanceTimer.time_spent_in_io += (std::chrono::steady_clock::now() - m_start_io);
 }
 
-extern "C"
-{
-    // void GodunovSolver::copy_func()
-    void copy_func()
-    {
-    //     int iter;
-    //     PDI_access("iter",(void**)&iter,PDI_IN);
-    //     int freq;
-    //     PDI_access("freq",(void**)&freq,PDI_IN);
-    //     void* data_device;
-    //     PDI_access("data_device",(void**)&data_device,PDI_IN);
-    //     if ( iter % freq == 0 )
-    //     {
-    //         Kokkos::Profiling::pushRegion("I/O - Checkpoint");
-    //         if(iter%100 == 0) Print() << "===================== output at iteration = " << iter << " time t = "<< freq << std::endl;
-    //         Kokkos::Profiling::pushRegion("I/O - Checkpoint - deep_copy");
-    //         Kokkos::deep_copy(m_u_host, m_u);
-    // //        Kokkos::deep_copy(m_u_host, data_device);
-    //         Kokkos::Profiling::popRegion();
-    //         Kokkos::Profiling::pushRegion("I/O - Checkpoint - write");
-    //         m_writer->write(m_u_host, m_grid, Super::m_iteration, Super::m_t,
-    //                         m_params->thermo.gamma, m_params->thermo.mmw);
-    // //        m_writer->write(m_u_host, m_grid, iter, freq,
-    // //                        m_params->thermo.gamma, m_params->thermo.mmw);
-    //         Kokkos::Profiling::popRegion();
-    //         Kokkos::Profiling::popRegion();
-    //     }
-
-    Print() << "#######################################################" << " Mcell-updates/s" << std::endl;
-    }
-}
 
 
 bool GodunovSolver::finished() const
