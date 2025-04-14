@@ -57,7 +57,7 @@ public:
 private:
     void computeFluxesAndUpdate(Real dt);
     void compute_adjust_timestep(Real dt_type, Real dt, Real& delta_type);
-    void copy_func();
+    // void copy_func();
 
 private:
     std::shared_ptr<Problem> m_problem;
