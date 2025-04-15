@@ -40,17 +40,6 @@ std::string getFilename(std::string const &prefix, Int outputId) {
 extern "C"
 {
 
-//     void copy_func() {
-//     int* iStep; PDI_access("iStep", (void**)&iStep, PDI_IN);
-// //    int* freq; PDI_access("freq", (void**)&freq, PDI_IN);
-// //    if (*iStep % *freq == 0) {
-//     if (*iStep % 100 == 0) {
-//         printf("**********************************\n");
-//         }
-// //    PDI_release("freq");
-//     PDI_release("iStep");
-//     }
-
     void writeXML() {
         if (!Session::isIOProc())
         {
