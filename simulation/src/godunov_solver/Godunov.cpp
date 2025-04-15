@@ -188,13 +188,16 @@ extern "C"
                 printf("*********** %i ***********************\n", iter);
                 printf("*********** %i ***********************\n\n", freq);
                 Kokkos::Profiling::pushRegion("I/O - Checkpoint");
-                if(Super::m_iteration%100 == 0) Print() << "===================== output at iteration = " << Super::m_iteration << " time t = "<<Super::m_t<< std::endl;
+                // if(Super::m_iteration%100 == 0) Print() << "===================== output at iteration = " << Super::m_iteration << " time t = "<<Super::m_t<< std::endl;
                 Kokkos::Profiling::pushRegion("I/O - Checkpoint - deep_copy");
-                Kokkos::deep_copy(m_u_host, m_u);
+                // Kokkos::deep_copy(m_u_host, m_u);
+                Kokkos::deep_copy(data_host, data_device);
                 Kokkos::Profiling::popRegion();
                 Kokkos::Profiling::pushRegion("I/O - Checkpoint - write");
-                m_writer->write(m_u_host, m_grid, Super::m_iteration, Super::m_t,
-                m_params->thermo.gamma, m_params->thermo.mmw);
+                // m_writer->write(m_u_host, m_grid, Super::m_iteration, Super::m_t,
+                // m_params->thermo.gamma, m_params->thermo.mmw);
+                PDI_expose(data_host);
+                free(data_host);
                 Kokkos::Profiling::popRegion();
                 Kokkos::Profiling::popRegion();
             }
