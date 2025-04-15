@@ -179,14 +179,14 @@ void GodunovSolver::prepareNextOutput(Real& dt)
 extern "C"
 {
     void copy_func() {
-        if (!Session::isIOProc())
+        if (Session::isIOProc())
         {
             int* iStep; PDI_access("iStep", (void**)&iStep, PDI_IN);
             int* freq; PDI_access("freq", (void**)&freq, PDI_IN);
             if (*iStep % *freq == 0) {
             // if (*iStep % 100 == 0) {
-                printf("*********** %i ***********************\n", iStep);
-                printf("*********** %i ***********************\n\n", freq);
+                printf("*********** %i ***********************\n", *iStep);
+                printf("*********** %i ***********************\n\n", *freq);
             }
             PDI_release("freq");
             PDI_release("iStep");
