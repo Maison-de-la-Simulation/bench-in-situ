@@ -185,7 +185,8 @@ extern "C"
             int* freq; PDI_access("freq", (void**)&freq, PDI_IN);
             if (*iStep % *freq == 0) {
             // if (*iStep % 100 == 0) {
-                printf("**********************************\n");
+                printf("*********** " << *iStep << " ***********************\n");
+                printf("*********** " << *freq << " ***********************\n\n");
             }
             PDI_release("freq");
             PDI_release("iStep");
