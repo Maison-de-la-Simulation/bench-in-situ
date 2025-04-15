@@ -45,8 +45,10 @@ GodunovSolver::GodunovSolver(std::shared_ptr<Problem> problem)
     , m_should_save    {false}
     , m_time_limit_reached  {false}
     , m_u              ("U", m_grid.nbCells())
+    , data_device      ("U", m_grid.nbCells())
     , m_q              ("Q", m_grid.nbCells())
     , m_u_host         {Kokkos::create_mirror(m_u)}
+    , data_host        {Kokkos::create_mirror(m_u)}
     , m_qr             {}
     , m_nStepmax {m_params->run.nStepmax}
     , m_tEnd {m_params->run.tEnd}
