@@ -180,7 +180,7 @@ void GodunovSolver::prepareNextOutput(Real& dt)
 
 extern "C"
 {
-    void copy_func() {
+    void GodunovSolver::copy_func() {
         if (Session::isIOProc())
         {
             int iter; PDI_access("iter", (void**)&iter, PDI_IN);
