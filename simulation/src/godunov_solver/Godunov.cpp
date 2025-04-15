@@ -45,10 +45,10 @@ GodunovSolver::GodunovSolver(std::shared_ptr<Problem> problem)
     , m_should_save    {false}
     , m_time_limit_reached  {false}
     , m_u              ("U", m_grid.nbCells())
-    , data_device      ("U", m_grid.nbCells())
+//    , data_device      ("U", m_grid.nbCells())
     , m_q              ("Q", m_grid.nbCells())
     , m_u_host         {Kokkos::create_mirror(m_u)}
-    , data_host        {Kokkos::create_mirror(m_u)}
+//    , data_host        {Kokkos::create_mirror(m_u)}
     , m_qr             {}
     , m_nStepmax {m_params->run.nStepmax}
     , m_tEnd {m_params->run.tEnd}
@@ -197,11 +197,15 @@ extern "C"
 //                void* data_host; Kokkos::deep_copy(data_host, data_device);
                 Kokkos::Profiling::popRegion();
                 Kokkos::Profiling::pushRegion("I/O - Checkpoint - write");
-                // m_writer->write(m_u_host, m_grid, Super::m_iteration, Super::m_t,
-                // m_params->thermo.gamma, m_params->thermo.mmw);
+
+//                m_writer->write(m_u_host, m_grid, Super::m_iteration, Super::m_t,
+//                m_params->thermo.gamma, m_params->thermo.mmw);
+
 //                PDI_expose("m_u_host", (void**)&data_host, PDI_OUT);
 //                free(data_host);
-                PDI_expose("m_u_host", (void**)&data_host, PDI_OUT);
+
+                PDI_expose("m_u_host", (void**)&m_u_host, PDI_OUT);
+
                 Kokkos::Profiling::popRegion();
                 Kokkos::Profiling::popRegion();
             }
