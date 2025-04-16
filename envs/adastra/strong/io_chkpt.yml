@@ -129,6 +129,7 @@ pdi:
             freq: 100
             iter: ${iStep}
             data_device: ${local_full_field}
+            time: ${m_t}
       on_event:
         write_xml:
           writeXML: {}
