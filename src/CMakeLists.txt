@@ -47,3 +47,12 @@ if(${PROJECT_NAME}_ENABLE_PDI)
   target_link_libraries(${PROJECT_NAME} PUBLIC PDI::PDI_C)
   target_compile_definitions(${PROJECT_NAME} PUBLIC ${PROJECT_NAME}_ENABLE_PDI)
 endif(${PROJECT_NAME}_ENABLE_PDI)
+
+if(${PROJECT_NAME}_ENABLE_HDF5)
+  find_package(HDF5 REQUIRED COMPONENTS C)
+  target_sources(${PROJECT_NAME} PRIVATE io/WriterHDF5.cpp)
+  target_link_libraries(${PROJECT_NAME} PUBLIC ${HDF5_C_LIBRARIES})
+  target_include_directories(${PROJECT_NAME} SYSTEM PUBLIC ${HDF5_C_INCLUDE_DIRS})
+  target_compile_definitions(${PROJECT_NAME} PUBLIC ${PROJECT_NAME}_ENABLE_HDF5 ${HDF5_C_DEFINITIONS})
+endif(${PROJECT_NAME}_ENABLE_HDF5)
+
