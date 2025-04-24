@@ -186,6 +186,8 @@ extern "C"
         {
             int* iter; PDI_access("iter", (void**)&iter, PDI_IN);
             int* freq; PDI_access("freq", (void**)&freq, PDI_IN);
+            int* a; PDI_access("m_u", (void**)&m_u, PDI_IN);
+            int* b; PDI_access("m_u_host", (void**)&m_u_host, PDI_IN);
 //            int time; PDI_access("time", (void**)&time, PDI_IN);
             printf("--- %i ---\n", *iter);
 //            printf("--- %i ---\n",time);
@@ -199,6 +201,7 @@ extern "C"
                 Print() << "===================== output at iteration = " << iter << " time t = "<< time << std::endl;
                 Kokkos::Profiling::pushRegion("I/O - Checkpoint - deep_copy");
 //                 // Kokkos::deep_copy(m_u_host, GodunovSolver::m_u);
+                Kokkos::deep_copy(b, a);
 //                void* data_host; Kokkos::deep_copy(data_host, data_device);
                 Kokkos::Profiling::popRegion();
                 Kokkos::Profiling::pushRegion("I/O - Checkpoint - write");
@@ -228,10 +231,19 @@ void GodunovSolver::pdiExposeData()
   std::chrono::steady_clock::time_point m_start_io = std::chrono::steady_clock::now();
 
 #if defined(Euler_ENABLE_PDI)
+    // PDI_multi_expose("data_on_GPU",
+    //                  "iStep", (void*)&(Super::m_iteration), PDI_OUT,
+    //                  "time", (void*)&(m_t), PDI_OUT,
+    //                 //  "local_full_field", (void*)&(local_full_field), PDI_OUT,
+    //                  NULL);
+
+    // a = &m_u;
+
     PDI_multi_expose("data_on_GPU",
                      "iStep", (void*)&(Super::m_iteration), PDI_OUT,
                      "time", (void*)&(m_t), PDI_OUT,
-                    //  "local_full_field", (void*)&(local_full_field), PDI_OUT,
+                     "m_u", (void*)&(m_u), PDI_OUT,
+                     "m_u_host", (void*)&(m_u_host), PDI_OUT,
                      NULL);
 
 //#if defined(Euler_ENABLE_PDI)

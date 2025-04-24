@@ -137,7 +137,9 @@ pdi:
           copy_func:
             freq: 100
             iter: ${iStep}
-            data_device: ${local_full_field}
+            m_u: ${m_u}
+            m_u_host: ${m_u_host}
+            # data_device: ${local_full_field}
 
     #mpi:
 
