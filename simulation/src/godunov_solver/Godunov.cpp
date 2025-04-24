@@ -184,16 +184,16 @@ extern "C"
         printf("AAAAAAAAAAAAAAAAAAAAAAAAA");
         if (Session::isIOProc())
         {
-            int iter; PDI_access("iter", (void**)&iter, PDI_IN);
-            int freq; PDI_access("freq", (void**)&freq, PDI_IN);
+            int* iter; PDI_access("iter", (void**)&iter, PDI_IN);
+            int* freq; PDI_access("freq", (void**)&freq, PDI_IN);
 //            int time; PDI_access("time", (void**)&time, PDI_IN);
-            printf("--- %i ---\n",iter);
+            printf("--- %i ---\n", *iter);
 //            printf("--- %i ---\n",time);
 //            void* data_device; PDI_access("data_device", (void**)&data_device, PDI_IN);
             // PDI_access("data_device", (void**)&GodunovSolver::m_u, PDI_IN);
-            if (iter % freq == 0) {
-                printf("*********** %i ***********************\n", iter);
-                printf("*********** %i ***********************\n\n", freq);
+            if (*iter % *freq == 0) {
+                printf("*********** %i ***********************\n", *iter);
+                printf("*********** %i ***********************\n\n", *freq);
                 Kokkos::Profiling::pushRegion("I/O - Checkpoint");
                 // if(Super::m_iteration%100 == 0) Print() << "===================== output at iteration = " << Super::m_iteration << " time t = "<<Super::m_t<< std::endl;
                 Print() << "===================== output at iteration = " << iter << " time t = "<< time << std::endl;
@@ -231,7 +231,14 @@ void GodunovSolver::pdiExposeData()
     PDI_multi_expose("data_on_GPU",
                      "iStep", (void*)&(Super::m_iteration), PDI_OUT,
                      "time", (void*)&(m_t), PDI_OUT,
+                     "local_full_field", (void*)&(local_full_field), PDI_OUT,
                      NULL);
+
+//#if defined(Euler_ENABLE_PDI)
+//    PDI_multi_expose("data_on_GPU",
+//                     "iStep", (void*)&(Super::m_iteration), PDI_OUT,
+//                     "time", (void*)&(m_t), PDI_OUT,
+//                     NULL);
 
 //    void copy_func() {
 //    int iter;

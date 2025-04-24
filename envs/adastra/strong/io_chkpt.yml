@@ -123,16 +123,21 @@ pdi:
   plugins:
 
     user_code:
-      on_data:
-        local_full_field:
-          copy_func:
-            freq: 100
-            iter: ${iStep}
+#      on_data:
+#        local_full_field:
+#          copy_func:
+#            freq: 100
+#            iter: ${iStep}
 #            data_device: ${local_full_field}
 #            time: ${m_t}
       on_event:
         write_xml:
           writeXML: {}
+        data_on_GPU:
+          copy_func:
+            freq: 100
+            iter: ${iStep}
+            data_device: ${local_full_field}
 
     #mpi:
 
