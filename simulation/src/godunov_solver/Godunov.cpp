@@ -231,7 +231,7 @@ void GodunovSolver::pdiExposeData()
     PDI_multi_expose("data_on_GPU",
                      "iStep", (void*)&(Super::m_iteration), PDI_OUT,
                      "time", (void*)&(m_t), PDI_OUT,
-                     "local_full_field", (void*)&(local_full_field), PDI_OUT,
+                    //  "local_full_field", (void*)&(local_full_field), PDI_OUT,
                      NULL);
 
 //#if defined(Euler_ENABLE_PDI)
