@@ -33,10 +33,15 @@ option(${PROJECT_NAME}_ENABLE_MPI_CUDA_AWARE "Enable MPI CUDA-aware build." OFF)
 option(${PROJECT_NAME}_ENABLE_TESTS "Enable ${PROJECT_NAME}'s tests build." OFF)
 option(${PROJECT_NAME}_ENABLE_TRILINOS "Enable Trilinos, use Kokkos from Trilinos." OFF)
 option(${PROJECT_NAME}_ENABLE_PDI "Enable PDI, use PDI for output." OFF)
+option(${PROJECT_NAME}_ENABLE_HDF5 "Enable HDF5, use HDF5 for output without PDI." OFF)
 
 if(${PROJECT_NAME}_ENABLE_PDI)
   find_package(PDI REQUIRED)
 endif(${PROJECT_NAME}_ENABLE_PDI)
+
+if(${PROJECT_NAME}_ENABLE_HDF5)
+  find_package(HDF5 REQUIRED COMPONENTS C)
+endif(${PROJECT_NAME}_ENABLE_HDF5)
 
 if(${PROJECT_NAME}_ENABLE_TRILINOS)
   # Get Trilinos as one entity
@@ -92,6 +97,9 @@ target_link_libraries(main ${PROJECT_NAME})
 if(${PROJECT_NAME}_ENABLE_PDI)
   target_compile_definitions(main PUBLIC ${PROJECT_NAME}_ENABLE_PDI)
 endif(${PROJECT_NAME}_ENABLE_PDI)
+if(${PROJECT_NAME}_ENABLE_HDF5)
+  target_compile_definitions(main PUBLIC ${PROJECT_NAME}_ENABLE_HDF5)
+endif(${PROJECT_NAME}_ENABLE_HDF5)
 set_target_properties(main PROPERTIES ENABLE_EXPORTS TRUE)
 
 if(${PROJECT_NAME}_ENABLE_DOCUMENTATION)

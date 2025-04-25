@@ -8,6 +8,9 @@
 #if defined(Euler_ENABLE_PDI)
 #include "WriterPDI.hpp"
 #endif
+#if defined(Euler_ENABLE_HDF5)
+#include "WriterHDF5.hpp"
+#endif
 #include "WriterTypes.hpp"
 #include "WriterVTK.hpp"
 
@@ -35,6 +38,14 @@ std::shared_ptr<WriterBase> WriterFactory::New(const UniformGrid& grid, const Pa
         ptr = std::make_shared<WriterPDI>(grid, params, prefix, variables);
 #else
         throw std::runtime_error("ARK has not been compiled with PDI support\n");
+#endif
+    }
+    else if (s2writer(type) == writer_t::hdf5)
+    {
+#if defined(Euler_ENABLE_HDF5)
+        ptr = std::make_shared<WriterHDF5>(grid, params, prefix, variables);
+#else
+        throw std::runtime_error("ARK has not been compiled with HDF5 support\n");
 #endif
     }
     else
