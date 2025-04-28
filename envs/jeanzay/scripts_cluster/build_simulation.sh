@@ -9,7 +9,8 @@ source ${PDI_INSTALL_DIR}/share/pdi/env.sh
 # If we want only to recompile the simulation code.
 if [ "${CLUSTER_NAME}" == "jeanzay" ]; then
     if [ "${GPU_ARCH}" == "V100" ] ||  [ "${GPU_ARCH}" == "A100" ] ||  [ "${GPU_ARCH}" == "H100" ]; then
-    source ../modules_${GPU_ARCH}.env
+        source ../modules_${GPU_ARCH}.env
+    fi
 fi
 
 
