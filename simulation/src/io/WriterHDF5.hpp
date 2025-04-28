@@ -45,6 +45,9 @@ public:
         void copy_data(std::vector<Real>& data, HostConstArrayDyn u, const UniformGrid & grid, Int ivar) const;
         void write_simple_dataset(const hid_t &file_id, const char* name, const hid_t &type, 
             const hsize_t size, const hsize_t dims[/*size*/], const void* data);
+        void write_simple_dataset_select(const hid_t &file_id, const char* name, const hid_t &type,
+            const hsize_t dims_size, const hsize_t dims[/*size*/], const hsize_t hyperslab_start[/*size*/],
+            const hsize_t hyperslab_count[/*size*/], const void* data);
         void writeXML( const UniformGrid & grid) const;
 
         std::string m_prefix;
