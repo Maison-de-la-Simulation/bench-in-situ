@@ -48,6 +48,7 @@ GodunovSolver::GodunovSolver(std::shared_ptr<Problem> problem)
 //    , data_device      ("U", m_grid.nbCells())
     , m_q              ("Q", m_grid.nbCells())
     , m_u_host         {Kokkos::create_mirror(m_u)}
+//    , m_u_host         {Kokkos::create_mirror_view(Kokkos::DefaultExecutionSpace::memory_space(), m_u)}
 //    , data_host        {Kokkos::create_mirror(m_u)}
     , m_qr             {}
     , m_nStepmax {m_params->run.nStepmax}
@@ -196,12 +197,34 @@ void deep(int* b, int* a)
 //    Kokkos::View<int*, Kokkos::LayoutLeft, Kokkos::HostSpace> mm_u_host(b, m_u_host_dim[0], m_u_host_dim[1]);
 //    Kokkos::deep_copy(mm_u_host, mm_u);
 
+//    std::array<size_t, 2> m_u_dim; PDI_access("m_u_kokkos_view_dimensions", (void**)&m_u_dim, PDI_IN);
+//    int m_u_dim; PDI_access("m_u_kokkos_view_dimensions", (void**)&m_u_dim, PDI_IN);
     std::array<size_t, 2> m_u_dim; PDI_access("m_u_kokkos_view_dimensions", (void**)&m_u_dim, PDI_IN);
     std::array<size_t, 2> m_u_host_dim; PDI_access("m_u_host_kokkos_view_dimensions", (void**)&m_u_host_dim, PDI_IN);
-    Kokkos::View<int*, Kokkos::LayoutLeft, Kokkos::HostSpace> mm_u(a, m_u_dim[0], m_u_dim[1]);
-    Kokkos::View<int*, Kokkos::LayoutLeft, Kokkos::HostSpace> mm_u_host(b, m_u_host_dim[0], m_u_host_dim[1]);
-    Kokkos::deep_copy(mm_u_host, mm_u);
+//    Kokkos::View<int**, Kokkos::LayoutLeft, Kokkos::HostSpace> mm_u(a, m_u_dim[0], m_u_dim[1]);
+//    Kokkos::View<int**, Kokkos::LayoutLeft, Kokkos::HostSpace> mm_u_host(b, m_u_host_dim[0], m_u_host_dim[1]);
 
+//    int* iter; PDI_access("iter", (void**)&iter, PDI_IN);
+//    printf("--- %i ---\n", *iter);
+
+//    printf("--- mu0 %zu ---\n", mm_u.extent(0));
+    printf("--- mu0 %zu ---\n", m_u_dim[0]);
+    printf("--- mu1 %zu ---\n", m_u_dim[1]);
+//    printf("--- la %i ---\n", m_u_dim);
+    printf("--- muhost0 %zu ---\n", m_u_host_dim[0]);
+    printf("--- muhost1 %zu ---\n", m_u_host_dim[1]);
+
+    printf("--- &mu %p ---\n", &m_u_dim);
+    printf("--- &muhost %p ---\n", &m_u_host_dim);
+
+
+//    Kokkos::View<int*, Kokkos::LayoutLeft, Kokkos::HostSpace> mm_u(a, m_u_dim[0], m_u_dim[1]);
+//    Kokkos::View<int*, Kokkos::LayoutLeft, Kokkos::HostSpace> mm_u_host(b, m_u_host_dim[0], m_u_host_dim[1]);
+//    Kokkos::deep_copy(mm_u_host, mm_u);
+
+
+    PDI_release("m_u_host_kokkos_view_dimensions");
+    PDI_release("m_u_kokkos_view_dimensions");
 }
 
 extern "C"
@@ -211,6 +234,8 @@ extern "C"
         if (Session::isIOProc())
         {
             int* iter; PDI_access("iter", (void**)&iter, PDI_IN);
+//            PDI_release("iter");
+//            int* iter; *iter = 1;
             int* freq; PDI_access("freq", (void**)&freq, PDI_IN);
             int* a; PDI_access("m_u", (void**)&a, PDI_IN);
             int* b; PDI_access("m_u_host", (void**)&b, PDI_IN);
@@ -220,7 +245,27 @@ extern "C"
 //            std::array<size_t, 2> m_u_kokkos_view_dimensions = { (*a).extent(0), (*a).extent(1) };
 //            std::array<size_t, 2> m_u_host_kokkos_view_dimensions = { b.extent(0), b.extent(1) };
 
+            printf("--- %i ---\n", *iter);
+
+//    std::array<size_t, 2> m_u_dim_test; PDI_access("m_u_kokkos_view_dimensions", (void**)&m_u_dim_test, PDI_IN);
+//    std::array<size_t, 2> m_u_host_dim_test; PDI_access("m_u_host_kokkos_view_dimensions", (void**)&m_u_host_dim_test, PDI_IN);
+
+//    printf("--- proof ---\n");
+//    printf("--- mu0 %zu ---\n", m_u_dim_test[0]);
+//    printf("--- mu1 %zu ---\n", m_u_dim_test[1]);
+//    printf("--- muhost0 %zu ---\n", m_u_host_dim_test[0]);
+//    printf("--- muhost1 %zu ---\n", m_u_host_dim_test[1]);
+//
+//    printf("--- &mu %p ---\n", &m_u_dim_test);
+//    printf("--- &muhost %p ---\n", &m_u_host_dim_test);
+//
+//    PDI_release("m_u_kokkos_view_dimensions");
+//    PDI_release("m_u_host_kokkos_view_dimensions");
+
             deep(b, a);
+
+            printf("--- after deep %i ---\n\n", *iter);
+
 //            deep(a, b, m_u_kokkos_view_dimensions, m_u_host_kokkos_view_dimensions);
 //            deep(a, b, a.layout());
 
@@ -228,7 +273,7 @@ extern "C"
 //            Array3d M_U_HOST("M_U_HOST", 10, Kokkos::ViewAllocateWithoutInitializing("test"), b);
 
 //            int time; PDI_access("time", (void**)&time, PDI_IN);
-            printf("--- %i ---\n", *iter);
+//            printf("--- %i ---\n", *iter);
 //            printf("--- %i ---\n",time);
 //            void* data_device; PDI_access("data_device", (void**)&data_device, PDI_IN);
             // PDI_access("data_device", (void**)&GodunovSolver::m_u, PDI_IN);
@@ -259,8 +304,10 @@ extern "C"
             }
 //            PDI_release("data_device");
 //            PDI_release("time");
+            PDI_release("m_u_host");
+            PDI_release("m_u");
             PDI_release("freq");
-            PDI_release("iStep");
+            PDI_release("iter");
         }
     }
 }
@@ -283,6 +330,16 @@ void GodunovSolver::pdiExposeData()
 
     std::array<size_t, 2> m_u_kokkos_view_dimensions = { m_u.extent(0), m_u.extent(1) };
     std::array<size_t, 2> m_u_host_kokkos_view_dimensions = { m_u_host.extent(0), m_u_host.extent(1) };
+//    int m_u_kokkos_view_dimensions = m_u.extent(0);
+
+    printf("--- pdiExposeData ---\n");
+    printf("--- mu0 %zu ---\n", m_u_kokkos_view_dimensions[0]);
+    printf("--- mu1 %zu ---\n", m_u_kokkos_view_dimensions[1]);
+    printf("--- muhost0 %zu ---\n", m_u_host_kokkos_view_dimensions[0]);
+    printf("--- muhost1 %zu ---\n\n", m_u_host_kokkos_view_dimensions[1]);
+
+    printf("--- &mu %p ---\n", &m_u_kokkos_view_dimensions);
+    printf("--- &muhost %p ---\n", &m_u_host_kokkos_view_dimensions);
 
 //    Kokkos::MemorySpace memorySpace = m_u.memory_space();
 //    Kokkos::ArrayLayout arrayLayout = m_u.layout();
@@ -296,6 +353,23 @@ void GodunovSolver::pdiExposeData()
                      "m_u_kokkos_view_dimensions", (void*)&(m_u_kokkos_view_dimensions), PDI_OUT,
                      "m_u_host_kokkos_view_dimensions", (void*)&(m_u_host_kokkos_view_dimensions), PDI_OUT,
                      NULL);
+
+
+//    std::array<size_t, 2> m_u_dim_test; PDI_access("m_u_kokkos_view_dimensions", (void**)&m_u_dim_test, PDI_IN);
+//    std::array<size_t, 2> m_u_host_dim_test; PDI_access("m_u_host_kokkos_view_dimensions", (void**)&m_u_host_dim_test, PDI_IN);
+//
+//    printf("--- proof there ---\n");
+//    printf("--- mu0 %zu ---\n", m_u_dim_test[0]);
+//    printf("--- mu1 %zu ---\n", m_u_dim_test[1]);
+//    printf("--- muhost0 %zu ---\n", m_u_host_dim_test[0]);
+//    printf("--- muhost1 %zu ---\n", m_u_host_dim_test[1]);
+//
+//    printf("--- &mu %p ---\n", &m_u_dim_test);
+//    printf("--- &muhost %p ---\n", &m_u_host_dim_test);
+//
+//    PDI_release("m_u_kokkos_view_dimensions");
+//    PDI_release("m_u_host_kokkos_view_dimensions");
+
 
 //#if defined(Euler_ENABLE_PDI)
 //    PDI_multi_expose("data_on_GPU",
