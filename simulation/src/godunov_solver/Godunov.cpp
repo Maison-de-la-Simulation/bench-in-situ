@@ -216,7 +216,7 @@ extern "C"
 
             printf("--- %i ---\n", *iter);
 
-            // deep(b, a);
+            deep(b, a);
 
             printf("--- after deep %i ---\n\n", *iter);
 
@@ -273,20 +273,20 @@ void GodunovSolver::pdiExposeData()
 
 #endif
 
-   if (m_should_save)
-   {
-      Kokkos::Profiling::pushRegion("I/O - Checkpoint");
-      if(Super::m_iteration%100 == 0) Print() << "===================== output at iteration = " << Super::m_iteration << " time t = "<<Super::m_t<< std::endl;
-      Kokkos::Profiling::pushRegion("I/O - Checkpoint - deep_copy");
-      Kokkos::deep_copy(m_u_host, m_u);
-      Kokkos::Profiling::popRegion();
-      Kokkos::Profiling::pushRegion("I/O - Checkpoint - write");
-      m_writer->write(m_u_host, m_grid, Super::m_iteration, Super::m_t,
-                      m_params->thermo.gamma, m_params->thermo.mmw);
-      Kokkos::Profiling::popRegion();
-      Kokkos::Profiling::popRegion();
+//    if (m_should_save)
+//    {
+//       Kokkos::Profiling::pushRegion("I/O - Checkpoint");
+//       if(Super::m_iteration%100 == 0) Print() << "===================== output at iteration = " << Super::m_iteration << " time t = "<<Super::m_t<< std::endl;
+//       Kokkos::Profiling::pushRegion("I/O - Checkpoint - deep_copy");
+//       Kokkos::deep_copy(m_u_host, m_u);
+//       Kokkos::Profiling::popRegion();
+//       Kokkos::Profiling::pushRegion("I/O - Checkpoint - write");
+//       m_writer->write(m_u_host, m_grid, Super::m_iteration, Super::m_t,
+//                       m_params->thermo.gamma, m_params->thermo.mmw);
+//       Kokkos::Profiling::popRegion();
+//       Kokkos::Profiling::popRegion();
 
-  }
+//   }
 
   Kokkos::fence();
   performanceTimer.time_spent_in_io += (std::chrono::steady_clock::now() - m_start_io);
