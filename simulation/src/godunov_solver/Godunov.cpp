@@ -232,9 +232,9 @@ void deep(int* b, int* a)
     printf("--- dim_host_ptr[0] %zu ---\n", dim_host_ptr[0]);
     printf("--- dim_host_ptr[1] %zu ---\n", dim_host_ptr[1]);
 
-//    Kokkos::View<int*, Kokkos::LayoutLeft, Kokkos::HostSpace> mm_u(a, m_u_dim[0], m_u_dim[1]);
-//    Kokkos::View<int*, Kokkos::LayoutLeft, Kokkos::HostSpace> mm_u_host(b, m_u_host_dim[0], m_u_host_dim[1]);
-//    Kokkos::deep_copy(mm_u_host, mm_u);
+    Kokkos::View<int*, Kokkos::LayoutLeft, Kokkos::HostSpace> mm_u(a, dim_ptr[0], dim_ptr[1]);
+    Kokkos::View<int*, Kokkos::LayoutLeft, Kokkos::HostSpace> mm_u_host(b, dim_host_ptr[0], dim_host_ptr[1]);
+    Kokkos::deep_copy(mm_u_host, mm_u);
 
 
     PDI_release("m_u_host_kokkos_view_dimensions");
