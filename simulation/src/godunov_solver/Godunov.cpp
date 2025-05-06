@@ -207,24 +207,30 @@ void deep(int* b, int* a)
 
 //    std::array<size_t, 2> m_u_dim; PDI_access("m_u_kokkos_view_dimensions", (void**)&m_u_dim, PDI_IN);
 //    int m_u_dim; PDI_access("m_u_kokkos_view_dimensions", (void**)&m_u_dim, PDI_IN);
-    std::array<size_t, 2> m_u_dim; PDI_access("m_u_kokkos_view_dimensions", (void**)&m_u_dim, PDI_IN);
-    std::array<size_t, 2> m_u_host_dim; PDI_access("m_u_host_kokkos_view_dimensions", (void**)&m_u_host_dim, PDI_IN);
-//    Kokkos::View<int**, Kokkos::LayoutLeft, Kokkos::HostSpace> mm_u(a, m_u_dim[0], m_u_dim[1]);
+    std::array<size_t, 2>* m_u_dim; PDI_access("m_u_kokkos_view_dimensions", (void**)&m_u_dim, PDI_IN);
+	size_t* dim_ptr = m_u_dim->data();
+    std::array<size_t, 2>* m_u_host_dim; PDI_access("m_u_host_kokkos_view_dimensions", (void**)&m_u_host_dim, PDI_IN);
+	size_t* dim_host_ptr = m_u_host_dim->data();
+    //    Kokkos::View<int**, Kokkos::LayoutLeft, Kokkos::HostSpace> mm_u(a, m_u_dim[0], m_u_dim[1]);
 //    Kokkos::View<int**, Kokkos::LayoutLeft, Kokkos::HostSpace> mm_u_host(b, m_u_host_dim[0], m_u_host_dim[1]);
 
 //    int* iter; PDI_access("iter", (void**)&iter, PDI_IN);
 //    printf("--- %i ---\n", *iter);
 
 //    printf("--- mu0 %zu ---\n", mm_u.extent(0));
-    printf("--- mu0 %zu ---\n", m_u_dim[0]);
-    printf("--- mu1 %zu ---\n", m_u_dim[1]);
-//    printf("--- la %i ---\n", m_u_dim);
-    printf("--- muhost0 %zu ---\n", m_u_host_dim[0]);
-    printf("--- muhost1 %zu ---\n", m_u_host_dim[1]);
+//     printf("--- mu0 %zu ---\n", m_u_dim[0]);
+//     printf("--- mu1 %zu ---\n", m_u_dim[1]);
+// //    printf("--- la %i ---\n", m_u_dim);
+//     printf("--- muhost0 %zu ---\n", m_u_host_dim[0]);
+//     printf("--- muhost1 %zu ---\n", m_u_host_dim[1]);
 
-    printf("--- &mu %p ---\n", &m_u_dim);
-    printf("--- &muhost %p ---\n", &m_u_host_dim);
+//     printf("--- &mu %p ---\n", &m_u_dim);
+//     printf("--- &muhost %p ---\n", &m_u_host_dim);
 
+    printf("--- dim_ptr[0] %zu ---\n", dim_ptr[0]);
+    printf("--- dim_ptr[1] %zu ---\n", dim_ptr[1]);
+    printf("--- dim_host_ptr[0] %zu ---\n", dim_host_ptr[0]);
+    printf("--- dim_host_ptr[1] %zu ---\n", dim_host_ptr[1]);
 
 //    Kokkos::View<int*, Kokkos::LayoutLeft, Kokkos::HostSpace> mm_u(a, m_u_dim[0], m_u_dim[1]);
 //    Kokkos::View<int*, Kokkos::LayoutLeft, Kokkos::HostSpace> mm_u_host(b, m_u_host_dim[0], m_u_host_dim[1]);
@@ -357,8 +363,8 @@ void GodunovSolver::pdiExposeData()
                      "m_u", (void*)(m_u.data()), PDI_OUT,
                      "m_u_host", (void*)(m_u_host.data()), PDI_OUT,
 //                     "arrayLayout", (void*)&(m_u.layout()), PDI_OUT,
-                     "m_u_kokkos_view_dimensions", (void*)(m_u_kokkos_view_dimensions.data()), PDI_OUT,
-                     "m_u_host_kokkos_view_dimensions", (void*)(m_u_host_kokkos_view_dimensions.data()), PDI_OUT,
+                     "m_u_kokkos_view_dimensions", (void*)&m_u_kokkos_view_dimensions, PDI_OUT,
+                     "m_u_host_kokkos_view_dimensions", (void*)&m_u_host_kokkos_view_dimensions, PDI_OUT,
                      NULL);
 
 
