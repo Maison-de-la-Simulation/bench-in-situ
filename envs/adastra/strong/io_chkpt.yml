@@ -97,7 +97,8 @@ pdi:
     time: double
     iStep: int
     freq: int
-
+    m_u_kokkos_view_dimensions: { type: array, subtype: size_t, size: 2 }
+    m_u_host_kokkos_view_dimensions: { type: array, subtype: size_t, size: 2 }
 
     mpi_coord: {type: array, subtype: int, size: 3}
 

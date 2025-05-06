@@ -182,6 +182,14 @@ void GodunovSolver::prepareNextOutput(Real& dt)
 //void deep(int* a, int* b, std::array<size_t, 2> m_u_dim, std::array<size_t, 2> m_u_host_dim)
 void deep(int* b, int* a)
 {
+            int* iter; PDI_access("iter", (void**)&iter, PDI_IN);
+            int* freq; PDI_access("freq", (void**)&freq, PDI_IN);
+            printf("########### %i ################\n", *iter);
+            printf("########### %i ################\n", *freq);
+            PDI_release("freq");
+            PDI_release("iter");
+
+
 //    Kokkos::View<Real**, Layout> mm_u("mm_u", 10, 9, Kokkos::WithoutInitializing, a);
 //    Kokkos::View<Real*[2*three_d+2+1], Layout> mm_u_host("mm_u_host", 10, Kokkos::ViewAllocateWithoutInitializing(), b);
 //    Kokkos::View<Real**, Layout> mm_u_host("mm_u_host", 10, 9, Kokkos::WithoutInitializing, b);
@@ -282,7 +290,7 @@ extern "C"
                 printf("*********** %i ***********************\n\n", *freq);
                 Kokkos::Profiling::pushRegion("I/O - Checkpoint");
                 // if(Super::m_iteration%100 == 0) Print() << "===================== output at iteration = " << Super::m_iteration << " time t = "<<Super::m_t<< std::endl;
-                Print() << "===================== output at iteration = " << iter << " time t = " << time << std::endl;
+                Print() << "===================== output at iteration = " << *iter << " time t = " << *time << std::endl;
                 Kokkos::Profiling::pushRegion("I/O - Checkpoint - deep_copy");
 //                 // Kokkos::deep_copy(m_u_host, GodunovSolver::m_u);
 //                Kokkos::deep_copy(b, a);
@@ -337,7 +345,6 @@ void GodunovSolver::pdiExposeData()
     printf("--- mu1 %zu ---\n", m_u_kokkos_view_dimensions[1]);
     printf("--- muhost0 %zu ---\n", m_u_host_kokkos_view_dimensions[0]);
     printf("--- muhost1 %zu ---\n\n", m_u_host_kokkos_view_dimensions[1]);
-
     printf("--- &mu %p ---\n", &m_u_kokkos_view_dimensions);
     printf("--- &muhost %p ---\n", &m_u_host_kokkos_view_dimensions);
 
@@ -347,11 +354,11 @@ void GodunovSolver::pdiExposeData()
     PDI_multi_expose("data_on_GPU",
                      "iStep", (void*)&(Super::m_iteration), PDI_OUT,
                      "time", (void*)&(m_t), PDI_OUT,
-                     "m_u", (void*)&(m_u), PDI_OUT,
-                     "m_u_host", (void*)&(m_u_host), PDI_OUT,
+                     "m_u", (void*)(m_u.data()), PDI_OUT,
+                     "m_u_host", (void*)(m_u_host.data()), PDI_OUT,
 //                     "arrayLayout", (void*)&(m_u.layout()), PDI_OUT,
-                     "m_u_kokkos_view_dimensions", (void*)&(m_u_kokkos_view_dimensions), PDI_OUT,
-                     "m_u_host_kokkos_view_dimensions", (void*)&(m_u_host_kokkos_view_dimensions), PDI_OUT,
+                     "m_u_kokkos_view_dimensions", (void*)(m_u_kokkos_view_dimensions.data()), PDI_OUT,
+                     "m_u_host_kokkos_view_dimensions", (void*)(m_u_host_kokkos_view_dimensions.data()), PDI_OUT,
                      NULL);
 
 
