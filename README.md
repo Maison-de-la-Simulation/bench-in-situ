@@ -17,6 +17,7 @@ or
 
 ``` bash
 git clone https://github.com/Maison-de-la-Simulation/bench-in-situ.git -b refactor
+cd bench-in-situ
 git submodule init
 git submodule update
 ```
