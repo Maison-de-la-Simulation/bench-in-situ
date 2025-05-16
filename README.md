@@ -10,13 +10,13 @@ At the same time, insitu analytics is computed and multiple small files are prod
 
 ## To clone the project
 ``` bash
-git clone --recurse-submodules https://github.com/Maison-de-la-Simulation/bench-in-situ.git
+git clone --recurse-submodules https://github.com/Maison-de-la-Simulation/bench-in-situ.git -b refactor
 ```
 
 or
 
 ``` bash
-git clone https://github.com/Maison-de-la-Simulation/bench-in-situ.git 
+git clone https://github.com/Maison-de-la-Simulation/bench-in-situ.git -b refactor
 git submodule init
 git submodule update
 ```
