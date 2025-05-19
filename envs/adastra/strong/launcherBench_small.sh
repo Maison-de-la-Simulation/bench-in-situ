@@ -27,8 +27,8 @@ FORMATED_SIMU_SIZE=$(printf "%03d" "$SIMU_SIZE")
 FORMATED_CUBE_SIZE=$(printf "%03d" "$CUBE_SIZE")
 
 mkdir -p ${WORKING_DIR} && cd ${WORKING_DIR}
-rm *.h5
-rm *.xmf
+#rm *.h5
+#rm *.xmf
 cd ..
 
 declare -A local_domain_decomposition=(
@@ -134,4 +134,4 @@ for  ((CUBE_SIZE=${SMALL_CUBE_SIZE}; CUBE_SIZE<=${SMALL_CUBE_SIZE}; CUBE_SIZE*=2
 done
 
 mkdir -p ${BASE_DIR}/${RESULT_DIR} && cd ${BASE_DIR}/${RESULT_DIR} && grep -rw . -e "RESULT" >> ${BASE_DIR}/${RESULT_FILE}
-rm -rf ${WORKING_DIR}
+#rm -rf ${WORKING_DIR}
