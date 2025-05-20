@@ -127,14 +127,14 @@ pdi:
       on_event:
         write_xml:
           writeXML: {}
-#        data_on_GPU:
-#          copy_func:
-#            freq: 100
-#            iter: ${iStep}
-#            m_u: ${m_u}
-#            m_u_host: ${m_u_host}
-#            m_u_kokkos_view_dimensions: ${m_u_kokkos_view_dimensions}
-#            m_u_host_kokkos_view_dimensions: ${m_u_host_kokkos_view_dimensions}
+        data_on_GPU:
+          copy_func:
+            freq: 100
+            iter: ${iStep}
+            m_u: ${m_u}
+            m_u_host: ${m_u_host}
+            m_u_kokkos_view_dimensions: ${m_u_kokkos_view_dimensions}
+            m_u_host_kokkos_view_dimensions: ${m_u_host_kokkos_view_dimensions}
 
     # user_code:
     #   on_event:
@@ -203,11 +203,14 @@ pdi:
           - *Bz_description
           - *dX_description
 
-#    - file: testGPU.h5
-##      collision_policy: write_into
-#      on_event: data_GPU_event
+    - file: testGPU${iStep}.h5
+      collision_policy: write_into
+      on_event: data_GPU_event
+      write:
+        iStep:
+          dataset: 'iter${iStep}/iStep'
 #      write:
-#         iStep:
-##        data_host:
-##        data: data_host
+#        iStep:
+#        data_host:
+#        data: data_host
 #        data: mm_u_host
