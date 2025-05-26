@@ -1,14 +1,14 @@
 full_datasets: &full_datasets
   Time: { type: double }
-  d: { type: array, subtype: double, size: ['$ncell[2]', '$ncell[1]', '$ncell[0]'] }
-  E: { type: array, subtype: double, size: ['$ncell[2]', '$ncell[1]', '$ncell[0]'] }
-  dX: { type: array, subtype: double, size: ['$ncell[2]', '$ncell[1]', '$ncell[0]'] }
-  mx: { type: array, subtype: double, size: ['$ncell[2]', '$ncell[1]', '$ncell[0]'] }
-  my: { type: array, subtype: double, size: ['$ncell[2]', '$ncell[1]', '$ncell[0]'] }
-  mz: { type: array, subtype: double, size: ['$ncell[2]', '$ncell[1]', '$ncell[0]'] }
-  Bx: { type: array, subtype: double, size: ['$ncell[2]', '$ncell[1]', '$ncell[0]'] }
-  By: { type: array, subtype: double, size: ['$ncell[2]', '$ncell[1]', '$ncell[0]'] }
-  Bz: { type: array, subtype: double, size: ['$ncell[2]', '$ncell[1]', '$ncell[0]'] }
+#  d: { type: array, subtype: double, size: ['$ncell[2]', '$ncell[1]', '$ncell[0]'] }
+#  E: { type: array, subtype: double, size: ['$ncell[2]', '$ncell[1]', '$ncell[0]'] }
+#  dX: { type: array, subtype: double, size: ['$ncell[2]', '$ncell[1]', '$ncell[0]'] }
+#  mx: { type: array, subtype: double, size: ['$ncell[2]', '$ncell[1]', '$ncell[0]'] }
+#  my: { type: array, subtype: double, size: ['$ncell[2]', '$ncell[1]', '$ncell[0]'] }
+#  mz: { type: array, subtype: double, size: ['$ncell[2]', '$ncell[1]', '$ncell[0]'] }
+#  Bx: { type: array, subtype: double, size: ['$ncell[2]', '$ncell[1]', '$ncell[0]'] }
+#  By: { type: array, subtype: double, size: ['$ncell[2]', '$ncell[1]', '$ncell[0]'] }
+#  Bz: { type: array, subtype: double, size: ['$ncell[2]', '$ncell[1]', '$ncell[0]'] }
 
 
 local_dataset_selection: &local_dataset_selection
@@ -127,14 +127,14 @@ pdi:
       on_event:
         write_xml:
           writeXML: {}
-        data_on_GPU:
-          copy_func:
-            freq: 100
-            iter: ${iStep}
-            m_u: ${m_u}
-            m_u_host: ${m_u_host}
-            m_u_kokkos_view_dimensions: ${m_u_kokkos_view_dimensions}
-            m_u_host_kokkos_view_dimensions: ${m_u_host_kokkos_view_dimensions}
+#        data_on_GPU:
+#          copy_func:
+#            freq: 100
+#            iter: ${iStep}
+#            m_u: ${m_u}
+#            m_u_host: ${m_u_host}
+#            m_u_kokkos_view_dimensions: ${m_u_kokkos_view_dimensions}
+#            m_u_host_kokkos_view_dimensions: ${m_u_host_kokkos_view_dimensions}
 
     # user_code:
     #   on_event:
@@ -192,23 +192,23 @@ pdi:
         output_id:
         restart_id:
         start:
-        local_full_field:
-          - *d_description
-          - *E_description
-          - *mx_description
-          - *my_description
-          - *mz_description
-          - *Bx_description
-          - *By_description
-          - *Bz_description
-          - *dX_description
+#        local_full_field:
+#          - *d_description
+#          - *E_description
+#          - *mx_description
+#          - *my_description
+#          - *mz_description
+#          - *Bx_description
+#          - *By_description
+#          - *Bz_description
+#          - *dX_description
 
-    - file: testGPU${iStep}.h5
-      collision_policy: write_into
-      on_event: data_GPU_event
-      write:
-        iStep:
-          dataset: 'iter${iStep}/iStep'
+#    - file: testGPU${iStep}.h5
+#      collision_policy: write_into
+#      on_event: data_GPU_event
+#      write:
+#        iStep:
+#          dataset: 'iter${iStep}/iStep'
 #      write:
 #        iStep:
 #        data_host:
