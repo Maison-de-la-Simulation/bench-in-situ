@@ -216,27 +216,6 @@ void deep(double* b, double* a)
             PDI_release("iter");
 }
 
-//void wr()
-//{
-//    int* iter; PDI_access("iter", (void**)&iter, PDI_IN);
-//    int* freq; PDI_access("freq", (void**)&freq, PDI_IN);
-//    printf("########### %i ################\n", *iter);
-//    printf("########### %i ################\n", *freq);
-//
-//    int* grid; PDI_access("m_grid", (void**)&grid, PDI_IN);
-//    int* thermo_gamma; PDI_access("thermo_gamma", (void**)&thermo_gamma, PDI_IN);
-//    int* thermo_mmw; PDI_access("thermo_mmw", (void**)&thermo_mmw, PDI_IN);
-//
-//    m_writer->write(b, m_grid, iter, time,
-//                    thermo.gamma, thermo.mmw);
-//
-//    PDI_release("thermo_mmw");
-//    PDI_release("thermo_gamma");
-//    PDI_release("m_grid");
-//    PDI_release("freq");
-//    PDI_release("iter");
-//}
-
 extern "C"
 {
     void copy_func() {
@@ -245,13 +224,13 @@ extern "C"
             int* iter; PDI_access("iter", (void**)&iter, PDI_IN);
             int* freq; PDI_access("freq", (void**)&freq, PDI_IN);
             double* a; PDI_access("m_u", (void**)&a, PDI_IN);
-            double* b; PDI_access("m_u_host", (void**)&b, PDI_IN);
+            // double* b; PDI_access("m_u_host", (void**)&b, PDI_IN);
+            std::array<size_t, 2>* m_u_dim; PDI_access("m_u_kokkos_view_dimensions", (void**)&m_u_dim, PDI_IN);
+            size_t* dim_ptr = m_u_dim->data();
+            std::array<size_t, 2>* m_u_host_dim; PDI_access("m_u_host_kokkos_view_dimensions", (void**)&m_u_host_dim, PDI_IN);
+            size_t* dim_host_ptr = m_u_host_dim->data();
 
-//            printf("--- %i ---\n", *iter);
 
-//            deep(b, a);
-
-//            printf("--- after deep %i ---\n\n", *iter);
 
             if (*iter % *freq == 0) {
                 printf("*********** %i ***********************\n", *iter);
@@ -259,17 +238,30 @@ extern "C"
                 Kokkos::Profiling::pushRegion("I/O - Checkpoint");
                 Print() << "===================== output at iteration = " << *iter << " time t = " << *time << std::endl;
                 Kokkos::Profiling::pushRegion("I/O - Checkpoint - deep_copy");
-                deep(b, a);
+                // deep(b, a);
+                Kokkos::View<Real*, Kokkos::LayoutLeft, Kokkos::HostSpace> mm_u(a, dim_ptr[0], dim_ptr[1]);
+                Kokkos::View<Real*, Kokkos::LayoutLeft, Kokkos::HostSpace> mm_u_host(b, dim_host_ptr[0], dim_host_ptr[1]);
+                Kokkos::deep_copy(mm_u_host, mm_u);
                 printf("--- after deep bis %i ---\n\n", *iter);
                 Kokkos::Profiling::popRegion();
                 Kokkos::Profiling::pushRegion("I/O - Checkpoint - write");
 //                wr(b);
 //                m_writer->write(b, m_grid, iter, time,
 //                                m_params->thermo.gamma, m_params->thermo.mmw);
+                PDI_multi_expose("data_HOST",
+                                // "iStep", iter, PDI_OUT,
+                                "u_host", (void*)(mm_u_host.data()), PDI_OUT),
+                                // "m_u_host", (void*)(m_u_host.data()), PDI_OUT,
+                                "m_u_host_kokkos_view_dimensions", (void*)&m_u_host_kokkos_view_dimensions, PDI_OUT,
+                                NULL);
+                                // "data_host", &data_host, PDI_OUT);
+                                // "data_host", data_host->data(), PDI_OUT);
+                                // "local_full_field", mm_u_host.data(), PDI_OUT);
                 Kokkos::Profiling::popRegion();
                 Kokkos::Profiling::popRegion();
             }
-            PDI_release("m_u_host");
+            // PDI_release("m_u_host");
+            PDI_release("m_u_kokkos_view_dimensions");
             PDI_release("m_u");
             PDI_release("freq");
             PDI_release("iter");
@@ -283,13 +275,13 @@ void GodunovSolver::pdiExposeData()
   std::chrono::steady_clock::time_point m_start_io = std::chrono::steady_clock::now();
 
 #if defined(Euler_ENABLE_PDI)
-    PDI_multi_expose("data_on_GPU",
-                     "iStep", (void*)&(Super::m_iteration), PDI_OUT,
-                     "time", (void*)&(m_t), PDI_OUT,
-                     NULL);
+    // PDI_multi_expose("data_on_GPU",
+    //                  "iStep", (void*)&(Super::m_iteration), PDI_OUT,
+    //                  "time", (void*)&(m_t), PDI_OUT,
+    //                  NULL);
 
-//    std::array<size_t, 2> m_u_kokkos_view_dimensions = { m_u.extent(0), m_u.extent(1) };
-//    std::array<size_t, 2> m_u_host_kokkos_view_dimensions = { m_u_host.extent(0), m_u_host.extent(1) };
+   std::array<size_t, 2> m_u_kokkos_view_dimensions = { m_u.extent(0), m_u.extent(1) };
+   std::array<size_t, 2> m_u_host_kokkos_view_dimensions = { m_u_host.extent(0), m_u_host.extent(1) };
 
 //    printf("--- pdiExposeData ---\n");
 //    printf("--- mu0 %zu ---\n", m_u_kokkos_view_dimensions[0]);
@@ -299,31 +291,31 @@ void GodunovSolver::pdiExposeData()
 //    printf("--- &mu %p ---\n", &m_u_kokkos_view_dimensions);
 //    printf("--- &muhost %p ---\n", &m_u_host_kokkos_view_dimensions);
 
-//    PDI_multi_expose("data_on_GPU",
-//                     "iStep", (void*)&(Super::m_iteration), PDI_OUT,
-//                     "time", (void*)&(m_t), PDI_OUT,
-//                     "m_u", (void*)(m_u.data()), PDI_OUT,
-//                     "m_u_host", (void*)(m_u_host.data()), PDI_OUT,
-//                     "m_u_kokkos_view_dimensions", (void*)&m_u_kokkos_view_dimensions, PDI_OUT,
-//                     "m_u_host_kokkos_view_dimensions", (void*)&m_u_host_kokkos_view_dimensions, PDI_OUT,
-//                     NULL);
+   PDI_multi_expose("data_on_GPU",
+                    "iStep", (void*)&(Super::m_iteration), PDI_OUT,
+                    "time", (void*)&(m_t), PDI_OUT,
+                    "m_u", (void*)(m_u.data()), PDI_OUT,
+                    "m_u_host", (void*)(m_u_host.data()), PDI_OUT,
+                    "m_u_kokkos_view_dimensions", (void*)&m_u_kokkos_view_dimensions, PDI_OUT,
+                    "m_u_host_kokkos_view_dimensions", (void*)&m_u_host_kokkos_view_dimensions, PDI_OUT,
+                    NULL);
 
 #endif
 
-    if (m_should_save)
-    {
-       Kokkos::Profiling::pushRegion("I/O - Checkpoint");
-       if(Super::m_iteration%100 == 0) Print() << "===================== output at iteration = " << Super::m_iteration << " time t = "<<Super::m_t<< std::endl;
-       Kokkos::Profiling::pushRegion("I/O - Checkpoint - deep_copy");
-       Kokkos::deep_copy(m_u_host, m_u);
-       Kokkos::Profiling::popRegion();
-       Kokkos::Profiling::pushRegion("I/O - Checkpoint - write");
-       m_writer->write(m_u_host, m_grid, Super::m_iteration, Super::m_t,
-                       m_params->thermo.gamma, m_params->thermo.mmw);
-       Kokkos::Profiling::popRegion();
-       Kokkos::Profiling::popRegion();
+//     if (m_should_save)
+//     {
+//        Kokkos::Profiling::pushRegion("I/O - Checkpoint");
+//        if(Super::m_iteration%100 == 0) Print() << "===================== output at iteration = " << Super::m_iteration << " time t = "<<Super::m_t<< std::endl;
+//        Kokkos::Profiling::pushRegion("I/O - Checkpoint - deep_copy");
+//        Kokkos::deep_copy(m_u_host, m_u);
+//        Kokkos::Profiling::popRegion();
+//        Kokkos::Profiling::pushRegion("I/O - Checkpoint - write");
+//        m_writer->write(m_u_host, m_grid, Super::m_iteration, Super::m_t,
+//                        m_params->thermo.gamma, m_params->thermo.mmw);
+//        Kokkos::Profiling::popRegion();
+//        Kokkos::Profiling::popRegion();
 
-   }
+//    }
 
   Kokkos::fence();
   performanceTimer.time_spent_in_io += (std::chrono::steady_clock::now() - m_start_io);

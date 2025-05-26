@@ -125,8 +125,10 @@ pdi:
 
     user_code:
       on_event:
-        write_xml:
-          writeXML: {}
+        # write_xml:
+        #   writeXML: {}
+        data_GPU:
+          copy_to_CPU: [u, u_dim]
 #        data_on_GPU:
 #          copy_func:
 #            freq: 100
@@ -175,33 +177,33 @@ pdi:
     
     decl_hdf5:
       
-    - file: ${filename}
-      datasets: *full_datasets # a list of datasets inside the file created on first access
-      on_event: checkpoint
-      collision_policy: write_into
-#      communicator: ${MPI_COMM_WORLD}
-      when: '$iStep%100 = 0'
-      write:
-        grid_size:
-        time:
-          - dataset: Time
-        Rstar_h:
-        gamma:
-        mmw:
-        iStep:
-        output_id:
-        restart_id:
-        start:
-#        local_full_field:
-#          - *d_description
-#          - *E_description
-#          - *mx_description
-#          - *my_description
-#          - *mz_description
-#          - *Bx_description
-#          - *By_description
-#          - *Bz_description
-#          - *dX_description
+#     - file: ${filename}
+#       datasets: *full_datasets # a list of datasets inside the file created on first access
+#       on_event: checkpoint
+#       collision_policy: write_into
+# #      communicator: ${MPI_COMM_WORLD}
+#       when: '$iStep%100 = 0'
+#       write:
+#         grid_size:
+#         time:
+#           - dataset: Time
+#         Rstar_h:
+#         gamma:
+#         mmw:
+#         iStep:
+#         output_id:
+#         restart_id:
+#         start:
+# #        local_full_field:
+# #          - *d_description
+# #          - *E_description
+# #          - *mx_description
+# #          - *my_description
+# #          - *mz_description
+# #          - *Bx_description
+# #          - *By_description
+# #          - *Bz_description
+# #          - *dX_description
 
 #    - file: testGPU${iStep}.h5
 #      collision_policy: write_into
@@ -214,3 +216,9 @@ pdi:
 #        data_host:
 #        data: data_host
 #        data: mm_u_host
+
+    - file: testGPU${iStep}.h5
+      collision_policy: write_into
+      on_event:
+          data_HOST:
+            write: u_host
