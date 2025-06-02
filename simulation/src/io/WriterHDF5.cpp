@@ -58,74 +58,12 @@ std::string WriterHDF5::getFilename(Int outputId) const{
 }
 
 // write simple dataset(scalar, vector, array)
-void WriterHDF5::write_simple_dataset(const hid_t &file_id, const char* name, const hid_t &type, 
-    const hsize_t dims_size, const hsize_t dims[/*size*/], const void* data)
-{
-    herr_t status=-1;
-    herr_t status_tmp=0;
-    hid_t dataset_id;
-    hid_t dataspace_id;
-
-    if (dims_size == 1 && dims[0] == 1){
-        dataspace_id = H5Screate(H5S_SCALAR);
-    }
-    else{
-        /*
-        * Describe the size of the array and create the data space for fixed
-        * size dataset.
-        */
-        dataspace_id = H5Screate_simple(dims_size, dims, NULL);
-    }
-    if (dataspace_id < 0) {
-        std::cout << "error "<< dataspace_id <<" in creating dataspace for " << name << std::endl;
-        goto end_function;
-    }
-
-    /*
-    * Create a new dataset within the file using defined dataspace and
-    * datatype and default dataset creation properties.
-    */
-    dataset_id = H5Dcreate2(file_id, name, type, dataspace_id, H5P_DEFAULT, H5P_DEFAULT, H5P_DEFAULT);
-    if (dataset_id < 0) {
-        std::cout << "error in H5Dcreate2 for "<< name <<"; dataset_id=" << dataset_id << std::endl;
-        goto close_dataspace_id;
-    }
-
-    /*
-    * Write the data to the dataset using default transfer properties.
-    */
-    status = H5Dwrite(dataset_id, type, H5S_ALL, H5S_ALL, H5P_DEFAULT, data);
-    if (status < 0) {
-        std::cout << "error in H5Dwrite for "<< name <<"; status=" << status << std::endl;
-    }
-
-    // close_dataset_id:
-    status_tmp=H5Dclose(dataset_id);
-    if (status_tmp < 0) {
-        status=status_tmp;
-        std::cout << "error in closing dataset for "<< name <<"; status=" << status_tmp << std::endl;
-    }
-
-close_dataspace_id:
-    status_tmp=H5Sclose(dataspace_id);
-    if (status_tmp < 0) {
-        status=status_tmp;
-        std::cout << "error in closing dataspace for "<< name <<"; status=" << status_tmp << std::endl;
-    }
-
-end_function:
-    if (status < 0) {
-        exit(EXIT_FAILURE);
-    }
-}
-
-// write simple dataset(scalar, vector, array)
 void WriterHDF5::write_simple_dataset_select(const hid_t &file_id, const char* name, const hid_t &type,
     const hsize_t dims_size, const hsize_t dims[/*size*/],
-    const hsize_t hyperslab_start[/*size*/],
-    const hsize_t hyperslab_count[/*size*/],
+    const hsize_t hyperslab_start[/*size*/], const hsize_t hyperslab_count[/*size*/],
     const void* data)
 {
+    // If we write all element in data,  hyperslab_start = 0  and hyperslab_count = dims
     herr_t status=-1;
     herr_t status_tmp=0;
     hid_t dataset_id;
@@ -133,8 +71,7 @@ void WriterHDF5::write_simple_dataset_select(const hid_t &file_id, const char* n
     hid_t datamemory_id;
 
     if (dims_size == 1 && dims[0] == 1){
-        std::cerr << "Error in selection" << std::endl;
-        exit(1);
+        dataspace_id = H5Screate(H5S_SCALAR);
     }
     else{
         /*
@@ -182,7 +119,6 @@ void WriterHDF5::write_simple_dataset_select(const hid_t &file_id, const char* n
     }
 
 close_datamemory_id:
-    std::cout << "close_datamemory_id" << std::endl;
     status_tmp=H5Sclose(datamemory_id);
     if (status_tmp < 0) {
         status=status_tmp;
@@ -190,7 +126,6 @@ close_datamemory_id:
     }
 
 close_dataset_id:
-    std::cout << "close_dataset_id" << std::endl;
     status_tmp=H5Dclose(dataset_id);
     if (status_tmp < 0) {
         status=status_tmp;
@@ -198,7 +133,6 @@ close_dataset_id:
     }
 
 close_dataspace_id:
-    std::cout << "close_dataspace_id" << std::endl;
     status_tmp=H5Sclose(dataspace_id);
     if (status_tmp < 0) {
         status=status_tmp;
@@ -208,44 +142,6 @@ close_dataspace_id:
 end_function:
     if (status < 0) {
         exit(EXIT_FAILURE);
-    }
-}
-
-void WriterHDF5::copy_data(std::vector<Real>& data, HostConstArrayDyn u,
-                                  const UniformGrid & grid, Int ivar) const
-{
-    const Int dim = three_d;
-    IntVectorNd<three_d> strides {};
-    for (Int idim=0; idim<dim; ++idim)
-    {
-        strides[idim] = (idim==0) ? 1 : strides[idim-1]*grid.m_nbCells[idim-1];
-    }
-
-    Int counter {0};
-    // transpose array to make data contiguous in memory
-    for (Int index=0; index<grid.nbCells(); ++index)
-    {
-        IntVectorNd<three_d> coord {grid.indexToCoord(index)};
-        if (grid.belongsToInnerDomain(coord))
-        {
-            Int index2 {0};
-            for (Int idim=0; idim<dim; ++idim)
-            {
-                index2 += (coord[idim] - grid.m_ghostWidths[idim]) * strides[idim];
-            }
-            data[index2] = u(index, ivar);
-            // index2 is C oriented (index2 = ix + iy*Nx + iz*Nx*Ny)
-            if (counter != index2) {
-                std::cout << "Problem index" << counter << " != " << index2 <<  std::endl;
-                exit(1);
-            }
-            counter++;
-        }
-    }
-
-    if (counter != (Int) data.size()) {
-        std::cout << "Total number of data is not correct:" << counter << " != " << data.size() <<  std::endl;
-        exit(1);    
     }
 }
 
@@ -454,21 +350,18 @@ void WriterHDF5::write(HostConstArrayDyn u, const UniformGrid& grid,
                             Int iStep, Real time, Real gamma, Real mmw)
 {
     auto& outputId = WriterBase::m_outputId;
-    //WriterBase::m_previous_outputs.push_back(std::make_pair(outputId, time));
     const auto& restartId = WriterBase::m_restartId;
     
     std::string filename = getFilename(outputId);
-    std::cout << "filename=" << filename << std::endl;
     const auto& Rstar_h = code_units::constants::Rstar_h;
 
-     // Jacques:::: A voir si on met la version local
+    // Jacques:::: A voir si on met la version local
     std::array<int, 3> ncells;
     ncells[IX] = grid.m_nbCells[IX] * grid.m_dom[IX];
     ncells[IY] = grid.m_nbCells[IY] * grid.m_dom[IY];
     ncells[IZ] = grid.m_nbCells[IZ] * grid.m_dom[IZ];
 
     const int dim = three_d;
-    const bool hyperslab = false;
 
     // create file 
     hid_t file_id = H5Fcreate(filename.c_str(), H5F_ACC_TRUNC, H5P_DEFAULT, H5P_DEFAULT);
@@ -482,70 +375,52 @@ void WriterHDF5::write(HostConstArrayDyn u, const UniformGrid& grid,
     
     hsize_t dims_grid[1];
     dims_grid[0] = dim;
-    write_simple_dataset(file_id, "/grid_size", hdf5_Int_type, 1, dims_grid, ncells.data());
+    hsize_t hyperslab_start_grid[1];
+    hyperslab_start_grid[0] = 0;
+
+    write_simple_dataset_select(file_id, "/grid_size", hdf5_Int_type, 1, dims_grid, hyperslab_start_grid, dims_grid, ncells.data());
 
     //=========================
     // write physical variables
     herr_t status=-1;
 
     // Create the data space for the dataset in memory and in file.
-    hsize_t dims_memory[dim];
+    hsize_t dims_var[dim];          // true dimension size of data in each direction
+    hsize_t hyperslab_start[dim];   // hyperslab_start in each direction
+    hsize_t dims_memory[dim];       // dimension size of the hyperslab in each direction (hyperslab_count)
     // The order of the dimension in hdf5 file is [grid.m_nbCells[2], grid.m_nbCells[1], grid.m_nbCells[0]]
     for (Int idim=0; idim<dim; ++idim) {
+        dims_var[idim] = grid.m_nbCells[dim-1-idim] + 2*grid.m_ghostWidths[dim-1-idim];
+        hyperslab_start[idim] = grid.m_ghostWidths[dim-1-idim];
         dims_memory[idim] = grid.m_nbCells[dim-1-idim];
     }
 
-    if (!hyperslab) {
-        size_t size_data=grid.m_nbCells[0]*grid.m_nbCells[1]*grid.m_nbCells[2];
-        std::vector<Real> data(size_data);
-
-        for (const auto& var : m_variables)
-        {
-            const int ivar = var.first;
-            const std::string var_name = var.second;
-    
-            // copy data
-            copy_data(data, u, grid, ivar);
-
-            // write var_name
-            write_simple_dataset(file_id, var_name.c_str(), hdf5_Real_type, dim, dims_memory, data.data());
-        }
+    Real *init_data;
+    for (const auto& var : m_variables)
+    {
+        const int ivar = var.first;
+        const std::string var_name = var.second;
+        init_data=&u(0,ivar);
+        // write var_name
+        write_simple_dataset_select(file_id, var_name.c_str(), hdf5_Real_type, dim, dims_var, hyperslab_start, dims_memory, init_data);
     }
-    else {
-
-        hsize_t dims_var[dim];
-        hsize_t hyperslab_start[dim];
-        // The order of the dimension in hdf5 file is [grid.m_nbCells[2], grid.m_nbCells[1], grid.m_nbCells[0]]
-        for (Int idim=0; idim<dim; ++idim) {
-            dims_var[idim] = grid.m_nbCells[dim-1-idim] + 2*grid.m_ghostWidths[dim-1-idim];
-            hyperslab_start[idim] = grid.m_ghostWidths[dim-1-idim];
-        }
-
-        Real *init_data;
-        for (const auto& var : m_variables)
-        {
-            const int ivar = var.first;
-            const std::string var_name = var.second;
-            init_data=&u(0,ivar);
-            // write var_name
-            write_simple_dataset_select(file_id, var_name.c_str(), hdf5_Real_type, dim, dims_var, hyperslab_start, dims_memory, init_data);
-        }
-
-    }
+    init_data = nullptr;
 
     hsize_t dims_scalar[1];
     dims_scalar[0] = 1;
+    hsize_t hyperslab_start_scalar[1];
+    hyperslab_start_scalar[0] = 0;
     
     // write integer numbers
-    write_simple_dataset(file_id, "/iStep", hdf5_Int_type, 1, dims_scalar, &iStep);
-    write_simple_dataset(file_id, "/output_id", hdf5_Int_type, 1, dims_scalar, &outputId);
-    write_simple_dataset(file_id, "/restart_id", hdf5_Int_type, 1, dims_scalar, &restartId);
+    write_simple_dataset_select(file_id, "/iStep", hdf5_Int_type, 1, dims_scalar, hyperslab_start_scalar, dims_scalar, &iStep);
+    write_simple_dataset_select(file_id, "/output_id", hdf5_Int_type, 1, dims_scalar, hyperslab_start_scalar, dims_scalar, &outputId);
+    write_simple_dataset_select(file_id, "/restart_id", hdf5_Int_type, 1, dims_scalar, hyperslab_start_scalar, dims_scalar, &restartId);
    
     // write real numbers
-    write_simple_dataset(file_id, "/Rstar_h", hdf5_Real_type, 1, dims_scalar, &Rstar_h);
-    write_simple_dataset(file_id, "/Time", hdf5_Real_type, 1, dims_scalar, &time);
-    write_simple_dataset(file_id, "/gamma", hdf5_Real_type, 1, dims_scalar, &gamma);
-    write_simple_dataset(file_id, "/mmw", hdf5_Real_type, 1, dims_scalar, &mmw);
+    write_simple_dataset_select(file_id, "/Rstar_h", hdf5_Real_type, 1, dims_scalar, hyperslab_start_scalar, dims_scalar, &Rstar_h);
+    write_simple_dataset_select(file_id, "/Time", hdf5_Real_type, 1, dims_scalar, hyperslab_start_scalar, dims_scalar, &time);
+    write_simple_dataset_select(file_id, "/gamma", hdf5_Real_type, 1, dims_scalar, hyperslab_start_scalar, dims_scalar, &gamma);
+    write_simple_dataset_select(file_id, "/mmw", hdf5_Real_type, 1, dims_scalar, hyperslab_start_scalar, dims_scalar, &mmw);
 
     // close file
     status = H5Fclose(file_id);
@@ -561,4 +436,3 @@ void WriterHDF5::write(HostConstArrayDyn u, const UniformGrid& grid,
 }
     
 }}
-
