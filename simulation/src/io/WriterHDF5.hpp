@@ -14,10 +14,62 @@
 #include <string>
 #include <utility>
 #include <vector>
+#include <functional>
 
 
 namespace hydro { namespace io
 {
+
+/** A RAII-style wrapper for HDF5 hid_t.
+ *
+ * This calls the provided destroyer function when the hid_t goes out of scope.
+ */
+class raii_h5_hid
+{
+private:
+    /// The wrapped hid_t
+    hid_t m_id;
+
+    /// The destroyer function rto call, or null if none
+    std::function<herr_t(hid_t)> m_destroyer;
+
+public:
+    raii_h5_hid(hid_t id, herr_t (*f)(hid_t)) : m_id(id), m_destroyer(f)
+    {
+        if (m_id < 0 || !m_destroyer) {
+            throw std::runtime_error("bench-in-situ error: creating h5 id failed");
+        }
+    }
+
+    /// No copy possible
+    raii_h5_hid(const raii_h5_hid&) = delete;
+    raii_h5_hid(raii_h5_hid&&) = delete;
+
+    ~raii_h5_hid() noexcept
+    {
+        if (m_id >= 0 && m_destroyer) {
+            try {
+                m_destroyer(m_id);
+            }
+            catch(...){
+                std::cerr << "bench-in-situ error: closing raii_h5_hid failed" << std::endl;
+            }
+        }
+    }
+
+    /// No copy possible
+    raii_h5_hid& operator=(const raii_h5_hid&) = delete;
+    raii_h5_hid& operator=(raii_h5_hid&&) = delete;
+
+
+    /** Supports using the Raii_5d_hid as a raw hid_t.
+	 * \return the raw hid_t
+	 */
+	operator hid_t () const noexcept
+    {
+        return m_id;
+    }
+};
 
 class WriterHDF5 : public WriterBase
 {
@@ -43,9 +95,8 @@ public:
 
     private:
         void copy_data(std::vector<Real>& data, HostConstArrayDyn u, const UniformGrid & grid, Int ivar) const;
-        void write_simple_dataset(const hid_t &file_id, const char* name, const hid_t &type, 
-            const hsize_t size, const hsize_t dims[/*size*/], const void* data);
-        void write_simple_dataset_select(const hid_t &file_id, const char* name, const hid_t &type,
+        void write_scalar_data(const hid_t &file_id, const std::string & name, const hid_t &type, const void* data);
+        void write_simple_dataset_select(const hid_t &file_id, const std::string& name, const hid_t &type,
             const hsize_t dims_size, const hsize_t dims[/*size*/], const hsize_t hyperslab_start[/*size*/],
             const hsize_t hyperslab_count[/*size*/], const void* data);
         void writeXML( const UniformGrid & grid) const;
