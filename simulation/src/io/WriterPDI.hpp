@@ -6,6 +6,7 @@
 #include "HydroUnits.hpp"
 #include "WriterBase.hpp"
 #include "Utils.hpp"
+#include "Timer.hpp"
 
 #include <array>
 #include <list>
@@ -36,6 +37,9 @@ public:
 
     std::array<int, three_d> m_mpi_coords;
     std::string m_prefix;
+
+private:
+    DebugTimer debugTimer;
 };
 
 }}

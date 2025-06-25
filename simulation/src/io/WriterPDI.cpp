@@ -325,6 +325,9 @@ WriterPDI::WriterPDI(const UniformGrid& grid, const Params&,
 void WriterPDI::write(HostConstArrayDyn u, const UniformGrid & grid,
                       Int iStep, Real time, Real gamma, Real mmw)
 {
+    Kokkos::fence();
+    std::chrono::steady_clock::time_point m_start_write = std::chrono::steady_clock::now();
+    
     std::array<int, 3> pdi_ncells;
     pdi_ncells[IX] = grid.m_nbCells[IX] * grid.m_dom[IX];
     pdi_ncells[IY] = grid.m_nbCells[IY] * grid.m_dom[IY];
@@ -339,6 +342,9 @@ void WriterPDI::write(HostConstArrayDyn u, const UniformGrid & grid,
 
     std::string filename = getFilename(prefix, outputId);
     int filename_size = filename.size();
+
+    Kokkos::fence();
+    debugTimer.time_spent_in_write_before_checkpoint += (std::chrono::steady_clock::now() - m_start_write);
 
     PDI_multi_expose("checkpoint",
                      "iStep", &iStep, PDI_OUT,
@@ -356,6 +362,9 @@ void WriterPDI::write(HostConstArrayDyn u, const UniformGrid & grid,
 
     WriterBase::m_previous_outputs.push_back(std::make_pair(outputId, time));
 
+    Kokkos::fence();
+    debugTimer.time_spent_in_write_after_checkpoint += (std::chrono::steady_clock::now() - m_start_write);
+
     ++outputId;
 
     int outputs_record_size = WriterBase::m_previous_outputs.size();
@@ -365,5 +374,9 @@ void WriterPDI::write(HostConstArrayDyn u, const UniformGrid & grid,
                      "outputs_record", WriterBase::m_previous_outputs.data(), PDI_OUT,
                      "restart_id", &m_restartId, PDI_OUT,
                      NULL);
+
+    Kokkos::fence();
+    debugTimer.time_spent_in_write_after_xml += (std::chrono::steady_clock::now() - m_start_write);
+    Print() << debugTimer << std::endl;
 }
 }}

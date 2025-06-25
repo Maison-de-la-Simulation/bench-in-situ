@@ -199,6 +199,9 @@ void deep(double* b, double* a)
     Kokkos::View<Real*, Kokkos::LayoutLeft, Kokkos::HostSpace> mm_u_host(b, dim_host_ptr[0], dim_host_ptr[1]);
     Kokkos::deep_copy(mm_u_host, mm_u);
 
+    Kokkos::fence();
+    performanceTimer.time_spent_in_deep_copy += (std::chrono::steady_clock::now() - m_start_io);
+
     void* data_host = &mm_u_host;
 //    PDI_expose("data_host", data_host, PDI_OUT);
 //    free(data_host);
