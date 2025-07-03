@@ -254,9 +254,9 @@ extern "C"
                 printf("--- after deep bis %i ---\n\n", *iter);
 
     std::array<int, 3> pdi_ncells;
-    pdi_ncells[IX] = grid.m_nbCells[IX] * grid.m_dom[IX];
-    pdi_ncells[IY] = grid.m_nbCells[IY] * grid.m_dom[IY];
-    pdi_ncells[IZ] = grid.m_nbCells[IZ] * grid.m_dom[IZ];
+    pdi_ncells[IX] = m_grid.m_nbCells[IX] * m_grid.m_dom[IX];
+    pdi_ncells[IY] = m_grid.m_nbCells[IY] * m_grid.m_dom[IY];
+    pdi_ncells[IZ] = m_grid.m_nbCells[IZ] * m_grid.m_dom[IZ];
                 
     // Int& outputId = io::WriterBase::m_outputId;
 
