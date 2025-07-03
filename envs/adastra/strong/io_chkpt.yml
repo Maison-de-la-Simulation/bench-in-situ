@@ -238,6 +238,7 @@ pdi:
 
     # - file: testGPU${iStep}.h5
     - file: ${filename}
+      datasets: *full_datasets # a list of datasets inside the file created on first access
       collision_policy: write_into
 #      on_event:
 #          data_HOST:
@@ -251,15 +252,15 @@ pdi:
 #          dataset: 'iter${iStep}/iStep'
 
         u_host:
-#          - *d_description
-#          - *E_description
-#          - *mx_description
-#          - *my_description
-#          - *mz_description
-#          - *Bx_description
-#          - *By_description
-#          - *Bz_description
-#          - *dX_description
+          - *d_description
+          - *E_description
+          - *mx_description
+          - *my_description
+          - *mz_description
+          - *Bx_description
+          - *By_description
+          - *Bz_description
+          - *dX_description
         m_u_host_kokkos_view_dimensions:
 #        m_u_host_kokkos_view_dimensions: ${m_u_host_kokkos_view_dimensions}
 
