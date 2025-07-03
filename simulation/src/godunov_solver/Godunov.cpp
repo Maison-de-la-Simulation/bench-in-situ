@@ -281,7 +281,7 @@ extern "C"
                                 "filename_size", &filename_size, PDI_OUT,
                                 "filename", filename.data(), PDI_OUT,
                                 // "grid_size", pdi_ncells.data(), PDI_OUT,
-                                "gamma", m_params->thermo.gamma, PDI_OUT,
+                                // "gamma", m_params->thermo.gamma, PDI_OUT,
                                 NULL);
 //                                "u_host", mm_u_host.data(), PDI_OUT,
 //                                "u_host", (void*)(mm_u_host.data()), PDI_OUT,
@@ -334,6 +334,7 @@ void GodunovSolver::pdiExposeData()
                     "m_u_host", (void*)(m_u_host.data()), PDI_OUT,
                     "m_u_kokkos_view_dimensions", (void*)&m_u_kokkos_view_dimensions, PDI_OUT,
                     "m_u_host_kokkos_view_dimensions", (void*)&m_u_host_kokkos_view_dimensions, PDI_OUT,
+                    "gamma", m_params->thermo.gamma, PDI_OUT,
                     NULL);
 
 #endif
