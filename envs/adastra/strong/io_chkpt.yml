@@ -236,7 +236,8 @@ pdi:
 #        data: data_host
 #        data: mm_u_host
 
-    - file: testGPU${iStep}.h5
+    # - file: testGPU${iStep}.h5
+    - file: ${filename}
       collision_policy: write_into
 #      on_event:
 #          data_HOST:

@@ -251,6 +251,15 @@ extern "C"
 //                Real* copied_ptr =  mm_u_host.data();
                 double* copied_ptr =  mm_u_host.data();
                 printf("--- after deep bis %i ---\n\n", *iter);
+
+    char *prefix_c_str;
+    PDI_access("prefix", (void **)&prefix_c_str, PDI_IN);
+    std::string prefix(prefix_c_str);
+    PDI_release("prefix");
+
+    std::string filename = getFilename(prefix, outputId);
+    int filename_size = filename.size();
+
                 Kokkos::Profiling::popRegion();
                 Kokkos::Profiling::pushRegion("I/O - Checkpoint - write");
 //                wr(b);
@@ -260,6 +269,8 @@ extern "C"
                                 "iStep", iter, PDI_OUT,
                                 "u_host", copied_ptr, PDI_OUT,
                                 "m_u_host_kokkos_view_dimensions", dim_host_ptr, PDI_OUT,
+                                "filename_size", &filename_size, PDI_OUT,
+                                "filename", filename.data(), PDI_OUT,
                                 NULL);
 //                                "u_host", mm_u_host.data(), PDI_OUT,
 //                                "u_host", (void*)(mm_u_host.data()), PDI_OUT,
