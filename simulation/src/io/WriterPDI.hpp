@@ -19,6 +19,8 @@
 namespace hydro { namespace io
 {
 
+std::string getFilename(std::string const &prefix, Int outputId);
+
 class WriterPDI : public WriterBase
 {
 public:
