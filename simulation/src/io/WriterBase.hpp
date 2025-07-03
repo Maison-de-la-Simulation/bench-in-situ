@@ -33,8 +33,9 @@ public:
     {
         m_restartId = id;
     }
-protected:
+    
     Int m_outputId = 0;
+protected:
     Int m_restartId = 0;
     std::vector<std::pair<Int, Real>> m_previous_outputs = {};
 };

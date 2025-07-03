@@ -252,6 +252,8 @@ extern "C"
                 double* copied_ptr =  mm_u_host.data();
                 printf("--- after deep bis %i ---\n\n", *iter);
 
+    auto& outputId = WriterBase::m_outputId;
+
     char *prefix_c_str;
     PDI_access("prefix", (void **)&prefix_c_str, PDI_IN);
     std::string prefix(prefix_c_str);
