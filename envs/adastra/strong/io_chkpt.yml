@@ -244,7 +244,8 @@ pdi:
 #            write: u_host
 
       on_event: data_HOST
-      write: 
+      write:
+        grid_size:
 #        iStep:
 #          dataset: 'iter${iStep}/iStep'
 

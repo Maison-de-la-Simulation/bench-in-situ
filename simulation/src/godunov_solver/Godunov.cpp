@@ -253,6 +253,11 @@ extern "C"
                 double* copied_ptr =  mm_u_host.data();
                 printf("--- after deep bis %i ---\n\n", *iter);
 
+    std::array<int, 3> pdi_ncells;
+    pdi_ncells[IX] = grid.m_nbCells[IX] * grid.m_dom[IX];
+    pdi_ncells[IY] = grid.m_nbCells[IY] * grid.m_dom[IY];
+    pdi_ncells[IZ] = grid.m_nbCells[IZ] * grid.m_dom[IZ];
+                
     // Int& outputId = io::WriterBase::m_outputId;
 
     char *prefix_c_str;
@@ -260,8 +265,8 @@ extern "C"
     std::string prefix(prefix_c_str);
     PDI_release("prefix");
 
-    std::string filename = io::getFilename(prefix, outputId);
-    // std::string filename = io::getFilename(prefix, iStep);
+    // std::string filename = io::getFilename(prefix, outputId);
+    std::string filename = io::getFilename(prefix, *iter);
     int filename_size = filename.size();
 
                 Kokkos::Profiling::popRegion();
@@ -275,6 +280,7 @@ extern "C"
                                 "m_u_host_kokkos_view_dimensions", dim_host_ptr, PDI_OUT,
                                 "filename_size", &filename_size, PDI_OUT,
                                 "filename", filename.data(), PDI_OUT,
+                                "grid_size", pdi_ncells.data(), PDI_OUT,
                                 NULL);
 //                                "u_host", mm_u_host.data(), PDI_OUT,
 //                                "u_host", (void*)(mm_u_host.data()), PDI_OUT,
