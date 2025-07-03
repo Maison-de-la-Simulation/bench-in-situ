@@ -253,10 +253,10 @@ extern "C"
                 double* copied_ptr =  mm_u_host.data();
                 printf("--- after deep bis %i ---\n\n", *iter);
 
-    std::array<int, 3> pdi_ncells;
-    pdi_ncells[IX] = m_grid.m_nbCells[IX] * m_grid.m_dom[IX];
-    pdi_ncells[IY] = m_grid.m_nbCells[IY] * m_grid.m_dom[IY];
-    pdi_ncells[IZ] = m_grid.m_nbCells[IZ] * m_grid.m_dom[IZ];
+    // std::array<int, 3> pdi_ncells;
+    // pdi_ncells[IX] = m_grid.m_nbCells[IX] * m_grid.m_dom[IX];
+    // pdi_ncells[IY] = m_grid.m_nbCells[IY] * m_grid.m_dom[IY];
+    // pdi_ncells[IZ] = m_grid.m_nbCells[IZ] * m_grid.m_dom[IZ];
                 
     // Int& outputId = io::WriterBase::m_outputId;
 
@@ -280,7 +280,8 @@ extern "C"
                                 "m_u_host_kokkos_view_dimensions", dim_host_ptr, PDI_OUT,
                                 "filename_size", &filename_size, PDI_OUT,
                                 "filename", filename.data(), PDI_OUT,
-                                "grid_size", pdi_ncells.data(), PDI_OUT,
+                                // "grid_size", pdi_ncells.data(), PDI_OUT,
+                                "gamma", m_params->thermo.gamma, PDI_OUT,
                                 NULL);
 //                                "u_host", mm_u_host.data(), PDI_OUT,
 //                                "u_host", (void*)(mm_u_host.data()), PDI_OUT,
