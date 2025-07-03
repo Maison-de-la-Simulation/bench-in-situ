@@ -121,12 +121,12 @@ pdi:
 
     grid_size: { type: array, subtype: int, size: 3 }
 
-    u_host:
-      type: array
-      subtype: double
-      size: ['${nvar}', '$ncell_local[2]+2*$ghost[2]', '$ncell_local[1]+2*$ghost[1]', '$ncell_local[0]+2*$ghost[0]']
-      subsize: ['${nvar}', '$ncell_local[2]', '$ncell_local[1]', '$ncell_local[0]']
-      start: [0, '$ghost[2]', '$ghost[1]', '$ghost[0]']
+    # u_host:
+    #   type: array
+    #   subtype: double
+    #   size: ['${nvar}', '$ncell_local[2]+2*$ghost[2]', '$ncell_local[1]+2*$ghost[1]', '$ncell_local[0]+2*$ghost[0]']
+    #   subsize: ['${nvar}', '$ncell_local[2]', '$ncell_local[1]', '$ncell_local[0]']
+    #   start: [0, '$ghost[2]', '$ghost[1]', '$ghost[0]']
 
 
   plugins:
@@ -240,18 +240,10 @@ pdi:
     - file: ${filename}
       datasets: *full_datasets # a list of datasets inside the file created on first access
       collision_policy: write_into
-#      on_event:
-#          data_HOST:
-#            write: u_host
-
       on_event: data_HOST
       write:
-        # grid_size:
         gamma:
-#        iStep:
-#          dataset: 'iter${iStep}/iStep'
-
-        u_host:
+        local_full_field: # u_host:
           - *d_description
           - *E_description
           - *mx_description

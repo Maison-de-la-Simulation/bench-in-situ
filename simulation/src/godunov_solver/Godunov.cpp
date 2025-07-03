@@ -276,7 +276,7 @@ extern "C"
 //                                m_params->thermo.gamma, m_params->thermo.mmw);
                 PDI_multi_expose("data_HOST",
                                 "iStep", iter, PDI_OUT,
-                                "u_host", copied_ptr, PDI_OUT,
+                                "local_full_field", copied_ptr, PDI_OUT, // u_host
                                 "m_u_host_kokkos_view_dimensions", dim_host_ptr, PDI_OUT,
                                 "filename_size", &filename_size, PDI_OUT,
                                 "filename", filename.data(), PDI_OUT,
