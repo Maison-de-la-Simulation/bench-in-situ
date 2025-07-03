@@ -176,7 +176,7 @@ void GodunovSolver::prepareNextOutput(Real& dt)
     
 }
 
-void deep(double* b, double* a)
+void GodunovSolver::deep(double* b, double* a)
 {
             int* iter; PDI_access("iter", (void**)&iter, PDI_IN);
             int* freq; PDI_access("freq", (void**)&freq, PDI_IN);
