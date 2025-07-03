@@ -45,7 +45,7 @@ public:
     void nextIteration(Real dt) final;
     void prepareNextOutput(Real& dt) final;
     void pdiExposeData() final;
-    int deep(double*, double*);
+    void deep(double*, double*);
     bool finished() const final;
     void printMonitoring(double t_tot) const final;
     bool shouldPrintInformation() const final;

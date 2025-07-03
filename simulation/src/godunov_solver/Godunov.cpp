@@ -178,6 +178,9 @@ void GodunovSolver::prepareNextOutput(Real& dt)
 
 void GodunovSolver::deep(double* b, double* a)
 {
+    Kokkos::fence();
+    std::chrono::steady_clock::time_point m_start_io_deep = std::chrono::steady_clock::now();
+
             int* iter; PDI_access("iter", (void**)&iter, PDI_IN);
             int* freq; PDI_access("freq", (void**)&freq, PDI_IN);
             printf("########### %i ################\n", *iter);
@@ -200,7 +203,7 @@ void GodunovSolver::deep(double* b, double* a)
     Kokkos::deep_copy(mm_u_host, mm_u);
 
     Kokkos::fence();
-    performanceTimer.time_spent_in_deep_copy += (std::chrono::steady_clock::now() - m_start_io);
+    performanceTimer.time_spent_in_deep_copy += (std::chrono::steady_clock::now() - m_start_io_deep);
 
     void* data_host = &mm_u_host;
 //    PDI_expose("data_host", data_host, PDI_OUT);
