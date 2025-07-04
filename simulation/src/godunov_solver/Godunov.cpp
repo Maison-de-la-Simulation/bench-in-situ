@@ -335,8 +335,8 @@ void GodunovSolver::pdiExposeData()
                     "m_u_kokkos_view_dimensions", (void*)&m_u_kokkos_view_dimensions, PDI_OUT,
                     "m_u_host_kokkos_view_dimensions", (void*)&m_u_host_kokkos_view_dimensions, PDI_OUT,
                     "Rstar_h", (void*)&(code_units::constants::Rstar_h), PDI_OUT,
-                    "gamma", (void*)(m_params->thermo.gamma), PDI_OUT,
-                    "mmw", (void*)&(mmw), PDI_OUT,
+                    "gamma", (void*)&(m_params->thermo.gamma), PDI_OUT,
+                    "mmw", (void*)&(m_params->thermo.mmw), PDI_OUT,
                     NULL);
 
 #endif
