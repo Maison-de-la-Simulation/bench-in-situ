@@ -242,11 +242,13 @@ pdi:
       collision_policy: write_into
       on_event: data_HOST
       write:
+        grid_size:
         time:
          - dataset: Time
         Rstar_h:
         gamma:
         mmw:
+        iStep:
         local_full_field: # u_host:
           - *d_description
           - *E_description
