@@ -342,7 +342,7 @@ void GodunovSolver::pdiExposeData()
    int tmp_rank=0;
 #if defined(MPI_SESSION)
    MPI_Comm_rank(MPI_COMM_WORLD, &tmp_rank);
-   m_mpi_coords = m_grid.comm.getCoords(m_grid.comm.rank());
+   m_writer->m_mpi_coords = m_grid.comm.getCoords(m_grid.comm.rank());
 #endif
 
    std::array<int, 3> pdi_start;
