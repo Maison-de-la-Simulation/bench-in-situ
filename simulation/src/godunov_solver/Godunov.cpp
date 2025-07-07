@@ -349,6 +349,9 @@ void GodunovSolver::pdiExposeData()
                     // "output_id", (void*)(m_writer->getOutputId()), PDI_OUT,
                     // "restart_id", (void*)(m_writer->getRestartId()), PDI_OUT,
                     "grid_size", (void*)(pdi_ncells.data()), PDI_OUT,
+                    "ncell_local", pdi_ncells_local.data(), PDI_OUT,
+                    "start", pdi_start.data(), PDI_OUT,
+                    "origin", origin.data(), PDI_OUT,
                     NULL);
 
 #endif
