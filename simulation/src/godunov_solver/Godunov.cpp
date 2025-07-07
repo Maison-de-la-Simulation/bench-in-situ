@@ -339,24 +339,24 @@ void GodunovSolver::pdiExposeData()
    pdi_ncells_local[IY] = m_grid.m_nbCells[IY];
    pdi_ncells_local[IZ] = m_grid.m_nbCells[IZ];
 
-   int tmp_rank=0;
-#if defined(MPI_SESSION)
-   MPI_Comm_rank(MPI_COMM_WORLD, &tmp_rank);
-   m_writer->m_mpi_coords = m_grid.comm.getCoords(m_grid.comm.rank());
-#endif
+//    int tmp_rank=0;
+// #if defined(MPI_SESSION)
+//    MPI_Comm_rank(MPI_COMM_WORLD, &tmp_rank);
+//    m_writer->m_mpi_coords = m_grid.comm.getCoords(m_grid.comm.rank());
+// #endif
 
-   std::array<int, 3> pdi_start;
-   pdi_start[IX] = m_grid.m_nbCells[IX] * m_writer->m_mpi_coords[IX];
-   pdi_start[IY] = m_grid.m_nbCells[IY] * m_writer->m_mpi_coords[IY];
-   pdi_start[IZ] = m_grid.m_nbCells[IZ] * m_writer->m_mpi_coords[IZ];
+//    std::array<int, 3> pdi_start;
+//    pdi_start[IX] = m_grid.m_nbCells[IX] * m_writer->m_mpi_coords[IX];
+//    pdi_start[IY] = m_grid.m_nbCells[IY] * m_writer->m_mpi_coords[IY];
+//    pdi_start[IZ] = m_grid.m_nbCells[IZ] * m_writer->m_mpi_coords[IZ];
 
-   std::ostringstream mpi_prefix;
-   mpi_prefix << std::setw(3) << std::setfill('0') << tmp_rank;    
-   std::string new_prefix(prefix);
-   new_prefix.append("_r"+mpi_prefix.str());
+//    std::ostringstream mpi_prefix;
+//    mpi_prefix << std::setw(3) << std::setfill('0') << tmp_rank;    
+//    std::string new_prefix(prefix);
+//    new_prefix.append("_r"+mpi_prefix.str());
 
-   int prefix_size = new_prefix.size() + 1;
-   int nvar = 9;
+//    int prefix_size = new_prefix.size() + 1;
+//    int nvar = 9;
     
    std::array<Real, 3> origin;
    origin[IX] = m_grid.m_lowGlobal[IX];
