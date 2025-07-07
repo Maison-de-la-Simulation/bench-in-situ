@@ -30,11 +30,8 @@ std::string getFilename(std::string const &prefix, Int outputId) {
   outputNum << std::setfill('0');
   outputNum << outputId;
 
-  fprintf(stderr, "%s", prefix);
-  fprintf(stdout, "%s", prefix);
-
-  fprintf(stderr, "%s", outputNum);
-  fprintf(stdout, "%s", outputNum);
+  printf("%s \n", prefix);
+  printf("%s \n", outputNum);
 
   // concatenate file prefix + file number + suffix
   std::string filename(prefix);
