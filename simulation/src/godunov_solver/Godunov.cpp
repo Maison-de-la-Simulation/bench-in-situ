@@ -346,9 +346,9 @@ void GodunovSolver::pdiExposeData()
 #endif
 
    std::array<int, 3> pdi_start;
-   pdi_start[IX] = m_grid.m_nbCells[IX] * m_mpi_coords[IX];
-   pdi_start[IY] = m_grid.m_nbCells[IY] * m_mpi_coords[IY];
-   pdi_start[IZ] = m_grid.m_nbCells[IZ] * m_mpi_coords[IZ];
+   pdi_start[IX] = m_grid.m_nbCells[IX] * m_writer->m_mpi_coords[IX];
+   pdi_start[IY] = m_grid.m_nbCells[IY] * m_writer->m_mpi_coords[IY];
+   pdi_start[IZ] = m_grid.m_nbCells[IZ] * m_writer->m_mpi_coords[IZ];
 
    std::ostringstream mpi_prefix;
    mpi_prefix << std::setw(3) << std::setfill('0') << tmp_rank;    
