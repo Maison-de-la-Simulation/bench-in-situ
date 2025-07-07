@@ -265,7 +265,7 @@ extern "C"
     PDI_access("prefix", (void **)&prefix_c_str, PDI_IN);
     printf("prefix_c_str %s \n", prefix_c_str);
     std::string prefix(prefix_c_str);
-    printf("prefix %s \n", prefix);
+    printf("prefix %s \n", prefix.c_str());
     PDI_release("prefix");
 
     // std::string filename = io::getFilename(prefix, outputId);
