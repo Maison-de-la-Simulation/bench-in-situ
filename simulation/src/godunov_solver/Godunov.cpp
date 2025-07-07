@@ -335,20 +335,20 @@ void GodunovSolver::pdiExposeData()
    pdi_ncells[IZ] = m_grid.m_nbCells[IZ] * m_grid.m_dom[IZ];
 
    std::array<int, 3> pdi_ncells_local;
-   pdi_ncells_local[IX] = grid.m_nbCells[IX];
-   pdi_ncells_local[IY] = grid.m_nbCells[IY];
-   pdi_ncells_local[IZ] = grid.m_nbCells[IZ];
+   pdi_ncells_local[IX] = m_grid.m_nbCells[IX];
+   pdi_ncells_local[IY] = m_grid.m_nbCells[IY];
+   pdi_ncells_local[IZ] = m_grid.m_nbCells[IZ];
 
    int tmp_rank=0;
 #if defined(MPI_SESSION)
    MPI_Comm_rank(MPI_COMM_WORLD, &tmp_rank);
-   m_mpi_coords = grid.comm.getCoords(grid.comm.rank());
+   m_mpi_coords = m_grid.comm.getCoords(m_grid.comm.rank());
 #endif
 
    std::array<int, 3> pdi_start;
-   pdi_start[IX] = grid.m_nbCells[IX] * m_mpi_coords[IX];
-   pdi_start[IY] = grid.m_nbCells[IY] * m_mpi_coords[IY];
-   pdi_start[IZ] = grid.m_nbCells[IZ] * m_mpi_coords[IZ];
+   pdi_start[IX] = m_grid.m_nbCells[IX] * m_mpi_coords[IX];
+   pdi_start[IY] = m_grid.m_nbCells[IY] * m_mpi_coords[IY];
+   pdi_start[IZ] = m_grid.m_nbCells[IZ] * m_mpi_coords[IZ];
 
    std::ostringstream mpi_prefix;
    mpi_prefix << std::setw(3) << std::setfill('0') << tmp_rank;    
@@ -359,14 +359,14 @@ void GodunovSolver::pdiExposeData()
    int nvar = 9;
     
    std::array<Real, 3> origin;
-   origin[IX] = grid.m_lowGlobal[IX];
-   origin[IY] = grid.m_lowGlobal[IY];
-   origin[IZ] = grid.m_lowGlobal[IZ];
+   origin[IX] = m_grid.m_lowGlobal[IX];
+   origin[IY] = m_grid.m_lowGlobal[IY];
+   origin[IZ] = m_grid.m_lowGlobal[IZ];
 
    std::array<Real, 3> dl;
-   dl[IX] = grid.m_dl[IX];
-   dl[IY] = grid.m_dl[IY];
-   dl[IZ] = grid.m_dl[IZ];
+   dl[IX] = m_grid.m_dl[IX];
+   dl[IY] = m_grid.m_dl[IY];
+   dl[IZ] = m_grid.m_dl[IZ];
 
 //    Int& outputId = io::WriterBase::m_outputId;
 
