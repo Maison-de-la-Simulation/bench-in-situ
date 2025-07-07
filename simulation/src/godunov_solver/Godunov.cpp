@@ -346,8 +346,8 @@ void GodunovSolver::pdiExposeData()
                     "Rstar_h", (void*)&(code_units::constants::Rstar_h), PDI_OUT,
                     "gamma", (void*)&(m_params->thermo.gamma), PDI_OUT,
                     "mmw", (void*)&(m_params->thermo.mmw), PDI_OUT,
-                    "output_id", (void*)&(m_writer->getOutputId()), PDI_OUT,
-                    "restart_id", (void*)&(m_writer->getRestartId()), PDI_OUT,
+                    "output_id", (void*)(m_writer->getOutputId()), PDI_OUT,
+                    "restart_id", (void*)(m_writer->getRestartId()), PDI_OUT,
                     "grid_size", (void*)(pdi_ncells.data()), PDI_OUT,
                     NULL);
 
