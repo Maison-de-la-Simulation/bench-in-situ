@@ -334,6 +334,40 @@ void GodunovSolver::pdiExposeData()
    pdi_ncells[IY] = m_grid.m_nbCells[IY] * m_grid.m_dom[IY];
    pdi_ncells[IZ] = m_grid.m_nbCells[IZ] * m_grid.m_dom[IZ];
 
+   std::array<int, 3> pdi_ncells_local;
+   pdi_ncells_local[IX] = grid.m_nbCells[IX];
+   pdi_ncells_local[IY] = grid.m_nbCells[IY];
+   pdi_ncells_local[IZ] = grid.m_nbCells[IZ];
+
+   int tmp_rank=0;
+#if defined(MPI_SESSION)
+   MPI_Comm_rank(MPI_COMM_WORLD, &tmp_rank);
+   m_mpi_coords = grid.comm.getCoords(grid.comm.rank());
+#endif
+
+   std::array<int, 3> pdi_start;
+   pdi_start[IX] = grid.m_nbCells[IX] * m_mpi_coords[IX];
+   pdi_start[IY] = grid.m_nbCells[IY] * m_mpi_coords[IY];
+   pdi_start[IZ] = grid.m_nbCells[IZ] * m_mpi_coords[IZ];
+
+   std::ostringstream mpi_prefix;
+   mpi_prefix << std::setw(3) << std::setfill('0') << tmp_rank;    
+   std::string new_prefix(prefix);
+   new_prefix.append("_r"+mpi_prefix.str());
+
+   int prefix_size = new_prefix.size() + 1;
+   int nvar = 9;
+    
+   std::array<Real, 3> origin;
+   origin[IX] = grid.m_lowGlobal[IX];
+   origin[IY] = grid.m_lowGlobal[IY];
+   origin[IZ] = grid.m_lowGlobal[IZ];
+
+   std::array<Real, 3> dl;
+   dl[IX] = grid.m_dl[IX];
+   dl[IY] = grid.m_dl[IY];
+   dl[IZ] = grid.m_dl[IZ];
+
 //    Int& outputId = io::WriterBase::m_outputId;
 
    PDI_multi_expose("data_GPU_event",
