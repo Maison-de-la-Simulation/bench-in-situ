@@ -33,9 +33,16 @@ public:
     {
         m_restartId = id;
     }
-    
-    Int m_outputId = 0;
+    Int getOutputId()
+    {
+        return m_outputId;
+    }
+    Int getRestartId()
+    {
+        return m_restartId;
+    }
 protected:
+    Int m_outputId = 0;
     Int m_restartId = 0;
     std::vector<std::pair<Int, Real>> m_previous_outputs = {};
 };

@@ -19,6 +19,7 @@
 #include "global_meanExecution.hpp"
 #include "vp2Execution.hpp"
 #include "io/WriterPDI.hpp"
+#include "io/WriterBase.hpp"
 
 
 
@@ -333,7 +334,7 @@ void GodunovSolver::pdiExposeData()
    pdi_ncells[IY] = m_grid.m_nbCells[IY] * m_grid.m_dom[IY];
    pdi_ncells[IZ] = m_grid.m_nbCells[IZ] * m_grid.m_dom[IZ];
 
-   Int& outputId = io::WriterBase::m_outputId;
+//    Int& outputId = io::WriterBase::m_outputId;
 
    PDI_multi_expose("data_GPU_event",
                     "iStep", (void*)&(Super::m_iteration), PDI_OUT,
@@ -345,8 +346,8 @@ void GodunovSolver::pdiExposeData()
                     "Rstar_h", (void*)&(code_units::constants::Rstar_h), PDI_OUT,
                     "gamma", (void*)&(m_params->thermo.gamma), PDI_OUT,
                     "mmw", (void*)&(m_params->thermo.mmw), PDI_OUT,
-                    // "output_id", (void*)&(outputId), PDI_OUT,
-                    // "restart_id", (void*)&(m_restartId), PDI_OUT,
+                    "output_id", (void*)&(m_writer->getOutputId()), PDI_OUT,
+                    "restart_id", (void*)&(m_writer->getRestartId()), PDI_OUT,
                     "grid_size", (void*)(pdi_ncells.data()), PDI_OUT,
                     NULL);
 
