@@ -341,11 +341,11 @@ void GodunovSolver::pdiExposeData()
    pdi_ncells_local[IY] = m_grid.m_nbCells[IY];
    pdi_ncells_local[IZ] = m_grid.m_nbCells[IZ];
 
-//    int tmp_rank=0;
-// #if defined(MPI_SESSION)
-//    MPI_Comm_rank(MPI_COMM_WORLD, &tmp_rank);
-//    m_writer->m_mpi_coords = m_grid.comm.getCoords(m_grid.comm.rank());
-// #endif
+   int tmp_rank=0;
+#if defined(MPI_SESSION)
+   MPI_Comm_rank(MPI_COMM_WORLD, &tmp_rank);
+   m_writer->m_mpi_coords = m_grid.comm.getCoords(m_grid.comm.rank());
+#endif
 
 //    std::array<int, 3> pdi_start;
 //    pdi_start[IX] = m_grid.m_nbCells[IX] * m_writer->m_mpi_coords[IX];
