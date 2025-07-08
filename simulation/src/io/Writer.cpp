@@ -37,6 +37,14 @@ std::shared_ptr<WriterBase> WriterFactory::New(const UniformGrid& grid, const Pa
         throw std::runtime_error("ARK has not been compiled with PDI support\n");
 #endif
     }
+    else if (s2writer(type) == writer_t::gpu_pdi)
+    {
+#if defined(Euler_ENABLE_PDI)
+        ptr = std::make_shared<WriterGpuPDI>(grid, params, prefix, variables);
+#else
+        throw std::runtime_error("ARK has not been compiled with PDI support\n");
+#endif
+    }
     else
     {
         throw std::runtime_error("Unknown writer\n");

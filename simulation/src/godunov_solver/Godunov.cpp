@@ -19,7 +19,7 @@
 #include "global_meanExecution.hpp"
 #include "vp2Execution.hpp"
 #include "io/WriterPDI.hpp"
-#include "io/WriterBase.hpp"
+#include "io/WriterGpuPDI.hpp"
 
 
 
@@ -379,25 +379,28 @@ void GodunovSolver::pdiExposeData()
 
 //    Int& outputId = io::WriterBase::m_outputId;
 
-   PDI_multi_expose("data_GPU_event",
-                    "iStep", (void*)&(Super::m_iteration), PDI_OUT,
-                    "time", (void*)&(m_t), PDI_OUT,
-                    "m_u", (void*)(m_u.data()), PDI_OUT,
-                    "m_u_host", (void*)(m_u_host.data()), PDI_OUT,
-                    "m_u_kokkos_view_dimensions", (void*)&m_u_kokkos_view_dimensions, PDI_OUT,
-                    "m_u_host_kokkos_view_dimensions", (void*)&m_u_host_kokkos_view_dimensions, PDI_OUT,
-                    "Rstar_h", (void*)&(code_units::constants::Rstar_h), PDI_OUT,
-                    "gamma", (void*)&(m_params->thermo.gamma), PDI_OUT,
-                    "mmw", (void*)&(m_params->thermo.mmw), PDI_OUT,
-                    // "output_id", (void*)(m_writer->getOutputId()), PDI_OUT,
-                    // "restart_id", (void*)(m_writer->getRestartId()), PDI_OUT,
-                    "grid_size", (void*)(pdi_ncells.data()), PDI_OUT,
-                    "ncell_local", pdi_ncells_local.data(), PDI_OUT,
-                    "start", pdi_start.data(), PDI_OUT,
-                    "origin", origin.data(), PDI_OUT,
-                    "prefix_size", &prefix_size, PDI_OUT,
-                    "prefix", new_prefix.c_str(), PDI_OUT,
-                    NULL);
+//    PDI_multi_expose("data_GPU_event",
+//                     "iStep", (void*)&(Super::m_iteration), PDI_OUT,
+//                     "time", (void*)&(m_t), PDI_OUT,
+//                     "m_u", (void*)(m_u.data()), PDI_OUT,
+//                     "m_u_host", (void*)(m_u_host.data()), PDI_OUT,
+//                     "m_u_kokkos_view_dimensions", (void*)&m_u_kokkos_view_dimensions, PDI_OUT,
+//                     "m_u_host_kokkos_view_dimensions", (void*)&m_u_host_kokkos_view_dimensions, PDI_OUT,
+//                     "Rstar_h", (void*)&(code_units::constants::Rstar_h), PDI_OUT,
+//                     "gamma", (void*)&(m_params->thermo.gamma), PDI_OUT,
+//                     "mmw", (void*)&(m_params->thermo.mmw), PDI_OUT,
+//                     // "output_id", (void*)(m_writer->getOutputId()), PDI_OUT,
+//                     // "restart_id", (void*)(m_writer->getRestartId()), PDI_OUT,
+//                     "grid_size", (void*)(pdi_ncells.data()), PDI_OUT,
+//                     "ncell_local", pdi_ncells_local.data(), PDI_OUT,
+//                     "start", pdi_start.data(), PDI_OUT,
+//                     "origin", origin.data(), PDI_OUT,
+//                     "prefix_size", &prefix_size, PDI_OUT,
+//                     "prefix", new_prefix.c_str(), PDI_OUT,
+//                     NULL);
+
+       m_writer->write(m_u_host, m_grid, Super::m_iteration, Super::m_t,
+                       m_params->thermo.gamma, m_params->thermo.mmw);
 
 #endif
 
