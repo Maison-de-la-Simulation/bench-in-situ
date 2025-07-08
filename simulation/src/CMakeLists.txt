@@ -43,7 +43,7 @@ if(${PROJECT_NAME}_ENABLE_MPI_CUDA_AWARE)
 endif(${PROJECT_NAME}_ENABLE_MPI_CUDA_AWARE)
 
 if(${PROJECT_NAME}_ENABLE_PDI)
-  target_sources(${PROJECT_NAME} PRIVATE io/ReaderPDI.cpp io/WriterPDI.cpp)
+  target_sources(${PROJECT_NAME} PRIVATE io/ReaderPDI.cpp io/WriterPDI.cpp io/WriterGpuPDI.cpp)
   target_link_libraries(${PROJECT_NAME} PUBLIC PDI::PDI_C)
   target_compile_definitions(${PROJECT_NAME} PUBLIC ${PROJECT_NAME}_ENABLE_PDI)
 endif(${PROJECT_NAME}_ENABLE_PDI)
