@@ -352,6 +352,13 @@ void GodunovSolver::pdiExposeData()
    pdi_start[IY] = m_grid.m_nbCells[IY] * mpi_coords[IY];
    pdi_start[IZ] = m_grid.m_nbCells[IZ] * mpi_coords[IZ];
 
+    char *prefix_c_str;
+    PDI_access("prefix", (void **)&prefix_c_str, PDI_IN);
+    printf("prefix_c_str %s \n", prefix_c_str);
+    std::string prefix(prefix_c_str);
+    printf("prefix %s \n", prefix.c_str());
+    PDI_release("prefix");
+   
    std::ostringstream mpi_prefix;
    mpi_prefix << std::setw(3) << std::setfill('0') << tmp_rank;    
    std::string new_prefix(prefix);
