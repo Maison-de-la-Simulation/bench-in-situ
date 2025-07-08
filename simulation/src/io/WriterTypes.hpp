@@ -6,7 +6,8 @@ enum class writer_t : short
 {
     unknown,
     vtk,
-    pdi
+    pdi,
+    gpu_pdi
 };
 
 inline
@@ -20,6 +21,10 @@ writer_t s2writer(const std::string& name)
     else if (name == "pdi")
     {
         type = writer_t::pdi;
+    }
+    else if (name == "gpu_pdi")
+    {
+        type = writer_t::gpu_pdi;
     }
     else
     {

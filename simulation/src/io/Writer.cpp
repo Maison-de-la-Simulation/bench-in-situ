@@ -7,6 +7,7 @@
 #include "WriterBase.hpp"
 #if defined(Euler_ENABLE_PDI)
 #include "WriterPDI.hpp"
+#include "WriterGpuPDI.hpp"
 #endif
 #include "WriterTypes.hpp"
 #include "WriterVTK.hpp"
