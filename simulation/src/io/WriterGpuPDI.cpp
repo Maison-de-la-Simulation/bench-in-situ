@@ -23,19 +23,19 @@
 namespace hydro { namespace io
 {
 
-std::string getFilename(std::string const &prefix, Int outputId) {
-  // write outputId in string outputNum
-  std::ostringstream outputNum;
-  outputNum << std::setw(std::numeric_limits<Int>::digits10);
-  outputNum << std::setfill('0');
-  outputNum << outputId;
+// std::string getFilename(std::string const &prefix, Int outputId) {
+//   // write outputId in string outputNum
+//   std::ostringstream outputNum;
+//   outputNum << std::setw(std::numeric_limits<Int>::digits10);
+//   outputNum << std::setfill('0');
+//   outputNum << outputId;
 
-  // concatenate file prefix + file number + suffix
-  std::string filename(prefix);
-  filename += "_" + outputNum.str();
-  filename += ".h5";
-  return filename;
-}
+//   // concatenate file prefix + file number + suffix
+//   std::string filename(prefix);
+//   filename += "_" + outputNum.str();
+//   filename += ".h5";
+//   return filename;
+// }
 
 extern "C"
 {
