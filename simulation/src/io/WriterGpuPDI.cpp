@@ -322,7 +322,7 @@ WriterGpuPDI::WriterGpuPDI(const UniformGrid& grid, const Params&,
     
 }
 
-void WriterGpuPDI::writeGpu(HostConstArrayDyn u, const UniformGrid & grid,
+void WriterGpuPDI::write(HostConstArrayDyn u, const UniformGrid & grid,
                       Int iStep, Real time, Real gamma, Real mmw)
 {
     Kokkos::fence();
