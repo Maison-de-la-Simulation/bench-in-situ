@@ -19,7 +19,7 @@
 namespace hydro { namespace io
 {
 
-std::string getFilename(std::string const &prefix, Int outputId);
+// std::string getFilename(std::string const &prefix, Int outputId);
 
 class WriterGpuPDI : public WriterBase
 {
