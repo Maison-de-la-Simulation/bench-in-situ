@@ -23,20 +23,6 @@
 namespace hydro { namespace io
 {
 
-// std::string getFilename(std::string const &prefix, Int outputId) {
-//   // write outputId in string outputNum
-//   std::ostringstream outputNum;
-//   outputNum << std::setw(std::numeric_limits<Int>::digits10);
-//   outputNum << std::setfill('0');
-//   outputNum << outputId;
-
-//   // concatenate file prefix + file number + suffix
-//   std::string filename(prefix);
-//   filename += "_" + outputNum.str();
-//   filename += ".h5";
-//   return filename;
-// }
-
 extern "C"
 {
 
@@ -320,6 +306,20 @@ WriterGpuPDI::WriterGpuPDI(const UniformGrid& grid, const Params&,
                      "prefix", new_prefix.c_str(), PDI_OUT,
                      NULL);
     
+}
+
+std::string getFilename(std::string const &prefix, Int outputId) {
+  // write outputId in string outputNum
+  std::ostringstream outputNum;
+  outputNum << std::setw(std::numeric_limits<Int>::digits10);
+  outputNum << std::setfill('0');
+  outputNum << outputId;
+
+  // concatenate file prefix + file number + suffix
+  std::string filename(prefix);
+  filename += "_" + outputNum.str();
+  filename += ".h5";
+  return filename;
 }
 
 void WriterGpuPDI::write(HostConstArrayDyn u, const UniformGrid & grid,
