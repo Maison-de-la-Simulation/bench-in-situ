@@ -34,7 +34,7 @@ public:
     //WriterGpuPDI& operator=(const WriterGpuPDI& x) = default;
     //WriterGpuPDI& operator=(WriterGpuPDI&& x) = default;
 
-    void write(HostConstArrayDyn u, const UniformGrid &grid,
+    void writeGpu(HostConstArrayDyn u, const UniformGrid &grid,
                Int iStep, Real time, Real gamma, Real mmw) override;
 
     std::array<int, three_d> m_mpi_coords;
