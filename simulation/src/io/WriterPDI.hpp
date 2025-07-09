@@ -19,8 +19,6 @@
 namespace hydro { namespace io
 {
 
-std::string getFilename(std::string const &prefix, Int outputId);
-
 class WriterPDI : public WriterBase
 {
 public:
@@ -36,6 +34,8 @@ public:
 
     void write(HostConstArrayDyn u, const UniformGrid &grid,
                Int iStep, Real time, Real gamma, Real mmw) override;
+
+    std::string getFilename(std::string const &prefix, Int outputId);
 
     std::array<int, three_d> m_mpi_coords;
     std::string m_prefix;
