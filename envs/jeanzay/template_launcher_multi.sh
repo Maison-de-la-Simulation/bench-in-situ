@@ -13,6 +13,7 @@
 ##################################################
 #SBATCH --cpus-per-task=%%CPUS-PER-TASKS
 ##################################################
+#SBATCH --exclusive
 #SBATCH --hint=nomultithread
 #SBATCH -A %%${IDRPROJ}@${ARCH}
 
@@ -73,10 +74,16 @@ cd ${JOB_GENERATED_DIR}
 # PDI
 source ${PDI_ENV_SCRIPT}
 
+for loop in $(seq 1 10);do
 # Simulation
 srun -N ${SIM_NODES} -n ${SIM_PROC} ${MAIN_SIMULATION} ${JOB_GENERATED_DIR}/setup.ini ${JOB_GENERATED_DIR}/${YAML_FILE} --kokkos-map-device-id-by=mpi_rank &
 simu_pid=$!
 wait $simu_pid
 
 rm ${SNAPSHOT_FILE_PATH}/${FORMATED_CUBE_SIZE}/${FORMATED_SIMU_SIZE}/*.h5 && rm ${SNAPSHOT_FILE_PATH}/${FORMATED_CUBE_SIZE}/${FORMATED_SIMU_SIZE}/*.xmf
+rm_pid=$!
+wait $rm_pid
+done
 rm -rf ${SNAPSHOT_FILE_PATH}/${FORMATED_CUBE_SIZE}/${FORMATED_SIMU_SIZE}
+rm_pid=$!
+wait $rm_pid
