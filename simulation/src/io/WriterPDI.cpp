@@ -308,7 +308,7 @@ WriterPDI::WriterPDI(const UniformGrid& grid, const Params&,
     
 }
 
-std::string WriterPDI::getFilename(std::string const &prefix, Int outputId) {
+static std::string WriterPDI::getFilename(std::string const &prefix, Int outputId) {
   // write outputId in string outputNum
   std::ostringstream outputNum;
   outputNum << std::setw(std::numeric_limits<Int>::digits10);
