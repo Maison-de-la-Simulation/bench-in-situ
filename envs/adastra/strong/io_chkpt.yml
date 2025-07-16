@@ -141,10 +141,10 @@ pdi:
           copy_func:
             freq: 100
             iter: ${iStep}
-            m_u: ${m_u}
-            m_u_host: ${m_u_host}
-            m_u_kokkos_view_dimensions: ${m_u_kokkos_view_dimensions}
-            m_u_host_kokkos_view_dimensions: ${m_u_host_kokkos_view_dimensions}
+            # m_u: ${m_u}
+            # m_u_host: ${m_u_host}
+            # m_u_kokkos_view_dimensions: ${m_u_kokkos_view_dimensions}
+            # m_u_host_kokkos_view_dimensions: ${m_u_host_kokkos_view_dimensions}
 
 
 #          copy_func: [u, u_dim]
