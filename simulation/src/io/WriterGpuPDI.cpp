@@ -154,7 +154,7 @@ extern "C"
             xdmfFile << " Dimensions=" << '"' << 1 << '"';
             xdmfFile << " Format=" << '"' << "HDF" << '"';
             xdmfFile << ">\n";
-            xdmfFile << std::string(12, ' ') << getFilename(prefix, it->first)
+            xdmfFile << std::string(12, ' ') << WriterGpuPDI::getFilename(prefix, it->first)
                      << ":/"
                      << "gamma"
                      << "\n";
@@ -174,7 +174,7 @@ extern "C"
             xdmfFile << " Dimensions=" << '"' << 1 << '"';
             xdmfFile << " Format=" << '"' << "HDF" << '"';
             xdmfFile << ">\n";
-            xdmfFile << std::string(12, ' ') << getFilename(prefix, it->first)
+            xdmfFile << std::string(12, ' ') << WriterGpuPDI::getFilename(prefix, it->first)
                      << ":/"
                      << "mmw"
                      << "\n";
@@ -194,7 +194,7 @@ extern "C"
             xdmfFile << " Dimensions=" << '"' << 1 << '"';
             xdmfFile << " Format=" << '"' << "HDF" << '"';
             xdmfFile << ">\n";
-            xdmfFile << std::string(12, ' ') << getFilename(prefix, it->first)
+            xdmfFile << std::string(12, ' ') << WriterGpuPDI::getFilename(prefix, it->first)
                      << ":/"
                      << "Rstar_h"
                      << "\n";
@@ -223,7 +223,7 @@ extern "C"
 
                 xdmfFile << " Format=" << '"' << "HDF" << '"';
                 xdmfFile << ">\n";
-                xdmfFile << std::string(12, ' ') << getFilename(prefix, it->first)
+                xdmfFile << std::string(12, ' ') << WriterGpuPDI::getFilename(prefix, it->first)
                          << ":/" << var_name << "\n";
                 xdmfFile << std::string(10, ' ') << "</DataItem>\n";
                 xdmfFile << std::string(8, ' ') << "</Attribute>\n";
@@ -340,7 +340,7 @@ void WriterGpuPDI::write(HostConstArrayDyn u, const UniformGrid & grid,
     std::string prefix(prefix_c_str);
     PDI_release("prefix");
 
-    std::string filename = getFilename(prefix, outputId);
+    std::string filename = WriterGpuPDI::getFilename(prefix, outputId);
     int filename_size = filename.size();
 
     Kokkos::fence();
