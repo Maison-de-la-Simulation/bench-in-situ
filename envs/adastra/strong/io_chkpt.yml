@@ -135,6 +135,8 @@ pdi:
       on_event:
         # write_xml:
         #   writeXML: {}
+        write_xml:
+          writeGpuXML: {}
         data_GPU_event:
           copy_func:
             freq: 100

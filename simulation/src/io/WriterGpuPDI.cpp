@@ -26,7 +26,7 @@ namespace hydro { namespace io
 extern "C"
 {
 
-    void writeXML() {
+    void writeGpuXML() {
         if (!Session::isIOProc())
         {
             return;
