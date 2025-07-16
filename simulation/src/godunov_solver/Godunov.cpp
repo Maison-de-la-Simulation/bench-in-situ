@@ -19,7 +19,7 @@
 #include "global_meanExecution.hpp"
 #include "vp2Execution.hpp"
 // #include "io/WriterPDI.hpp"
-// #include "io/WriterGpuPDI.hpp"
+#include "io/WriterGpuPDI.hpp"
 
 
 
