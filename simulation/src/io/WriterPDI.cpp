@@ -26,7 +26,7 @@ namespace hydro { namespace io
 extern "C"
 {
 
-    void WriterPDI::writeXML() {
+    static void WriterPDI::writeXML() {
         if (!Session::isIOProc())
         {
             return;
