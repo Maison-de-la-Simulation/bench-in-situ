@@ -327,6 +327,21 @@ void WriterGpuPDI::write(HostConstArrayDyn u, const UniformGrid & grid,
 {
     Kokkos::fence();
     std::chrono::steady_clock::time_point m_start_write = std::chrono::steady_clock::now();
+
+    ////
+    int tmp_rank=0;
+#if defined(MPI_SESSION)
+    MPI_Comm_rank(MPI_COMM_WORLD, &tmp_rank);
+    m_mpi_coords = grid.comm.getCoords(grid.comm.rank());
+#endif
+
+    std::ostringstream mpi_prefix;
+    mpi_prefix << std::setw(3) << std::setfill('0') << tmp_rank;    
+    std::string new_prefix(prefix);
+    new_prefix.append("_r"+mpi_prefix.str());
+
+    int prefix_size = new_prefix.size() + 1;
+    ////
     
     std::array<int, 3> pdi_ncells;
     pdi_ncells[IX] = grid.m_nbCells[IX] * grid.m_dom[IX];
@@ -340,7 +355,10 @@ void WriterGpuPDI::write(HostConstArrayDyn u, const UniformGrid & grid,
     std::string prefix(prefix_c_str);
     PDI_release("prefix");
 
-    std::string filename = WriterGpuPDI::getFilename(prefix, outputId);
+    // std::string filename = WriterGpuPDI::getFilename(prefix, outputId);
+    ////
+    std::string filename = WriterGpuPDI::getFilename(new_prefix, outputId);
+    ////
     int filename_size = filename.size();
 
     std::array<size_t, 2> u_kokkos_view_dimensions = { u.extent(0), u.extent(1) };
