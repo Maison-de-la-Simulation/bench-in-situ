@@ -270,7 +270,8 @@ extern "C"
 
     // std::string filename = io::getFilename(prefix, outputId);
     // std::string filename = io::getFilename(prefix, *iter);
-    std::string filename = "io::getFilename(prefix, *iter)";
+    // std::string filename = "io::getFilename(prefix, *iter)";
+    std::string filename = io::WriterGpuPDI::getFilename(prefix, *iter);
     int filename_size = filename.size();
 
                 Kokkos::Profiling::popRegion();

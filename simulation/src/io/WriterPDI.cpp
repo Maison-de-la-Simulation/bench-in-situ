@@ -378,5 +378,6 @@ void WriterPDI::write(HostConstArrayDyn u, const UniformGrid & grid,
     Kokkos::fence();
     debugTimer.time_spent_in_write_after_xml += (std::chrono::steady_clock::now() - m_start_write);
     Print() << debugTimer << std::endl;
+    printf("--- debugTimer de WriterPDI ---\n");
 }
 }}
