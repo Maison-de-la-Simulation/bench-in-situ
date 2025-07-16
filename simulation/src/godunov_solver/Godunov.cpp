@@ -18,8 +18,8 @@
 #include "MusclReconstructionExecution.hpp"
 #include "global_meanExecution.hpp"
 #include "vp2Execution.hpp"
-#include "io/WriterPDI.hpp"
-#include "io/WriterGpuPDI.hpp"
+// #include "io/WriterPDI.hpp"
+// #include "io/WriterGpuPDI.hpp"
 
 
 
@@ -269,7 +269,8 @@ extern "C"
     PDI_release("prefix");
 
     // std::string filename = io::getFilename(prefix, outputId);
-    std::string filename = io::getFilename(prefix, *iter);
+    // std::string filename = io::getFilename(prefix, *iter);
+    std::string filename = "io::getFilename(prefix, *iter)";
     int filename_size = filename.size();
 
                 Kokkos::Profiling::popRegion();
