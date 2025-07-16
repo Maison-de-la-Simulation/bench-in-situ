@@ -327,6 +327,18 @@ void WriterGpuPDI::write(HostConstArrayDyn u, const UniformGrid & grid,
 {
     Kokkos::fence();
     std::chrono::steady_clock::time_point m_start_write = std::chrono::steady_clock::now();
+    
+    std::array<int, 3> pdi_ncells;
+    pdi_ncells[IX] = grid.m_nbCells[IX] * grid.m_dom[IX];
+    pdi_ncells[IY] = grid.m_nbCells[IY] * grid.m_dom[IY];
+    pdi_ncells[IZ] = grid.m_nbCells[IZ] * grid.m_dom[IZ];
+
+    auto& outputId = WriterBase::m_outputId;
+
+    char *prefix_c_str;
+    PDI_access("prefix", (void **)&prefix_c_str, PDI_IN);
+    std::string prefix(prefix_c_str);
+    PDI_release("prefix");
 
     ////
     int tmp_rank=0;
@@ -342,18 +354,6 @@ void WriterGpuPDI::write(HostConstArrayDyn u, const UniformGrid & grid,
 
     int prefix_size = new_prefix.size() + 1;
     ////
-    
-    std::array<int, 3> pdi_ncells;
-    pdi_ncells[IX] = grid.m_nbCells[IX] * grid.m_dom[IX];
-    pdi_ncells[IY] = grid.m_nbCells[IY] * grid.m_dom[IY];
-    pdi_ncells[IZ] = grid.m_nbCells[IZ] * grid.m_dom[IZ];
-
-    auto& outputId = WriterBase::m_outputId;
-
-    char *prefix_c_str;
-    PDI_access("prefix", (void **)&prefix_c_str, PDI_IN);
-    std::string prefix(prefix_c_str);
-    PDI_release("prefix");
 
     // std::string filename = WriterGpuPDI::getFilename(prefix, outputId);
     ////
