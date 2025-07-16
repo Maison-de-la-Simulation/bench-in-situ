@@ -343,8 +343,8 @@ void WriterGpuPDI::write(HostConstArrayDyn u, const UniformGrid & grid,
     std::string filename = WriterGpuPDI::getFilename(prefix, outputId);
     int filename_size = filename.size();
 
-    std::array<size_t, 2> m_u_kokkos_view_dimensions = { u.extent(0), u.extent(1) };
-    // std::array<size_t, 2> m_u_host_kokkos_view_dimensions = { m_u_host.extent(0), m_u_host.extent(1) };
+    std::array<size_t, 2> u_kokkos_view_dimensions = { u.extent(0), u.extent(1) };
+    std::array<size_t, 2> u_host_kokkos_view_dimensions = { u.extent(0), u.extent(1) };
 
     Kokkos::fence();
     debugTimer.time_spent_in_write_before_checkpoint += (std::chrono::steady_clock::now() - m_start_write);
@@ -400,7 +400,10 @@ void WriterGpuPDI::write(HostConstArrayDyn u, const UniformGrid & grid,
     PDI_multi_expose("data_GPU_event",
                      "iStep", &iStep, PDI_OUT,
                      "time", &time, PDI_OUT,
-                    //  "m_u", (void*)(u.data()), PDI_OUT,
+                     "m_u", (void*)(u.data()), PDI_OUT,
+                     "m_u_host", (void*)(u.data()), PDI_OUT,
+                     "m_u_kokkos_view_dimensions", (void*)&u_kokkos_view_dimensions, PDI_OUT,
+                     "m_u_host_kokkos_view_dimensions", (void*)&u_host_kokkos_view_dimensions, PDI_OUT,
                      "Rstar_h", &code_units::constants::Rstar_h, PDI_OUT,
                      "gamma", &gamma, PDI_OUT,
                      "mmw", &mmw, PDI_OUT,
