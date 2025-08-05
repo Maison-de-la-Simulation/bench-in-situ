@@ -366,7 +366,7 @@ void GodunovSolver::pdiExposeData()
    mpi_prefix << std::setw(3) << std::setfill('0') << tmp_rank;    
    std::string new_prefix(prefix);
    new_prefix.append("_r"+mpi_prefix.str());
-   printf("new_prefix %s \n", *new_prefix);
+   printf("new_prefix %s \n", new_prefix);
 
    int prefix_size = new_prefix.size() + 1;
 //    int nvar = 9;
