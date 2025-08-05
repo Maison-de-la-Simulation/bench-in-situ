@@ -226,8 +226,8 @@ void GodunovSolver::deep(double* b, double* a)
                      "iStep", iter, PDI_OUT,
                      "m_u", (void*)(mm_u.data()), PDI_OUT,
                      "m_u_host", (void*)(mm_u_host.data()), PDI_OUT,
-                     "m_u_kokkos_view_dimensions", (void*)&m_u_kokkos_view_dimensions, PDI_OUT,
-                     "m_u_host_kokkos_view_dimensions", (void*)&m_u_host_kokkos_view_dimensions, PDI_OUT,
+                     "m_u_kokkos_view_dimensions", (void*)&m_u_dim, PDI_OUT,
+                     "m_u_host_kokkos_view_dimensions", (void*)&m_u_host_dim, PDI_OUT,
                      NULL);
 
     PDI_release("m_u_host_kokkos_view_dimensions");
