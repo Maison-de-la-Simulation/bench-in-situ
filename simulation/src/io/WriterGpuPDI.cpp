@@ -274,7 +274,7 @@ WriterGpuPDI::WriterGpuPDI(const UniformGrid& grid, const Params&,
     mpi_prefix << std::setw(3) << std::setfill('0') << tmp_rank;    
     std::string new_prefix(prefix);
     new_prefix.append("_r"+mpi_prefix.str());
-   printf("new_prefix GPU %s \n", new_prefix.c_str());
+   printf("new_prefix GPU %s \n", new_prefix.c_str()); //OK?
 
     int prefix_size = new_prefix.size() + 1;
     int nvar = 9;
@@ -352,6 +352,7 @@ void WriterGpuPDI::write(HostConstArrayDyn u, const UniformGrid & grid,
     mpi_prefix << std::setw(3) << std::setfill('0') << tmp_rank;    
     std::string new_prefix(prefix);
     new_prefix.append("_r"+mpi_prefix.str());
+   printf("new_prefix GPU write %s \n", new_prefix.c_str());
 
     int prefix_size = new_prefix.size() + 1;
     ////
@@ -432,6 +433,7 @@ void WriterGpuPDI::write(HostConstArrayDyn u, const UniformGrid & grid,
                      "filename_size", &filename_size, PDI_OUT,
                      "filename", filename.data(), PDI_OUT,
                      "grid_size", pdi_ncells.data(), PDI_OUT,
+                     "prefix", new_prefix.c_str(), PDI_OUT,
                      NULL);
 
     WriterBase::m_previous_outputs.push_back(std::make_pair(outputId, time));
