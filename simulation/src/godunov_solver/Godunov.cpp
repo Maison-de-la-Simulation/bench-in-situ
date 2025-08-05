@@ -187,6 +187,8 @@ void GodunovSolver::deep(double* b, double* a)
             int* freq; PDI_access("freq", (void**)&freq, PDI_IN);
             printf("########### %i ################\n", *iter);
             printf("########### %i ################\n", *freq);
+            std::string prefix; PDI_access("prefix", (void**)&prefix, PDI_IN);
+            printf("########### %s ################\n", prefix.c_str());
 //            PDI_release("freq");
 //            PDI_release("iter");
 
@@ -362,13 +364,13 @@ void GodunovSolver::pdiExposeData()
     printf("prefix %s \n", prefix.c_str());
     PDI_release("prefix");
    
-   std::ostringstream mpi_prefix;
-   mpi_prefix << std::setw(3) << std::setfill('0') << tmp_rank;    
-   std::string new_prefix(prefix);
-   new_prefix.append("_r"+mpi_prefix.str());
-   printf("new_prefix %s \n", new_prefix.c_str());
+//    std::ostringstream mpi_prefix;
+//    mpi_prefix << std::setw(3) << std::setfill('0') << tmp_rank;    
+//    std::string new_prefix(prefix);
+//    new_prefix.append("_r"+mpi_prefix.str());
+//    printf("new_prefix %s \n", new_prefix.c_str());
 
-   int prefix_size = new_prefix.size() + 1;
+//    int prefix_size = new_prefix.size() + 1;
 //    int nvar = 9;
     
    std::array<Real, 3> origin;
