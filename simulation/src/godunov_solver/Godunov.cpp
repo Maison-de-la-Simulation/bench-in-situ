@@ -178,63 +178,63 @@ void GodunovSolver::prepareNextOutput(Real& dt)
     
 }
 
-void GodunovSolver::deep(double* b, double* a)
-{
-    Kokkos::fence();
-    std::chrono::steady_clock::time_point m_start_io_deep = std::chrono::steady_clock::now();
+// void GodunovSolver::deep(double* b, double* a)
+// {
+//     Kokkos::fence();
+//     std::chrono::steady_clock::time_point m_start_io_deep = std::chrono::steady_clock::now();
 
-            int* iter; PDI_access("iter", (void**)&iter, PDI_IN);
-            int* freq; PDI_access("freq", (void**)&freq, PDI_IN);
-            printf("########### %i ################\n", *iter);
-            printf("########### %i ################\n", *freq);
-            std::string prefix; PDI_access("prefix", (void**)&prefix, PDI_IN);
-            printf("########### %s ################\n", prefix.c_str());
-//            PDI_release("freq");
-//            PDI_release("iter");
+//             int* iter; PDI_access("iter", (void**)&iter, PDI_IN);
+//             int* freq; PDI_access("freq", (void**)&freq, PDI_IN);
+//             printf("########### %i ################\n", *iter);
+//             printf("########### %i ################\n", *freq);
+//             std::string prefix; PDI_access("prefix", (void**)&prefix, PDI_IN);
+//             printf("########### %s ################\n", prefix.c_str());
+// //            PDI_release("freq");
+// //            PDI_release("iter");
 
-    std::array<size_t, 2>* m_u_dim; PDI_access("m_u_kokkos_view_dimensions", (void**)&m_u_dim, PDI_IN);
-    size_t* dim_ptr = m_u_dim->data();
-    std::array<size_t, 2>* m_u_host_dim; PDI_access("m_u_host_kokkos_view_dimensions", (void**)&m_u_host_dim, PDI_IN);
-    size_t* dim_host_ptr = m_u_host_dim->data();
+//     std::array<size_t, 2>* m_u_dim; PDI_access("m_u_kokkos_view_dimensions", (void**)&m_u_dim, PDI_IN);
+//     size_t* dim_ptr = m_u_dim->data();
+//     std::array<size_t, 2>* m_u_host_dim; PDI_access("m_u_host_kokkos_view_dimensions", (void**)&m_u_host_dim, PDI_IN);
+//     size_t* dim_host_ptr = m_u_host_dim->data();
 
-    printf("--- dim_ptr[0] %zu ---\n", dim_ptr[0]);
-    printf("--- dim_ptr[1] %zu ---\n", dim_ptr[1]);
-    printf("--- dim_host_ptr[0] %zu ---\n", dim_host_ptr[0]);
-    printf("--- dim_host_ptr[1] %zu ---\n", dim_host_ptr[1]);
+//     printf("--- dim_ptr[0] %zu ---\n", dim_ptr[0]);
+//     printf("--- dim_ptr[1] %zu ---\n", dim_ptr[1]);
+//     printf("--- dim_host_ptr[0] %zu ---\n", dim_host_ptr[0]);
+//     printf("--- dim_host_ptr[1] %zu ---\n", dim_host_ptr[1]);
 
-    Kokkos::View<Real*, Kokkos::LayoutLeft, Kokkos::HostSpace> mm_u(a, dim_ptr[0], dim_ptr[1]);
-    Kokkos::View<Real*, Kokkos::LayoutLeft, Kokkos::HostSpace> mm_u_host(b, dim_host_ptr[0], dim_host_ptr[1]);
-    Kokkos::deep_copy(mm_u_host, mm_u);
+//     Kokkos::View<Real*, Kokkos::LayoutLeft, Kokkos::HostSpace> mm_u(a, dim_ptr[0], dim_ptr[1]);
+//     Kokkos::View<Real*, Kokkos::LayoutLeft, Kokkos::HostSpace> mm_u_host(b, dim_host_ptr[0], dim_host_ptr[1]);
+//     Kokkos::deep_copy(mm_u_host, mm_u);
 
-    Kokkos::fence();
-    performanceTimer.time_spent_in_deep_copy += (std::chrono::steady_clock::now() - m_start_io_deep);
+//     Kokkos::fence();
+//     performanceTimer.time_spent_in_deep_copy += (std::chrono::steady_clock::now() - m_start_io_deep);
 
-    void* data_host = &mm_u_host;
-//    PDI_expose("data_host", data_host, PDI_OUT);
-//    free(data_host);
+//     void* data_host = &mm_u_host;
+// //    PDI_expose("data_host", data_host, PDI_OUT);
+// //    free(data_host);
 
-    // PDI_multi_expose("data_GPU_event",
-    //                  "iStep", iter, PDI_OUT,
-    //                 //  "data_host", &data_host, PDI_OUT,
-    //                 //  "data_host", data_host->data(), PDI_OUT,
-    //                 //  "m_u_host", data_host->data(), PDI_OUT,
-    //                 //  "local_full_field", mm_u_host.data(), PDI_OUT,
-    //                  "m_u_host", mm_u_host.data(), PDI_OUT,
-    //                  NULL);
+//     // PDI_multi_expose("data_GPU_event",
+//     //                  "iStep", iter, PDI_OUT,
+//     //                 //  "data_host", &data_host, PDI_OUT,
+//     //                 //  "data_host", data_host->data(), PDI_OUT,
+//     //                 //  "m_u_host", data_host->data(), PDI_OUT,
+//     //                 //  "local_full_field", mm_u_host.data(), PDI_OUT,
+//     //                  "m_u_host", mm_u_host.data(), PDI_OUT,
+//     //                  NULL);
 
-    PDI_multi_expose("data_GPU_event",
-                     "iStep", iter, PDI_OUT,
-                     "m_u", (void*)(mm_u.data()), PDI_OUT,
-                     "m_u_host", (void*)(mm_u_host.data()), PDI_OUT,
-                     "m_u_kokkos_view_dimensions", (void*)&m_u_dim, PDI_OUT,
-                     "m_u_host_kokkos_view_dimensions", (void*)&m_u_host_dim, PDI_OUT,
-                     NULL);
+//     PDI_multi_expose("data_GPU_event",
+//                      "iStep", iter, PDI_OUT,
+//                      "m_u", (void*)(mm_u.data()), PDI_OUT,
+//                      "m_u_host", (void*)(mm_u_host.data()), PDI_OUT,
+//                      "m_u_kokkos_view_dimensions", (void*)&m_u_dim, PDI_OUT,
+//                      "m_u_host_kokkos_view_dimensions", (void*)&m_u_host_dim, PDI_OUT,
+//                      NULL);
 
-    PDI_release("m_u_host_kokkos_view_dimensions");
-    PDI_release("m_u_kokkos_view_dimensions");
-            PDI_release("freq");
-            PDI_release("iter");
-}
+//     PDI_release("m_u_host_kokkos_view_dimensions");
+//     PDI_release("m_u_kokkos_view_dimensions");
+//             PDI_release("freq");
+//             PDI_release("iter");
+// }
 
 extern "C"
 {
@@ -263,6 +263,16 @@ extern "C"
                 Kokkos::View<Real*, Kokkos::LayoutLeft, Kokkos::HostSpace> mm_u(a, dim_ptr[0], dim_ptr[1]);
                 Kokkos::View<Real*, Kokkos::LayoutLeft, Kokkos::HostSpace> mm_u_host(b, dim_host_ptr[0], dim_host_ptr[1]);
                 Kokkos::deep_copy(mm_u_host, mm_u);
+
+                // for (std::size_t i = 0; i < mm_u_host.extent(0); ++i) {
+                //     std::cout << "mm_u_host[" << i << "] = " << mm_u_host(i) << "\n";
+                // }
+                for (std::size_t i = 0; i < M; ++i) {
+                    for (std::size_t j = 0; j < N; ++j) {
+                        std::cout << "mm_u_host(" << i << "," << j << ") = " << mm_u_host(i, j) << "\n";
+                    }
+                }
+
 //                Real* copied_ptr =  mm_u_host.data();
                 // double* copied_ptr =  mm_u_host.data();
                 double* copied_ptr =  mm_u.data();
