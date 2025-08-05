@@ -27,10 +27,10 @@ extern "C"
 {
 
     void writeGpuXML() {
-        if (!Session::isIOProc())
-        {
-            return;
-        }
+        // if (!Session::isIOProc())
+        // {
+        //     return;
+        // }
 
         Int* restartId;
         PDI_access("restart_id", (void**)&restartId, PDI_IN);
