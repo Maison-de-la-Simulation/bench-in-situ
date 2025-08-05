@@ -274,13 +274,16 @@ extern "C"
                 //         std::cout << "mm_u_host(" << i << "," << j << ") = " << mm_u_host(i, j) << "\n";
                 //     }
                 // }
-                for (int i = 0; i < dim_ptr[0]; ++i) {
-                    for (int j = 0; j < dim_ptr[1]; ++j) {
-                        std::cout << "mm_u(" << i << "," << j << ") = " << mm_u(i,j)
-                                << "   mm_u_host(" << i << "," << j << ") = " << mm_u_host(i,j)
-                                << std::endl;
-                    }
-                }
+                // if (Session::isIOProc())
+                // {
+                //     for (int i = 0; i < dim_ptr[0]; ++i) {
+                //         for (int j = 0; j < dim_ptr[1]; ++j) {
+                //             std::cout << "mm_u(" << i << "," << j << ") = " << mm_u(i,j)
+                //                     << "   mm_u_host(" << i << "," << j << ") = " << mm_u_host(i,j)
+                //                     << std::endl;
+                //         }
+                //     }
+                // }
 
 
 //                Real* copied_ptr =  mm_u_host.data();
