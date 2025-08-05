@@ -303,8 +303,8 @@ WriterGpuPDI::WriterGpuPDI(const UniformGrid& grid, const Params&,
                      "origin", origin.data(), PDI_OUT,
                      "dl", dl.data(), PDI_OUT,
                      "restart_id", &m_restartId, PDI_OUT,
-                     "prefix_size", &prefix_size, PDI_OUT,
-                     "prefix", new_prefix.c_str(), PDI_OUT,
+                    //  "prefix_size", &prefix_size, PDI_OUT,
+                    //  "prefix", new_prefix.c_str(), PDI_OUT,
                      NULL);
     
 }
@@ -433,6 +433,7 @@ void WriterGpuPDI::write(HostConstArrayDyn u, const UniformGrid & grid,
                      "filename_size", &filename_size, PDI_OUT,
                      "filename", filename.data(), PDI_OUT,
                      "grid_size", pdi_ncells.data(), PDI_OUT,
+                     "prefix_size", &prefix_size, PDI_OUT,
                      "prefix", new_prefix.c_str(), PDI_OUT,
                      NULL);
 
