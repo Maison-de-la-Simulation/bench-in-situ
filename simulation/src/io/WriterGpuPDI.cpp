@@ -359,6 +359,7 @@ void WriterGpuPDI::write(HostConstArrayDyn u, const UniformGrid & grid,
     ////
 
     std::string filename = WriterGpuPDI::getFilename(prefix, outputId);
+   printf("filename write %s \n", filename.c_str());
     ////
     // std::string filename = WriterGpuPDI::getFilename(new_prefix, outputId);
     ////
