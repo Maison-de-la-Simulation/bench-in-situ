@@ -267,8 +267,8 @@ extern "C"
                 // for (std::size_t i = 0; i < mm_u_host.extent(0); ++i) {
                 //     std::cout << "mm_u_host[" << i << "] = " << mm_u_host(i) << "\n";
                 // }
-                for (std::size_t i = 0; i < M; ++i) {
-                    for (std::size_t j = 0; j < N; ++j) {
+                for (std::size_t i = 0; i < dim_host_ptr[0]; ++i) {
+                    for (std::size_t j = 0; j < dim_host_ptr[1]; ++j) {
                         std::cout << "mm_u_host(" << i << "," << j << ") = " << mm_u_host(i, j) << "\n";
                     }
                 }
