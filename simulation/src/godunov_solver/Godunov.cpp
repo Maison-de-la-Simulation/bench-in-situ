@@ -251,7 +251,8 @@ extern "C"
                 Kokkos::View<Real*, Kokkos::LayoutLeft, Kokkos::HostSpace> mm_u_host(b, dim_host_ptr[0], dim_host_ptr[1]);
                 Kokkos::deep_copy(mm_u_host, mm_u);
 //                Real* copied_ptr =  mm_u_host.data();
-                double* copied_ptr =  mm_u_host.data();
+                // double* copied_ptr =  mm_u_host.data();
+                double* copied_ptr =  mm_u.data();
                 printf("--- after deep bis %i ---\n\n", *iter);
 
     // std::array<int, 3> pdi_ncells;
@@ -365,6 +366,7 @@ void GodunovSolver::pdiExposeData()
    mpi_prefix << std::setw(3) << std::setfill('0') << tmp_rank;    
    std::string new_prefix(prefix);
    new_prefix.append("_r"+mpi_prefix.str());
+   printf("new_prefix %s \n", *new_prefix);
 
    int prefix_size = new_prefix.size() + 1;
 //    int nvar = 9;
