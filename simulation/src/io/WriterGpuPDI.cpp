@@ -348,18 +348,18 @@ void WriterGpuPDI::write(HostConstArrayDyn u, const UniformGrid & grid,
     m_mpi_coords = grid.comm.getCoords(grid.comm.rank());
 #endif
 
-    std::ostringstream mpi_prefix;
-    mpi_prefix << std::setw(3) << std::setfill('0') << tmp_rank;    
-    std::string new_prefix(prefix);
-    new_prefix.append("_r"+mpi_prefix.str());
-   printf("new_prefix GPU write %s \n", new_prefix.c_str());
+//     std::ostringstream mpi_prefix;
+//     mpi_prefix << std::setw(3) << std::setfill('0') << tmp_rank;    
+//     std::string new_prefix(prefix);
+//     new_prefix.append("_r"+mpi_prefix.str());
+//    printf("new_prefix GPU write %s \n", new_prefix.c_str());
 
-    int prefix_size = new_prefix.size() + 1;
+//     int prefix_size = new_prefix.size() + 1;
     ////
 
-    // std::string filename = WriterGpuPDI::getFilename(prefix, outputId);
+    std::string filename = WriterGpuPDI::getFilename(prefix, outputId);
     ////
-    std::string filename = WriterGpuPDI::getFilename(new_prefix, outputId);
+    // std::string filename = WriterGpuPDI::getFilename(new_prefix, outputId);
     ////
     int filename_size = filename.size();
 
