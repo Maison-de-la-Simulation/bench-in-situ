@@ -230,7 +230,8 @@ extern "C"
 {
     void copy_func() {
 //        printf("*********** in copy_func ***********************\n");
-        if (Session::isIOProc())
+        // if (Session::isIOProc())
+        if (true)
         {
             int* iter; PDI_access("iter", (void**)&iter, PDI_IN);
             int* freq; PDI_access("freq", (void**)&freq, PDI_IN);
