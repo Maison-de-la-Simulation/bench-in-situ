@@ -274,7 +274,7 @@ WriterGpuPDI::WriterGpuPDI(const UniformGrid& grid, const Params&,
     mpi_prefix << std::setw(3) << std::setfill('0') << tmp_rank;    
     std::string new_prefix(prefix);
     new_prefix.append("_r"+mpi_prefix.str());
-   printf("new_prefix GPU %s \n", new_prefix);
+   printf("new_prefix GPU %s \n", new_prefix.c_str());
 
     int prefix_size = new_prefix.size() + 1;
     int nvar = 9;
