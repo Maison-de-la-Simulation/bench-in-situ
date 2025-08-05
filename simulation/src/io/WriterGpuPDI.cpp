@@ -340,6 +340,7 @@ void WriterGpuPDI::write(HostConstArrayDyn u, const UniformGrid & grid,
     PDI_access("prefix", (void **)&prefix_c_str, PDI_IN);
     std::string prefix(prefix_c_str);
     PDI_release("prefix");
+   printf("prefix GPU write %s \n", prefix.c_str());
 
     ////
     int tmp_rank=0;
