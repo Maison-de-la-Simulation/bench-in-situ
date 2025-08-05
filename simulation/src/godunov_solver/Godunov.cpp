@@ -260,18 +260,28 @@ extern "C"
                 Print() << "===================== output at iteration = " << *iter << " time t = " << *time << std::endl;
                 Kokkos::Profiling::pushRegion("I/O - Checkpoint - deep_copy");
                 // deep(b, a);
-                Kokkos::View<Real*, Kokkos::LayoutLeft, Kokkos::HostSpace> mm_u(a, dim_ptr[0], dim_ptr[1]);
-                Kokkos::View<Real*, Kokkos::LayoutLeft, Kokkos::HostSpace> mm_u_host(b, dim_host_ptr[0], dim_host_ptr[1]);
+                // Kokkos::View<Real*, Kokkos::LayoutLeft, Kokkos::HostSpace> mm_u(a, dim_ptr[0], dim_ptr[1]);
+                // Kokkos::View<Real*, Kokkos::LayoutLeft, Kokkos::HostSpace> mm_u_host(b, dim_host_ptr[0], dim_host_ptr[1]);
+                Kokkos::View<Real**, Kokkos::LayoutLeft, Kokkos::HostSpace> mm_u(a, dim_ptr[0], dim_ptr[1]);
+                Kokkos::View<Real**, Kokkos::LayoutLeft, Kokkos::HostSpace> mm_u_host(b, dim_host_ptr[0], dim_host_ptr[1]);
                 Kokkos::deep_copy(mm_u_host, mm_u);
 
                 // for (std::size_t i = 0; i < mm_u_host.extent(0); ++i) {
                 //     std::cout << "mm_u_host[" << i << "] = " << mm_u_host(i) << "\n";
                 // }
-                for (std::size_t i = 0; i < dim_host_ptr[0]; ++i) {
-                    for (std::size_t j = 0; j < dim_host_ptr[1]; ++j) {
-                        std::cout << "mm_u_host(" << i << "," << j << ") = " << mm_u_host(i, j) << "\n";
+                // for (std::size_t i = 0; i < dim_host_ptr[0]; ++i) {
+                //     for (std::size_t j = 0; j < dim_host_ptr[1]; ++j) {
+                //         std::cout << "mm_u_host(" << i << "," << j << ") = " << mm_u_host(i, j) << "\n";
+                //     }
+                // }
+                for (int i = 0; i < dim_ptr[0]; ++i) {
+                    for (int j = 0; j < dim_ptr[1]; ++j) {
+                        std::cout << "mm_u(" << i << "," << j << ") = " << mm_u(i,j)
+                                << "   mm_u_host(" << i << "," << j << ") = " << mm_u_host(i,j)
+                                << std::endl;
                     }
                 }
+
 
 //                Real* copied_ptr =  mm_u_host.data();
                 // double* copied_ptr =  mm_u_host.data();
