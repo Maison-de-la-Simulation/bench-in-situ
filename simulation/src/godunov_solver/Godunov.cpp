@@ -288,7 +288,7 @@ extern "C"
                 {
                     for (int i = 0; i < mm_u.extent(0); ++i) {
                         for (int j = 0; j < mm_u.extent(1); ++j) {
-                            if (m_u(i,j) != 0 || m_u_host(i,j) != 0)
+                            if (mm_u(i,j) != 0 || mm_u_host(i,j) != 0)
                             {
                                 std::cout << "mm_u(" << i << "," << j << ") = " << mm_u(i,j)
                                         << "   mm_u_host(" << i << "," << j << ") = " << mm_u_host(i,j)
