@@ -48,6 +48,7 @@ extern "C"
             prefix + '_' +
             restartNum.str() + ".xmf"};
         std::ofstream xdmfFile(xdmfFilenameFull, std::ofstream::trunc);
+        std::cout << "xdmfFilenameFull = " << xdmfFilenameFull << std::endl;
 
         xdmfFile << "<?xml version=\"1.0\"?>\n";
         xdmfFile << "<!DOCTYPE Xdmf SYSTEM \"Xdmf.dtd\" []>\n";
