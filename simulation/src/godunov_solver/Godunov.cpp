@@ -90,6 +90,7 @@ GodunovSolver::GodunovSolver(std::shared_ptr<Problem> problem)
         io::Reader reader(m_grid, *m_params, variables_to_save);
         reader.read(m_u_host, m_grid, Super::m_iteration, Super::m_t, outputId, restartId);
         Kokkos::deep_copy(m_u, m_u_host);
+        printf("*********** Kokkos::deep_copy(m_u, m_u_host); ***********************\n");
         m_writer->setOutputId(++outputId);
         m_writer->setRestartId(++restartId);
         m_should_save = false;
