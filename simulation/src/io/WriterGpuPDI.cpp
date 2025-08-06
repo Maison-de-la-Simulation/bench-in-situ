@@ -440,17 +440,14 @@ void WriterGpuPDI::write(HostConstArrayDyn u, const UniformGrid & grid,
     {
         for (int i = 0; i < u.extent(0); ++i) {
             for (int j = 0; j < u.extent(1); ++j) {
-                if (u(i,j) != 0)
-                {
-    //                if (u(i,j) != 0)
-    //                {
-    //                    std::cout << "write mm_u(" << i << "," << j << ") = " << u(i,j)
-    //                        << std::endl;
-    //                }
-                    std::cout << "write mm_u(" << i << "," << j << ") = " << u(i,j)
-                            << std::endl;
+//                if (u(i,j) != 0)
+//                {
+//                    std::cout << "write mm_u(" << i << "," << j << ") = " << u(i,j)
+//                        << std::endl;
+//                }
+                std::cout << "write mm_u(" << i << "," << j << ") = " << u(i,j)
+                        << std::endl;
 
-                }
             }
         }
     }
