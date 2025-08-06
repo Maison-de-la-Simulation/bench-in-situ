@@ -453,6 +453,7 @@ void GodunovSolver::pdiExposeData()
 //                     "prefix", new_prefix.c_str(), PDI_OUT,
 //                     NULL);
 
+        ////m_u not accessible here
         // if (Session::isIOProc())
         // {
         //     for (int i = 0; i < m_u.extent(0); ++i) {
