@@ -285,19 +285,19 @@ extern "C"
                 //         }
                 //     }
                 // }
-                if (Session::isIOProc())
-                {
-                    for (int i = 0; i < mm_u.extent(0); ++i) {
-                        for (int j = 0; j < mm_u.extent(1); ++j) {
-                            if (mm_u(i,j) != 0 || mm_u_host(i,j) != 0)
-                            {
-                                std::cout << "mm_u(" << i << "," << j << ") = " << mm_u(i,j)
-                                        << "   mm_u_host(" << i << "," << j << ") = " << mm_u_host(i,j)
-                                        << std::endl;
-                            }
-                        }
-                    }
-                }
+                // if (Session::isIOProc())
+                // {
+                //     for (int i = 0; i < mm_u.extent(0); ++i) {
+                //         for (int j = 0; j < mm_u.extent(1); ++j) {
+                //             if (mm_u(i,j) != 0 || mm_u_host(i,j) != 0)
+                //             {
+                //                 std::cout << "mm_u(" << i << "," << j << ") = " << mm_u(i,j)
+                //                         << "   mm_u_host(" << i << "," << j << ") = " << mm_u_host(i,j)
+                //                         << std::endl;
+                //             }
+                //         }
+                //     }
+                // }
 
 
 //                Real* copied_ptr =  mm_u_host.data();
