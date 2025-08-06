@@ -436,18 +436,18 @@ void WriterGpuPDI::write(HostConstArrayDyn u, const UniformGrid & grid,
     //     // std::cout << "u(0,64) = " << u(0,64) << std::endl;
     //     // std::cout << "u(64,0) = " << u(64,0) << std::endl;
     // }
-    if (Session::isIOProc())
-    {
-        for (int i = 0; i < u.extent(0); ++i) {
-            for (int j = 0; j < u.extent(1); ++j) {
-                if (u(i,j) != 0)
-                {
-                    std::cout << "mm_u(" << i << "," << j << ") = " << u(i,j)
-                        << std::endl;
-                }
-            }
-        }
-    }
+    // if (Session::isIOProc())
+    // {
+    //     for (int i = 0; i < u.extent(0); ++i) {
+    //         for (int j = 0; j < u.extent(1); ++j) {
+    //             if (u(i,j) != 0)
+    //             {
+    //                 std::cout << "mm_u(" << i << "," << j << ") = " << u(i,j)
+    //                     << std::endl;
+    //             }
+    //         }
+    //     }
+    // }
 
     PDI_multi_expose("data_GPU_event",
                      "iStep", &iStep, PDI_OUT,
