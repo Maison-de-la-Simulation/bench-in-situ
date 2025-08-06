@@ -27,10 +27,10 @@ extern "C"
 {
 
     void writeGpuXML() {
-        // if (!Session::isIOProc())
-        // {
-        //     return;
-        // }
+        if (!Session::isIOProc())
+        {
+            return;
+        }
 
         Int* restartId;
         PDI_access("restart_id", (void**)&restartId, PDI_IN);
@@ -434,7 +434,7 @@ void WriterGpuPDI::write(HostConstArrayDyn u, const UniformGrid & grid,
         std::cout << "u.extent(0) = " << u.extent(0) << std::endl;
         std::cout << "u.extent(1) = " << u.extent(1) << std::endl;
         // std::cout << "u(0,64) = " << u(0,64) << std::endl;
-        // std::cout << "u(64,0) = " << u(64,0) << std::endl;
+        std::cout << "u(64,0) = " << u(64,0) << std::endl;
     }
 
     PDI_multi_expose("data_GPU_event",
