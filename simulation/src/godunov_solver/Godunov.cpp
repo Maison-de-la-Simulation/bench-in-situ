@@ -453,19 +453,19 @@ void GodunovSolver::pdiExposeData()
 //                     "prefix", new_prefix.c_str(), PDI_OUT,
 //                     NULL);
 
-        if (Session::isIOProc())
-        {
-            for (int i = 0; i < m_u.extent(0); ++i) {
-                for (int j = 0; j < m_u.extent(1); ++j) {
-                    if (m_u(i,j) != 0 || m_u_host(i,j) != 0)
-                    {
-                        std::cout << "godunov m_u(" << i << "," << j << ") = " << m_u(i,j)
-                                // << "   m_u_host(" << i << "," << j << ") = " << m_u_host(i,j)
-                                << std::endl;
-                    }
-                }
-            }
-        }
+        // if (Session::isIOProc())
+        // {
+        //     for (int i = 0; i < m_u.extent(0); ++i) {
+        //         for (int j = 0; j < m_u.extent(1); ++j) {
+        //             if (m_u(i,j) != 0 || m_u_host(i,j) != 0)
+        //             {
+        //                 std::cout << "godunov m_u(" << i << "," << j << ") = " << m_u(i,j)
+        //                         // << "   m_u_host(" << i << "," << j << ") = " << m_u_host(i,j)
+        //                         << std::endl;
+        //             }
+        //         }
+        //     }
+        // }
 
        m_writer->write(m_u_host, m_grid, Super::m_iteration, Super::m_t,
                        m_params->thermo.gamma, m_params->thermo.mmw);
