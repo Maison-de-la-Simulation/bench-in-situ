@@ -460,7 +460,7 @@ void GodunovSolver::pdiExposeData()
                     if (m_u(i,j) != 0 || m_u_host(i,j) != 0)
                     {
                         std::cout << "godunov m_u(" << i << "," << j << ") = " << m_u(i,j)
-                                << "   m_u_host(" << i << "," << j << ") = " << m_u_host(i,j)
+                                // << "   m_u_host(" << i << "," << j << ") = " << m_u_host(i,j)
                                 << std::endl;
                     }
                 }
