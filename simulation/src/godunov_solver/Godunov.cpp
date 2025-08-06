@@ -245,7 +245,7 @@ extern "C"
         {
             int* iter; PDI_access("iter", (void**)&iter, PDI_IN);
             int* freq; PDI_access("freq", (void**)&freq, PDI_IN);
-            double* a; PDI_access("m_u", (void**)&a, PDI_IN);
+            double* a; PDI_access("m_u", (void**)&a, PDI_IN); //Real, and not just double
             double* b; PDI_access("m_u_host", (void**)&b, PDI_IN);
             std::array<size_t, 2>* m_u_dim; PDI_access("m_u_kokkos_view_dimensions", (void**)&m_u_dim, PDI_IN);
             size_t* dim_ptr = m_u_dim->data();
@@ -284,6 +284,19 @@ extern "C"
                 //         }
                 //     }
                 // }
+                if (Session::isIOProc())
+                {
+                    for (int i = 0; i < mm_u.extent(0); ++i) {
+                        for (int j = 0; j < mm_u.extent(1); ++j) {
+                            if (m_u(i,j) != 0 || m_u_host(i,j) != 0)
+                            {
+                                std::cout << "mm_u(" << i << "," << j << ") = " << mm_u(i,j)
+                                        << "   mm_u_host(" << i << "," << j << ") = " << mm_u_host(i,j)
+                                        << std::endl;
+                            }
+                        }
+                    }
+                }
 
 
 //                Real* copied_ptr =  mm_u_host.data();
@@ -439,19 +452,19 @@ void GodunovSolver::pdiExposeData()
 //                     "prefix", new_prefix.c_str(), PDI_OUT,
 //                     NULL);
 
-        if (Session::isIOProc())
-        {
-            for (int i = 0; i < m_u.extent(0); ++i) {
-                for (int j = 0; j < m_u.extent(1); ++j) {
-                    if (m_u(i,j) != 0 || m_u_host(i,j) != 0)
-                    {
-                        std::cout << "m_u(" << i << "," << j << ") = " << m_u(i,j)
-                                << "   m_u_host(" << i << "," << j << ") = " << m_u_host(i,j)
-                                << std::endl;
-                    }
-                }
-            }
-        }
+        // if (Session::isIOProc())
+        // {
+        //     for (int i = 0; i < m_u.extent(0); ++i) {
+        //         for (int j = 0; j < m_u.extent(1); ++j) {
+        //             if (m_u(i,j) != 0 || m_u_host(i,j) != 0)
+        //             {
+        //                 std::cout << "m_u(" << i << "," << j << ") = " << m_u(i,j)
+        //                         << "   m_u_host(" << i << "," << j << ") = " << m_u_host(i,j)
+        //                         << std::endl;
+        //             }
+        //         }
+        //     }
+        // }
 
        m_writer->write(m_u_host, m_grid, Super::m_iteration, Super::m_t,
                        m_params->thermo.gamma, m_params->thermo.mmw);
