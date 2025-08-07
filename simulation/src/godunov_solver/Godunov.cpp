@@ -246,8 +246,8 @@ extern "C"
         {
             int* iter; PDI_access("iter", (void**)&iter, PDI_IN);
             int* freq; PDI_access("freq", (void**)&freq, PDI_IN);
-            double* a; PDI_access("m_u", (void**)&a, PDI_IN); //Real, and not just double
-            double* b; PDI_access("m_u_host", (void**)&b, PDI_IN);
+            Real** a; PDI_access("m_u", (void**)&a, PDI_IN); //Real, and not just double
+            Real** b; PDI_access("m_u_host", (void**)&b, PDI_IN);
             std::array<size_t, 2>* m_u_dim; PDI_access("m_u_kokkos_view_dimensions", (void**)&m_u_dim, PDI_IN);
             size_t* dim_ptr = m_u_dim->data();
             std::array<size_t, 2>* m_u_host_dim; PDI_access("m_u_host_kokkos_view_dimensions", (void**)&m_u_host_dim, PDI_IN);
@@ -317,13 +317,13 @@ extern "C"
                 //         }
                 //     }
                 // }
-                std::cout << "View contents:\n";
-                for (int i = 0; i < dim_host_ptr[0]; ++i) {
-                    for (int j = 0; j < dim_host_ptr[1]; ++j) {
-                        std::cout << mm_u_host(i, j) << " ";
-                    }
-                    std::cout << "\n";
-                }
+                // std::cout << "View contents:\n"; //NOK, zeroes only
+                // for (int i = 0; i < dim_host_ptr[0]; ++i) {
+                //     for (int j = 0; j < dim_host_ptr[1]; ++j) {
+                //         std::cout << mm_u_host(i, j) << " ";
+                //     }
+                //     std::cout << "\n";
+                // }
 
 
 //                Real* copied_ptr =  mm_u_host.data();
