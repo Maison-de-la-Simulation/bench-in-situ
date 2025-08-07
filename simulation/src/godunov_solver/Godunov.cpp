@@ -271,9 +271,9 @@ extern "C"
                 // std::cout << "dim_ptr[0] = " << dim_ptr[0] //OK
                 //                     << "   dim_ptr[1] = " << dim_ptr[1]
                 //                     << std::endl;
-                std::cout << "a(0,0) = " << a[0]
-                                    << "   b(0,0) = " << b[0]
-                                    << std::endl;
+                // std::cout << "a(0,0) = " << a[0]
+                //                     << "   b(0,0) = " << b[0]
+                //                     << std::endl;
 
                 // for (std::size_t i = 0; i < mm_u_host.extent(0); ++i) {
                 //     std::cout << "mm_u_host[" << i << "] = " << mm_u_host(i) << "\n";
@@ -306,6 +306,19 @@ extern "C"
                 //         }
                 //     }
                 // }
+                if (Session::isIOProc())
+                {
+                    for (int i = 0; i < dim_ptr[0]; ++i) {
+                        for (int j = 0; j < dim_ptr[1]; ++j) {
+                            if (a[i][j] != 0 || b[i][j] != 0)
+                            {
+                                std::cout << "a(" << i << "," << j << ") = " << a[i][j]
+                                        << "   b(" << i << "," << j << ") = " << b[i][j]
+                                        << std::endl;
+                            }
+                        }
+                    }
+                }
 
 
 //                Real* copied_ptr =  mm_u_host.data();
