@@ -306,16 +306,23 @@ extern "C"
                 //         }
                 //     }
                 // }
-                if (Session::isIOProc())
-                {
-                    for (int i = 0; i < dim_ptr[0]; ++i) {
-                        if (a[i] != 0 || b[i] != 0)
-                        {
-                            std::cout << "a(" << i << ") = " << a[i]
-                                    << "   b(" << i << ") = " << b[i]
-                                    << std::endl;
-                        }
+                // if (Session::isIOProc()) //NOK, zeroes only
+                // {
+                //     for (int i = 0; i < dim_ptr[0]; ++i) {
+                //         if (a[i] != 0 || b[i] != 0)
+                //         {
+                //             std::cout << "a(" << i << ") = " << a[i]
+                //                     << "   b(" << i << ") = " << b[i]
+                //                     << std::endl;
+                //         }
+                //     }
+                // }
+                std::cout << "View contents:\n";
+                for (int i = 0; i < dim_host_ptr[0]; ++i) {
+                    for (int j = 0; j < dim_host_ptr[1]; ++j) {
+                        std::cout << mm_u_host(i, j) << " ";
                     }
+                    std::cout << "\n";
                 }
 
 
