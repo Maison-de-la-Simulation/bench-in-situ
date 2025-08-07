@@ -133,12 +133,12 @@ pdi:
 
     user_code:
       on_event:
-        when: '$iter % $freq == 0'
         # write_xml:
         #   writeXML: {}
         write_xml:
           writeGpuXML: {}
         data_GPU_event:
+          when: '$iter % $freq == 0'
           copy_func:
             freq: 100
             iter: ${iStep}
