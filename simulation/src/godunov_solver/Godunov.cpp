@@ -309,13 +309,11 @@ extern "C"
                 if (Session::isIOProc())
                 {
                     for (int i = 0; i < dim_ptr[0]; ++i) {
-                        for (int j = 0; j < dim_ptr[1]; ++j) {
-                            if (a[i][j] != 0 || b[i][j] != 0)
-                            {
-                                std::cout << "a(" << i << "," << j << ") = " << a[i][j]
-                                        << "   b(" << i << "," << j << ") = " << b[i][j]
-                                        << std::endl;
-                            }
+                        if (a[i] != 0 || b[i] != 0)
+                        {
+                            std::cout << "a(" << i << ") = " << a[i]
+                                    << "   b(" << i << ") = " << b[i]
+                                    << std::endl;
                         }
                     }
                 }
