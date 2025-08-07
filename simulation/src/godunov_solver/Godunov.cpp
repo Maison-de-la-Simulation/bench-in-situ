@@ -495,7 +495,7 @@ void GodunovSolver::pdiExposeData()
         //     }
         // }
 
-        Kokkos::deep_copy(m_u_host, m_u);
+        // Kokkos::deep_copy(m_u_host, m_u);
 
        m_writer->write(m_u_host, m_grid, Super::m_iteration, Super::m_t,
                        m_params->thermo.gamma, m_params->thermo.mmw);
