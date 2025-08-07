@@ -268,6 +268,9 @@ extern "C"
                 Kokkos::View<Real**, Kokkos::LayoutLeft, Kokkos::HostSpace> mm_u(a, dim_ptr[0], dim_ptr[1]);
                 Kokkos::View<Real**, Kokkos::LayoutLeft, Kokkos::HostSpace> mm_u_host(b, dim_host_ptr[0], dim_host_ptr[1]);
                 Kokkos::deep_copy(mm_u_host, mm_u);
+                std::cout << "dim_ptr[0] = " << dim_ptr[0]
+                                    << "   dim_ptr[1] = " << dim_ptr[1]
+                                    << std::endl;
 
                 // for (std::size_t i = 0; i < mm_u_host.extent(0); ++i) {
                 //     std::cout << "mm_u_host[" << i << "] = " << mm_u_host(i) << "\n";
@@ -303,8 +306,9 @@ extern "C"
 
 
 //                Real* copied_ptr =  mm_u_host.data();
-                double* copied_ptr =  mm_u_host.data();
+                // double* copied_ptr =  mm_u_host.data();
                 // double* copied_ptr =  mm_u.data();
+                Real* copied_ptr = const_cast<Real*>(mm_u_host.data());
                 printf("--- after deep bis %i ---\n\n", *iter);
 
     // std::array<int, 3> pdi_ncells;
