@@ -261,6 +261,8 @@ extern "C"
                 Print() << "===================== output at iteration = " << *iter << " time t = " << *time << std::endl;
                 Kokkos::Profiling::pushRegion("I/O - Checkpoint - deep_copy");
                 // deep(b, a);
+                // Kokkos::deep_copy(m_u_host, m_u);
+                // Kokkos::deep_copy(b, a);
                 // Kokkos::View<Real*, Kokkos::LayoutLeft, Kokkos::HostSpace> mm_u(a, dim_ptr[0], dim_ptr[1]);
                 // Kokkos::View<Real*, Kokkos::LayoutLeft, Kokkos::HostSpace> mm_u_host(b, dim_host_ptr[0], dim_host_ptr[1]);
                 Kokkos::View<Real**, Kokkos::LayoutLeft, Kokkos::HostSpace> mm_u(a, dim_ptr[0], dim_ptr[1]);
@@ -301,8 +303,8 @@ extern "C"
 
 
 //                Real* copied_ptr =  mm_u_host.data();
-                // double* copied_ptr =  mm_u_host.data();
-                double* copied_ptr =  mm_u.data();
+                double* copied_ptr =  mm_u_host.data();
+                // double* copied_ptr =  mm_u.data();
                 printf("--- after deep bis %i ---\n\n", *iter);
 
     // std::array<int, 3> pdi_ncells;
@@ -468,7 +470,7 @@ void GodunovSolver::pdiExposeData()
         //     }
         // }
 
-        Kokkos::deep_copy(m_u_host, m_u);
+        // Kokkos::deep_copy(m_u_host, m_u);
 
        m_writer->write(m_u_host, m_grid, Super::m_iteration, Super::m_t,
                        m_params->thermo.gamma, m_params->thermo.mmw);

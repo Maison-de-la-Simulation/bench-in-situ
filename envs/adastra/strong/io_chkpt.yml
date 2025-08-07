@@ -139,7 +139,7 @@ pdi:
           writeGpuXML: {}
         data_GPU_event:
           copy_func:
-            freq: 50
+            freq: 100
             iter: ${iStep}
             m_u: ${m_u}
             m_u_host: ${m_u_host}
