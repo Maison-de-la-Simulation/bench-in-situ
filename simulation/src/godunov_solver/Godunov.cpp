@@ -414,7 +414,8 @@ extern "C"
             {
                 for (int i = 0; i < dim_host_ptr[0]; ++i) {
                     for (int j = 0; j < dim_host_ptr[1]; ++j) {
-                    if (mm_u_host[i][j] != 0)
+                    // if (mm_u_host[i][j] != 0)
+                    if (mm_u_host(i, j) != 0)
                         {
                             // std::cout << "before mm_u_host(" << i << "," << j << ") = " << mm_u_host[i][j]
                             //     << std::endl;
