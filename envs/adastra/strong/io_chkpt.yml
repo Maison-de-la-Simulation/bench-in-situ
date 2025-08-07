@@ -138,7 +138,6 @@ pdi:
         write_xml:
           writeGpuXML: {}
         data_GPU_event:
-          when: '$iter % $freq == 0'
           copy_func:
             freq: 100
             iter: ${iStep}
@@ -146,7 +145,16 @@ pdi:
             m_u_host: ${m_u_host}
             m_u_kokkos_view_dimensions: ${m_u_kokkos_view_dimensions}
             m_u_host_kokkos_view_dimensions: ${m_u_host_kokkos_view_dimensions}
+        data_GPU_before:
+          before_func:
+            freq: 100
+            iter: ${iStep}
+            m_u: ${m_u}
+            m_u_host: ${m_u_host}
+            m_u_kokkos_view_dimensions: ${m_u_kokkos_view_dimensions}
+            m_u_host_kokkos_view_dimensions: ${m_u_host_kokkos_view_dimensions}
             #prefix ?
+          # when: '$iter % $freq == 0'
 
 
 #          copy_func: [u, u_dim]
