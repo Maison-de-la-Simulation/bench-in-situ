@@ -271,8 +271,8 @@ extern "C"
                 // std::cout << "dim_ptr[0] = " << dim_ptr[0] //OK
                 //                     << "   dim_ptr[1] = " << dim_ptr[1]
                 //                     << std::endl;
-                std::cout << "a(0,0) = " << a(0,0)
-                                    << "   b(0,0) = " << b(0,0)
+                std::cout << "a(0,0) = " << a[0][0]
+                                    << "   b(0,0) = " << b[0][0]
                                     << std::endl;
 
                 // for (std::size_t i = 0; i < mm_u_host.extent(0); ++i) {
