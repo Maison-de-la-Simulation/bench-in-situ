@@ -341,7 +341,7 @@ void WriterGpuPDI::write(HostConstArrayDyn u, const UniformGrid & grid,
     PDI_access("prefix", (void **)&prefix_c_str, PDI_IN);
     std::string prefix(prefix_c_str);
     PDI_release("prefix");
-   printf("prefix GPU write %s \n", prefix.c_str());
+//    printf("prefix GPU write %s \n", prefix.c_str());
 
     ////
     int tmp_rank=0;
@@ -360,7 +360,7 @@ void WriterGpuPDI::write(HostConstArrayDyn u, const UniformGrid & grid,
     ////
 
     std::string filename = WriterGpuPDI::getFilename(prefix, outputId);
-   printf("filename write %s \n", filename.c_str());
+//    printf("filename write %s \n", filename.c_str());
     ////
     // std::string filename = WriterGpuPDI::getFilename(new_prefix, outputId);
     ////

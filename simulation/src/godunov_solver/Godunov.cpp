@@ -341,9 +341,9 @@ extern "C"
 
     char *prefix_c_str;
     PDI_access("prefix", (void **)&prefix_c_str, PDI_IN);
-    printf("prefix_c_str %s \n", prefix_c_str);
+    // printf("prefix_c_str %s \n", prefix_c_str);
     std::string prefix(prefix_c_str);
-    printf("prefix %s \n", prefix.c_str());
+    // printf("prefix %s \n", prefix.c_str());
     PDI_release("prefix");
 
     // std::string filename = io::getFilename(prefix, outputId);
@@ -434,6 +434,12 @@ extern "C"
             //     "filename", filename.data(), PDI_OUT,
             //     NULL);
         }
+        PDI_release("m_u_host_kokkos_view_dimensions");
+        PDI_release("m_u_kokkos_view_dimensions");
+        PDI_release("m_u_host");
+        PDI_release("m_u");
+        PDI_release("freq");
+        PDI_release("iter");
     }
 }
 
