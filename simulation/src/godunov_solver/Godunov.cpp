@@ -490,9 +490,9 @@ void GodunovSolver::pdiExposeData()
 
     char *prefix_c_str;
     PDI_access("prefix", (void **)&prefix_c_str, PDI_IN);
-    printf("prefix_c_str %s \n", prefix_c_str);
+    // printf("prefix_c_str %s \n", prefix_c_str);
     std::string prefix(prefix_c_str);
-    printf("prefix %s \n", prefix.c_str());
+    // printf("prefix %s \n", prefix.c_str());
     PDI_release("prefix");
 
 //    std::ostringstream mpi_prefix;
