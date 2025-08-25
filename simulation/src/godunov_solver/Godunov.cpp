@@ -403,7 +403,8 @@ extern "C"
             Print() << "===================== output at iteration = " << *iter << " time t = " << *time << std::endl;
             Kokkos::Profiling::pushRegion("I/O - Checkpoint - deep_copy");
             // Kokkos::deep_copy(b, a);
-            Kokkos::View<Real**, Kokkos::LayoutLeft, Kokkos::HostSpace> mm_u(a, dim_ptr[0], dim_ptr[1]);
+            // Kokkos::View<Real**, Kokkos::LayoutLeft, Kokkos::HostSpace> mm_u(a, dim_ptr[0], dim_ptr[1]);
+            Kokkos::View<Real**, Kokkos::LayoutLeft> mm_u(a, dim_ptr[0], dim_ptr[1]);
             Kokkos::View<Real**, Kokkos::LayoutLeft, Kokkos::HostSpace> mm_u_host(b, dim_host_ptr[0], dim_host_ptr[1]);
             Kokkos::deep_copy(mm_u_host, mm_u);
 
