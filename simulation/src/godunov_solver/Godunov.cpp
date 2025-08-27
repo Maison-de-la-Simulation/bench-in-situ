@@ -255,8 +255,8 @@ extern "C"
         size_t* dim_host_ptr = m_u_host_dim->data();
 
         if (*iter % *freq == 0) {
-            printf("*********** %i ***********************\n", *iter);
-            printf("*********** %i ***********************\n\n", *freq);
+            // printf("*********** %i ***********************\n", *iter);
+            // printf("*********** %i ***********************\n\n", *freq);
             Kokkos::Profiling::pushRegion("I/O - Checkpoint");
             Print() << "===================== output at iteration = " << *iter << " time t = " << *time << std::endl;
             Kokkos::Profiling::pushRegion("I/O - Checkpoint - deep_copy");
