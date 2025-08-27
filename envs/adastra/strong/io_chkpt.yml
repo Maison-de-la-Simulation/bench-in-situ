@@ -121,14 +121,6 @@ pdi:
 
     grid_size: { type: array, subtype: int, size: 3 }
 
-    # u_host:
-    #   type: array
-    #   subtype: double
-    #   size: ['${nvar}', '$ncell_local[2]+2*$ghost[2]', '$ncell_local[1]+2*$ghost[1]', '$ncell_local[0]+2*$ghost[0]']
-    #   subsize: ['${nvar}', '$ncell_local[2]', '$ncell_local[1]', '$ncell_local[0]']
-    #   start: [0, '$ghost[2]', '$ghost[1]', '$ghost[0]']
-
-
   plugins:
 
     user_code:
@@ -153,102 +145,10 @@ pdi:
             m_u_host: ${m_u_host}
             m_u_kokkos_view_dimensions: ${m_u_kokkos_view_dimensions}
             m_u_host_kokkos_view_dimensions: ${m_u_host_kokkos_view_dimensions}
-            #prefix ?
-          # when: '$iter % $freq == 0'
-
-
-#          copy_func: [u, u_dim]
-#          copy_to_CPU: [u, u_dim]
-
-#        data_on_GPU:
-#          copy_func:
-#            freq: 100
-#            iter: ${iStep}
-#            m_u: ${m_u}
-#            m_u_host: ${m_u_host}
-#            m_u_kokkos_view_dimensions: ${m_u_kokkos_view_dimensions}
-#            m_u_host_kokkos_view_dimensions: ${m_u_host_kokkos_view_dimensions}
-
-    # user_code:
-    #   on_event:
-    #     write_xml:
-    #       writeXML: {}
-
-    #mpi:
-
-#    decl_hdf5:
-#
-#  
-#    - file: ${filename}
-#      datasets: *full_datasets 
-#      on_event: checkpoint
-#      collision_policy: write_into
-#      when: '$iStep = 250 | $iStep = 750'
-#      write:
-#        grid_size:
-#        time:
-#          - dataset: Time
-#        Rstar_h:
-#        gamma:
-#        mmw:
-#        iStep:
-#        output_id:
-#        restart_id:
-#        local_full_field:
-#          - *d_description
-#          - *E_description
-#          - *mx_description
-#          - *my_description
-#          - *mz_description
-#          - *Bx_description
-#          - *By_description
-#          - *Bz_description
-#          - *dX_description
 
     
     decl_hdf5:
-      
-#     - file: ${filename}
-#       datasets: *full_datasets # a list of datasets inside the file created on first access
-#       on_event: checkpoint
-#       collision_policy: write_into
-# #      communicator: ${MPI_COMM_WORLD}
-#       when: '$iStep%100 = 0'
-#       write:
-#         grid_size:
-#         time:
-#           - dataset: Time
-#         Rstar_h:
-#         gamma:
-#         mmw:
-#         iStep:
-#         output_id:
-#         restart_id:
-#         start:
-# #        local_full_field:
-# #          - *d_description
-# #          - *E_description
-# #          - *mx_description
-# #          - *my_description
-# #          - *mz_description
-# #          - *Bx_description
-# #          - *By_description
-# #          - *Bz_description
-# #          - *dX_description
 
-#    - file: testGPU${iStep}.h5
-#      collision_policy: write_into
-#      on_event: data_GPU_event
-#      write:
-#        iStep:
-#          dataset: 'iter${iStep}/iStep'
-#      write:
-#        iStep:
-#        data_host:
-#        data: data_host
-#        data: mm_u_host
-
-    # - file: testGPU${iStep}.h5
     - file: ${filename}
       datasets: *full_datasets # a list of datasets inside the file created on first access
 #      collision_policy: write_into
@@ -274,6 +174,3 @@ pdi:
           - *By_description
           - *Bz_description
           - *dX_description
-        # m_u_host_kokkos_view_dimensions:
-#        m_u_host_kokkos_view_dimensions: ${m_u_host_kokkos_view_dimensions}
-
