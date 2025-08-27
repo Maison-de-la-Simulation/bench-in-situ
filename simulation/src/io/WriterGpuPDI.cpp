@@ -342,29 +342,14 @@ void WriterGpuPDI::write(HostConstArrayDyn u, const UniformGrid & grid,
     PDI_access("prefix", (void **)&prefix_c_str, PDI_IN);
     std::string prefix(prefix_c_str);
     PDI_release("prefix");
-//    printf("prefix GPU write %s \n", prefix.c_str());
 
-    ////
     int tmp_rank=0;
 #if defined(MPI_SESSION)
     MPI_Comm_rank(MPI_COMM_WORLD, &tmp_rank);
     m_mpi_coords = grid.comm.getCoords(grid.comm.rank());
 #endif
 
-//     std::ostringstream mpi_prefix;
-//     mpi_prefix << std::setw(3) << std::setfill('0') << tmp_rank;    
-//     std::string new_prefix(prefix);
-//     new_prefix.append("_r"+mpi_prefix.str());
-//    printf("new_prefix GPU write %s \n", new_prefix.c_str());
-
-//     int prefix_size = new_prefix.size() + 1;
-    ////
-
     std::string filename = WriterGpuPDI::getFilename(prefix, outputId);
-//    printf("filename write %s \n", filename.c_str());
-    ////
-    // std::string filename = WriterGpuPDI::getFilename(new_prefix, outputId);
-    ////
     int filename_size = filename.size();
 
     std::array<size_t, 2> u_kokkos_view_dimensions = { u.extent(0), u.extent(1) };
@@ -372,86 +357,6 @@ void WriterGpuPDI::write(HostConstArrayDyn u, const UniformGrid & grid,
 
     Kokkos::fence();
     debugTimer.time_spent_in_write_before_checkpoint += (std::chrono::steady_clock::now() - m_start_write);
-
-    // PDI_multi_expose("checkpoint",
-    //                  "iStep", &iStep, PDI_OUT,
-    //                  "time", &time, PDI_OUT,
-    //                  "Rstar_h", &code_units::constants::Rstar_h, PDI_OUT,
-    //                  "gamma", &gamma, PDI_OUT,
-    //                  "mmw", &mmw, PDI_OUT,
-    //                  "output_id", &outputId, PDI_OUT,
-    //                  "restart_id", &m_restartId, PDI_OUT,
-    //                  "local_full_field", u.data(), PDI_OUT,
-    //                  "filename_size", &filename_size, PDI_OUT,
-    //                  "filename", filename.data(), PDI_OUT,
-    //                  "grid_size", pdi_ncells.data(), PDI_OUT,
-    //                  NULL);
-
-//    PDI_multi_expose("data_GPU_event",
-//                     "iStep", (void*)&(Super::m_iteration), PDI_OUT,
-//                     "time", (void*)&(m_t), PDI_OUT,
-//                     "m_u", (void*)(m_u.data()), PDI_OUT,
-//                     "m_u_host", (void*)(m_u_host.data()), PDI_OUT,
-//                     "m_u_kokkos_view_dimensions", (void*)&m_u_kokkos_view_dimensions, PDI_OUT,
-//                     "m_u_host_kokkos_view_dimensions", (void*)&m_u_host_kokkos_view_dimensions, PDI_OUT,
-//                     "Rstar_h", (void*)&(code_units::constants::Rstar_h), PDI_OUT,
-//                     "gamma", (void*)&(m_params->thermo.gamma), PDI_OUT,
-//                     "mmw", (void*)&(m_params->thermo.mmw), PDI_OUT,
-//                     // "output_id", (void*)(m_writer->getOutputId()), PDI_OUT,
-//                     // "restart_id", (void*)(m_writer->getRestartId()), PDI_OUT,
-//                     "grid_size", (void*)(pdi_ncells.data()), PDI_OUT,
-//                     "ncell_local", pdi_ncells_local.data(), PDI_OUT,
-//                     "start", pdi_start.data(), PDI_OUT,
-//                     "origin", origin.data(), PDI_OUT,
-//                     "prefix_size", &prefix_size, PDI_OUT,
-//                     // "prefix", new_prefix.c_str(), PDI_OUT,
-//                     NULL);
-
-    // PDI_multi_expose("data_GPU_event",
-    //                  "iStep", &iStep, PDI_OUT,
-    //                  "time", &time, PDI_OUT,
-    //                  "Rstar_h", &code_units::constants::Rstar_h, PDI_OUT,
-    //                  "gamma", &gamma, PDI_OUT,
-    //                  "mmw", &mmw, PDI_OUT,
-    //                  "output_id", &outputId, PDI_OUT,
-    //                  "restart_id", &m_restartId, PDI_OUT,
-    //                  "local_full_field", u.data(), PDI_OUT,
-    //                  "filename_size", &filename_size, PDI_OUT,
-    //                  "filename", filename.data(), PDI_OUT,
-    //                  "grid_size", pdi_ncells.data(), PDI_OUT,
-    //                  NULL);
-
-    // if (Session::isIOProc())
-    // {
-    //     for (int i = 0; i < u.extent(0); ++i) {
-    //         for (int j = 0; j < u.extent(1); ++j) {
-    //             std::cout << "mm_u(" << i << "," << j << ") = " << u(i,j)
-    //                     << "   mm_u_host(" << i << "," << j << ") = " << u(i,j)
-    //                     << std::endl;
-    //         }
-    //     }
-    // }
-    // if (Session::isIOProc())
-    // {
-    //     std::cout << "u.extent(0) = " << u.extent(0) << std::endl;
-    //     std::cout << "u.extent(1) = " << u.extent(1) << std::endl;
-    //     // std::cout << "u(0,64) = " << u(0,64) << std::endl;
-    //     // std::cout << "u(64,0) = " << u(64,0) << std::endl;
-    // }
-    // if (Session::isIOProc()) //good print
-    // {
-    //     for (int i = 0; i < u.extent(0); ++i) {
-    //         for (int j = 0; j < u.extent(1); ++j) {
-    //            if (u(i,j) != 0)
-    //            {
-    //                std::cout << "write u(" << i << "," << j << ") = " << u(i,j)
-    //                    << std::endl;
-    //            }
-    //             // std::cout << "write mm_u(" << i << "," << j << ") = " << u(i,j)
-    //             //         << std::endl;
-    //         }
-    //     }
-    // }
 
     PDI_multi_expose("data_GPU_event",
                      "iStep", &iStep, PDI_OUT,
@@ -490,7 +395,7 @@ void WriterGpuPDI::write(HostConstArrayDyn u, const UniformGrid & grid,
 
     Kokkos::fence();
     debugTimer.time_spent_in_write_after_xml += (std::chrono::steady_clock::now() - m_start_write);
-    Print() << debugTimer << std::endl;
-    printf("--- debugTimer de WriterGpuPDI ---\n");
+    // Print() << debugTimer << std::endl;
+    // printf("--- debugTimer de WriterGpuPDI ---\n");
 }
 }}
