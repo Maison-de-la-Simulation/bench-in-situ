@@ -252,7 +252,7 @@ pdi:
     - file: ${filename}
       datasets: *full_datasets # a list of datasets inside the file created on first access
 #      collision_policy: write_into
-      collision_policy: replace
+      collision_policy: replace_and_warn
       on_event: data_HOST
       write:
         grid_size:
