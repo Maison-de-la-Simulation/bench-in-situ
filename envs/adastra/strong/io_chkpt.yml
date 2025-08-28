@@ -125,8 +125,6 @@ pdi:
 
     user_code:
       on_event:
-        # write_xml:
-        #   writeXML: {}
         write_xml:
           writeGpuXML: {}
         data_GPU_event:
@@ -152,21 +150,19 @@ pdi:
 
     - file: ${filename}
       datasets: *full_datasets # a list of datasets inside the file created on first access
-      # collision_policy: write_into
-      # collision_policy: replace_and_warn
       collision_policy: replace
       on_event: data_HOST
       write:
         grid_size:
         time:
-         - dataset: Time
+          - dataset: Time
         Rstar_h:
         gamma:
         mmw:
         iStep:
         output_id:
         restart_id:
-        local_full_field: # u_host:
+        local_full_field:
           - *d_description
           - *E_description
           - *mx_description

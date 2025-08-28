@@ -6,7 +6,6 @@
 #include "HydroUnits.hpp"
 #include "WriterBase.hpp"
 #include "Utils.hpp"
-#include "Timer.hpp"
 
 #include <array>
 #include <list>
@@ -35,13 +34,8 @@ public:
     void write(HostConstArrayDyn u, const UniformGrid &grid,
                Int iStep, Real time, Real gamma, Real mmw) override;
 
-    static std::string getFilename(std::string const &prefix, Int outputId);
-
     std::array<int, three_d> m_mpi_coords;
     std::string m_prefix;
-
-private:
-    DebugTimer debugTimer;
 };
 
 }}

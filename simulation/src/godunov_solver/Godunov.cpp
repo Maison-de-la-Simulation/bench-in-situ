@@ -18,7 +18,6 @@
 #include "MusclReconstructionExecution.hpp"
 #include "global_meanExecution.hpp"
 #include "vp2Execution.hpp"
-// #include "io/WriterPDI.hpp"
 #include "io/WriterGpuPDI.hpp"
 
 
@@ -183,66 +182,61 @@ void GodunovSolver::prepareNextOutput(Real& dt)
 extern "C"
 {
     void copy_func() {
-        // if (Session::isIOProc())
-        if (true)
-        {
-            int* iter; PDI_access("iter", (void**)&iter, PDI_IN);
-            int* freq; PDI_access("freq", (void**)&freq, PDI_IN);
-            Real* time; PDI_access("time", (void**)&time, PDI_IN);
-            Real* a; PDI_access("m_u", (void**)&a, PDI_IN); //Real, and not just double
-            Real* b; PDI_access("m_u_host", (void**)&b, PDI_IN);
-            std::array<size_t, 2>* m_u_dim; PDI_access("m_u_kokkos_view_dimensions", (void**)&m_u_dim, PDI_IN);
-            size_t* dim_ptr = m_u_dim->data();
-            std::array<size_t, 2>* m_u_host_dim; PDI_access("m_u_host_kokkos_view_dimensions", (void**)&m_u_host_dim, PDI_IN);
-            size_t* dim_host_ptr = m_u_host_dim->data();
+        int* iter; PDI_access("iter", (void**)&iter, PDI_IN);
+        int* freq; PDI_access("freq", (void**)&freq, PDI_IN);
+        Real* time; PDI_access("time", (void**)&time, PDI_IN);
+        Real* a; PDI_access("m_u", (void**)&a, PDI_IN); //Real, and not just double
+        Real* b; PDI_access("m_u_host", (void**)&b, PDI_IN);
+        std::array<size_t, 2>* m_u_dim; PDI_access("m_u_kokkos_view_dimensions", (void**)&m_u_dim, PDI_IN);
+        size_t* dim_ptr = m_u_dim->data();
+        std::array<size_t, 2>* m_u_host_dim; PDI_access("m_u_host_kokkos_view_dimensions", (void**)&m_u_host_dim, PDI_IN);
+        size_t* dim_host_ptr = m_u_host_dim->data();
 
+        if (*iter % *freq == 0) {
+            // printf("*********** %i ***********************\n", *iter);
+            // printf("*********** %i ***********************\n\n", *freq);
+            Kokkos::Profiling::pushRegion("I/O - Checkpoint");
+            Print() << "===================== output at iteration = " << *iter << " time t = " << *time << std::endl;
+            Kokkos::Profiling::pushRegion("I/O - Checkpoint - deep_copy");
+            Kokkos::View<Real**, Kokkos::LayoutLeft> mm_u(a, dim_ptr[0], dim_ptr[1]);
+            Kokkos::View<Real**, Kokkos::LayoutLeft, Kokkos::HostSpace> mm_u_host(b, dim_host_ptr[0], dim_host_ptr[1]);
+            Kokkos::deep_copy(mm_u_host, mm_u);
 
-            if (*iter % *freq == 0) {
-                // printf("*********** %i ***********************\n", *iter);
-                // printf("*********** %i ***********************\n\n", *freq);
-                Kokkos::Profiling::pushRegion("I/O - Checkpoint");
-                Print() << "===================== output at iteration = " << *iter << " time t = " << *time << std::endl;
-                Kokkos::Profiling::pushRegion("I/O - Checkpoint - deep_copy");
-                Kokkos::View<Real**, Kokkos::LayoutLeft> mm_u(a, dim_ptr[0], dim_ptr[1]);
-                Kokkos::View<Real**, Kokkos::LayoutLeft, Kokkos::HostSpace> mm_u_host(b, dim_host_ptr[0], dim_host_ptr[1]);
-                Kokkos::deep_copy(mm_u_host, mm_u);
+            Real* copied_ptr = const_cast<Real*>(mm_u_host.data());
+            // printf("--- after deep bis %i ---\n\n", *iter);
 
-                Real* copied_ptr = const_cast<Real*>(mm_u_host.data());
-                // printf("--- after deep bis %i ---\n\n", *iter);
+            char *prefix_c_str;
+            PDI_access("prefix", (void **)&prefix_c_str, PDI_IN);
+            // printf("prefix_c_str %s \n", prefix_c_str);
+            std::string prefix(prefix_c_str);
+            // printf("prefix %s \n", prefix.c_str());
+            PDI_release("prefix");
 
-    char *prefix_c_str;
-    PDI_access("prefix", (void **)&prefix_c_str, PDI_IN);
-    // printf("prefix_c_str %s \n", prefix_c_str);
-    std::string prefix(prefix_c_str);
-    // printf("prefix %s \n", prefix.c_str());
-    PDI_release("prefix");
+            std::string filename = io::WriterGpuPDI::getFilename(prefix, *iter);
+            int filename_size = filename.size();
 
-    std::string filename = io::WriterGpuPDI::getFilename(prefix, *iter);
-    int filename_size = filename.size();
-
-                Kokkos::Profiling::popRegion();
-                Kokkos::Profiling::pushRegion("I/O - Checkpoint - write");
+            Kokkos::Profiling::popRegion();
+            Kokkos::Profiling::pushRegion("I/O - Checkpoint - write");
 //                wr(b);
 //                m_writer->write(b, m_grid, iter, time,
 //                                m_params->thermo.gamma, m_params->thermo.mmw);
-                PDI_multi_expose("data_HOST",
-                                "iStep", iter, PDI_OUT,
-                                "local_full_field", copied_ptr, PDI_OUT, // u_host
-                                "m_u_host_kokkos_view_dimensions", dim_host_ptr, PDI_OUT,
-                                "filename_size", &filename_size, PDI_OUT,
-                                "filename", filename.data(), PDI_OUT,
-                                NULL);
-                Kokkos::Profiling::popRegion();
-                Kokkos::Profiling::popRegion();
-            }
-            PDI_release("m_u_host_kokkos_view_dimensions");
-            PDI_release("m_u_kokkos_view_dimensions");
-            PDI_release("m_u_host");
-            PDI_release("m_u");
-            PDI_release("time");
-            PDI_release("freq");
-            PDI_release("iter");
+            PDI_multi_expose("data_HOST",
+                            "iStep", iter, PDI_OUT,
+                            "local_full_field", copied_ptr, PDI_OUT, // u_host
+                            "m_u_host_kokkos_view_dimensions", dim_host_ptr, PDI_OUT,
+                            "filename_size", &filename_size, PDI_OUT,
+                            "filename", filename.data(), PDI_OUT,
+                            NULL);
+            Kokkos::Profiling::popRegion();
+            Kokkos::Profiling::popRegion();
         }
+        PDI_release("m_u_host_kokkos_view_dimensions");
+        PDI_release("m_u_kokkos_view_dimensions");
+        PDI_release("m_u_host");
+        PDI_release("m_u");
+        PDI_release("time");
+        PDI_release("freq");
+        PDI_release("iter");
     }
 
     void before_func() {
