@@ -188,6 +188,7 @@ extern "C"
         {
             int* iter; PDI_access("iter", (void**)&iter, PDI_IN);
             int* freq; PDI_access("freq", (void**)&freq, PDI_IN);
+            int* time; PDI_access("time", (void**)&time, PDI_IN);
             Real* a; PDI_access("m_u", (void**)&a, PDI_IN); //Real, and not just double
             Real* b; PDI_access("m_u_host", (void**)&b, PDI_IN);
             std::array<size_t, 2>* m_u_dim; PDI_access("m_u_kokkos_view_dimensions", (void**)&m_u_dim, PDI_IN);
@@ -238,6 +239,7 @@ extern "C"
             PDI_release("m_u_kokkos_view_dimensions");
             PDI_release("m_u_host");
             PDI_release("m_u");
+            PDI_release("time");
             PDI_release("freq");
             PDI_release("iter");
         }
