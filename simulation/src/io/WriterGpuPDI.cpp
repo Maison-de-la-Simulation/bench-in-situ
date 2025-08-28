@@ -291,9 +291,11 @@ WriterGpuPDI::WriterGpuPDI(const UniformGrid& grid, const Params&,
     dl[IZ] = grid.m_dl[IZ];
 
     int iStep = 0;
+    double time = 0;
 
     PDI_multi_expose("init_pdi_w_deisa",
                      "iStep", &iStep, PDI_OUT,
+                     "time", &time, PDI_OUT,
                      "mpi_coord", m_mpi_coords.data(), PDI_OUT,
                      "nvar", &nvar, PDI_OUT,
                      "ncell", pdi_ncells.data(), PDI_OUT,
