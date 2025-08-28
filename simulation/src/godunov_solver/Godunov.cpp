@@ -90,7 +90,6 @@ GodunovSolver::GodunovSolver(std::shared_ptr<Problem> problem)
         io::Reader reader(m_grid, *m_params, variables_to_save);
         reader.read(m_u_host, m_grid, Super::m_iteration, Super::m_t, outputId, restartId);
         Kokkos::deep_copy(m_u, m_u_host);
-        printf("*********** Kokkos::deep_copy(m_u, m_u_host); ***********************\n");
         m_writer->setOutputId(++outputId);
         m_writer->setRestartId(++restartId);
         m_should_save = false;
@@ -184,6 +183,7 @@ void GodunovSolver::prepareNextOutput(Real& dt)
 extern "C"
 {
     void copy_func() {
+        printf("copy_func\n");
         // if (Session::isIOProc())
         if (true)
         {
@@ -198,8 +198,8 @@ extern "C"
 
 
             if (*iter % *freq == 0) {
-                printf("*********** %i ***********************\n", *iter);
-                printf("*********** %i ***********************\n\n", *freq);
+                // printf("*********** %i ***********************\n", *iter);
+                // printf("*********** %i ***********************\n\n", *freq);
                 Kokkos::Profiling::pushRegion("I/O - Checkpoint");
                 Print() << "===================== output at iteration = " << *iter << " time t = " << *time << std::endl;
                 Kokkos::Profiling::pushRegion("I/O - Checkpoint - deep_copy");
@@ -245,6 +245,7 @@ extern "C"
     }
 
     void before_func() {
+        printf("before_func\n");
         int* iter; PDI_access("iter", (void**)&iter, PDI_IN);
         int* freq; PDI_access("freq", (void**)&freq, PDI_IN);
         Real* a; PDI_access("m_u", (void**)&a, PDI_IN); //Real, and not just double
@@ -258,7 +259,7 @@ extern "C"
             // printf("*********** %i ***********************\n", *iter);
             // printf("*********** %i ***********************\n\n", *freq);
             Kokkos::Profiling::pushRegion("I/O - Checkpoint");
-            Print() << "===================== output at iteration = " << *iter << " time t = " << *time << std::endl;
+            // Print() << "===================== output at iteration = " << *iter << " time t = " << *time << std::endl;
             Kokkos::Profiling::pushRegion("I/O - Checkpoint - deep_copy");
             // Kokkos::deep_copy(b, a);
             // Kokkos::View<Real**, Kokkos::LayoutLeft, Kokkos::HostSpace> mm_u(a, dim_ptr[0], dim_ptr[1]);
