@@ -260,7 +260,7 @@ extern "C"
             // printf("*********** %i ***********************\n", *iter);
             // printf("*********** %i ***********************\n\n", *freq);
             Kokkos::Profiling::pushRegion("I/O - Checkpoint");
-            Print() << "===================== output at iteration = " << *iter << " time t = " << *time << std::endl;
+            // Print() << "===================== output at iteration = " << *iter << " time t = " << *time << std::endl;
             Kokkos::Profiling::pushRegion("I/O - Checkpoint - deep_copy");
             // Kokkos::deep_copy(b, a);
             // Kokkos::View<Real**, Kokkos::LayoutLeft, Kokkos::HostSpace> mm_u(a, dim_ptr[0], dim_ptr[1]);
