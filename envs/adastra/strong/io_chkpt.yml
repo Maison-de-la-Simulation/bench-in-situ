@@ -1,5 +1,5 @@
 full_datasets: &full_datasets
-  Time: { type: double }
+  Time: { type: Real }
   d: { type: array, subtype: double, size: ['$ncell[2]', '$ncell[1]', '$ncell[0]'] }
   E: { type: array, subtype: double, size: ['$ncell[2]', '$ncell[1]', '$ncell[0]'] }
   dX: { type: array, subtype: double, size: ['$ncell[2]', '$ncell[1]', '$ncell[0]'] }
@@ -94,7 +94,7 @@ pdi:
     prefix: { type: array, subtype: char, size: $prefix_size }
     rank: int
     size: int
-    time: double
+    time: Real
     iStep: int
     freq: int
     m_u_kokkos_view_dimensions: { type: array, subtype: size_t, size: 2 }
