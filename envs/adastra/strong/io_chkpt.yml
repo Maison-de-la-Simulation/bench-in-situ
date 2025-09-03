@@ -123,10 +123,16 @@ pdi:
 
   plugins:
 
+    ##For default data transfer
+    # user_code:
+    #   on_event:
+    #     write_xml:
+    #       writeXML: {}
+
+    ##For data transfer through user-code
     user_code:
       on_event:
         write_xml:
-          # writeXML: {}
           writeGpuXML: {}
         data_GPU_event:
           copy_func:
@@ -146,8 +152,8 @@ pdi:
             m_u_kokkos_view_dimensions: ${m_u_kokkos_view_dimensions}
             m_u_host_kokkos_view_dimensions: ${m_u_host_kokkos_view_dimensions}
     
-    decl_hdf5:
-
+    ##For default data transfer
+    # decl_hdf5:
     # - file: ${filename}
     #   datasets: *full_datasets 
     #   on_event: checkpoint
@@ -175,8 +181,10 @@ pdi:
     #       - *Bz_description
     #       - *dX_description
 
+    ##For data transfer through user-code
+    decl_hdf5:
     - file: ${filename}
-      datasets: *full_datasets # a list of datasets inside the file created on first access
+      datasets: *full_datasets
       collision_policy: replace
       on_event: data_HOST
       write:
