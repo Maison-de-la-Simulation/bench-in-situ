@@ -193,8 +193,6 @@ extern "C"
         size_t* dim_host_ptr = m_u_host_dim->data();
 
         if (*iter % *freq == 0) {
-            // printf("*********** %i ***********************\n", *iter);
-            // printf("*********** %i ***********************\n\n", *freq);
             Kokkos::Profiling::pushRegion("I/O - Checkpoint");
             Print() << "===================== output at iteration = " << *iter << " time t = " << *time << std::endl;
             Kokkos::Profiling::pushRegion("I/O - Checkpoint - deep_copy");
@@ -203,13 +201,10 @@ extern "C"
             Kokkos::deep_copy(mm_u_host, mm_u);
 
             Real* copied_ptr = const_cast<Real*>(mm_u_host.data());
-            // printf("--- after deep bis %i ---\n\n", *iter);
 
             char *prefix_c_str;
             PDI_access("prefix", (void **)&prefix_c_str, PDI_IN);
-            // printf("prefix_c_str %s \n", prefix_c_str);
             std::string prefix(prefix_c_str);
-            // printf("prefix %s \n", prefix.c_str());
             PDI_release("prefix");
 
             std::string filename = io::WriterGpuPDI::getFilename(prefix, *iter);
@@ -217,9 +212,6 @@ extern "C"
 
             Kokkos::Profiling::popRegion();
             Kokkos::Profiling::pushRegion("I/O - Checkpoint - write");
-//                wr(b);
-//                m_writer->write(b, m_grid, iter, time,
-//                                m_params->thermo.gamma, m_params->thermo.mmw);
             PDI_multi_expose("data_HOST",
                             "iStep", iter, PDI_OUT,
                             "local_full_field", copied_ptr, PDI_OUT, // u_host
@@ -252,20 +244,13 @@ extern "C"
         size_t* dim_host_ptr = m_u_host_dim->data();
 
         if (*iter % *freq == 0) {
-            // printf("*********** %i ***********************\n", *iter);
-            // printf("*********** %i ***********************\n\n", *freq);
             Kokkos::Profiling::pushRegion("I/O - Checkpoint");
-            // Print() << "===================== output at iteration = " << *iter << " time t = " << *time << std::endl;
             Kokkos::Profiling::pushRegion("I/O - Checkpoint - deep_copy");
-            // Kokkos::deep_copy(b, a);
-            // Kokkos::View<Real**, Kokkos::LayoutLeft, Kokkos::HostSpace> mm_u(a, dim_ptr[0], dim_ptr[1]);
             Kokkos::View<Real**, Kokkos::LayoutLeft> mm_u(a, dim_ptr[0], dim_ptr[1]);
             Kokkos::View<Real**, Kokkos::LayoutLeft, Kokkos::HostSpace> mm_u_host(b, dim_host_ptr[0], dim_host_ptr[1]);
             Kokkos::deep_copy(mm_u_host, mm_u);
-
-            // Real* copied_ptr = const_cast<Real*>(mm_u_host.data());
-            // printf("--- after deep bis %i ---\n\n", *iter);
         }
+
         PDI_release("m_u_host_kokkos_view_dimensions");
         PDI_release("m_u_kokkos_view_dimensions");
         PDI_release("m_u_host");
@@ -311,9 +296,7 @@ void GodunovSolver::pdiExposeData()
 
         char *prefix_c_str;
         PDI_access("prefix", (void **)&prefix_c_str, PDI_IN);
-        // printf("prefix_c_str %s \n", prefix_c_str);
         std::string prefix(prefix_c_str);
-        // printf("prefix %s \n", prefix.c_str());
         PDI_release("prefix");
 
         std::array<Real, 3> origin;
