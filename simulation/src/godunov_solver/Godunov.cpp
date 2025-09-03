@@ -280,7 +280,7 @@ void GodunovSolver::pdiExposeData()
     Kokkos::fence();
     std::chrono::steady_clock::time_point m_start_io = std::chrono::steady_clock::now();
 
-    printf("*********** ici %s ***********************\n", m_params->output.type);
+    printf("*********** ici %s ***********************\n", m_params->output.type.c_str());
     if(m_params->output.type == "gpu_pdi") 
     {
  
