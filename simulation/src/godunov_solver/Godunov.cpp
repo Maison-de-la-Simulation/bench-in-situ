@@ -18,7 +18,6 @@
 #include "MusclReconstructionExecution.hpp"
 #include "global_meanExecution.hpp"
 #include "vp2Execution.hpp"
-#include "io/WriterGpuPDI.hpp"
 
 
 
