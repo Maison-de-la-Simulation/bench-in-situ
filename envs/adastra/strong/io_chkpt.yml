@@ -152,7 +152,8 @@ pdi:
       datasets: *full_datasets 
       on_event: checkpoint
       collision_policy: replace
-      when: '$iStep = 250 | $iStep = 750'
+      # when: '$iStep = 250 | $iStep = 750'
+      when: '$iStep = 0 | $iStep = 100 | $iStep = 200 | $iStep = 300 | $iStep = 400 | $iStep = 500 | $iStep = 600 | $iStep = 700 | $iStep = 800 | $iStep = 900 | $iStep = 1000'
       write:
         grid_size:
         time:
