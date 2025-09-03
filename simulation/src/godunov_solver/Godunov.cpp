@@ -281,8 +281,9 @@ void GodunovSolver::pdiExposeData()
     std::chrono::steady_clock::time_point m_start_io = std::chrono::steady_clock::now();
 
     printf("*********** ici %s ***********************\n", m_params->output.type.c_str());
-    if(m_params->output.type == "gpu_pdi") 
+    if(m_params->output.type.c_str() == "gpu_pdi") 
     {
+    printf("*********** if ***********************\n");
  
 #if defined(Euler_ENABLE_PDI)
     std::array<size_t, 2> m_u_kokkos_view_dimensions = { m_u.extent(0), m_u.extent(1) };
@@ -341,6 +342,7 @@ void GodunovSolver::pdiExposeData()
     }
     else
     {
+    printf("*********** else ***********************\n");
     #if defined(Euler_ENABLE_PDI)
     PDI_multi_expose("data_on_GPU",
                      "iStep", (void*)&(Super::m_iteration), PDI_OUT,
