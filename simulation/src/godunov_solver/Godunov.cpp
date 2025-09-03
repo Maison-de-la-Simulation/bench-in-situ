@@ -281,7 +281,7 @@ void GodunovSolver::pdiExposeData()
     std::chrono::steady_clock::time_point m_start_io = std::chrono::steady_clock::now();
 
     printf("*********** ici %s ***********************\n", m_params->output.type.c_str());
-    if(m_params->output.type.c_str() == "gpu_pdi") 
+    if(m_params->output.type == "gpu_pdi") 
     {
     printf("*********** if ***********************\n");
  
