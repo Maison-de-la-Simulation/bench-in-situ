@@ -18,7 +18,7 @@
 #include "MusclReconstructionExecution.hpp"
 #include "global_meanExecution.hpp"
 #include "vp2Execution.hpp"
-#include "io/WriterGpuPDI.hpp"
+// #include "io/WriterGpuPDI.hpp"
 
 
 
@@ -35,6 +35,10 @@
 
 namespace hydro
 {
+
+namespace io {
+class WriterGpuPDI; // forward declaration only
+}
 
 GodunovSolver::GodunovSolver(std::shared_ptr<Problem> problem)
     : Solver           {}
@@ -267,8 +271,10 @@ void GodunovSolver::pdiExposeData()
     Kokkos::fence();
     std::chrono::steady_clock::time_point m_start_io = std::chrono::steady_clock::now();
 
-    if(m_params->output.type == "gpu_pdi") //Move data transfer to PDI through user-code
-    {    
+    // if(m_params->output.type == "gpu_pdi") //Move data transfer to PDI through user-code
+    if(dynamic_cast<const io::WriterGpuPDI*>(m_writer.get())) //Move data transfer to PDI through user-code
+    {
+        printf("********* if ***********/n");
 #if defined(Euler_ENABLE_PDI)
         std::array<size_t, 2> m_u_kokkos_view_dimensions = { m_u.extent(0), m_u.extent(1) };
         std::array<size_t, 2> m_u_host_kokkos_view_dimensions = { m_u_host.extent(0), m_u_host.extent(1) };
@@ -317,18 +323,22 @@ void GodunovSolver::pdiExposeData()
                 "m_u_host_kokkos_view_dimensions", (void*)&m_u_host_kokkos_view_dimensions, PDI_OUT,
                 NULL);
 
-        m_writer->write(m_u_host, m_grid, Super::m_iteration, Super::m_t,
-                        m_params->thermo.gamma, m_params->thermo.mmw);
+        // m_writer->write(m_u_host, m_grid, Super::m_iteration, Super::m_t,
+        //                 m_params->thermo.gamma, m_params->thermo.mmw);
+        WriterGpuPDI& gpu_writer = dynamic_cast<WriterGpuPDI&>(*m_writer);
+        gpu_writer->write(m_u_host, m_grid, Super::m_iteration, Super::m_t,
+                          m_params->thermo.gamma, m_params->thermo.mmw);
 #endif
     }
     else //Default data transfer
     {
-        #if defined(Euler_ENABLE_PDI)
+        printf("********* else ***********/n");
+#if defined(Euler_ENABLE_PDI)
         PDI_multi_expose("data_on_GPU",
                         "iStep", (void*)&(Super::m_iteration), PDI_OUT,
                         "time", (void*)&(m_t), PDI_OUT,
                         NULL);
-        #endif
+#endif
 
         if (m_should_save)
         {
