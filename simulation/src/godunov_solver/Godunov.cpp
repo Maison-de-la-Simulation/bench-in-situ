@@ -239,6 +239,7 @@ extern "C"
         PDI_release("iter");
     }
 
+
     void before_func() {
         int* iter; PDI_access("iter", (void**)&iter, PDI_IN);
         int* freq; PDI_access("freq", (void**)&freq, PDI_IN);
@@ -274,6 +275,7 @@ extern "C"
         PDI_release("iter");
     }
 }
+
 
 void GodunovSolver::pdiExposeData()
 {
@@ -430,15 +432,18 @@ double GodunovSolver::memoryUsage() const
     return static_cast<double>(memory * sizeof(Real));
 }
 
+
 void GodunovSolver::set_should_save()
 {
   m_should_save=true;
 }
 
+
 void GodunovSolver::set_time_limit_reached()
 {
   m_time_limit_reached=true;
 }
+
 
 void GodunovSolver::compute_adjust_timestep(Real dt_type, Real dt, Real& delta_type)
 {
@@ -461,6 +466,7 @@ void GodunovSolver::compute_adjust_timestep(Real dt_type, Real dt, Real& delta_t
         }
     } 
 }
+
 
 void GodunovSolver::accumulate_compute_duration(const std::chrono::steady_clock::duration& duration) {
   performanceTimer.time_spent_in_compute += duration;

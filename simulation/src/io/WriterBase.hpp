@@ -33,14 +33,6 @@ public:
     {
         m_restartId = id;
     }
-    Int getOutputId()
-    {
-        return m_outputId;
-    }
-    Int getRestartId()
-    {
-        return m_restartId;
-    }
 protected:
     Int m_outputId = 0;
     Int m_restartId = 0;

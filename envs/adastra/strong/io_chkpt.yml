@@ -124,69 +124,42 @@ pdi:
   plugins:
 
     ##For default data transfer
-    user_code:
-      on_event:
-        write_xml:
-          writeXML: {}
-
-    ##For data transfer through user-code
     # user_code:
     #   on_event:
     #     write_xml:
-    #       writeGpuXML: {}
-    #     data_GPU_event:
-    #       copy_func:
-    #         time: ${time}
-    #         freq: 100
-    #         iter: ${iStep}
-    #         m_u: ${m_u}
-    #         m_u_host: ${m_u_host}
-    #         m_u_kokkos_view_dimensions: ${m_u_kokkos_view_dimensions}
-    #         m_u_host_kokkos_view_dimensions: ${m_u_host_kokkos_view_dimensions}
-    #     data_GPU_before:
-    #       before_func:
-    #         freq: 100
-    #         iter: ${iStep}
-    #         m_u: ${m_u}
-    #         m_u_host: ${m_u_host}
-    #         m_u_kokkos_view_dimensions: ${m_u_kokkos_view_dimensions}
-    #         m_u_host_kokkos_view_dimensions: ${m_u_host_kokkos_view_dimensions}
-    
-    ##For default data transfer
-    decl_hdf5:
-    - file: ${filename}
-      datasets: *full_datasets 
-      on_event: checkpoint
-      collision_policy: replace
-      # when: '$iStep = 250 | $iStep = 750'
-      when: '$iStep = 0 | $iStep = 100 | $iStep = 200 | $iStep = 300 | $iStep = 400 | $iStep = 500 | $iStep = 600 | $iStep = 700 | $iStep = 800 | $iStep = 900 | $iStep = 1000'
-      write:
-        grid_size:
-        time:
-          - dataset: Time
-        Rstar_h:
-        gamma:
-        mmw:
-        iStep:
-        output_id:
-        restart_id:
-        local_full_field:
-          - *d_description
-          - *E_description
-          - *mx_description
-          - *my_description
-          - *mz_description
-          - *Bx_description
-          - *By_description
-          - *Bz_description
-          - *dX_description
+    #       writeXML: {}
 
     ##For data transfer through user-code
+    user_code:
+      on_event:
+        write_xml:
+          writeGpuXML: {}
+        data_GPU_event:
+          copy_func:
+            time: ${time}
+            freq: 100
+            iter: ${iStep}
+            m_u: ${m_u}
+            m_u_host: ${m_u_host}
+            m_u_kokkos_view_dimensions: ${m_u_kokkos_view_dimensions}
+            m_u_host_kokkos_view_dimensions: ${m_u_host_kokkos_view_dimensions}
+        data_GPU_before:
+          before_func:
+            freq: 100
+            iter: ${iStep}
+            m_u: ${m_u}
+            m_u_host: ${m_u_host}
+            m_u_kokkos_view_dimensions: ${m_u_kokkos_view_dimensions}
+            m_u_host_kokkos_view_dimensions: ${m_u_host_kokkos_view_dimensions}
+    
+    ##For default data transfer
     # decl_hdf5:
     # - file: ${filename}
-    #   datasets: *full_datasets
+    #   datasets: *full_datasets 
+    #   on_event: checkpoint
     #   collision_policy: replace
-    #   on_event: data_HOST
+    #   # when: '$iStep = 250 | $iStep = 750'
+    #   when: '$iStep = 0 | $iStep = 100 | $iStep = 200 | $iStep = 300 | $iStep = 400 | $iStep = 500 | $iStep = 600 | $iStep = 700 | $iStep = 800 | $iStep = 900 | $iStep = 1000'
     #   write:
     #     grid_size:
     #     time:
@@ -207,3 +180,30 @@ pdi:
     #       - *By_description
     #       - *Bz_description
     #       - *dX_description
+
+    ##For data transfer through user-code
+    decl_hdf5:
+    - file: ${filename}
+      datasets: *full_datasets
+      collision_policy: replace
+      on_event: data_HOST
+      write:
+        grid_size:
+        time:
+          - dataset: Time
+        Rstar_h:
+        gamma:
+        mmw:
+        iStep:
+        output_id:
+        restart_id:
+        local_full_field:
+          - *d_description
+          - *E_description
+          - *mx_description
+          - *my_description
+          - *mz_description
+          - *Bx_description
+          - *By_description
+          - *Bz_description
+          - *dX_description

@@ -85,5 +85,3 @@ simulation/build/**
 
 lib/pdi/
 lib/install_pdi/
-
-.vscode/
