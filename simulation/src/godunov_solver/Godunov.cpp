@@ -277,33 +277,37 @@ extern "C"
 
 void GodunovSolver::pdiExposeData()
 {
-  Kokkos::fence();
-  std::chrono::steady_clock::time_point m_start_io = std::chrono::steady_clock::now();
+    Kokkos::fence();
+    std::chrono::steady_clock::time_point m_start_io = std::chrono::steady_clock::now();
 
+    printf("*********** ici %s ***********************\n", m_params->output.type);
+    if(m_params->output.type == "gpu_pdi") 
+    {
+ 
 #if defined(Euler_ENABLE_PDI)
-   std::array<size_t, 2> m_u_kokkos_view_dimensions = { m_u.extent(0), m_u.extent(1) };
-   std::array<size_t, 2> m_u_host_kokkos_view_dimensions = { m_u_host.extent(0), m_u_host.extent(1) };
-
-   std::array<int, 3> pdi_ncells;
-   pdi_ncells[IX] = m_grid.m_nbCells[IX] * m_grid.m_dom[IX];
-   pdi_ncells[IY] = m_grid.m_nbCells[IY] * m_grid.m_dom[IY];
-   pdi_ncells[IZ] = m_grid.m_nbCells[IZ] * m_grid.m_dom[IZ];
-
-   std::array<int, 3> pdi_ncells_local;
-   pdi_ncells_local[IX] = m_grid.m_nbCells[IX];
-   pdi_ncells_local[IY] = m_grid.m_nbCells[IY];
-   pdi_ncells_local[IZ] = m_grid.m_nbCells[IZ];
-
-   int tmp_rank=0;
+    std::array<size_t, 2> m_u_kokkos_view_dimensions = { m_u.extent(0), m_u.extent(1) };
+    std::array<size_t, 2> m_u_host_kokkos_view_dimensions = { m_u_host.extent(0), m_u_host.extent(1) };
+ 
+    std::array<int, 3> pdi_ncells;
+    pdi_ncells[IX] = m_grid.m_nbCells[IX] * m_grid.m_dom[IX];
+    pdi_ncells[IY] = m_grid.m_nbCells[IY] * m_grid.m_dom[IY];
+    pdi_ncells[IZ] = m_grid.m_nbCells[IZ] * m_grid.m_dom[IZ];
+ 
+    std::array<int, 3> pdi_ncells_local;
+    pdi_ncells_local[IX] = m_grid.m_nbCells[IX];
+    pdi_ncells_local[IY] = m_grid.m_nbCells[IY];
+    pdi_ncells_local[IZ] = m_grid.m_nbCells[IZ];
+ 
+    int tmp_rank=0;
 #if defined(MPI_SESSION)
-   MPI_Comm_rank(MPI_COMM_WORLD, &tmp_rank);
-   std::array<int, three_d> mpi_coords = m_grid.comm.getCoords(m_grid.comm.rank());
+    MPI_Comm_rank(MPI_COMM_WORLD, &tmp_rank);
+    std::array<int, three_d> mpi_coords = m_grid.comm.getCoords(m_grid.comm.rank());
 #endif
-
-   std::array<int, 3> pdi_start;
-   pdi_start[IX] = m_grid.m_nbCells[IX] * mpi_coords[IX];
-   pdi_start[IY] = m_grid.m_nbCells[IY] * mpi_coords[IY];
-   pdi_start[IZ] = m_grid.m_nbCells[IZ] * mpi_coords[IZ];
+ 
+    std::array<int, 3> pdi_start;
+    pdi_start[IX] = m_grid.m_nbCells[IX] * mpi_coords[IX];
+    pdi_start[IY] = m_grid.m_nbCells[IY] * mpi_coords[IY];
+    pdi_start[IZ] = m_grid.m_nbCells[IZ] * mpi_coords[IZ];
 
     char *prefix_c_str;
     PDI_access("prefix", (void **)&prefix_c_str, PDI_IN);
@@ -312,15 +316,15 @@ void GodunovSolver::pdiExposeData()
     // printf("prefix %s \n", prefix.c_str());
     PDI_release("prefix");
 
-   std::array<Real, 3> origin;
-   origin[IX] = m_grid.m_lowGlobal[IX];
-   origin[IY] = m_grid.m_lowGlobal[IY];
-   origin[IZ] = m_grid.m_lowGlobal[IZ];
-
-   std::array<Real, 3> dl;
-   dl[IX] = m_grid.m_dl[IX];
-   dl[IY] = m_grid.m_dl[IY];
-   dl[IZ] = m_grid.m_dl[IZ];
+    std::array<Real, 3> origin;
+    origin[IX] = m_grid.m_lowGlobal[IX];
+    origin[IY] = m_grid.m_lowGlobal[IY];
+    origin[IZ] = m_grid.m_lowGlobal[IZ];
+ 
+    std::array<Real, 3> dl;
+    dl[IX] = m_grid.m_dl[IX];
+    dl[IY] = m_grid.m_dl[IY];
+    dl[IZ] = m_grid.m_dl[IZ];
 
     PDI_multi_expose("data_GPU_before",
             "iStep", (void*)&(Super::m_iteration), PDI_OUT,
@@ -334,23 +338,36 @@ void GodunovSolver::pdiExposeData()
                     m_params->thermo.gamma, m_params->thermo.mmw);
 #endif
 
-//     if (m_should_save)
-//     {
-//        Kokkos::Profiling::pushRegion("I/O - Checkpoint");
-//        if(Super::m_iteration%100 == 0) Print() << "===================== output at iteration = " << Super::m_iteration << " time t = "<<Super::m_t<< std::endl;
-//        Kokkos::Profiling::pushRegion("I/O - Checkpoint - deep_copy");
-//        Kokkos::deep_copy(m_u_host, m_u);
-//        Kokkos::Profiling::popRegion();
-//        Kokkos::Profiling::pushRegion("I/O - Checkpoint - write");
-//        m_writer->write(m_u_host, m_grid, Super::m_iteration, Super::m_t,
-//                        m_params->thermo.gamma, m_params->thermo.mmw);
-//        Kokkos::Profiling::popRegion();
-//        Kokkos::Profiling::popRegion();
+    }
+    else
+    {
+    #if defined(Euler_ENABLE_PDI)
+    PDI_multi_expose("data_on_GPU",
+                     "iStep", (void*)&(Super::m_iteration), PDI_OUT,
+                     "time", (void*)&(m_t), PDI_OUT,
+                     NULL);
+    #endif
 
-//    }
+    if (m_should_save)
+    {
+       Kokkos::Profiling::pushRegion("I/O - Checkpoint");
+       if(Super::m_iteration%100 == 0) Print() << "===================== output at iteration = " << Super::m_iteration << " time t = "<<Super::m_t<< std::endl;
+       Kokkos::Profiling::pushRegion("I/O - Checkpoint - deep_copy");
+       Kokkos::deep_copy(m_u_host, m_u);
+       Kokkos::Profiling::popRegion();
+       Kokkos::Profiling::pushRegion("I/O - Checkpoint - write");
+       m_writer->write(m_u_host, m_grid, Super::m_iteration, Super::m_t,
+                       m_params->thermo.gamma, m_params->thermo.mmw);
+       Kokkos::Profiling::popRegion();
+       Kokkos::Profiling::popRegion();
 
-  Kokkos::fence();
-  performanceTimer.time_spent_in_io += (std::chrono::steady_clock::now() - m_start_io);
+    }
+
+    }
+
+
+    Kokkos::fence();
+    performanceTimer.time_spent_in_io += (std::chrono::steady_clock::now() - m_start_io);
 }
 
 
