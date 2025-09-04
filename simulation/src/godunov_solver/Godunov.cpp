@@ -18,7 +18,7 @@
 #include "MusclReconstructionExecution.hpp"
 #include "global_meanExecution.hpp"
 #include "vp2Execution.hpp"
-// #include "io/WriterGpuPDI.hpp"
+#include "io/WriterGpuPDI.hpp"
 
 
 
@@ -36,9 +36,9 @@
 namespace hydro
 {
 
-namespace io {
-class WriterGpuPDI; // forward declaration only
-}
+// namespace io {
+// class WriterGpuPDI; // forward declaration only
+// }
 
 GodunovSolver::GodunovSolver(std::shared_ptr<Problem> problem)
     : Solver           {}
@@ -206,13 +206,16 @@ extern "C"
 
             Real* copied_ptr = const_cast<Real*>(mm_u_host.data());
 
-            char *prefix_c_str;
-            PDI_access("prefix", (void **)&prefix_c_str, PDI_IN);
-            std::string prefix(prefix_c_str);
-            PDI_release("prefix");
+            // char *prefix_c_str;
+            // PDI_access("prefix", (void **)&prefix_c_str, PDI_IN);
+            // std::string prefix(prefix_c_str);
+            // PDI_release("prefix");
 
-            std::string filename = io::WriterGpuPDI::getFilename(prefix, *iter);
-            int filename_size = filename.size();
+            // std::string filename = io::WriterGpuPDI::getFilename(prefix, *iter);
+            // int filename_size = filename.size();
+
+            std::string* filename_size; PDI_access("filename_size", (void**)&filename_size, PDI_IN);
+            std::string* filename; PDI_access("filename", (void**)&filename, PDI_IN);
 
             Kokkos::Profiling::popRegion();
             Kokkos::Profiling::pushRegion("I/O - Checkpoint - write");
@@ -225,6 +228,9 @@ extern "C"
                             NULL);
             Kokkos::Profiling::popRegion();
             Kokkos::Profiling::popRegion();
+
+            PDI_release("filename");
+            PDI_release("filename_size");
         }
         PDI_release("m_u_host_kokkos_view_dimensions");
         PDI_release("m_u_kokkos_view_dimensions");
@@ -271,8 +277,8 @@ void GodunovSolver::pdiExposeData()
     Kokkos::fence();
     std::chrono::steady_clock::time_point m_start_io = std::chrono::steady_clock::now();
 
-    // if(m_params->output.type == "gpu_pdi") //Move data transfer to PDI through user-code
-    if(dynamic_cast<const io::WriterGpuPDI*>(m_writer.get())) //Move data transfer to PDI through user-code
+    if(m_params->output.type == "gpu_pdi") //Move data transfer to PDI through user-code
+    // if(dynamic_cast<const io::WriterGpuPDI*>(m_writer.get())) //Move data transfer to PDI through user-code
     {
         printf("********* if ***********/n");
 #if defined(Euler_ENABLE_PDI)
@@ -305,6 +311,9 @@ void GodunovSolver::pdiExposeData()
         std::string prefix(prefix_c_str);
         PDI_release("prefix");
 
+        std::string filename = io::WriterGpuPDI::getFilename(prefix, *iter);
+        int filename_size = filename.size();
+
         std::array<Real, 3> origin;
         origin[IX] = m_grid.m_lowGlobal[IX];
         origin[IY] = m_grid.m_lowGlobal[IY];
@@ -321,13 +330,15 @@ void GodunovSolver::pdiExposeData()
                 "m_u_host", (void*)(m_u_host.data()), PDI_OUT,
                 "m_u_kokkos_view_dimensions", (void*)&m_u_kokkos_view_dimensions, PDI_OUT,
                 "m_u_host_kokkos_view_dimensions", (void*)&m_u_host_kokkos_view_dimensions, PDI_OUT,
+                "filename_size", &filename_size, PDI_OUT,
+                "filename", filename.data(), PDI_OUT,
                 NULL);
 
-        // m_writer->write(m_u_host, m_grid, Super::m_iteration, Super::m_t,
-        //                 m_params->thermo.gamma, m_params->thermo.mmw);
-        WriterGpuPDI& gpu_writer = dynamic_cast<WriterGpuPDI&>(*m_writer);
-        gpu_writer->write(m_u_host, m_grid, Super::m_iteration, Super::m_t,
-                          m_params->thermo.gamma, m_params->thermo.mmw);
+        m_writer->write(m_u_host, m_grid, Super::m_iteration, Super::m_t,
+                        m_params->thermo.gamma, m_params->thermo.mmw);
+        // WriterGpuPDI& gpu_writer = dynamic_cast<WriterGpuPDI&>(*m_writer);
+        // gpu_writer->write(m_u_host, m_grid, Super::m_iteration, Super::m_t,
+        //                   m_params->thermo.gamma, m_params->thermo.mmw);
 #endif
     }
     else //Default data transfer
