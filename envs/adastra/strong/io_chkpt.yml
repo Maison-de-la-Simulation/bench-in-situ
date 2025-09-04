@@ -151,8 +151,8 @@ pdi:
             m_u_host: ${m_u_host}
             m_u_kokkos_view_dimensions: ${m_u_kokkos_view_dimensions}
             m_u_host_kokkos_view_dimensions: ${m_u_host_kokkos_view_dimensions}
-            # filename_size: ${filename_size}
-            # filename: ${filename}
+            filename_size: ${filename_size}
+            filename: ${filename}
     
     ##For default data transfer
     # decl_hdf5:

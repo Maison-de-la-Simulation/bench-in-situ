@@ -206,13 +206,18 @@ extern "C"
 
             Real* copied_ptr = const_cast<Real*>(mm_u_host.data());
 
-            char *prefix_c_str;
-            PDI_access("prefix", (void **)&prefix_c_str, PDI_IN);
-            std::string prefix(prefix_c_str);
-            PDI_release("prefix");
+            // char *prefix_c_str;
+            // PDI_access("prefix", (void **)&prefix_c_str, PDI_IN);
+            // std::string prefix(prefix_c_str);
+            // PDI_release("prefix");
 
-            std::string filename = io::WriterGpuPDI::getFilename(prefix, *iter);
-            int filename_size = filename.size();
+            // std::string filename = io::WriterGpuPDI::getFilename(prefix, *iter);
+            // int filename_size = filename.size();
+
+
+            int* filename_size; PDI_access("filename_size", (void**)&filename_size, PDI_IN);
+            std::string* filename; PDI_access("filename", (void**)&filename, PDI_IN);
+
 
             // printf(" data_HOST %s\n",filename.c_str());
 
@@ -222,8 +227,10 @@ extern "C"
                             "iStep", iter, PDI_OUT,
                             "local_full_field", copied_ptr, PDI_OUT, // u_host
                             "m_u_host_kokkos_view_dimensions", dim_host_ptr, PDI_OUT,
+                            // "filename_size", &filename_size, PDI_OUT,
+                            // "filename", filename.data(), PDI_OUT,
                             "filename_size", &filename_size, PDI_OUT,
-                            "filename", filename.data(), PDI_OUT,
+                            "filename", filename->data(), PDI_OUT,
                             NULL);
             Kokkos::Profiling::popRegion();
             Kokkos::Profiling::popRegion();
@@ -320,13 +327,13 @@ void GodunovSolver::pdiExposeData()
         dl[IY] = m_grid.m_dl[IY];
         dl[IZ] = m_grid.m_dl[IZ];
 
-        PDI_multi_expose("data_GPU_before",
-                "iStep", (void*)&(Super::m_iteration), PDI_OUT,
-                "m_u", (void*)(m_u.data()), PDI_OUT,
-                "m_u_host", (void*)(m_u_host.data()), PDI_OUT,
-                "m_u_kokkos_view_dimensions", (void*)&m_u_kokkos_view_dimensions, PDI_OUT,
-                "m_u_host_kokkos_view_dimensions", (void*)&m_u_host_kokkos_view_dimensions, PDI_OUT,
-                NULL);
+        // PDI_multi_expose("data_GPU_before",
+        //         "iStep", (void*)&(Super::m_iteration), PDI_OUT,
+        //         "m_u", (void*)(m_u.data()), PDI_OUT,
+        //         "m_u_host", (void*)(m_u_host.data()), PDI_OUT,
+        //         "m_u_kokkos_view_dimensions", (void*)&m_u_kokkos_view_dimensions, PDI_OUT,
+        //         "m_u_host_kokkos_view_dimensions", (void*)&m_u_host_kokkos_view_dimensions, PDI_OUT,
+        //         NULL);
 
         // PDI_multi_expose("",
         //         "iStep", (void*)&(Super::m_iteration), PDI_OUT,
@@ -335,6 +342,16 @@ void GodunovSolver::pdiExposeData()
         //         "m_u_kokkos_view_dimensions", (void*)&m_u_kokkos_view_dimensions, PDI_OUT,
         //         "m_u_host_kokkos_view_dimensions", (void*)&m_u_host_kokkos_view_dimensions, PDI_OUT,
         //         NULL);
+
+        PDI_multi_expose("data_GPU_before",
+        "iStep", (void*)&(Super::m_iteration), PDI_OUT,
+        "m_u", (void*)(m_u.data()), PDI_OUT,
+        "m_u_host", (void*)(m_u_host.data()), PDI_OUT,
+        "m_u_kokkos_view_dimensions", (void*)&m_u_kokkos_view_dimensions, PDI_OUT,
+        "m_u_host_kokkos_view_dimensions", (void*)&m_u_host_kokkos_view_dimensions, PDI_OUT,
+        "filename_size", &filename_size, PDI_OUT,
+        "filename", filename.data(), PDI_OUT,
+        NULL);
 
         // printf(" _ %s\n",filename.c_str());
 
