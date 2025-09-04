@@ -214,7 +214,7 @@ extern "C"
             // std::string filename = io::WriterGpuPDI::getFilename(prefix, *iter);
             // int filename_size = filename.size();
 
-            std::string* filename_size; PDI_access("filename_size", (void**)&filename_size, PDI_IN);
+            int* filename_size; PDI_access("filename_size", (void**)&filename_size, PDI_IN);
             std::string* filename; PDI_access("filename", (void**)&filename, PDI_IN);
 
             Kokkos::Profiling::popRegion();
