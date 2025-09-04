@@ -217,6 +217,8 @@ extern "C"
             int* filename_size; PDI_access("filename_size", (void**)&filename_size, PDI_IN);
             std::string* filename; PDI_access("filename", (void**)&filename, PDI_IN);
 
+            printf(" data_HOST %s\n",filename);
+
             Kokkos::Profiling::popRegion();
             Kokkos::Profiling::pushRegion("I/O - Checkpoint - write");
             PDI_multi_expose("data_HOST",
@@ -337,6 +339,8 @@ void GodunovSolver::pdiExposeData()
         //         "filename", filename.data(), PDI_OUT,
         //         NULL);
         
+        printf(" _ %s\n",filename);
+
         PDI_multi_expose("",
                 "filename_size", &filename_size, PDI_OUT,
                 "filename", filename.data(), PDI_OUT,
