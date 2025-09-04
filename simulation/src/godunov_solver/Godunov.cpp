@@ -214,7 +214,7 @@ extern "C"
             std::string filename = io::WriterGpuPDI::getFilename(prefix, *iter);
             int filename_size = filename.size();
 
-            printf(" data_HOST %s\n",filename.c_str());
+            // printf(" data_HOST %s\n",filename.c_str());
 
             Kokkos::Profiling::popRegion();
             Kokkos::Profiling::pushRegion("I/O - Checkpoint - write");
@@ -276,7 +276,7 @@ void GodunovSolver::pdiExposeData()
     if(m_params->output.type == "gpu_pdi") //Move data transfer to PDI through user-code
     // if(dynamic_cast<const io::WriterGpuPDI*>(m_writer.get())) //Move data transfer to PDI through user-code
     {
-        printf("********* if ***********\n");
+        // printf("********* if ***********\n");
 #if defined(Euler_ENABLE_PDI)
         std::array<size_t, 2> m_u_kokkos_view_dimensions = { m_u.extent(0), m_u.extent(1) };
         std::array<size_t, 2> m_u_host_kokkos_view_dimensions = { m_u_host.extent(0), m_u_host.extent(1) };
@@ -328,7 +328,7 @@ void GodunovSolver::pdiExposeData()
         //         "m_u_host_kokkos_view_dimensions", (void*)&m_u_host_kokkos_view_dimensions, PDI_OUT,
         //         NULL);
 
-        printf(" _ %s\n",filename.c_str());
+        // printf(" _ %s\n",filename.c_str());
 
         m_writer->write(m_u_host, m_grid, Super::m_iteration, Super::m_t,
                         m_params->thermo.gamma, m_params->thermo.mmw);
@@ -339,7 +339,7 @@ void GodunovSolver::pdiExposeData()
     }
     else //Default data transfer
     {
-        printf("********* else ***********\n");
+        // printf("********* else ***********\n");
 #if defined(Euler_ENABLE_PDI)
         PDI_multi_expose("data_on_GPU",
                         "iStep", (void*)&(Super::m_iteration), PDI_OUT,
