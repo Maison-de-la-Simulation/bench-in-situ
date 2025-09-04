@@ -224,7 +224,8 @@ extern "C"
                             "local_full_field", copied_ptr, PDI_OUT, // u_host
                             "m_u_host_kokkos_view_dimensions", dim_host_ptr, PDI_OUT,
                             "filename_size", &filename_size, PDI_OUT,
-                            "filename", filename.data(), PDI_OUT,
+                            // "filename", filename.data(), PDI_OUT,
+                            "filename", filename, PDI_OUT,
                             NULL);
             Kokkos::Profiling::popRegion();
             Kokkos::Profiling::popRegion();
@@ -311,7 +312,8 @@ void GodunovSolver::pdiExposeData()
         std::string prefix(prefix_c_str);
         PDI_release("prefix");
 
-        std::string filename = io::WriterGpuPDI::getFilename(prefix, *iter);
+        // std::string filename = io::WriterGpuPDI::getFilename(prefix, *iter);
+        std::string filename = io::WriterGpuPDI::getFilename(prefix, Super::m_iteration);
         int filename_size = filename.size();
 
         std::array<Real, 3> origin;
