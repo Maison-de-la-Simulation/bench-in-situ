@@ -225,7 +225,7 @@ extern "C"
                             "m_u_host_kokkos_view_dimensions", dim_host_ptr, PDI_OUT,
                             "filename_size", &filename_size, PDI_OUT,
                             // "filename", filename.data(), PDI_OUT,
-                            "filename", filename->data(), PDI_OUT,
+                            "filename", filename, PDI_OUT,
                             NULL);
             Kokkos::Profiling::popRegion();
             Kokkos::Profiling::popRegion();
@@ -338,7 +338,7 @@ void GodunovSolver::pdiExposeData()
         
         PDI_multi_expose("",
                 "filename_size", &filename_size, PDI_OUT,
-                "filename", filename.data(), PDI_OUT,
+                "filename", (void*)(filename.data()), PDI_OUT,
                 NULL);
 
         m_writer->write(m_u_host, m_grid, Super::m_iteration, Super::m_t,
