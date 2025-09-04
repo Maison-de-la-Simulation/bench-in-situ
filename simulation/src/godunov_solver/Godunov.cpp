@@ -225,7 +225,7 @@ extern "C"
                             "iStep", iter, PDI_OUT,
                             "local_full_field", copied_ptr, PDI_OUT, // u_host
                             "m_u_host_kokkos_view_dimensions", dim_host_ptr, PDI_OUT,
-                            "filename_size", &filename_size, PDI_OUT,
+                            "filename_size", (void*)&(filename_size), PDI_OUT,
                             // "filename", filename.data(), PDI_OUT,
                             // "filename", &filename, PDI_OUT,
                             "filename", filename->data(), PDI_OUT,
@@ -342,7 +342,7 @@ void GodunovSolver::pdiExposeData()
         printf(" _ %s\n",filename.c_str());
 
         PDI_multi_expose("",
-                "filename_size", &filename_size, PDI_OUT,
+                "filename_size", (void*)&(filename_size), PDI_OUT,
                 "filename", filename.data(), PDI_OUT,
                 NULL);
 
