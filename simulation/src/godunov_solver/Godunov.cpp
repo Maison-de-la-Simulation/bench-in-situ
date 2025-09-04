@@ -214,12 +214,12 @@ extern "C"
             std::string filename = io::WriterGpuPDI::getFilename(prefix, *iter);
             int filename_size = filename.size();
 
-            printf(" data_HOST %s\n",filename);
+            // printf(" data_HOST %s\n",filename);
 
             // int* filename_size; PDI_access("filename_size", (void**)&filename_size, PDI_IN);
             // std::string* filename; PDI_access("filename", (void**)&filename, PDI_IN);
 
-            // printf(" data_HOST %s\n",filename->c_str());
+            printf(" data_HOST %s\n",filename->c_str());
 
             Kokkos::Profiling::popRegion();
             Kokkos::Profiling::pushRegion("I/O - Checkpoint - write");
@@ -317,7 +317,7 @@ void GodunovSolver::pdiExposeData()
         std::string prefix(prefix_c_str);
         PDI_release("prefix");
 
-        std::string filename = io::WriterGpuPDI::getFilename(prefix, *iter);
+        // std::string filename = io::WriterGpuPDI::getFilename(prefix, *iter);
         std::string filename = io::WriterGpuPDI::getFilename(prefix, Super::m_iteration);
         int filename_size = filename.size();
 
