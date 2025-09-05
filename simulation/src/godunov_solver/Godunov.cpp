@@ -322,9 +322,14 @@ void GodunovSolver::pdiExposeData()
         std::string prefix(prefix_c_str);
         PDI_release("prefix");
 
-        // std::string filename = io::WriterGpuPDI::getFilename(prefix, Super::m_iteration);
-        char* filename = io::WriterGpuPDI::getFilename(prefix, Super::m_iteration);
+        std::string filename = io::WriterGpuPDI::getFilename(prefix, Super::m_iteration);
+        // char* filename = io::WriterGpuPDI::getFilename(prefix, Super::m_iteration);
         int filename_size = filename.size();
+
+        PDI_multi_expose("",
+                         "filename_size", &filename_size, PDI_OUT,
+                         "filename", filename.data(), PDI_OUT,
+                         NULL);
 
         std::array<Real, 3> origin;
         origin[IX] = m_grid.m_lowGlobal[IX];
@@ -364,8 +369,10 @@ void GodunovSolver::pdiExposeData()
         // "filename", (void*)(filename.data()), PDI_OUT,
         // "filename_size", (void*)&(filename_size), PDI_OUT,
         // "filename", (void*)(filename.c_str()), PDI_OUT,
-        "filename_size", (void*)&(filename_size), PDI_OUT,
-        "filename", (void*)(filename), PDI_OUT,
+        // "filename_size", (void*)&(filename_size), PDI_OUT,
+        // "filename", (void*)(filename), PDI_OUT,
+        // "filename_size", &filename_size, PDI_OUT,
+        // "filename", filename.data(), PDI_OUT,
         NULL);
 
         // printf(" _ %s\n",filename.c_str());
