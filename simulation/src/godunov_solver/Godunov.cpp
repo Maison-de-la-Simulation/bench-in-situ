@@ -216,11 +216,13 @@ extern "C"
 
 
             int* filename_size; PDI_access("filename_size", (void**)&filename_size, PDI_IN);
-            std::string* filename; PDI_access("filename", (void**)&filename, PDI_IN);
+            // std::string* filename; PDI_access("filename", (void**)&filename, PDI_IN);
+            char* filename; PDI_access("filename", (void**)&filename, PDI_IN);
 
             printf(" data_HOST ...\n");
-            printf(" data_HOST %s\n",filename->c_str());
-            printf(" data_HOST %i\n",&filename_size);
+            // printf(" data_HOST %s\n",filename->c_str());
+            printf(" data_HOST %s\n",filename);
+            printf(" data_HOST %i\n",*filename_size);
 
             Kokkos::Profiling::popRegion();
             Kokkos::Profiling::pushRegion("I/O - Checkpoint - write");
@@ -230,8 +232,10 @@ extern "C"
                             "m_u_host_kokkos_view_dimensions", dim_host_ptr, PDI_OUT,
                             // "filename_size", &filename_size, PDI_OUT,
                             // "filename", filename.data(), PDI_OUT,
+                            // "filename_size", &filename_size, PDI_OUT,
+                            // "filename", filename->data(), PDI_OUT,
                             "filename_size", &filename_size, PDI_OUT,
-                            "filename", filename->data(), PDI_OUT,
+                            "filename", filename, PDI_OUT,
                             NULL);
             Kokkos::Profiling::popRegion();
             Kokkos::Profiling::popRegion();
@@ -318,7 +322,8 @@ void GodunovSolver::pdiExposeData()
         std::string prefix(prefix_c_str);
         PDI_release("prefix");
 
-        std::string filename = io::WriterGpuPDI::getFilename(prefix, Super::m_iteration);
+        // std::string filename = io::WriterGpuPDI::getFilename(prefix, Super::m_iteration);
+        char* filename = io::WriterGpuPDI::getFilename(prefix, Super::m_iteration);
         int filename_size = filename.size();
 
         std::array<Real, 3> origin;
@@ -359,6 +364,8 @@ void GodunovSolver::pdiExposeData()
         // "filename", (void*)(filename.data()), PDI_OUT,
         // "filename_size", (void*)&(filename_size), PDI_OUT,
         // "filename", (void*)(filename.c_str()), PDI_OUT,
+        "filename_size", (void*)&(filename_size), PDI_OUT,
+        "filename", (void*)(filename), PDI_OUT,
         NULL);
 
         // printf(" _ %s\n",filename.c_str());
