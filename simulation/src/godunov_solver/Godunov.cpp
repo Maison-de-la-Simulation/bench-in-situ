@@ -221,9 +221,6 @@ extern "C"
                             NULL);
             Kokkos::Profiling::popRegion();
             Kokkos::Profiling::popRegion();
-
-            PDI_release("filename");
-            PDI_release("filename_size");
         }
         PDI_release("m_u_host_kokkos_view_dimensions");
         PDI_release("m_u_kokkos_view_dimensions");
@@ -326,7 +323,6 @@ void GodunovSolver::pdiExposeData()
     }
     else //Default data transfer
     {
-        // printf("********* else ***********\n");
 #if defined(Euler_ENABLE_PDI)
         PDI_multi_expose("data_on_GPU",
                         "iStep", (void*)&(Super::m_iteration), PDI_OUT,
