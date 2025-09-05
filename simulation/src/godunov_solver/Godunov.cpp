@@ -218,7 +218,7 @@ extern "C"
             int* filename_size; PDI_access("filename_size", (void**)&filename_size, PDI_IN);
             std::string* filename; PDI_access("filename", (void**)&filename, PDI_IN);
 
-
+            printf(" data_HOST ...\n");
             printf(" data_HOST %s\n",filename->c_str());
             printf(" data_HOST %i\n",&filename_size);
 
@@ -235,6 +235,9 @@ extern "C"
                             NULL);
             Kokkos::Profiling::popRegion();
             Kokkos::Profiling::popRegion();
+
+            PDI_release("filename");
+            PDI_release("filename_size");
         }
         PDI_release("m_u_host_kokkos_view_dimensions");
         PDI_release("m_u_kokkos_view_dimensions");
@@ -353,7 +356,7 @@ void GodunovSolver::pdiExposeData()
         // "filename_size", &filename_size, PDI_OUT,
         // "filename", filename.data(), PDI_OUT,
         "filename_size", (void*)&(filename_size), PDI_OUT,
-        "filename", filename.data(), PDI_OUT,
+        "filename", (void*)(filename.data()), PDI_OUT,
         NULL);
 
         // printf(" _ %s\n",filename.c_str());
