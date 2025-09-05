@@ -219,7 +219,7 @@ extern "C"
             std::string* filename; PDI_access("filename", (void**)&filename, PDI_IN);
 
 
-            printf(" data_HOST %s\n",filename.c_str());
+            printf(" data_HOST %s\n",filename->data().c_str());
             printf(" data_HOST %i\n",&filename_size);
 
             Kokkos::Profiling::popRegion();
