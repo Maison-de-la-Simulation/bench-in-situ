@@ -355,8 +355,10 @@ void GodunovSolver::pdiExposeData()
         "m_u_host_kokkos_view_dimensions", (void*)&m_u_host_kokkos_view_dimensions, PDI_OUT,
         // "filename_size", &filename_size, PDI_OUT,
         // "filename", filename.data(), PDI_OUT,
-        "filename_size", (void*)&(filename_size), PDI_OUT,
-        "filename", (void*)(filename.data()), PDI_OUT,
+        // "filename_size", (void*)&(filename_size), PDI_OUT,
+        // "filename", (void*)(filename.data()), PDI_OUT,
+        // "filename_size", (void*)&(filename_size), PDI_OUT,
+        // "filename", (void*)(filename.c_str()), PDI_OUT,
         NULL);
 
         // printf(" _ %s\n",filename.c_str());
