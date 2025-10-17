@@ -202,22 +202,12 @@ extern "C"
 
             Real* copied_ptr = const_cast<Real*>(mm_u_host.data());
 
-            char *prefix_c_str;
-            PDI_access("prefix", (void **)&prefix_c_str, PDI_IN);
-            std::string prefix(prefix_c_str);
-            PDI_release("prefix");
-
-            // std::string filename = io::WriterGpuPDI::getFilename(prefix, *iter);
-            // int filename_size = filename.size();
-
             Kokkos::Profiling::popRegion();
             Kokkos::Profiling::pushRegion("I/O - Checkpoint - write");
             PDI_multi_expose("data_HOST",
                             "iStep", iter, PDI_OUT,
                             "local_full_field", copied_ptr, PDI_OUT, // u_host
                             "m_u_host_kokkos_view_dimensions", dim_host_ptr, PDI_OUT,
-                            // "filename_size", &filename_size, PDI_OUT,
-                            // "filename", filename.data(), PDI_OUT,
                             NULL);
             Kokkos::Profiling::popRegion();
             Kokkos::Profiling::popRegion();
@@ -328,27 +318,29 @@ void GodunovSolver::pdiExposeData()
     }
     else //Default data transfer
     {
-#if defined(Euler_ENABLE_PDI)
-        PDI_multi_expose("data_on_GPU",
-                        "iStep", (void*)&(Super::m_iteration), PDI_OUT,
-                        "time", (void*)&(m_t), PDI_OUT,
-                        NULL);
-#endif
+// #if defined(Euler_ENABLE_PDI)
+//         PDI_multi_expose("data_on_GPU",
+//                         "iStep", (void*)&(Super::m_iteration), PDI_OUT,
+//                         "time", (void*)&(m_t), PDI_OUT,
+//                         NULL);
+// #endif
 
-        if (m_should_save)
-        {
-        Kokkos::Profiling::pushRegion("I/O - Checkpoint");
-        if(Super::m_iteration%100 == 0) Print() << "===================== output at iteration = " << Super::m_iteration << " time t = "<<Super::m_t<< std::endl;
-        Kokkos::Profiling::pushRegion("I/O - Checkpoint - deep_copy");
-        Kokkos::deep_copy(m_u_host, m_u);
-        Kokkos::Profiling::popRegion();
-        Kokkos::Profiling::pushRegion("I/O - Checkpoint - write");
-        m_writer->write(m_u_host, m_grid, Super::m_iteration, Super::m_t,
-                        m_params->thermo.gamma, m_params->thermo.mmw);
-        Kokkos::Profiling::popRegion();
-        Kokkos::Profiling::popRegion();
+//         if (m_should_save)
+//         {
+//         Kokkos::Profiling::pushRegion("I/O - Checkpoint");
+//         if(Super::m_iteration%100 == 0) Print() << "===================== output at iteration = " << Super::m_iteration << " time t = "<<Super::m_t<< std::endl;
+//         Kokkos::Profiling::pushRegion("I/O - Checkpoint - deep_copy");
+//         Kokkos::deep_copy(m_u_host, m_u);
+//         Kokkos::Profiling::popRegion();
+//         Kokkos::Profiling::pushRegion("I/O - Checkpoint - write");
+//         m_writer->write(m_u_host, m_grid, Super::m_iteration, Super::m_t,
+//                         m_params->thermo.gamma, m_params->thermo.mmw);
+//         Kokkos::Profiling::popRegion();
+//         Kokkos::Profiling::popRegion();
 
-        }
+//         }
+        fprintf(stderr, "Error: gpu_pdi missing\n");
+        return -1;
     }
 
     Kokkos::fence();
