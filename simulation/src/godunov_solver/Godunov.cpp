@@ -309,7 +309,7 @@ void GodunovSolver::pdiExposeData()
         dl[IY] = m_grid.m_dl[IY];
         dl[IZ] = m_grid.m_dl[IZ];
 
-        std::string filename = io::WriterGpuPDI::getFilename(prefix, *iter);
+        std::string filename = io::WriterGpuPDI::getFilename(prefix, Super::m_iteration);
         int filename_size = filename.size();
 
         PDI_multi_expose("data_GPU_before",
