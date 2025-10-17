@@ -302,12 +302,17 @@ void GodunovSolver::pdiExposeData()
         std::string filename = io::WriterGpuPDI::getFilename(prefix, Super::m_iteration);
         int filename_size = filename.size();
 
-        PDI_multi_expose("data_GPU_before",
-                "iStep", (void*)&(Super::m_iteration), PDI_OUT,
-                "m_u", (void*)(m_u.data()), PDI_OUT,
-                "m_u_host", (void*)(m_u_host.data()), PDI_OUT,
-                "m_u_kokkos_view_dimensions", (void*)&m_u_kokkos_view_dimensions, PDI_OUT,
-                "m_u_host_kokkos_view_dimensions", (void*)&m_u_host_kokkos_view_dimensions, PDI_OUT,
+        // PDI_multi_expose("data_GPU_before",
+        //         "iStep", (void*)&(Super::m_iteration), PDI_OUT,
+        //         "m_u", (void*)(m_u.data()), PDI_OUT,
+        //         "m_u_host", (void*)(m_u_host.data()), PDI_OUT,
+        //         "m_u_kokkos_view_dimensions", (void*)&m_u_kokkos_view_dimensions, PDI_OUT,
+        //         "m_u_host_kokkos_view_dimensions", (void*)&m_u_host_kokkos_view_dimensions, PDI_OUT,
+        //         "filename_size", &filename_size, PDI_OUT,
+        //         "filename", filename.data(), PDI_OUT,
+        //         NULL);
+
+        PDI_multi_expose("",
                 "filename_size", &filename_size, PDI_OUT,
                 "filename", filename.data(), PDI_OUT,
                 NULL);
