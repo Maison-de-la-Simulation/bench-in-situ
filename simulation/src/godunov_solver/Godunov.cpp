@@ -207,8 +207,8 @@ extern "C"
             std::string prefix(prefix_c_str);
             PDI_release("prefix");
 
-            std::string filename = io::WriterGpuPDI::getFilename(prefix, *iter);
-            int filename_size = filename.size();
+            // std::string filename = io::WriterGpuPDI::getFilename(prefix, *iter);
+            // int filename_size = filename.size();
 
             Kokkos::Profiling::popRegion();
             Kokkos::Profiling::pushRegion("I/O - Checkpoint - write");
@@ -216,8 +216,8 @@ extern "C"
                             "iStep", iter, PDI_OUT,
                             "local_full_field", copied_ptr, PDI_OUT, // u_host
                             "m_u_host_kokkos_view_dimensions", dim_host_ptr, PDI_OUT,
-                            "filename_size", &filename_size, PDI_OUT,
-                            "filename", filename.data(), PDI_OUT,
+                            // "filename_size", &filename_size, PDI_OUT,
+                            // "filename", filename.data(), PDI_OUT,
                             NULL);
             Kokkos::Profiling::popRegion();
             Kokkos::Profiling::popRegion();
@@ -309,12 +309,17 @@ void GodunovSolver::pdiExposeData()
         dl[IY] = m_grid.m_dl[IY];
         dl[IZ] = m_grid.m_dl[IZ];
 
+        std::string filename = io::WriterGpuPDI::getFilename(prefix, *iter);
+        int filename_size = filename.size();
+
         PDI_multi_expose("data_GPU_before",
                 "iStep", (void*)&(Super::m_iteration), PDI_OUT,
                 "m_u", (void*)(m_u.data()), PDI_OUT,
                 "m_u_host", (void*)(m_u_host.data()), PDI_OUT,
                 "m_u_kokkos_view_dimensions", (void*)&m_u_kokkos_view_dimensions, PDI_OUT,
                 "m_u_host_kokkos_view_dimensions", (void*)&m_u_host_kokkos_view_dimensions, PDI_OUT,
+                "filename_size", &filename_size, PDI_OUT,
+                "filename", filename.data(), PDI_OUT,
                 NULL);
 
         m_writer->write(m_u_host, m_grid, Super::m_iteration, Super::m_t,
