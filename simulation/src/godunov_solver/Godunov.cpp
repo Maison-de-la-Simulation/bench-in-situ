@@ -340,7 +340,6 @@ void GodunovSolver::pdiExposeData()
 
 //         }
         fprintf(stderr, "Error: gpu_pdi missing\n");
-        return -1;
     }
 
     Kokkos::fence();
