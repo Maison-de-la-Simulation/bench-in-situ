@@ -198,7 +198,7 @@ extern "C"
             Kokkos::Profiling::pushRegion("I/O - Checkpoint - deep_copy");
             Kokkos::View<Real**, Kokkos::LayoutLeft> mm_u(a, dim_ptr[0], dim_ptr[1]);
             Kokkos::View<Real**, Kokkos::LayoutLeft, Kokkos::HostSpace> mm_u_host(b, dim_host_ptr[0], dim_host_ptr[1]);
-            Kokkos::deep_copy(mm_u_host, mm_u);
+            // Kokkos::deep_copy(mm_u_host, mm_u);
 
             Real* copied_ptr = const_cast<Real*>(mm_u_host.data());
 
@@ -302,21 +302,22 @@ void GodunovSolver::pdiExposeData()
         std::string filename = io::WriterGpuPDI::getFilename(prefix, Super::m_iteration);
         int filename_size = filename.size();
 
-        // PDI_multi_expose("data_GPU_before",
-        //         "iStep", (void*)&(Super::m_iteration), PDI_OUT,
-        //         "m_u", (void*)(m_u.data()), PDI_OUT,
-        //         "m_u_host", (void*)(m_u_host.data()), PDI_OUT,
-        //         "m_u_kokkos_view_dimensions", (void*)&m_u_kokkos_view_dimensions, PDI_OUT,
-        //         "m_u_host_kokkos_view_dimensions", (void*)&m_u_host_kokkos_view_dimensions, PDI_OUT,
-        //         "filename_size", &filename_size, PDI_OUT,
-        //         "filename", filename.data(), PDI_OUT,
-        //         NULL);
-
-        PDI_multi_expose("",
+        PDI_multi_expose("data_GPU_before",
+                "iStep", (void*)&(Super::m_iteration), PDI_OUT,
+                "m_u", (void*)(m_u.data()), PDI_OUT,
+                "m_u_host", (void*)(m_u_host.data()), PDI_OUT,
+                "m_u_kokkos_view_dimensions", (void*)&m_u_kokkos_view_dimensions, PDI_OUT,
+                "m_u_host_kokkos_view_dimensions", (void*)&m_u_host_kokkos_view_dimensions, PDI_OUT,
                 "filename_size", &filename_size, PDI_OUT,
                 "filename", filename.data(), PDI_OUT,
                 NULL);
 
+        // PDI_multi_expose("",
+        //         "filename_size", &filename_size, PDI_OUT,
+        //         "filename", filename.data(), PDI_OUT,
+        //         NULL);
+
+        printf("vers write\n");
         m_writer->write(m_u_host, m_grid, Super::m_iteration, Super::m_t,
                         m_params->thermo.gamma, m_params->thermo.mmw);
 #endif

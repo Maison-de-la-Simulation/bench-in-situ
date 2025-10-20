@@ -329,6 +329,7 @@ std::string WriterGpuPDI::getFilename(std::string const &prefix, Int outputId) {
 void WriterGpuPDI::write(HostConstArrayDyn u, const UniformGrid & grid,
                       Int iStep, Real time, Real gamma, Real mmw)
 {
+    printf("in WriterGpuPDI::write\n");
     Kokkos::fence();
     std::chrono::steady_clock::time_point m_start_write = std::chrono::steady_clock::now();
     
