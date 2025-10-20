@@ -233,13 +233,13 @@ extern "C"
         std::array<size_t, 2>* m_u_host_dim; PDI_access("m_u_host_kokkos_view_dimensions", (void**)&m_u_host_dim, PDI_IN);
         size_t* dim_host_ptr = m_u_host_dim->data();
 
-        if (*iter % *freq == 0) {
+        // if (*iter % *freq == 0) {
             Kokkos::Profiling::pushRegion("I/O - Checkpoint");
             Kokkos::Profiling::pushRegion("I/O - Checkpoint - deep_copy");
             Kokkos::View<Real**, Kokkos::LayoutLeft> mm_u(a, dim_ptr[0], dim_ptr[1]);
             Kokkos::View<Real**, Kokkos::LayoutLeft, Kokkos::HostSpace> mm_u_host(b, dim_host_ptr[0], dim_host_ptr[1]);
             Kokkos::deep_copy(mm_u_host, mm_u);
-        }
+        // }
 
         PDI_release("m_u_host_kokkos_view_dimensions");
         PDI_release("m_u_kokkos_view_dimensions");
@@ -260,66 +260,70 @@ void GodunovSolver::pdiExposeData()
     if(m_params->output.type == "gpu_pdi") //Move data transfer to PDI through user-code
     {
 #if defined(Euler_ENABLE_PDI)
-        std::array<size_t, 2> m_u_kokkos_view_dimensions = { m_u.extent(0), m_u.extent(1) };
-        std::array<size_t, 2> m_u_host_kokkos_view_dimensions = { m_u_host.extent(0), m_u_host.extent(1) };
-    
-        std::array<int, 3> pdi_ncells;
-        pdi_ncells[IX] = m_grid.m_nbCells[IX] * m_grid.m_dom[IX];
-        pdi_ncells[IY] = m_grid.m_nbCells[IY] * m_grid.m_dom[IY];
-        pdi_ncells[IZ] = m_grid.m_nbCells[IZ] * m_grid.m_dom[IZ];
-    
-        std::array<int, 3> pdi_ncells_local;
-        pdi_ncells_local[IX] = m_grid.m_nbCells[IX];
-        pdi_ncells_local[IY] = m_grid.m_nbCells[IY];
-        pdi_ncells_local[IZ] = m_grid.m_nbCells[IZ];
-    
-        int tmp_rank=0;
-#if defined(MPI_SESSION)
-        MPI_Comm_rank(MPI_COMM_WORLD, &tmp_rank);
-        std::array<int, three_d> mpi_coords = m_grid.comm.getCoords(m_grid.comm.rank());
-#endif
-    
-        std::array<int, 3> pdi_start;
-        pdi_start[IX] = m_grid.m_nbCells[IX] * mpi_coords[IX];
-        pdi_start[IY] = m_grid.m_nbCells[IY] * mpi_coords[IY];
-        pdi_start[IZ] = m_grid.m_nbCells[IZ] * mpi_coords[IZ];
+        int* freq; PDI_access("freq", (void**)&freq, PDI_IN);
+        if (Super::m_iteration % *freq == 0) {
+            std::array<size_t, 2> m_u_kokkos_view_dimensions = { m_u.extent(0), m_u.extent(1) };
+            std::array<size_t, 2> m_u_host_kokkos_view_dimensions = { m_u_host.extent(0), m_u_host.extent(1) };
+        
+            std::array<int, 3> pdi_ncells;
+            pdi_ncells[IX] = m_grid.m_nbCells[IX] * m_grid.m_dom[IX];
+            pdi_ncells[IY] = m_grid.m_nbCells[IY] * m_grid.m_dom[IY];
+            pdi_ncells[IZ] = m_grid.m_nbCells[IZ] * m_grid.m_dom[IZ];
+        
+            std::array<int, 3> pdi_ncells_local;
+            pdi_ncells_local[IX] = m_grid.m_nbCells[IX];
+            pdi_ncells_local[IY] = m_grid.m_nbCells[IY];
+            pdi_ncells_local[IZ] = m_grid.m_nbCells[IZ];
+        
+            int tmp_rank=0;
+    #if defined(MPI_SESSION)
+            MPI_Comm_rank(MPI_COMM_WORLD, &tmp_rank);
+            std::array<int, three_d> mpi_coords = m_grid.comm.getCoords(m_grid.comm.rank());
+    #endif
+        
+            std::array<int, 3> pdi_start;
+            pdi_start[IX] = m_grid.m_nbCells[IX] * mpi_coords[IX];
+            pdi_start[IY] = m_grid.m_nbCells[IY] * mpi_coords[IY];
+            pdi_start[IZ] = m_grid.m_nbCells[IZ] * mpi_coords[IZ];
 
-        char *prefix_c_str;
-        PDI_access("prefix", (void **)&prefix_c_str, PDI_IN);
-        std::string prefix(prefix_c_str);
-        PDI_release("prefix");
+            char *prefix_c_str;
+            PDI_access("prefix", (void **)&prefix_c_str, PDI_IN);
+            std::string prefix(prefix_c_str);
+            PDI_release("prefix");
 
-        std::array<Real, 3> origin;
-        origin[IX] = m_grid.m_lowGlobal[IX];
-        origin[IY] = m_grid.m_lowGlobal[IY];
-        origin[IZ] = m_grid.m_lowGlobal[IZ];
-    
-        std::array<Real, 3> dl;
-        dl[IX] = m_grid.m_dl[IX];
-        dl[IY] = m_grid.m_dl[IY];
-        dl[IZ] = m_grid.m_dl[IZ];
+            std::array<Real, 3> origin;
+            origin[IX] = m_grid.m_lowGlobal[IX];
+            origin[IY] = m_grid.m_lowGlobal[IY];
+            origin[IZ] = m_grid.m_lowGlobal[IZ];
+        
+            std::array<Real, 3> dl;
+            dl[IX] = m_grid.m_dl[IX];
+            dl[IY] = m_grid.m_dl[IY];
+            dl[IZ] = m_grid.m_dl[IZ];
 
-        std::string filename = io::WriterGpuPDI::getFilename(prefix, Super::m_iteration);
-        int filename_size = filename.size();
+            std::string filename = io::WriterGpuPDI::getFilename(prefix, Super::m_iteration);
+            int filename_size = filename.size();
 
-        PDI_multi_expose("data_GPU_before",
-                "iStep", (void*)&(Super::m_iteration), PDI_OUT,
-                "m_u", (void*)(m_u.data()), PDI_OUT,
-                "m_u_host", (void*)(m_u_host.data()), PDI_OUT,
-                "m_u_kokkos_view_dimensions", (void*)&m_u_kokkos_view_dimensions, PDI_OUT,
-                "m_u_host_kokkos_view_dimensions", (void*)&m_u_host_kokkos_view_dimensions, PDI_OUT,
-                "filename_size", &filename_size, PDI_OUT,
-                "filename", filename.data(), PDI_OUT,
-                NULL);
+            PDI_multi_expose("data_GPU_before",
+                    "iStep", (void*)&(Super::m_iteration), PDI_OUT,
+                    "m_u", (void*)(m_u.data()), PDI_OUT,
+                    "m_u_host", (void*)(m_u_host.data()), PDI_OUT,
+                    "m_u_kokkos_view_dimensions", (void*)&m_u_kokkos_view_dimensions, PDI_OUT,
+                    "m_u_host_kokkos_view_dimensions", (void*)&m_u_host_kokkos_view_dimensions, PDI_OUT,
+                    "filename_size", &filename_size, PDI_OUT,
+                    "filename", filename.data(), PDI_OUT,
+                    NULL);
 
-        // PDI_multi_expose("",
-        //         "filename_size", &filename_size, PDI_OUT,
-        //         "filename", filename.data(), PDI_OUT,
-        //         NULL);
+            // PDI_multi_expose("",
+            //         "filename_size", &filename_size, PDI_OUT,
+            //         "filename", filename.data(), PDI_OUT,
+            //         NULL);
 
-        printf("vers write\n");
-        m_writer->write(m_u_host, m_grid, Super::m_iteration, Super::m_t,
-                        m_params->thermo.gamma, m_params->thermo.mmw);
+            // printf("vers write\n");
+            m_writer->write(m_u_host, m_grid, Super::m_iteration, Super::m_t,
+                            m_params->thermo.gamma, m_params->thermo.mmw);
+        }
+        PDI_release("freq");
 #endif
     }
     else //Default data transfer
