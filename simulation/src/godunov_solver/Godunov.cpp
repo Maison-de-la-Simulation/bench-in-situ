@@ -260,8 +260,9 @@ void GodunovSolver::pdiExposeData()
     if(m_params->output.type == "gpu_pdi") //Move data transfer to PDI through user-code
     {
 #if defined(Euler_ENABLE_PDI)
-        int* freq; PDI_access("freq", (void**)&freq, PDI_IN);
-        if (Super::m_iteration % *freq == 0) {
+        // int* freq; PDI_access("freq", (void**)&freq, PDI_IN);
+        // if (Super::m_iteration % *freq == 0) {
+        if (Super::m_iteration % 100 == 0) {
             std::array<size_t, 2> m_u_kokkos_view_dimensions = { m_u.extent(0), m_u.extent(1) };
             std::array<size_t, 2> m_u_host_kokkos_view_dimensions = { m_u_host.extent(0), m_u_host.extent(1) };
         
@@ -323,7 +324,7 @@ void GodunovSolver::pdiExposeData()
             m_writer->write(m_u_host, m_grid, Super::m_iteration, Super::m_t,
                             m_params->thermo.gamma, m_params->thermo.mmw);
         }
-        PDI_release("freq");
+        // PDI_release("freq");
 #endif
     }
     else //Default data transfer
