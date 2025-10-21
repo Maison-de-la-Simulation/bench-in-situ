@@ -204,7 +204,7 @@ pdi:
     ##For data transfer through user-code
     decl_hdf5:
     # - file: ${filename}
-    - file: output_${iStep}.h5
+    - file: output_${rank}_${iStep}.h5
       datasets: *full_datasets
       collision_policy: replace
       on_event: data_HOST
