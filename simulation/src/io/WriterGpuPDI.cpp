@@ -328,7 +328,8 @@ std::string WriterGpuPDI::getFilename(std::string const &prefix, Int outputId) {
   return filename;
 }
 
-void WriterGpuPDI::write(HostConstArrayDyn u, const UniformGrid & grid,
+// void WriterGpuPDI::write(HostConstArrayDyn u, const UniformGrid & grid,
+void WriterGpuPDI::write(ConstArrayDyn u, const UniformGrid & grid,
                       Int iStep, Real time, Real gamma, Real mmw)
 {
     // printf("in WriterGpuPDI::write\n");
@@ -356,31 +357,51 @@ void WriterGpuPDI::write(HostConstArrayDyn u, const UniformGrid & grid,
     std::string filename = WriterGpuPDI::getFilename(prefix, outputId * 100); // * freq);
     int filename_size = filename.size();
 
-    std::array<size_t, 2> u_kokkos_view_dimensions = { u.extent(0), u.extent(1) };
-    std::array<size_t, 2> u_host_kokkos_view_dimensions = { u.extent(0), u.extent(1) };
+    // std::array<size_t, 2> u_kokkos_view_dimensions = { u.extent(0), u.extent(1) };
+    // std::array<size_t, 2> u_host_kokkos_view_dimensions = { u.extent(0), u.extent(1) };
+    int freq = 100;
+    int ex0 = u.extent_int(0);
+    int ex1 = u.extent_int(1);
 
     Kokkos::fence();
     debugTimer.time_spent_in_write_before_checkpoint += (std::chrono::steady_clock::now() - m_start_write);
 
-    PDI_multi_expose("data_GPU_event",
-                     "iStep", &iStep, PDI_OUT,
-                     "time", &time, PDI_OUT,
-                     "m_u", (void*)(u.data()), PDI_OUT,
-                     "m_u_host", (void*)(u.data()), PDI_OUT,
-                     "m_u_kokkos_view_dimensions", (void*)&u_kokkos_view_dimensions, PDI_OUT,
-                     "m_u_host_kokkos_view_dimensions", (void*)&u_host_kokkos_view_dimensions, PDI_OUT,
-                     "Rstar_h", &code_units::constants::Rstar_h, PDI_OUT,
-                     "gamma", &gamma, PDI_OUT,
-                     "mmw", &mmw, PDI_OUT,
-                     "output_id", &outputId, PDI_OUT,
-                     "restart_id", &m_restartId, PDI_OUT,
-                     "local_full_field", u.data(), PDI_OUT,
-                     "filename_size", &filename_size, PDI_OUT,
-                     "filename", filename.data(), PDI_OUT,
-                     "grid_size", pdi_ncells.data(), PDI_OUT,
-                    //  "prefix_size", &prefix_size, PDI_OUT,
-                    //  "prefix", new_prefix.c_str(), PDI_OUT,
-                     NULL);
+    // PDI_multi_expose("data_GPU_event",
+    //                  "iStep", &iStep, PDI_OUT,
+    //                  "time", &time, PDI_OUT,
+    //                  "m_u", (void*)(u.data()), PDI_OUT,
+    //                  "m_u_host", (void*)(u.data()), PDI_OUT,
+    //                  "m_u_kokkos_view_dimensions", (void*)&u_kokkos_view_dimensions, PDI_OUT,
+    //                  "m_u_host_kokkos_view_dimensions", (void*)&u_host_kokkos_view_dimensions, PDI_OUT,
+    //                  "Rstar_h", &code_units::constants::Rstar_h, PDI_OUT,
+    //                  "gamma", &gamma, PDI_OUT,
+    //                  "mmw", &mmw, PDI_OUT,
+    //                  "output_id", &outputId, PDI_OUT,
+    //                  "restart_id", &m_restartId, PDI_OUT,
+    //                  "local_full_field", u.data(), PDI_OUT,
+    //                  "filename_size", &filename_size, PDI_OUT,
+    //                  "filename", filename.data(), PDI_OUT,
+    //                  "grid_size", pdi_ncells.data(), PDI_OUT,
+    //                 //  "prefix_size", &prefix_size, PDI_OUT,
+    //                 //  "prefix", new_prefix.c_str(), PDI_OUT,
+    //                  NULL);
+
+    PDI_multi_expose("trigger_UC",
+                    "rank", &(tmp_rank), PDI_OUT,
+                    "freq", &(freq), PDI_OUT,
+                    "iStep", &(Super::m_iteration), PDI_OUT,
+                    "m_u_extent_0", &(ex0), PDI_OUT,
+                    "m_u_extent_1", &(ex1), PDI_OUT,
+                    "m_u", (void*)(u.data()), PDI_OUT,
+                    "Rstar_h", &code_units::constants::Rstar_h, PDI_OUT,
+                    "gamma", &gamma, PDI_OUT,
+                    "mmw", &mmw, PDI_OUT,
+                    "output_id", &outputId, PDI_OUT,
+                    "restart_id", &m_restartId, PDI_OUT,
+                    "filename_size", &filename_size, PDI_OUT,
+                    "filename", filename.data(), PDI_OUT,
+                    "grid_size", pdi_ncells.data(), PDI_OUT,
+                    NULL);
 
     WriterBase::m_previous_outputs.push_back(std::make_pair(outputId, time));
 

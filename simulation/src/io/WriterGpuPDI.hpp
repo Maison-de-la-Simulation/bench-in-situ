@@ -32,7 +32,8 @@ public:
     //WriterGpuPDI& operator=(const WriterGpuPDI& x) = default;
     //WriterGpuPDI& operator=(WriterGpuPDI&& x) = default;
 
-    void write(HostConstArrayDyn u, const UniformGrid &grid,
+    // void write(HostConstArrayDyn u, const UniformGrid &grid,
+    void write(ConstArrayDyn u, const UniformGrid &grid,
                Int iStep, Real time, Real gamma, Real mmw) override;
 
     static std::string getFilename(std::string const &prefix, Int outputId);

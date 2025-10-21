@@ -33,6 +33,8 @@ public:
 
     void write(HostConstArrayDyn u, const UniformGrid &grid,
                Int iStep, Real time, Real gamma, Real mmw) override;
+    void write(ConstArrayDyn u, const UniformGrid &grid,
+               Int iStep, Real time, Real gamma, Real mmw) override;
     
     static std::string getFilename(std::string const &prefix, Int outputId);
 
