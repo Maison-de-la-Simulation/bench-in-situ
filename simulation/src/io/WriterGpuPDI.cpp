@@ -244,9 +244,42 @@ extern "C"
         PDI_release("outputs_record");
         PDI_release("outputs_record_size");
     }
+
+    void copy_func() {
+        
+        int* iter; PDI_access("iStep", (void**)&iter, PDI_IN);
+        int* freq; PDI_access("freq", (void**)&freq, PDI_IN);
+        if ((*iter) % (*freq) == 0) {
+           
+            Real* u_ddata; PDI_access("m_u", (void**)&u_ddata, PDI_IN); //Real, and not just double
+            int* m_u_extent_0; PDI_access("m_u_extent_0", (void**)&m_u_extent_0, PDI_IN);
+            int* m_u_extent_1; PDI_access("m_u_extent_1", (void**)&m_u_extent_1, PDI_IN);
+            
+            Kokkos::Profiling::pushRegion("I/O - Checkpoint");
+            Kokkos::Profiling::pushRegion("I/O - Checkpoint - deep_copy");
+            Kokkos::View<Real**, Kokkos::LayoutLeft> mm_u(u_ddata, *m_u_extent_0 ,*m_u_extent_1);
+            auto mm_u_host =  Kokkos::create_mirror_view(mm_u);
+            Kokkos::deep_copy(mm_u_host, mm_u);
+
+            Kokkos::Profiling::popRegion();
+            Kokkos::Profiling::pushRegion("I/O - Checkpoint - write");
+        
+            PDI_multi_expose("data_HOST",
+                            "local_full_field", mm_u_host.data(), PDI_OUT, 
+                            NULL);
+            Kokkos::Profiling::popRegion();
+            Kokkos::Profiling::popRegion();
+            PDI_release("m_u_extent_0");
+            PDI_release("m_u_extent_1");
+            PDI_release("m_u");
+        }
+        PDI_release("freq");
+        PDI_release("iStep");
+    }
+
 }
 
-WriterGpuPDI::WriterGpuPDI(const UniformGrid& grid, const Params&,
+WriterGpuPDI::WriterGpuPDI(const UniformGrid& grid, const Params& param,
                      const std::string& prefix,
                      const std::vector<std::pair<int, std::string>>&)
 {
@@ -275,7 +308,6 @@ WriterGpuPDI::WriterGpuPDI(const UniformGrid& grid, const Params&,
     mpi_prefix << std::setw(3) << std::setfill('0') << tmp_rank;
     std::string new_prefix(prefix);
     new_prefix.append("_r"+mpi_prefix.str());
-//    printf("new_prefix GPU %s \n", new_prefix.c_str());
 
     int prefix_size = new_prefix.size() + 1;
     int nvar = 9;
@@ -292,6 +324,7 @@ WriterGpuPDI::WriterGpuPDI(const UniformGrid& grid, const Params&,
 
     int iStep = 0;
     double time = 0;
+    int freq = param.output.output_freq;
 
     PDI_multi_expose("init_pdi_w_deisa",
                      "iStep", &iStep, PDI_OUT,
@@ -308,7 +341,7 @@ WriterGpuPDI::WriterGpuPDI(const UniformGrid& grid, const Params&,
                      "restart_id", &m_restartId, PDI_OUT,
                      "prefix_size", &prefix_size, PDI_OUT,
                      "prefix", new_prefix.c_str(), PDI_OUT,
-                    //  "freq", &freq, PDI_OUT,
+                     "freq", &freq, PDI_OUT,
                      NULL);
     
 }
@@ -328,11 +361,9 @@ std::string WriterGpuPDI::getFilename(std::string const &prefix, Int outputId) {
   return filename;
 }
 
-// void WriterGpuPDI::write(HostConstArrayDyn u, const UniformGrid & grid,
 void WriterGpuPDI::write(ConstArrayDyn u, const UniformGrid & grid,
                       Int iStep, Real time, Real gamma, Real mmw)
 {
-    // printf("in WriterGpuPDI::write\n");
     Kokkos::fence();
     std::chrono::steady_clock::time_point m_start_write = std::chrono::steady_clock::now();
     
@@ -356,43 +387,19 @@ void WriterGpuPDI::write(ConstArrayDyn u, const UniformGrid & grid,
 
     std::string filename = WriterGpuPDI::getFilename(prefix, outputId * 100); // * freq);
     int filename_size = filename.size();
-
-    // std::array<size_t, 2> u_kokkos_view_dimensions = { u.extent(0), u.extent(1) };
-    // std::array<size_t, 2> u_host_kokkos_view_dimensions = { u.extent(0), u.extent(1) };
-    int freq = 100;
+    std::cout<<filename<<std::endl;
     int ex0 = u.extent_int(0);
     int ex1 = u.extent_int(1);
 
     Kokkos::fence();
     debugTimer.time_spent_in_write_before_checkpoint += (std::chrono::steady_clock::now() - m_start_write);
 
-    // PDI_multi_expose("data_GPU_event",
-    //                  "iStep", &iStep, PDI_OUT,
-    //                  "time", &time, PDI_OUT,
-    //                  "m_u", (void*)(u.data()), PDI_OUT,
-    //                  "m_u_host", (void*)(u.data()), PDI_OUT,
-    //                  "m_u_kokkos_view_dimensions", (void*)&u_kokkos_view_dimensions, PDI_OUT,
-    //                  "m_u_host_kokkos_view_dimensions", (void*)&u_host_kokkos_view_dimensions, PDI_OUT,
-    //                  "Rstar_h", &code_units::constants::Rstar_h, PDI_OUT,
-    //                  "gamma", &gamma, PDI_OUT,
-    //                  "mmw", &mmw, PDI_OUT,
-    //                  "output_id", &outputId, PDI_OUT,
-    //                  "restart_id", &m_restartId, PDI_OUT,
-    //                  "local_full_field", u.data(), PDI_OUT,
-    //                  "filename_size", &filename_size, PDI_OUT,
-    //                  "filename", filename.data(), PDI_OUT,
-    //                  "grid_size", pdi_ncells.data(), PDI_OUT,
-    //                 //  "prefix_size", &prefix_size, PDI_OUT,
-    //                 //  "prefix", new_prefix.c_str(), PDI_OUT,
-    //                  NULL);
-
     PDI_multi_expose("trigger_UC",
                     "rank", &(tmp_rank), PDI_OUT,
-                    "freq", &(freq), PDI_OUT,
                     "iStep", &iStep, PDI_OUT,
-                    "m_u_extent_0", &(ex0), PDI_OUT,
-                    "m_u_extent_1", &(ex1), PDI_OUT,
-                    "m_u", (void*)(u.data()), PDI_OUT,
+                    "m_u_extent_0", &ex0, PDI_OUT,
+                    "m_u_extent_1", &ex1, PDI_OUT,
+                    "m_u", u.data(), PDI_OUT,
                     "Rstar_h", &code_units::constants::Rstar_h, PDI_OUT,
                     "gamma", &gamma, PDI_OUT,
                     "mmw", &mmw, PDI_OUT,
@@ -420,7 +427,5 @@ void WriterGpuPDI::write(ConstArrayDyn u, const UniformGrid & grid,
 
     Kokkos::fence();
     debugTimer.time_spent_in_write_after_xml += (std::chrono::steady_clock::now() - m_start_write);
-    // Print() << debugTimer << std::endl;
-    // printf("--- debugTimer de WriterGpuPDI ---\n");
 }
 }}

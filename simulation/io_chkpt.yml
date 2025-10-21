@@ -96,10 +96,14 @@ pdi:
     size: int
     time: double
     iStep: int
+    freq: int
+    m_u_kokkos_view_dimensions: { type: array, subtype: size_t, size: 2 }
+    m_u_host_kokkos_view_dimensions: { type: array, subtype: size_t, size: 2 }
 
-
-    pdi_writer_time_step: int
     mpi_coord: {type: array, subtype: int, size: 3}
+
+    m_u_extent_0: int
+    m_u_extent_1: int
 
   data:
 
@@ -120,25 +124,28 @@ pdi:
 
     grid_size: { type: array, subtype: int, size: 3 }
 
+    m_u:
+      type: array
+      subtype: double
+      size: ['${nvar}', '$ncell_local[2]+2*$ghost[2]', '$ncell_local[1]+2*$ghost[1]', '$ncell_local[0]+2*$ghost[0]']
+      subsize: ['${nvar}', '$ncell_local[2]', '$ncell_local[1]', '$ncell_local[0]']
+      start: [0, '$ghost[2]', '$ghost[1]', '$ghost[0]']
 
   plugins:
 
     user_code:
       on_event:
-        write_xml:
-          writeXML: {}
-
-    # mpi:
-
-    decl_hdf5:
-
+        trigger_UC:
+          copy_func: {}
+          
   
+    ##For data transfer through user-code
+    decl_hdf5:
     - file: ${filename}
-      datasets: *full_datasets # a list of datasets inside the file created on first access
-      on_event: checkpoint
-      collision_policy: write_into
-      # communicator: '${MPI_COMM_WORLD}'
-      when: '$iStep%100 = 0'
+    # - file: output_${rank}_${iStep}.h5
+      datasets: *full_datasets
+      collision_policy: replace
+      on_event: data_HOST
       write:
         grid_size:
         time:
@@ -159,5 +166,3 @@ pdi:
           - *By_description
           - *Bz_description
           - *dX_description
-
-    
