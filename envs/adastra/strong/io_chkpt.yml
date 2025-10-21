@@ -137,7 +137,7 @@ pdi:
         data_GPU_event:
           copy_func:
             time: ${time}
-            freq: 100
+            # freq: 100
             iter: ${iStep}
             m_u: ${m_u}
             m_u_host: ${m_u_host}
@@ -145,7 +145,7 @@ pdi:
             m_u_host_kokkos_view_dimensions: ${m_u_host_kokkos_view_dimensions}
         data_GPU_before:
           before_func:
-            freq: 100
+            # freq: 100
             iter: ${iStep}
             m_u: ${m_u}
             m_u_host: ${m_u_host}

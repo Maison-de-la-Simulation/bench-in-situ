@@ -308,6 +308,7 @@ WriterGpuPDI::WriterGpuPDI(const UniformGrid& grid, const Params&,
                      "restart_id", &m_restartId, PDI_OUT,
                      "prefix_size", &prefix_size, PDI_OUT,
                      "prefix", new_prefix.c_str(), PDI_OUT,
+                    //  "freq", &freq, PDI_OUT,
                      NULL);
     
 }
@@ -317,7 +318,8 @@ std::string WriterGpuPDI::getFilename(std::string const &prefix, Int outputId) {
   std::ostringstream outputNum;
   outputNum << std::setw(std::numeric_limits<Int>::digits10);
   outputNum << std::setfill('0');
-  outputNum << outputId;
+//   outputNum << outputId;
+  outputNum << outputId * 100; // * freq
 
   // concatenate file prefix + file number + suffix
   std::string filename(prefix);
