@@ -318,8 +318,8 @@ std::string WriterGpuPDI::getFilename(std::string const &prefix, Int outputId) {
   std::ostringstream outputNum;
   outputNum << std::setw(std::numeric_limits<Int>::digits10);
   outputNum << std::setfill('0');
-//   outputNum << outputId;
-  outputNum << outputId * 100; // * freq
+  outputNum << outputId;
+//   outputNum << outputId * 100; // * freq
 
   // concatenate file prefix + file number + suffix
   std::string filename(prefix);
@@ -353,7 +353,7 @@ void WriterGpuPDI::write(HostConstArrayDyn u, const UniformGrid & grid,
     m_mpi_coords = grid.comm.getCoords(grid.comm.rank());
 #endif
 
-    std::string filename = WriterGpuPDI::getFilename(prefix, outputId);
+    std::string filename = WriterGpuPDI::getFilename(prefix, outputId * 100); // * freq);
     int filename_size = filename.size();
 
     std::array<size_t, 2> u_kokkos_view_dimensions = { u.extent(0), u.extent(1) };

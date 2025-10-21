@@ -102,6 +102,9 @@ pdi:
 
     mpi_coord: {type: array, subtype: int, size: 3}
 
+    m_u_extent_0: int
+    m_u_extent_1: int
+
   data:
 
     filename_size: int
@@ -121,6 +124,13 @@ pdi:
 
     grid_size: { type: array, subtype: int, size: 3 }
 
+    m_u:
+      type: array
+      subtype: double
+      size: ['${nvar}', '$ncell_local[2]+2*$ghost[2]', '$ncell_local[1]+2*$ghost[1]', '$ncell_local[0]+2*$ghost[0]']
+      subsize: ['${nvar}', '$ncell_local[2]', '$ncell_local[1]', '$ncell_local[0]']
+      start: [0, '$ghost[2]', '$ghost[1]', '$ghost[0]']
+
   plugins:
 
     ##For default data transfer
@@ -134,25 +144,33 @@ pdi:
       on_event:
         write_xml:
           writeGpuXML: {}
-        data_GPU_event:
-          copy_func:
-            time: ${time}
+        # data_GPU_event:
+        #   copy_func:
+        #     time: ${time}
+        #     # freq: 100
+        #     iter: ${iStep}
+        #     m_u: ${m_u}
+        #     m_u_host: ${m_u_host}
+        #     m_u_kokkos_view_dimensions: ${m_u_kokkos_view_dimensions}
+        #     m_u_host_kokkos_view_dimensions: ${m_u_host_kokkos_view_dimensions}
+        # data_GPU_before:
+        #   before_func:
+        #     # freq: 100
+        #     iter: ${iStep}
+        #     m_u: ${m_u}
+        #     m_u_host: ${m_u_host}
+        #     m_u_kokkos_view_dimensions: ${m_u_kokkos_view_dimensions}
+        #     m_u_host_kokkos_view_dimensions: ${m_u_host_kokkos_view_dimensions}
+        #     # filename_size: ${filename_size}
+        #     # filename: ${filename}
+        trigger_UC:
+          copy_func: {}
             # freq: 100
-            iter: ${iStep}
-            m_u: ${m_u}
-            m_u_host: ${m_u_host}
-            m_u_kokkos_view_dimensions: ${m_u_kokkos_view_dimensions}
-            m_u_host_kokkos_view_dimensions: ${m_u_host_kokkos_view_dimensions}
-        data_GPU_before:
-          before_func:
-            # freq: 100
-            iter: ${iStep}
-            m_u: ${m_u}
-            m_u_host: ${m_u_host}
-            m_u_kokkos_view_dimensions: ${m_u_kokkos_view_dimensions}
-            m_u_host_kokkos_view_dimensions: ${m_u_host_kokkos_view_dimensions}
-            # filename_size: ${filename_size}
-            # filename: ${filename}
+            # iter: ${iStep}
+            # m_u: ${m_u}
+            # m_u_host: ${m_u_host}
+            # m_u_kokkos_view_dimensions: ${m_u_kokkos_view_dimensions}
+            # m_u_host_kokkos_view_dimensions: ${m_u_host_kokkos_view_dimensions}
     
     ##For default data transfer
     # decl_hdf5:
@@ -185,20 +203,21 @@ pdi:
 
     ##For data transfer through user-code
     decl_hdf5:
-    - file: ${filename}
+    # - file: ${filename}
+    - file: output_${iStep}.h5
       datasets: *full_datasets
       collision_policy: replace
       on_event: data_HOST
       write:
-        grid_size:
-        time:
-          - dataset: Time
-        Rstar_h:
-        gamma:
-        mmw:
-        iStep:
-        output_id:
-        restart_id:
+        # grid_size:
+        # time:
+        #   - dataset: Time
+        # Rstar_h:
+        # gamma:
+        # mmw:
+        # iStep:
+        # output_id:
+        # restart_id:
         local_full_field:
           - *d_description
           - *E_description
