@@ -10,7 +10,7 @@
 #include "WriterGpuPDI.hpp"
 #endif
 #include "WriterTypes.hpp"
-#include "WriterVTK.hpp"
+// #include "WriterVTK.hpp"
 
 #include <chrono>
 #include <list>
@@ -26,11 +26,7 @@ std::shared_ptr<WriterBase> WriterFactory::New(const UniformGrid& grid, const Pa
                                                          const std::vector<std::pair<int, std::string>>& variables)
 {
     std::shared_ptr<WriterBase> ptr ( nullptr );
-    if (s2writer(type) == writer_t::vtk)
-    {
-        ptr = std::make_shared<WriterVTK>(grid, params, prefix, variables);
-    }
-    else if (s2writer(type) == writer_t::pdi)
+    if (s2writer(type) == writer_t::pdi)
     {
 #if defined(Euler_ENABLE_PDI)
         ptr = std::make_shared<WriterPDI>(grid, params, prefix, variables);

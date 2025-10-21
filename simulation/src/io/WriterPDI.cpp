@@ -322,7 +322,7 @@ std::string WriterPDI::getFilename(std::string const &prefix, Int outputId) {
   return filename;
 }
 
-void WriterPDI::write(HostConstArrayDyn u, const UniformGrid & grid,
+void WriterPDI::write(ConstArrayDyn u, const UniformGrid & grid,
                       Int iStep, Real time, Real gamma, Real mmw)
 {
     std::array<int, 3> pdi_ncells;

@@ -31,8 +31,8 @@ public:
     //WriterPDI& operator=(const WriterPDI& x) = default;
     //WriterPDI& operator=(WriterPDI&& x) = default;
 
-    void write(HostConstArrayDyn u, const UniformGrid &grid,
-               Int iStep, Real time, Real gamma, Real mmw) override;
+    // void write(HostConstArrayDyn u, const UniformGrid &grid,
+    //            Int iStep, Real time, Real gamma, Real mmw) override;
     void write(ConstArrayDyn u, const UniformGrid &grid,
                Int iStep, Real time, Real gamma, Real mmw) override;
     

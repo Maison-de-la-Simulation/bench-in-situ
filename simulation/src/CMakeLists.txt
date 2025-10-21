@@ -12,7 +12,7 @@ add_library(${PROJECT_NAME}
   HydroParams.cpp
   io/Reader.cpp
   io/Writer.cpp
-  io/WriterVTK.cpp
+  # io/WriterVTK.cpp
   shared/ConservativeToPrimitiveExecution.cpp
   shared/PrimitiveToConservativeExecution.cpp
   shared/global_meanExecution.cpp
