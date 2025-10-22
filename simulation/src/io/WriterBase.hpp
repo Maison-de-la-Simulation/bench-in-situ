@@ -22,9 +22,9 @@ public:
   //  WriterBase& operator=(const WriterBase& x) = default;
   //  WriterBase& operator=(WriterBase&& x) = default;
 
-    // virtual void write(HostConstArrayDyn u, const UniformGrid& grid,
-    //                    Int iStep, Real time, Real gamma, Real mmw) = 0;
-    virtual void write(ConstArrayDyn u, const UniformGrid& grid,
+    virtual void write(HostConstArrayDyn u, const UniformGrid& grid,
+                       Int iStep, Real time, Real gamma, Real mmw) = 0;
+    virtual void writeDevice(ConstArrayDyn u, const UniformGrid& grid,
                        Int iStep, Real time, Real gamma, Real mmw) = 0;
 
     void setOutputId(Int id)
