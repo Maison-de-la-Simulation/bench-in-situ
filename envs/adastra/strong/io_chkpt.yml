@@ -98,12 +98,8 @@ pdi:
     iStep: int
     freq: int
     m_u_kokkos_view_dimensions: { type: array, subtype: size_t, size: 2 }
-    # m_u_host_kokkos_view_dimensions: { type: array, subtype: size_t, size: 2 }
 
     mpi_coord: {type: array, subtype: int, size: 3}
-
-    # m_u_extent_0: int
-    # m_u_extent_1: int
 
   data:
 
@@ -135,14 +131,13 @@ pdi:
     user_code:
       on_event:
         write_xml:
-          writeGpuXML: {}
-          # writeXML: {}
+          writeXML: {}
         trigger_UC:
           copy_func: {}
 
     decl_hdf5:
     - file: output_${rank}_${filename}.h5
-    # - file: output_${rank}_${iStep}.h5
+    # - file: ${filename}
       datasets: *full_datasets
       collision_policy: replace
       on_event: data_HOST

@@ -22,10 +22,6 @@ writer_t s2writer(const std::string& name)
     {
         type = writer_t::pdi;
     }
-    // else if (name == "gpu_pdi")
-    // {
-    //     type = writer_t::gpu_pdi;
-    // }
     else
     {
         type = writer_t::unknown;
