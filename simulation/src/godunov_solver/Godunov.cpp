@@ -182,6 +182,8 @@ void GodunovSolver::pdiExposeData()
 {
     Kokkos::fence();
     std::chrono::steady_clock::time_point m_start_io = std::chrono::steady_clock::now();
+
+#if defined(Euler_ENABLE_PDI)
               
     using memory_space = typename Array::memory_space;
     if (Kokkos::SpaceAccessibility<Kokkos::HostSpace, memory_space>::accessible) {
@@ -192,6 +194,8 @@ void GodunovSolver::pdiExposeData()
         m_writer->writeDevice(m_u, m_grid, Super::m_iteration, Super::m_t,
                     m_params->thermo.gamma, m_params->thermo.mmw);
     }
+
+#endif
 
     Kokkos::fence();
     performanceTimer.time_spent_in_io += (std::chrono::steady_clock::now() - m_start_io);
