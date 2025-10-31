@@ -251,14 +251,47 @@ extern "C"
         if ((*iter) % (*freq) == 0) {
            
             Real* u_ddata; PDI_access("local_full_field", (void**)&u_ddata, PDI_IN); //Real, and not just double
-            int* m_u_extent_0; PDI_access("m_u_extent_0", (void**)&m_u_extent_0, PDI_IN);
-            int* m_u_extent_1; PDI_access("m_u_extent_1", (void**)&m_u_extent_1, PDI_IN);
+            std::array<size_t, 2>* m_u_dim; PDI_access("m_u_kokkos_view_dimensions", (void**)&m_u_dim, PDI_IN);
+            size_t* dim_ptr = m_u_dim->data();
+            // int* m_u_extent_0; PDI_access("m_u_extent_0", (void**)&m_u_extent_0, PDI_IN);
+            // int* m_u_extent_1; PDI_access("m_u_extent_1", (void**)&m_u_extent_1, PDI_IN);
             
             Kokkos::Profiling::pushRegion("I/O - Checkpoint");
             Kokkos::Profiling::pushRegion("I/O - Checkpoint - deep_copy");
-            Kokkos::View<Real**, Kokkos::LayoutLeft> mm_u(u_ddata, *m_u_extent_0 ,*m_u_extent_1);
-            auto mm_u_host =  Kokkos::create_mirror_view(mm_u);
-            Kokkos::deep_copy(mm_u_host, mm_u);
+            // // Kokkos::View<Real**, Kokkos::LayoutLeft> mm_u(u_ddata,  dim_ptr[0], dim_ptr[1]);
+            // // // Kokkos::View<Real**, Kokkos::LayoutLeft> mm_u(u_ddata, *m_u_extent_0 ,*m_u_extent_1);
+            // // auto mm_u_host =  Kokkos::create_mirror_view(mm_u);
+            // // Kokkos::deep_copy(mm_u_host, mm_u);
+            // ArrayDyn mm_u(u_ddata, dim_ptr[0], dim_ptr[1]);
+            // auto mm_u_host = Kokkos::create_mirror_view(mm_u);
+            // Kokkos::deep_copy(mm_u_host, mm_u);
+            // // auto mm_u_host = Kokkos::create_mirror_view_and_copy(Kokkos::HostSpace(), u_ddata);
+
+            // ArrayDyn mm_u(u_ddata, dim_ptr[0], dim_ptr[1]);
+            // HostArrayDyn mm_u_host = Kokkos::create_mirror_view(mm_u);
+            // Kokkos::deep_copy(mm_u_host, mm_u);
+
+            // Kokkos::View<Real**, Kokkos::LayoutLeft> mm_u(u_ddata,  dim_ptr[0], dim_ptr[1]);
+            // // auto mm_u_host = Kokkos::create_mirror_view_and_copy(Kokkos::HostSpace(), mm_u);
+            // // auto mm_u_host = Kokkos::create_mirror_view_and_copy(Kokkos::ExecSpace(), mm_u);
+            // auto mm_u_host = Kokkos::create_mirror_view_and_copy(
+            //     typename Kokkos::DefaultExecutionSpace::memory_space{}, mm_u);
+            // // auto mm_u_host = Kokkos::subview(mm_u, Kokkos::ALL, std::make_pair(dim_ptr[0], dim_ptr[1]));
+
+            std::cout << "Default execution space: "
+                << typeid(Kokkos::DefaultExecutionSpace).name() << std::endl;
+            std::cout << "Default memory space: "
+                << typeid(typename Kokkos::DefaultExecutionSpace::memory_space).name() << std::endl;
+
+            // // Kokkos::View<Real**, Kokkos::LayoutLeft, typename Kokkos::DefaultExecutionSpace::memory_space> mm_u(u_ddata, dim_ptr[0], dim_ptr[1]);
+            // Kokkos::View<Real**, Kokkos::LayoutLeft, DeviceSpace> mm_u(u_ddata, dim_ptr[0], dim_ptr[1]);
+            // auto mm_u_host = Kokkos::create_mirror_view_and_copy(Kokkos::HostSpace{}, mm_u);
+
+            // auto mm_u = Kokkos::View<Real**, Kokkos::LayoutLeft, DeviceSpace>(a, dim_ptr[0], dim_ptr[1]);
+            // auto mm_u_host = Kokkos::create_mirror_view_and_copy(Kokkos::HostSpace{}, mm_u);
+
+            Kokkos::View<Real**, Kokkos::LayoutLeft, Kokkos::DefaultExecutionSpace::memory_space> mm_u(u_ddata, dim_ptr[0], dim_ptr[1]);
+            auto mm_u_host = Kokkos::create_mirror_view_and_copy(Kokkos::HostSpace{}, mm_u);
 
             Kokkos::Profiling::popRegion();
             Kokkos::Profiling::pushRegion("I/O - Checkpoint - write");
@@ -268,8 +301,9 @@ extern "C"
                             NULL);
             Kokkos::Profiling::popRegion();
             Kokkos::Profiling::popRegion();
-            PDI_release("m_u_extent_0");
-            PDI_release("m_u_extent_1");
+            PDI_release("m_u_kokkos_view_dimensions");
+            // PDI_release("m_u_extent_0");
+            // PDI_release("m_u_extent_1");
             PDI_release("local_full_field");
         }
         PDI_release("freq");
@@ -433,8 +467,9 @@ void WriterPDI::writeDevice(ConstArrayDyn u, const UniformGrid & grid,
     std::string filename = WriterPDI::getFilename(prefix, outputId);
     int filename_size = filename.size();
     std::cout<<filename<<std::endl;
-    int ex0 = u.extent_int(0);
-    int ex1 = u.extent_int(1);
+    std::array<size_t, 2> m_u_kokkos_view_dimensions = { u.extent(0), u.extent(1) };
+    // int ex0 = u.extent_int(0);
+    // int ex1 = u.extent_int(1);
 
     Kokkos::fence();
     debugTimer.time_spent_in_write_before_checkpoint += (std::chrono::steady_clock::now() - m_start_write);
@@ -442,8 +477,9 @@ void WriterPDI::writeDevice(ConstArrayDyn u, const UniformGrid & grid,
     PDI_multi_expose("trigger_UC",
                     "rank", &(tmp_rank), PDI_OUT,
                     "iStep", &iStep, PDI_OUT,
-                    "m_u_extent_0", &ex0, PDI_OUT,
-                    "m_u_extent_1", &ex1, PDI_OUT,
+                    "m_u_kokkos_view_dimensions", (void*)&m_u_kokkos_view_dimensions, PDI_OUT,
+                    // "m_u_extent_0", &ex0, PDI_OUT,
+                    // "m_u_extent_1", &ex1, PDI_OUT,
                     "local_full_field", u.data(), PDI_OUT,
                     "Rstar_h", &code_units::constants::Rstar_h, PDI_OUT,
                     "gamma", &gamma, PDI_OUT,
