@@ -136,8 +136,8 @@ pdi:
           copy_func: {}
 
     decl_hdf5:
-    - file: output_${rank}_${filename}.h5
-    # - file: ${filename}
+#    - file: output_${rank}_${filename}.h5
+    - file: ${filename}
       datasets: *full_datasets
       collision_policy: replace
       on_event: data_HOST

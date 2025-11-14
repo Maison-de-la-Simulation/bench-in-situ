@@ -245,19 +245,34 @@ extern "C"
     }
 
     void copy_func() {
+
+        printf("dans copy_func\n");
+        fflush(stdout);
         
         int* iter; PDI_access("iStep", (void**)&iter, PDI_IN);
         int* freq; PDI_access("freq", (void**)&freq, PDI_IN);
+        printf("*iter %i\n",*iter);
+        printf("*freq %i\n",*freq);
+        fflush(stdout);
+
         if ((*iter) % (*freq) == 0) {
-           
+
+            printf("avant u_ddata\n");
+            fflush(stdout);         
             Real* u_ddata; PDI_access("local_full_field", (void**)&u_ddata, PDI_IN); //Real, and not just double
+            printf("après u_ddata %f\n",*u_ddata);
+            fflush(stdout);
             std::array<size_t, 2>* m_u_dim; PDI_access("m_u_kokkos_view_dimensions", (void**)&m_u_dim, PDI_IN);
             size_t* dim_ptr = m_u_dim->data();
+            printf("après dim_ptr %zu\n",*u_ddata);
+            fflush(stdout);         
             // int* m_u_extent_0; PDI_access("m_u_extent_0", (void**)&m_u_extent_0, PDI_IN);
             // int* m_u_extent_1; PDI_access("m_u_extent_1", (void**)&m_u_extent_1, PDI_IN);
             
             Kokkos::Profiling::pushRegion("I/O - Checkpoint");
             Kokkos::Profiling::pushRegion("I/O - Checkpoint - deep_copy");
+            printf("u_ddata %f\n",u_ddata);
+            fflush(stdout);
             // // Kokkos::View<Real**, Kokkos::LayoutLeft> mm_u(u_ddata,  dim_ptr[0], dim_ptr[1]);
             // // // Kokkos::View<Real**, Kokkos::LayoutLeft> mm_u(u_ddata, *m_u_extent_0 ,*m_u_extent_1);
             // // auto mm_u_host =  Kokkos::create_mirror_view(mm_u);
@@ -293,6 +308,8 @@ extern "C"
             Kokkos::View<Real**, Kokkos::LayoutLeft, Kokkos::DefaultExecutionSpace::memory_space> mm_u(u_ddata, dim_ptr[0], dim_ptr[1]);
             auto mm_u_host = Kokkos::create_mirror_view_and_copy(Kokkos::HostSpace{}, mm_u);
 
+            printf("after view_and_copy\n");
+
             Kokkos::Profiling::popRegion();
             Kokkos::Profiling::pushRegion("I/O - Checkpoint - write");
         
@@ -306,6 +323,8 @@ extern "C"
             // PDI_release("m_u_extent_1");
             PDI_release("local_full_field");
         }
+        printf("après if copy_func\n");
+        fflush(stdout);  
         PDI_release("freq");
         PDI_release("iStep");
     }
@@ -358,6 +377,8 @@ WriterPDI::WriterPDI(const UniformGrid& grid, const Params& param,
     double time = 0;
     int freq = param.output.output_freq;
 
+    printf("init_pdi_w_deisa\n");
+    fflush(stdout);
     PDI_multi_expose("init_pdi_w_deisa",
                      "iStep", &iStep, PDI_OUT,
                      "mpi_coord", m_mpi_coords.data(), PDI_OUT,
@@ -394,6 +415,7 @@ std::string WriterPDI::getFilename(std::string const &prefix, Int outputId) {
 void WriterPDI::write(HostConstArrayDyn u, const UniformGrid & grid,
                       Int iStep, Real time, Real gamma, Real mmw)
 {
+    // printf("dans write\n");
     std::array<int, 3> pdi_ncells;
     pdi_ncells[IX] = grid.m_nbCells[IX] * grid.m_dom[IX];
     pdi_ncells[IY] = grid.m_nbCells[IY] * grid.m_dom[IY];
@@ -419,7 +441,8 @@ void WriterPDI::write(HostConstArrayDyn u, const UniformGrid & grid,
                      "mmw", &mmw, PDI_OUT,
                      "output_id", &outputId, PDI_OUT,
                      "restart_id", &m_restartId, PDI_OUT,
-                     "local_full_field", u.data(), PDI_OUT,
+                    //  "local_full_field", u.data(), PDI_OUT,
+                     "local_full_field", (void*)(u.data()), PDI_OUT,
                      "filename_size", &filename_size, PDI_OUT,
                      "filename", filename.data(), PDI_OUT,
                      "grid_size", pdi_ncells.data(), PDI_OUT,
@@ -444,6 +467,7 @@ void WriterPDI::write(HostConstArrayDyn u, const UniformGrid & grid,
 void WriterPDI::writeDevice(ConstArrayDyn u, const UniformGrid & grid,
                       Int iStep, Real time, Real gamma, Real mmw)
 {
+    // printf("dans writeDevice\n");
     Kokkos::fence();
     std::chrono::steady_clock::time_point m_start_write = std::chrono::steady_clock::now();
     
@@ -453,6 +477,7 @@ void WriterPDI::writeDevice(ConstArrayDyn u, const UniformGrid & grid,
     pdi_ncells[IZ] = grid.m_nbCells[IZ] * grid.m_dom[IZ];
 
     auto& outputId = WriterBase::m_outputId;
+    // printf("après outputId\n");
 
     char *prefix_c_str;
     PDI_access("prefix", (void **)&prefix_c_str, PDI_IN);
@@ -464,23 +489,34 @@ void WriterPDI::writeDevice(ConstArrayDyn u, const UniformGrid & grid,
     MPI_Comm_rank(MPI_COMM_WORLD, &tmp_rank);
 #endif
 
+    // printf("avant getFilename\n");
+    // printf("%s\n",prefix.c_str());
+    // printf("%i\n",outputId);
     std::string filename = WriterPDI::getFilename(prefix, outputId);
+    // printf("après getFilename\n");
+    // printf("%s\n",filename.c_str());
     int filename_size = filename.size();
-    std::cout<<filename<<std::endl;
+    // std::cout<<filename<<std::endl;
+    // printf("avant extent\n");
     std::array<size_t, 2> m_u_kokkos_view_dimensions = { u.extent(0), u.extent(1) };
+    // printf("après extent\n");
+    // fprintf(stderr, "après extent\n");
     // int ex0 = u.extent_int(0);
     // int ex1 = u.extent_int(1);
 
     Kokkos::fence();
     debugTimer.time_spent_in_write_before_checkpoint += (std::chrono::steady_clock::now() - m_start_write);
 
+    printf("avant trigger_UC\n");
+    fflush(stdout);
     PDI_multi_expose("trigger_UC",
                     "rank", &(tmp_rank), PDI_OUT,
                     "iStep", &iStep, PDI_OUT,
                     "m_u_kokkos_view_dimensions", (void*)&m_u_kokkos_view_dimensions, PDI_OUT,
                     // "m_u_extent_0", &ex0, PDI_OUT,
                     // "m_u_extent_1", &ex1, PDI_OUT,
-                    "local_full_field", u.data(), PDI_OUT,
+                    // "local_full_field", u.data(), PDI_OUT,
+                    "local_full_field", (void*)(u.data()), PDI_OUT,
                     "Rstar_h", &code_units::constants::Rstar_h, PDI_OUT,
                     "gamma", &gamma, PDI_OUT,
                     "mmw", &mmw, PDI_OUT,
@@ -490,6 +526,8 @@ void WriterPDI::writeDevice(ConstArrayDyn u, const UniformGrid & grid,
                     "filename", filename.data(), PDI_OUT,
                     "grid_size", pdi_ncells.data(), PDI_OUT,
                     NULL);
+    printf("après trigger_UC\n");
+    fflush(stdout);
 
     WriterBase::m_previous_outputs.push_back(std::make_pair(outputId, time));
 
