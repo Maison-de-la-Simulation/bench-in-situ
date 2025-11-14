@@ -186,7 +186,6 @@ void GodunovSolver::pdiExposeData()
 #if defined(Euler_ENABLE_PDI)
               
     using memory_space = typename Array::memory_space;
-    printf("avant segfault\n");
     if constexpr (Kokkos::SpaceAccessibility<Kokkos::HostSpace, memory_space>::accessible) {
         m_writer->write(m_u, m_grid, Super::m_iteration, Super::m_t,
                     m_params->thermo.gamma, m_params->thermo.mmw);

@@ -6,8 +6,7 @@ enum class writer_t : short
 {
     unknown,
     vtk,
-    pdi//,
-    // gpu_pdi
+    pdi
 };
 
 inline

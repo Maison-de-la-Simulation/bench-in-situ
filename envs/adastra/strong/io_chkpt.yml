@@ -136,21 +136,20 @@ pdi:
           copy_func: {}
 
     decl_hdf5:
-#    - file: output_${rank}_${filename}.h5
     - file: ${filename}
       datasets: *full_datasets
       collision_policy: replace
       on_event: data_HOST
       write:
-        # grid_size:
-        # time:
-        #   - dataset: Time
-        # Rstar_h:
-        # gamma:
-        # mmw:
-        # iStep:
-        # output_id:
-        # restart_id:
+        grid_size:
+        time:
+          - dataset: Time
+        Rstar_h:
+        gamma:
+        mmw:
+        iStep:
+        output_id:
+        restart_id:
         local_full_field:
           - *d_description
           - *E_description

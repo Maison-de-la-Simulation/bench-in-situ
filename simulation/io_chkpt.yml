@@ -98,12 +98,8 @@ pdi:
     iStep: int
     freq: int
     m_u_kokkos_view_dimensions: { type: array, subtype: size_t, size: 2 }
-    # m_u_host_kokkos_view_dimensions: { type: array, subtype: size_t, size: 2 }
 
     mpi_coord: {type: array, subtype: int, size: 3}
-
-    # m_u_extent_0: int
-    # m_u_extent_1: int
 
   data:
 
@@ -132,19 +128,15 @@ pdi:
       start: [0, '$ghost[2]', '$ghost[1]', '$ghost[0]']
 
   plugins:
-
     user_code:
       on_event:
         write_xml:
           writeXML: {}
         trigger_UC:
           copy_func: {}
-          
-  
-    ##For data transfer through user-code
+
     decl_hdf5:
     - file: ${filename}
-    # - file: output_${rank}_${iStep}.h5
       datasets: *full_datasets
       collision_policy: replace
       on_event: data_HOST
