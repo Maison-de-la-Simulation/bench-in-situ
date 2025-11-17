@@ -90,6 +90,7 @@ OutputParams::OutputParams(const INIReader& reader)
     n_mean   = reader.GetInteger(section, "n_mean", n_mean);
     n_profile   = reader.GetInteger(section, "n_profile", n_profile);
     n_slice   = reader.GetInteger(section, "n_slice", n_slice);
+    output_freq = reader.GetInteger(section, "output_freq", output_freq);
 }
 
 Params::Params(const std::string& filename)

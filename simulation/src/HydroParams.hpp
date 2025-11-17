@@ -98,6 +98,7 @@ struct OutputParams
     Int n_mean = 0;
     Int n_profile = 0;
     Int n_slice = 0;
+    Int output_freq = 0;
     std::string section = "output";
 };
 

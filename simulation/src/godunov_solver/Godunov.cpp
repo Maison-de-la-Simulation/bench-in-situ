@@ -150,6 +150,7 @@ void GodunovSolver::nextIteration(Real dt)
     Super::m_iteration++;
 }
 
+
 void GodunovSolver::prepareNextOutput(Real& dt)
 {
     m_should_save = false;
@@ -176,46 +177,28 @@ void GodunovSolver::prepareNextOutput(Real& dt)
     
 }
 
+
 void GodunovSolver::pdiExposeData()
 {
-  Kokkos::fence();
-  std::chrono::steady_clock::time_point m_start_io = std::chrono::steady_clock::now();
+    Kokkos::fence();
+    std::chrono::steady_clock::time_point m_start_io = std::chrono::steady_clock::now();
 
 #if defined(Euler_ENABLE_PDI)
-    PDI_multi_expose("data_on_GPU",
-                     "iStep", (void*)&(Super::m_iteration), PDI_OUT,
-                     "time", (void*)&(m_t), PDI_OUT,
-                     NULL);
-
-    /*
-    // m_should_save is defined here by the yaml file (not by the setup.ini!!!)
-    bool *should_deepcopy;
-    PDI_access("should_deepcopy",  (void **)&should_deepcopy,  PDI_IN);
-    PDI_release("should_deepcopy");
-
-    m_should_save=*should_deepcopy;
-    should_deepcopy=nullptr;
-    */
+              
+    using memory_space = typename Array::memory_space;
+    if constexpr (Kokkos::SpaceAccessibility<Kokkos::HostSpace, memory_space>::accessible) {
+        m_writer->write(m_u, m_grid, Super::m_iteration, Super::m_t,
+                    m_params->thermo.gamma, m_params->thermo.mmw);
+    }
+    else {
+        m_writer->writeDevice(m_u, m_grid, Super::m_iteration, Super::m_t,
+                    m_params->thermo.gamma, m_params->thermo.mmw);
+    }
 
 #endif
 
-    if (m_should_save)
-    {
-        Kokkos::Profiling::pushRegion("I/O - Checkpoint");
-        if(Super::m_iteration%100 == 0) Print() << "===================== output at iteration = " << Super::m_iteration << " time t = "<<Super::m_t<< std::endl;
-        Kokkos::Profiling::pushRegion("I/O - Checkpoint - deep_copy");
-        Kokkos::deep_copy(m_u_host, m_u);
-        Kokkos::Profiling::popRegion();
-        Kokkos::Profiling::pushRegion("I/O - Checkpoint - write");
-        m_writer->write(m_u_host, m_grid, Super::m_iteration, Super::m_t,
-                        m_params->thermo.gamma, m_params->thermo.mmw);
-        Kokkos::Profiling::popRegion();
-        Kokkos::Profiling::popRegion();
-
-    }
-
-  Kokkos::fence();
-  performanceTimer.time_spent_in_io += (std::chrono::steady_clock::now() - m_start_io);
+    Kokkos::fence();
+    performanceTimer.time_spent_in_io += (std::chrono::steady_clock::now() - m_start_io);
 }
 
 
@@ -283,15 +266,18 @@ double GodunovSolver::memoryUsage() const
     return static_cast<double>(memory * sizeof(Real));
 }
 
+
 void GodunovSolver::set_should_save()
 {
   m_should_save=true;
 }
 
+
 void GodunovSolver::set_time_limit_reached()
 {
   m_time_limit_reached=true;
 }
+
 
 void GodunovSolver::compute_adjust_timestep(Real dt_type, Real dt, Real& delta_type)
 {
@@ -314,6 +300,7 @@ void GodunovSolver::compute_adjust_timestep(Real dt_type, Real dt, Real& delta_t
         }
     } 
 }
+
 
 void GodunovSolver::accumulate_compute_duration(const std::chrono::steady_clock::duration& duration) {
   performanceTimer.time_spent_in_compute += duration;

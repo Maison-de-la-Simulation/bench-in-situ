@@ -24,6 +24,8 @@ public:
 
     virtual void write(HostConstArrayDyn u, const UniformGrid& grid,
                        Int iStep, Real time, Real gamma, Real mmw) = 0;
+    virtual void writeDevice(ConstArrayDyn u, const UniformGrid& grid,
+                       Int iStep, Real time, Real gamma, Real mmw) = 0;
 
     void setOutputId(Int id)
     {

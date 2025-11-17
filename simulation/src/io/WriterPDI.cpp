@@ -23,20 +23,6 @@
 namespace hydro { namespace io
 {
 
-std::string getFilename(std::string const &prefix, Int outputId) {
-  // write outputId in string outputNum
-  std::ostringstream outputNum;
-  outputNum << std::setw(std::numeric_limits<Int>::digits10);
-  outputNum << std::setfill('0');
-  outputNum << outputId;
-
-  // concatenate file prefix + file number + suffix
-  std::string filename(prefix);
-  filename += "_" + outputNum.str();
-  filename += ".h5";
-  return filename;
-}
-
 extern "C"
 {
 
@@ -168,7 +154,7 @@ extern "C"
             xdmfFile << " Dimensions=" << '"' << 1 << '"';
             xdmfFile << " Format=" << '"' << "HDF" << '"';
             xdmfFile << ">\n";
-            xdmfFile << std::string(12, ' ') << getFilename(prefix, it->first)
+            xdmfFile << std::string(12, ' ') << WriterPDI::getFilename(prefix, it->first)
                      << ":/"
                      << "gamma"
                      << "\n";
@@ -188,7 +174,7 @@ extern "C"
             xdmfFile << " Dimensions=" << '"' << 1 << '"';
             xdmfFile << " Format=" << '"' << "HDF" << '"';
             xdmfFile << ">\n";
-            xdmfFile << std::string(12, ' ') << getFilename(prefix, it->first)
+            xdmfFile << std::string(12, ' ') << WriterPDI::getFilename(prefix, it->first)
                      << ":/"
                      << "mmw"
                      << "\n";
@@ -208,7 +194,7 @@ extern "C"
             xdmfFile << " Dimensions=" << '"' << 1 << '"';
             xdmfFile << " Format=" << '"' << "HDF" << '"';
             xdmfFile << ">\n";
-            xdmfFile << std::string(12, ' ') << getFilename(prefix, it->first)
+            xdmfFile << std::string(12, ' ') << WriterPDI::getFilename(prefix, it->first)
                      << ":/"
                      << "Rstar_h"
                      << "\n";
@@ -237,7 +223,7 @@ extern "C"
 
                 xdmfFile << " Format=" << '"' << "HDF" << '"';
                 xdmfFile << ">\n";
-                xdmfFile << std::string(12, ' ') << getFilename(prefix, it->first)
+                xdmfFile << std::string(12, ' ') << WriterPDI::getFilename(prefix, it->first)
                          << ":/" << var_name << "\n";
                 xdmfFile << std::string(10, ' ') << "</DataItem>\n";
                 xdmfFile << std::string(8, ' ') << "</Attribute>\n";
@@ -257,9 +243,41 @@ extern "C"
         PDI_release("outputs_record");
         PDI_release("outputs_record_size");
     }
+
+    void copy_func() {        
+        int* iter; PDI_access("iStep", (void**)&iter, PDI_IN);
+        int* freq; PDI_access("freq", (void**)&freq, PDI_IN);
+
+        if ((*iter) % (*freq) == 0) {
+
+            Real* u_ddata; PDI_access("local_full_field", (void**)&u_ddata, PDI_IN); //Real, and not just double
+            std::array<size_t, 2>* m_u_dim; PDI_access("m_u_kokkos_view_dimensions", (void**)&m_u_dim, PDI_IN);
+            size_t* dim_ptr = m_u_dim->data();
+            
+            Kokkos::Profiling::pushRegion("I/O - Checkpoint");
+            Kokkos::Profiling::pushRegion("I/O - Checkpoint - deep_copy");
+
+            Kokkos::View<Real**, Kokkos::LayoutLeft, Kokkos::DefaultExecutionSpace::memory_space> mm_u(u_ddata, dim_ptr[0], dim_ptr[1]);
+            auto mm_u_host = Kokkos::create_mirror_view_and_copy(Kokkos::HostSpace{}, mm_u);
+
+
+            Kokkos::Profiling::popRegion();
+            Kokkos::Profiling::pushRegion("I/O - Checkpoint - write");
+        
+            PDI_multi_expose("data_HOST",
+                            "local_full_field", mm_u_host.data(), PDI_OUT, 
+                            NULL);
+            Kokkos::Profiling::popRegion();
+            Kokkos::Profiling::popRegion();
+            PDI_release("m_u_kokkos_view_dimensions");
+            PDI_release("local_full_field");
+        }
+        PDI_release("freq");
+        PDI_release("iStep");
+    }
 }
 
-WriterPDI::WriterPDI(const UniformGrid& grid, const Params&,
+WriterPDI::WriterPDI(const UniformGrid& grid, const Params& param,
                      const std::string& prefix,
                      const std::vector<std::pair<int, std::string>>&)
 {
@@ -303,6 +321,8 @@ WriterPDI::WriterPDI(const UniformGrid& grid, const Params&,
     dl[IZ] = grid.m_dl[IZ];
 
     int iStep = 0;
+    double time = 0;
+    int freq = param.output.output_freq;
 
     PDI_multi_expose("init_pdi_w_deisa",
                      "iStep", &iStep, PDI_OUT,
@@ -318,8 +338,23 @@ WriterPDI::WriterPDI(const UniformGrid& grid, const Params&,
                      "restart_id", &m_restartId, PDI_OUT,
                      "prefix_size", &prefix_size, PDI_OUT,
                      "prefix", new_prefix.c_str(), PDI_OUT,
+                     "freq", &freq, PDI_OUT,
                      NULL);
     
+}
+
+std::string WriterPDI::getFilename(std::string const &prefix, Int outputId) {
+  // write outputId in string outputNum
+  std::ostringstream outputNum;
+  outputNum << std::setw(std::numeric_limits<Int>::digits10);
+  outputNum << std::setfill('0');
+  outputNum << outputId;
+
+  // concatenate file prefix + file number + suffix
+  std::string filename(prefix);
+  filename += "_" + outputNum.str();
+  filename += ".h5";
+  return filename;
 }
 
 void WriterPDI::write(HostConstArrayDyn u, const UniformGrid & grid,
@@ -337,10 +372,12 @@ void WriterPDI::write(HostConstArrayDyn u, const UniformGrid & grid,
     std::string prefix(prefix_c_str);
     PDI_release("prefix");
 
-    std::string filename = getFilename(prefix, outputId);
+    std::string filename = WriterPDI::getFilename(prefix, outputId);
     int filename_size = filename.size();
 
-    PDI_multi_expose("checkpoint",
+    int* freq; PDI_access("freq", (void**)&freq, PDI_IN);
+    if(iStep % (*freq) == 0) {
+        PDI_multi_expose("data_HOST",
                      "iStep", &iStep, PDI_OUT,
                      "time", &time, PDI_OUT,
                      "Rstar_h", &code_units::constants::Rstar_h, PDI_OUT,
@@ -349,6 +386,7 @@ void WriterPDI::write(HostConstArrayDyn u, const UniformGrid & grid,
                      "output_id", &outputId, PDI_OUT,
                      "restart_id", &m_restartId, PDI_OUT,
                      "local_full_field", u.data(), PDI_OUT,
+                    //  "local_full_field", (void*)(u.data()), PDI_OUT,
                      "filename_size", &filename_size, PDI_OUT,
                      "filename", filename.data(), PDI_OUT,
                      "grid_size", pdi_ncells.data(), PDI_OUT,
@@ -365,5 +403,71 @@ void WriterPDI::write(HostConstArrayDyn u, const UniformGrid & grid,
                      "outputs_record", WriterBase::m_previous_outputs.data(), PDI_OUT,
                      "restart_id", &m_restartId, PDI_OUT,
                      NULL);
+    }
+    PDI_release("freq");
+    
 }
+
+void WriterPDI::writeDevice(ConstArrayDyn u, const UniformGrid & grid,
+                      Int iStep, Real time, Real gamma, Real mmw)
+{
+    Kokkos::fence();
+    std::chrono::steady_clock::time_point m_start_write = std::chrono::steady_clock::now();
+    
+    std::array<int, 3> pdi_ncells;
+    pdi_ncells[IX] = grid.m_nbCells[IX] * grid.m_dom[IX];
+    pdi_ncells[IY] = grid.m_nbCells[IY] * grid.m_dom[IY];
+    pdi_ncells[IZ] = grid.m_nbCells[IZ] * grid.m_dom[IZ];
+
+    auto& outputId = WriterBase::m_outputId;
+
+    char *prefix_c_str;
+    PDI_access("prefix", (void **)&prefix_c_str, PDI_IN);
+    std::string prefix(prefix_c_str);
+    PDI_release("prefix");
+
+    int tmp_rank=0;
+#if defined(MPI_SESSION)
+    MPI_Comm_rank(MPI_COMM_WORLD, &tmp_rank);
+#endif
+
+    std::string filename = WriterPDI::getFilename(prefix, outputId);
+    int filename_size = filename.size();
+    std::array<size_t, 2> m_u_kokkos_view_dimensions = { u.extent(0), u.extent(1) };
+
+    Kokkos::fence();
+    debugTimer.time_spent_in_write_before_checkpoint += (std::chrono::steady_clock::now() - m_start_write);
+
+    PDI_multi_expose("trigger_UC",
+                    "rank", &tmp_rank, PDI_OUT,
+                    "iStep", &iStep, PDI_OUT,
+                    "time", &time, PDI_OUT,
+                    "m_u_kokkos_view_dimensions", (void*)&m_u_kokkos_view_dimensions, PDI_OUT,
+                    "local_full_field", u.data(), PDI_OUT,
+                    // "local_full_field", (void*)(u.data()), PDI_OUT,
+                    "Rstar_h", &code_units::constants::Rstar_h, PDI_OUT,
+                    "gamma", &gamma, PDI_OUT,
+                    "mmw", &mmw, PDI_OUT,
+                    "output_id", &outputId, PDI_OUT,
+                    "restart_id", &m_restartId, PDI_OUT,
+                    "filename_size", &filename_size, PDI_OUT,
+                    "filename", filename.data(), PDI_OUT,
+                    "grid_size", pdi_ncells.data(), PDI_OUT,
+                    NULL);
+
+    WriterBase::m_previous_outputs.push_back(std::make_pair(outputId, time));
+
+    ++outputId;
+
+    int outputs_record_size = WriterBase::m_previous_outputs.size();
+
+    PDI_multi_expose("write_xml",
+                     "outputs_record_size", &outputs_record_size, PDI_OUT,
+                     "outputs_record", WriterBase::m_previous_outputs.data(), PDI_OUT,
+                     "restart_id", &m_restartId, PDI_OUT,
+                     NULL);
+    Kokkos::fence();
+    debugTimer.time_spent_in_write_after_xml += (std::chrono::steady_clock::now() - m_start_write);
+}
+
 }}
